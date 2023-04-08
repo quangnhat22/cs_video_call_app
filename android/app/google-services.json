@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "974507363344",
+    "project_id": "cs-video-call",
+    "storage_bucket": "cs-video-call.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974507363344:android:9027f8a9533feff277ce95",
+        "android_client_info": {
+          "package_name": "xyz.coffeesolution.videocall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974507363344-upkj0eqenqh8edh12fmce2msah7ir1ll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH0OMAhRhJr-n-xcqauX3-S2JpkcJMCBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974507363344-upkj0eqenqh8edh12fmce2msah7ir1ll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
