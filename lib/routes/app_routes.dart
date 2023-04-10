@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/routes/route_name.dart';
+
+import '../presentation/welcome/view/welcome_page.dart';
+import '../presentation/auth/login/view/login_page.dart';
 
 class AppRoutes {
   static final routeObserver = RouteObserver<PageRoute>();
@@ -7,16 +11,16 @@ class AppRoutes {
 
   static Route unAuthorizedRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case RouteName.welcomePage:
-      //   return _buildRoute(
-      //     settings,
-      //     const WelcomePage(),
-      //   );
-      // case RouteName.loginPage:
-      //   return _buildRoute(
-      //     settings,
-      //     const LoginPage(),
-      //   );
+      case RouteName.welcomePage:
+        return _buildRoute(
+          settings,
+          const WelcomePage(),
+        );
+      case RouteName.loginPage:
+        return _buildRoute(
+          settings,
+          const LoginPage(),
+        );
       default:
         return _errorRoute();
     }
