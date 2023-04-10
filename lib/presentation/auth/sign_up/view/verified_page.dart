@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/core/config/app_assets.dart';
 
 class VerifiedPage extends StatelessWidget {
   const VerifiedPage({super.key});
@@ -36,13 +37,7 @@ class VerifiedPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                    width: 250,
-                    height: 250,
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      fit: BoxFit.cover,
-                    )),
+                SizedBox(width: 250, height: 250, child: AppAssets.logoImage),
                 const Text(
                   'We have sent a verified email to you. Please check your email and click the link to verify your account',
                   textAlign: TextAlign.center,
