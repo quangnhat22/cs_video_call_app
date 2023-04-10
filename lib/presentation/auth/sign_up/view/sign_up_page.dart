@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/core/config/app_config.dart';
 
+import './verified_page.dart';
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -30,7 +32,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void signUp() {
     if (_formKey.currentState!.validate()) {
-      print('Sign up');
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const VerifiedPage()));
     }
   }
 
@@ -48,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter new password';
+      return 'Please enter password';
     }
 
     if (value.length < 8) {
@@ -234,7 +237,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             child: SizedBox(
                               width: double.infinity,
                               child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
                                   style: ButtonStyle(
                                       padding: MaterialStateProperty.all(
                                           const EdgeInsets.symmetric(

@@ -173,7 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: SizedBox(
                             width: double.infinity,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                                 style: ButtonStyle(
                                     padding: MaterialStateProperty.all(
                                         const EdgeInsets.symmetric(
