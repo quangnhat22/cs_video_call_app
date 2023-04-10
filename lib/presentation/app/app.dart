@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../common/widgets/stateless/m_material_app.dart';
 import '../../routes/app_routes.dart';
 import '../../routes/route_name.dart';
-import '../welcome/view/welcome_page.dart';
 import 'bloc/app_bloc.dart';
 
 class App extends StatelessWidget {
@@ -18,10 +18,8 @@ class App extends StatelessWidget {
         builder: (context, state) {
           switch (state.runtimeType) {
             case AppLoading:
-              return const MaterialApp(
-                home: Center(
-                  child: WelcomePage(),
-                ),
+              return const MMaterialApp(
+                homeWidget: WelcomePage(),
               );
             case AppUnAuthorized:
               return const MMaterialApp(

@@ -1,3 +1,9 @@
 {
-  "language": "English"
+  "language": "English",
+  "get_connect_with_your_friends": "Get Connect with your Friends",
+  "easy_way_to_connect_and_call_video_with_your_friends": "Easy way to connect and call video with your friends",
+  "sign_in_with_email": "Sign in with email",
+  "sign_in_with_google": "Sign in with Google",
+  "or": "Or",
+  "sign_up_with_email": "Sign up with email"
 }
