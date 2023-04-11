@@ -46,6 +46,7 @@ dependencies:
   json_annotation: ^4.8.0
   intl: ^0.17.0
   firebase_core: ^2.9.0
+  flutter_screenutil: ^5.7.0
 
 dev_dependencies:
   flutter_test:

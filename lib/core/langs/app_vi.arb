@@ -1,3 +1,9 @@
 {
-  "language": "Vietnamese"
+  "language": "English",
+  "get_connect_with_your_friends": "Kết nối với những người bạn",
+  "easy_way_to_connect_and_call_video_with_your_friends": "Dễ dàng kết nối và gặp mặt với bạn bè",
+  "sign_in_with_email": "Đăng nhập với Email",
+  "sign_in_with_google": "Đăng nhập với Google",
+  "or": "Hoặc",
+  "sign_up_with_email": "Đăng ký với Email"
 }

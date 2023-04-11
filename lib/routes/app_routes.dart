@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
-import '../presentation/welcome/view/welcome_page.dart';
 import '../presentation/auth/login/view/login_page.dart';
 
 class AppRoutes {
