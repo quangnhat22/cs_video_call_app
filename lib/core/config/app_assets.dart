@@ -5,4 +5,9 @@ class AppAssets {
     'assets/images/welcome.png',
     fit: BoxFit.cover,
   );
+
+  static final logoGoogle = Image.asset(
+    'assets/images/google.png',
+    width: 26,
+  );
 }

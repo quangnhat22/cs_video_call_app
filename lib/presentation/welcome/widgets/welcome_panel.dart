@@ -7,8 +7,6 @@ class WelcomePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        //.w. .h là của thư viện bên ngoài, cho phép co dãn theo kích thước màn hình
-        // không can lay media query nựa
         SizedBox(
           height: 240.w,
           width: 240.h,

@@ -17,14 +17,15 @@ class App extends StatelessWidget {
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
           switch (state.runtimeType) {
-            case AppLoading:
-              return const MMaterialApp(
-                homeWidget: WelcomePage(),
-              );
+            // case AppLoading:
+            //   return const MMaterialApp(
+            //     homeWidget: WelcomePage(),
+            //   );
             case AppUnAuthorized:
               return const MMaterialApp(
-                initialRoute: RouteName.loginPage,
+                initialRoute: RouteName.welcomePage,
                 onGenerateRoute: AppRoutes.unAuthorizedRoute,
+                homeWidget: WelcomePage(),
               );
             default:
               return const MaterialApp(

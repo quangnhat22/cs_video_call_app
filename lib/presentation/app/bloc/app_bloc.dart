@@ -5,7 +5,7 @@ part 'app_event.dart';
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc() : super(AppLoading()) {
+  AppBloc() : super(AppUnAuthorized()) {
     on<AppEvent>((event, emit) {
       // TODO: implement event handler
     });
