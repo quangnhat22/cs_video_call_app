@@ -34,6 +34,7 @@ class MMaterialApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
           navigatorKey: AppGlobalKeys.navigatorKey,
           navigatorObservers: [
             AppRoutes.routeObserver,
