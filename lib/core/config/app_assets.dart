@@ -11,4 +11,9 @@ class AppAssets {
     'assets/images/logo.png',
     fit: BoxFit.cover,
   );
+
+  static final defaultAvatar = Image.asset(
+    'assets/images/default_avatar.png',
+    fit: BoxFit.cover,
+  );
 }

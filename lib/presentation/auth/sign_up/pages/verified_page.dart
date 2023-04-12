@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/core/config/app_assets.dart';
+import 'package:videocall/presentation/auth/sign_up/pages/set_up_profile_page.dart';
 
 class VerifiedPage extends StatelessWidget {
   const VerifiedPage({super.key});
@@ -59,7 +60,13 @@ class VerifiedPage extends StatelessWidget {
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 14, horizontal: 20))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SetUpProfilePage()));
+                      },
                       child: const Text('SET UP MY PROFILE')),
                 ),
                 const SizedBox(

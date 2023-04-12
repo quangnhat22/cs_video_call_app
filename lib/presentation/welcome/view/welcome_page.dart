@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/presentation/auth/login/view/login_page.dart';
-import 'package:videocall/presentation/auth/sign_up/view/sign_up_page.dart';
+import 'package:videocall/presentation/auth/sign_up/pages/sign_up_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
