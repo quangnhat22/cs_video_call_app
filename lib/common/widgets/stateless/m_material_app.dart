@@ -8,9 +8,14 @@ import '../../../utils/global_keys.dart';
 
 class MMaterialApp extends StatelessWidget {
   const MMaterialApp(
-      {Key? key, this.initialRoute, this.onGenerateRoute, this.homeWidget})
+      {Key? key,
+      required this.keyMaterialApp,
+      this.initialRoute,
+      this.onGenerateRoute,
+      this.homeWidget})
       : super(key: key);
 
+  final String keyMaterialApp;
   final String? initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Widget? homeWidget;
@@ -25,6 +30,7 @@ class MMaterialApp extends StatelessWidget {
         return MaterialApp(
           title: 'CS Chat App',
           debugShowCheckedModeBanner: false,
+          key: ValueKey(keyMaterialApp),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,

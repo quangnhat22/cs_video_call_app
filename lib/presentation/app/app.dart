@@ -23,15 +23,16 @@ class App extends StatelessWidget {
             //   );
             case AppUnAuthorized:
               return const MMaterialApp(
+                keyMaterialApp: "App_UnAuthorized",
                 initialRoute: RouteName.welcomePage,
                 onGenerateRoute: AppRoutes.unAuthorizedRoute,
                 homeWidget: WelcomePage(),
               );
             default:
-              return const MaterialApp(
-                home: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              return const MMaterialApp(
+                keyMaterialApp: "App_Authorized",
+                initialRoute: RouteName.dashboardPage,
+                onGenerateRoute: AppRoutes.authorizedRoute,
               );
           }
         },

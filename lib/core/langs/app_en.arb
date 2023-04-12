@@ -5,5 +5,10 @@
   "sign_in_with_email": "Sign in with email",
   "sign_in_with_google": "Sign in with Google",
   "or": "Or",
-  "sign_up_with_email": "Sign up with email"
+  "sign_up_with_email": "Sign up with email",
+  "friends": "Friends",
+  "groups": "Groups",
+  "schedules": "Schedules",
+  "notifications": "Notifications",
+  "setting": "Setting"
 }
