@@ -5,8 +5,11 @@ class GroupsDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: MHomeAppBar(
+        title: AppLocalizations.of(context)!.groups,
+      ),
+      body: const Center(
         child: Text("Groups"),
       ),
     );

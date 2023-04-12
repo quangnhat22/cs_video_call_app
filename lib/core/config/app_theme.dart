@@ -10,10 +10,10 @@ class AppTheme {
         //fontFamily: "Roboto",
         ),
     colorScheme: AppColors.lightColorScheme,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       elevation: 0,
       foregroundColor: Colors.black,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.darkColorScheme.background,
     ),
     filledButtonTheme: const FilledButtonThemeData(
       style: ButtonStyle(
@@ -29,10 +29,10 @@ class AppTheme {
         //fontFamily: "Roboto",
         ),
     colorScheme: AppColors.darkColorScheme,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       elevation: 0,
-      foregroundColor: Colors.black,
-      backgroundColor: Colors.white,
+      foregroundColor: Colors.white,
+      backgroundColor: AppColors.darkColorScheme.background,
     ),
     filledButtonTheme: const FilledButtonThemeData(
       style: ButtonStyle(

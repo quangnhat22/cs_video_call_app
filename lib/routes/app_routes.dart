@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
-import 'package:videocall/presentation/notifications/notifications.dart';
-import 'package:videocall/presentation/schedules/schedule_dash_board.dart';
-import 'package:videocall/presentation/setting/setting.dart';
+import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
+import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
+import 'package:videocall/presentation/setting/setting_dash_board/setting_dash_board.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
@@ -53,17 +53,17 @@ class AppRoutes {
       case RouteName.schedulesPage:
         return _buildRoute(
           settings,
-          const SchedulePage(),
+          const ScheduleDashBoardPage(),
         );
       case RouteName.notificationsPage:
         return _buildRoute(
           settings,
-          const NotificationsPage(),
+          const NotificationsDashBoardPage(),
         );
       case RouteName.settingPage:
         return _buildRoute(
           settings,
-          const SettingPage(),
+          const SettingDashBoardPage(),
         );
       default:
         return _errorRoute();

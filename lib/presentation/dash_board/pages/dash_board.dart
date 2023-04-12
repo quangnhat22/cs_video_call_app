@@ -13,9 +13,9 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _pages = const <Widget>[
     FriendsDashBoardPage(),
     GroupsDashBoardPage(),
-    SchedulePage(),
-    NotificationsPage(),
-    SettingPage(),
+    ScheduleDashBoardPage(),
+    NotificationsDashBoardPage(),
+    SettingDashBoardPage(),
   ];
 
   @override

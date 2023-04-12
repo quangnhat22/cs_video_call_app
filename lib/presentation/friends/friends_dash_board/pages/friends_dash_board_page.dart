@@ -5,8 +5,11 @@ class FriendsDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: MHomeAppBar(
+        title: AppLocalizations.of(context)!.friends,
+      ),
+      body: const Center(
         child: Text("Friends"),
       ),
     );

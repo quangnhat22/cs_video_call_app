@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.17.0
   firebase_core: ^2.9.0
   flutter_screenutil: ^5.7.0
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
