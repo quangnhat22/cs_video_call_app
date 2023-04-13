@@ -9,6 +9,8 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   void handleForgotPassword() {
     Navigator.pushNamed(context, RouteName.forgotPasswordPage);
@@ -16,7 +18,9 @@ class _LoginFormState extends State<LoginForm> {
 
   void handleLogin() {
     if (_formKey.currentState!.validate()) {
-      debugPrint('Login');
+      /**
+       * Validate user account with controllers
+       */
     }
   }
 
@@ -26,7 +30,7 @@ class _LoginFormState extends State<LoginForm> {
       left: 0,
       right: 0,
       bottom: 0,
-      height: (AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh),
+      height: AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
@@ -37,7 +41,8 @@ class _LoginFormState extends State<LoginForm> {
           child: Form(
             key: _formKey,
             child: Column(children: [
-              const LoginTextFields(),
+              EmailTextFormField(emailController),
+              PasswordTextFormField(passwordController),
               SizedBox(
                 width: double.infinity,
                 child: GestureDetector(

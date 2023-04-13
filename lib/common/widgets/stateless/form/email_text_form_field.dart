@@ -3,7 +3,9 @@ import 'package:videocall/core/config/app_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailTextFormField extends StatelessWidget {
-  const EmailTextFormField({super.key});
+  final TextEditingController emailController;
+
+  const EmailTextFormField(this.emailController, {super.key});
 
   String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
@@ -22,6 +24,7 @@ class EmailTextFormField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
+        controller: emailController,
         validator: (value) => validateEmail(value, context),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.mail),

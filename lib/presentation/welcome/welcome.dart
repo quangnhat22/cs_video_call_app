@@ -3,7 +3,7 @@ library welcome;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:videocall/common/widgets/stateless/custom_outline_icon_button.dart';
+import 'package:videocall/common/widgets/stateless/buttons/custom_outline_icon_button.dart';
 import 'package:videocall/common/widgets/stateless/divider/divider_with_text.dart';
 import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/routes/app_navigation.dart';

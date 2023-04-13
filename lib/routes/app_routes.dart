@@ -7,7 +7,7 @@ import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_boar
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
-import 'package:videocall/presentation/auth/sign_up/pages/sign_up_page.dart';
+import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
