@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/forgot_password/view/success_notification_page.dart';
+import 'package:videocall/presentation/auth/forgot_password/pages/success_notification_page.dart';
 
 class NewPasswordPage extends StatefulWidget {
   const NewPasswordPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/forgot_password/view/new_password_page.dart';
+import 'package:videocall/presentation/auth/forgot_password/pages/new_password_page.dart';
 
 import './reset_code_input.dart';
 

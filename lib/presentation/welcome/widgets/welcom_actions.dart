@@ -15,7 +15,9 @@ class WelcomeActions extends StatelessWidget {
           labelText: AppLocalizations.of(context)!.sign_in_with_email,
           icon: const Icon(Icons.mail),
           widthBtn: _getWithByOrientation(),
-          handleOnClickButton: () {},
+          handleOnClickButton: () {
+            Navigator.pushNamed(context, RouteName.loginPage);
+          },
         ),
         CustomOutlineIconButton(
           labelText: AppLocalizations.of(context)!.sign_in_with_google,

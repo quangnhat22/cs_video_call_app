@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/login/view/login_page.dart';
+import 'package:videocall/presentation/auth/login/login.dart';
 
 class SuccessNotificationPage extends StatelessWidget {
   const SuccessNotificationPage({super.key});

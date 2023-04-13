@@ -6,10 +6,12 @@ import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_b
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
+import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
+import 'package:videocall/presentation/auth/sign_up/pages/sign_up_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
-import '../presentation/auth/login/view/login_page.dart';
+import '../presentation/auth/login/login.dart';
 import '../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
@@ -27,6 +29,13 @@ class AppRoutes {
           settings,
           const LoginPage(),
         );
+      case RouteName.forgotPasswordPage:
+        return _buildRoute(
+          settings,
+          const ResetPasswordPage(),
+        );
+      case RouteName.signUpPage:
+        return _buildRoute(settings, const SignUpPage());
       default:
         return _errorRoute();
     }
