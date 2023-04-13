@@ -47,6 +47,8 @@ dependencies:
   intl: ^0.17.0
   firebase_core: ^2.9.0
   flutter_screenutil: ^5.7.0
+  cached_network_image: ^3.2.3
+  collection: ^1.17.0
 
 dev_dependencies:
   flutter_test:
@@ -76,10 +78,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/welcome.png
-    - assets/images/google.png
-    - assets/images/logo.png
-    - assets/images/success.png
+    - assets/images/
+    - assets/logos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

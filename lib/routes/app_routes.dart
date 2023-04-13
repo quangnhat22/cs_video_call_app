@@ -1,15 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:videocall/presentation/dash_board/dash_board.dart';
+import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
+import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
+import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
+import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/pages/sign_up_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
 import '../presentation/auth/login/login.dart';
+import '../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
   static final routeObserver = RouteObserver<PageRoute>();
-
-  static Map<String, WidgetBuilder> routes = {};
 
   static Route unAuthorizedRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -36,12 +42,38 @@ class AppRoutes {
   }
 
   static Route authorizedRoute(RouteSettings settings) {
+    log(settings.name.toString());
     switch (settings.name) {
-      // case '/':
-      //   return _buildRoute(
-      //     settings,
-      //     const WelcomePage(),
-      //   );
+      case RouteName.dashboardPage:
+        return _buildRoute(
+          settings,
+          const DashboardPage(),
+        );
+      case RouteName.friendsPage:
+        return _buildRoute(
+          settings,
+          const FriendsDashBoardPage(),
+        );
+      case RouteName.groupsPage:
+        return _buildRoute(
+          settings,
+          const GroupsDashBoardPage(),
+        );
+      case RouteName.schedulesPage:
+        return _buildRoute(
+          settings,
+          const ScheduleDashBoardPage(),
+        );
+      case RouteName.notificationsPage:
+        return _buildRoute(
+          settings,
+          const NotificationsDashBoardPage(),
+        );
+      case RouteName.settingPage:
+        return _buildRoute(
+          settings,
+          const SettingDashBoardPage(),
+        );
       default:
         return _errorRoute();
     }

@@ -7,12 +7,14 @@ class CustomOutlineIconButton extends StatelessWidget {
       required this.labelText,
       required this.icon,
       this.handleOnClickButton,
+      this.color,
       this.widthBtn})
       : super(key: key);
 
   final String labelText;
   final Widget icon;
   final double? widthBtn;
+  final Color? color;
   final VoidCallback? handleOnClickButton;
 
   @override
@@ -29,7 +31,13 @@ class CustomOutlineIconButton extends StatelessWidget {
             labelText,
           ),
           style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(Colors.grey[700]),
+            foregroundColor:
+                MaterialStateProperty.all(color ?? Colors.grey[700]),
+            side: MaterialStateProperty.resolveWith<BorderSide>(
+              (states) => BorderSide(
+                color: color ?? Colors.grey[700]!,
+              ),
+            ),
             padding: MaterialStateProperty.all(
               const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
             ),

@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AppAssets {
+  static var iconApp = Image.asset(
+    'assets/logos/logo_light.png',
+    fit: BoxFit.cover,
+  );
+
+  static final iconLightApp = Image.asset(
+    'assets/logos/logo_light.png',
+    fit: BoxFit.cover,
+  );
+
   static final welcomeImage = Image.asset(
     'assets/images/welcome.png',
     fit: BoxFit.cover,
@@ -14,5 +24,9 @@ class AppAssets {
   static final appLogo = Image.asset(
     'assets/images/logo.png',
     fit: BoxFit.cover,
+  );
+
+  static const emptyAvatar = AssetImage(
+    'assets/images/empty_avatar.png',
   );
 }
