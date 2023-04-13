@@ -1,5 +1,5 @@
 {
-  "language": "English",
+  "language": "Ngôn ngữ",
   "get_connect_with_your_friends": "Kết nối với những người bạn",
   "easy_way_to_connect_and_call_video_with_your_friends": "Dễ dàng kết nối và gặp mặt với bạn bè",
   "sign_in_with_email": "Đăng nhập với Email",
@@ -10,5 +10,12 @@
   "groups": "Nhóm",
   "schedules": "Lịch biểu",
   "notifications": "Thông báo",
-  "setting": "Cài đặt"
+  "setting": "Cài đặt",
+  "log_out": "Đăng xuất",
+  "about_us": "Thông tin về chúng tôi",
+  "devices": "Danh sách thiết bị",
+  "theme": "Chủ đề",
+  "change_password": "Thay đổi mật khẩu",
+  "edit_profile": "Cập nhật thông tin",
+  "change_profile_photo": "Thay đổi ảnh đại diện"
 }

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:videocall/core/config/app_color.dart';
 
 class AppTheme {
   AppTheme._();
+
+  static bool isDarkTheme() {
+    return SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark;
+  }
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     useMaterial3: true,
@@ -19,6 +25,10 @@ class AppTheme {
       style: ButtonStyle(
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
+    ),
+    cardTheme: CardTheme(
+      elevation: 1,
+      surfaceTintColor: AppColors.lightColorScheme.surface,
     ),
   );
 
@@ -38,6 +48,10 @@ class AppTheme {
       style: ButtonStyle(
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
+    ),
+    cardTheme: CardTheme(
+      elevation: 1,
+      surfaceTintColor: AppColors.darkColorScheme.surface,
     ),
   );
 }

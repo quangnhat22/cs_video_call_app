@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
+import 'package:videocall/core/config/app_theme.dart';
 
 import '../../../core/config/app_assets.dart';
 
@@ -19,13 +20,16 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.background,
+      elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: CircleAvatar(
           radius: 8,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(60),
-            child: AppAssets.iconApp,
+            child: AppTheme.isDarkTheme()
+                ? AppAssets.iconLightApp
+                : AppAssets.iconApp,
           ),
         ),
       ),
@@ -38,7 +42,6 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.search),
-          //color: Theme.of(context).primaryColor,
           onPressed: () {
             //showSearch(context: context, delegate: CustomSearch());
           },
