@@ -28,6 +28,12 @@
   "please_enter_email": "Please enter email",
   "email_is_invalid": "Email is invalid",
   "please_enter_password": "Please enter password",
+  "please_enter_confirm_password": "Please enter confirm password",
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
-  "enter_you_registered_email_below_to_receive_password_reset_instruction": "Enter you registered email below to receive password reset instruction"
+  "confirm_password_is_incorrect": "Confirm password is incorrect",
+  "enter_you_registered_email_below_to_receive_password_reset_instruction": "Enter you registered email below to receive password reset instruction",
+  "welcome": "Welcome",
+  "start_chatting_with_a_new_account": "Start chatting with a new account",
+  "confirm_password_text_field_label": "Confirm Password (*)",
+  "sign_up_text_button": "SIGN UP"
 }

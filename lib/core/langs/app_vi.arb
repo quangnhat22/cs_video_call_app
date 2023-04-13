@@ -28,6 +28,12 @@
   "please_enter_email": "Vui lòng nhập email",
   "email_is_invalid": "Email không hợp lệ",
   "please_enter_password": "Vui lòng nhập mật khẩu",
+  "please_enter_confirm_password": "Vui lòng nhập lại mật khẩu",
   "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
-  "enter_you_registered_email_below_to_receive_password_reset_instruction": "Nhập email bạn đã đăng ký bên dưới để nhận hướng dẫn đặt lại mật khẩu"
+  "confirm_password_is_incorrect": "Mật khẩu không chính xác",
+  "enter_you_registered_email_below_to_receive_password_reset_instruction": "Nhập email bạn đã đăng ký bên dưới để nhận hướng dẫn đặt lại mật khẩu",
+  "welcome": "Chào mừng bạn",
+  "start_chatting_with_a_new_account": "Bắt đầu trò chuyện với một tài khoản mới",
+  "confirm_password_text_field_label": "Xác nhận mật khẩu",
+  "sign_up_text_button": "ĐĂNG KÝ"
 }
