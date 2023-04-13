@@ -10,4 +10,9 @@ class AppAssets {
     'assets/images/google.png',
     width: 26,
   );
+
+  static final appLogo = Image.asset(
+    'assets/images/logo.png',
+    fit: BoxFit.cover,
+  );
 }

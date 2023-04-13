@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
+import 'package:videocall/presentation/auth/sign_up/pages/sign_up_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 import 'package:videocall/routes/route_name.dart';
 
-import '../presentation/auth/login/view/login_page.dart';
+import '../presentation/auth/login/login.dart';
 
 class AppRoutes {
   static final routeObserver = RouteObserver<PageRoute>();
@@ -21,6 +23,13 @@ class AppRoutes {
           settings,
           const LoginPage(),
         );
+      case RouteName.forgotPasswordPage:
+        return _buildRoute(
+          settings,
+          const ResetPasswordPage(),
+        );
+      case RouteName.signUpPage:
+        return _buildRoute(settings, const SignUpPage());
       default:
         return _errorRoute();
     }

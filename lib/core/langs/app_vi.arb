@@ -5,5 +5,17 @@
   "sign_in_with_email": "Đăng nhập với Email",
   "sign_in_with_google": "Đăng nhập với Google",
   "or": "Hoặc",
-  "sign_up_with_email": "Đăng ký với Email"
+  "sign_up_with_email": "Đăng ký với Email",
+  "welcome_back": "Chào mừng bạn trở lại",
+  "sign_in_your_account_to_see_your_chating": "Đăng nhập để xem các cuộc trò chuyện của bạn",
+  "email_text_field_label": "Email (*)",
+  "password_text_field_label": "Mật khẩu (*)",
+  "forgot_password": "Quên Mật Khẩu?",
+  "sign_in_text_button": "ĐĂNG NHẬP",
+  "back_to_welcome": "QUAY LẠI",
+  "please_enter_email": "Vui lòng nhập email",
+  "email_is_invalid": "Email không hợp lệ",
+  "please_enter_password": "Vui lòng nhập mật khẩu",
+  "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
+  "enter_you_registered_email_below_to_receive_password_reset_instruction": "Nhập email bạn đã đăng ký bên dưới để nhận hướng dẫn đặt lại mật khẩu"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/common/widgets/stateless/auth_header.dart';
 import 'package:videocall/core/config/app_config.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -79,47 +80,8 @@ class _SignUpPageState extends State<SignUpPage> {
           fit: StackFit.expand,
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Container(
-              padding: const EdgeInsets.only(top: 30, left: 12, right: 12),
-              decoration:
-                  const BoxDecoration(color: Color.fromRGBO(123, 106, 193, 1)),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(255, 251, 255, 1)),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(10)),
-                          shape:
-                              MaterialStateProperty.all(const CircleBorder())),
-                      child: const Icon(
-                        Icons.chevron_left,
-                        color: Color.fromRGBO(123, 106, 193, 1),
-                      ),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        child: const Text(
-                          'Welcome',
-                          style: TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )),
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      child: const Text(
-                        'Start chatting with a new account',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
-                  ]),
-            ),
+            const AuthHeader('Welcome', 'Start chatting with a new account',
+                Color.fromRGBO(123, 106, 193, 1)),
             Positioned(
               left: 0,
               right: 0,
