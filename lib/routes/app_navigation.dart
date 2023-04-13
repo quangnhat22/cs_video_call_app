@@ -17,6 +17,14 @@ class NavigationUtil {
     );
   }
 
+  static Future pushReplacementNamed(
+      {required String routeName, Object? args}) async {
+    return await _navigatorKey?.pushReplacementNamed(
+      routeName,
+      arguments: args,
+    );
+  }
+
   static Future pushAndRemoveUntil({required Widget page}) async {
     return await _navigatorKey?.pushAndRemoveUntil(
       MaterialPageRoute(

@@ -28,6 +28,11 @@ class AppTextStyles {
     color: Colors.grey,
   );
 
+  //app bar
+  static const TextStyle titleAppBarTextStyle = TextStyle(
+    fontWeight: FontWeight.w400,
+  );
+
   // static const TextStyle normalItalicPrimaryTextStyle = TextStyle(
   //   color: AppColor.primaryColor,
   //   fontStyle: FontStyle.italic,
