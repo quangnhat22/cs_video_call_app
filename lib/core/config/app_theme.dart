@@ -26,6 +26,10 @@ class AppTheme {
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
     ),
+    elevatedButtonTheme: const ElevatedButtonThemeData(
+        style: ButtonStyle(
+      foregroundColor: MaterialStatePropertyAll(Colors.white),
+    )),
     cardTheme: CardTheme(
       elevation: 1,
       surfaceTintColor: AppColors.lightColorScheme.surface,
@@ -49,6 +53,9 @@ class AppTheme {
         foregroundColor: MaterialStatePropertyAll(Colors.white),
       ),
     ),
+    elevatedButtonTheme: const ElevatedButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: MaterialStatePropertyAll(Colors.white))),
     cardTheme: CardTheme(
       elevation: 1,
       surfaceTintColor: AppColors.darkColorScheme.surface,

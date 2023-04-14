@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import './confirm_reset_code_page.dart';
+part of forgot_password;
 
 class ResetPasswordPage extends StatelessWidget {
   const ResetPasswordPage({super.key});
@@ -19,42 +18,27 @@ class ResetPasswordPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 20),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.all(10)),
-                                backgroundColor: MaterialStateProperty.all(
-                                    const Color.fromRGBO(0, 89, 120, 1)),
-                                shape: MaterialStateProperty.all(
-                                    const CircleBorder())),
-                            child: const Icon(Icons.chevron_left),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: FloatBackButton(
+                              Theme.of(context).colorScheme.primary,
+                              Theme.of(context).colorScheme.onPrimary),
                         ),
                       ],
                     ),
-                    SizedBox(
-                        width: 250,
-                        height: 250,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.cover,
-                        )),
-                    const Text(
-                      'Forgot password?',
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    SizedBox(width: 250, height: 250, child: AppAssets.appLogo),
+                    Text(
+                      AppLocalizations.of(context)!.forgot_password,
+                      style: const TextStyle(
+                          fontSize: 26, fontWeight: FontWeight.bold),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 28),
-                      child: const Text(
-                        'Enter you registered email below to receive password reset instruction',
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .enter_you_registered_email_below_to_receive_password_reset_instruction,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),

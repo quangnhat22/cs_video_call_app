@@ -33,6 +33,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle authHeadTitleTextStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: AppFontSize.headlineFontSize,
+      color: Colors.white);
+
+  static const TextStyle authHeadSubtitleTextStyle =
+      TextStyle(fontSize: AppFontSize.normalFontSize, color: Colors.white);
+
   // static const TextStyle normalItalicPrimaryTextStyle = TextStyle(
   //   color: AppColor.primaryColor,
   //   fontStyle: FontStyle.italic,

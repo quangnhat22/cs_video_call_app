@@ -21,6 +21,11 @@ class AppAssets {
     width: 26,
   );
 
+  static final appLogo = Image.asset(
+    'assets/images/logo.png',
+    fit: BoxFit.cover,
+  );
+
   static const emptyAvatar = AssetImage(
     'assets/images/empty_avatar.png',
   );

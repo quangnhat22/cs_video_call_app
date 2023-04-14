@@ -3,7 +3,7 @@ class RouteName {
 
   // unauth
   static const String welcomePage = '/';
-  static const String loginPage = '/login';
+  static const String loginPage = '/loginlogin';
   static const String signUpPage = '/sign-up';
   static const String forgotPasswordPage = '/forgot-password';
   // auth
