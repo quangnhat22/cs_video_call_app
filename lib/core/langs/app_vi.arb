@@ -53,5 +53,9 @@
   "welcome": "Chào mừng bạn",
   "start_chatting_with_a_new_account": "Bắt đầu trò chuyện với một tài khoản mới",
   "confirm_password_text_field_label": "Xác nhận mật khẩu",
-  "sign_up_text_button": "ĐĂNG KÝ"
+  "sign_up_text_button": "ĐĂNG KÝ",
+  "friends_tab_calls_title": "Cuộc gọi",
+  "friends_tab_contacts_title": "Liên hệ",
+  "friends_tab_requests_title": "Yêu cầu",
+  "friends_clear_text_button": "Xoá"
 }

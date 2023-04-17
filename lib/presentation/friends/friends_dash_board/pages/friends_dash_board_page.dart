@@ -5,13 +5,33 @@ class FriendsDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.friends,
-      ),
-      body: const Center(
-        child: Text("Friends"),
-      ),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: MHomeAppBar(
+            title: AppLocalizations.of(context)!.friends,
+            bottomWidget: TabBar(tabs: [
+              Tab(
+                child:
+                    Text(AppLocalizations.of(context)!.friends_tab_calls_title),
+              ),
+              Tab(
+                child: Text(
+                    AppLocalizations.of(context)!.friends_tab_contacts_title),
+              ),
+              Tab(
+                child: Text(
+                    AppLocalizations.of(context)!.friends_tab_requests_title),
+              )
+            ]),
+          ),
+          body: const TabBarView(
+            children: <Widget>[
+              CallTab(),
+              Text('Contacts'),
+              Text('Requests'),
+            ],
+          )),
     );
   }
 }

@@ -53,5 +53,9 @@
   "welcome": "Welcome",
   "start_chatting_with_a_new_account": "Start chatting with a new account",
   "confirm_password_text_field_label": "Confirm Password (*)",
-  "sign_up_text_button": "SIGN UP"
+  "sign_up_text_button": "SIGN UP",
+  "friends_tab_calls_title": "Calls",
+  "friends_tab_contacts_title": "Contacts",
+  "friends_tab_requests_title": "Requests",
+  "friends_clear_text_button": "Clear"
 }
