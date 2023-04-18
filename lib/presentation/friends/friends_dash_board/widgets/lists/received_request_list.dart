@@ -15,8 +15,7 @@ class ReceivedRequestList extends StatelessWidget {
                 padding: EdgeInsets.only(top: 8.0),
                 child: Text('Nguyễn Văn An'),
               ),
-              subtitle: Expanded(
-                  child: Column(
+              subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
@@ -52,7 +51,7 @@ class ReceivedRequestList extends StatelessWidget {
                     ],
                   )
                 ],
-              )),
+              ),
               leading: const CircleAvatar(child: Text('A')),
             ),
           );
