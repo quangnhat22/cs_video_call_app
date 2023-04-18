@@ -57,5 +57,11 @@
   "friends_tab_calls_title": "Calls",
   "friends_tab_contacts_title": "Contacts",
   "friends_tab_requests_title": "Requests",
-  "friends_clear_text_button": "Clear"
+  "friends_clear_text_button": "Clear",
+  "requests_recall_text_button": "Recall",
+  "requests_sent_text_button_segment": "Sent",
+  "requests_received_text_button_segment": "Received",
+  "user_status_online": "Online",
+  "reject_received_requests": "Reject",
+  "accept_received_requests": "Accept"
 }

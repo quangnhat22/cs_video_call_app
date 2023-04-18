@@ -6,5 +6,13 @@ import 'package:videocall/common/widgets/stateless/m_app_bar.dart';
 
 part 'pages/friends_dash_board_page.dart';
 part 'widgets/dropdown_filter_button.dart';
-part 'widgets/call_list.dart';
+part 'widgets/request_segmented_button.dart';
+
+part 'widgets/lists/call_list.dart';
+part 'widgets/lists/contact_list.dart';
+part 'widgets/lists/sent_request_list.dart';
+part 'widgets/lists/received_request_list.dart';
+
 part 'widgets/tabs/calls_tab.dart';
+part 'widgets/tabs/contacts_tab.dart';
+part 'widgets/tabs/requests_tab.dart';

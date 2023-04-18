@@ -27,9 +27,9 @@ class FriendsDashBoardPage extends StatelessWidget {
           ),
           body: const TabBarView(
             children: <Widget>[
-              CallTab(),
-              Text('Contacts'),
-              Text('Requests'),
+              CallsTab(),
+              ContactsTab(),
+              RequestsTab(),
             ],
           )),
     );

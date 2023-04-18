@@ -57,5 +57,11 @@
   "friends_tab_calls_title": "Cuộc gọi",
   "friends_tab_contacts_title": "Liên hệ",
   "friends_tab_requests_title": "Yêu cầu",
-  "friends_clear_text_button": "Xoá"
+  "friends_clear_text_button": "Xoá",
+  "requests_recall_text_button": "Gọi lại",
+  "requests_sent_text_button_segment": "Đã gọi",
+  "requests_received_text_button_segment": "Đã nhận",
+  "user_status_online": "Đang hoạt động",
+  "reject_received_requests": "Từ chối",
+  "accept_received_requests": "Chấp nhận"
 }

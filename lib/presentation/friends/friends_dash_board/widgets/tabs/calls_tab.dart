@@ -1,7 +1,7 @@
 part of friends_dash_board;
 
-class CallTab extends StatelessWidget {
-  const CallTab({super.key});
+class CallsTab extends StatelessWidget {
+  const CallsTab({super.key});
 
   void handleDropdownChange(String selectedValue) {
     debugPrint(selectedValue);
