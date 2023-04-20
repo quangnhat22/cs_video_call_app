@@ -6,7 +6,7 @@ class AppConfig {
   // AppConfig._() {
   //   _config = _Config.constants;
   // }
-  static const baseUrl = 'localhost/v1';
+  static const baseUrl = 'http://localhost:8080/v1';
 }
 
 // class _Config {
