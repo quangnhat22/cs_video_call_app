@@ -7,7 +7,7 @@ class LoginWithGoogleButton extends StatelessWidget {
   }) : super(key: key);
 
   void _handleOnTapBtn(BuildContext ctx) async {
-    //ctx.read<WelcomeCubit>().ad;
+    ctx.read<WelcomeCubit>().loginWithGoogle();
   }
 
   final double? widthBtn;
