@@ -11,7 +11,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<void> loginWithGoogle() async {
-    _authFirebase.signInWithGoogle();
+    final res = await _authFirebase.signInWithGoogle();
   }
 
   @override

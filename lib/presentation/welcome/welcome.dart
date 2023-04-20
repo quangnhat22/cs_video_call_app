@@ -10,6 +10,7 @@ import 'package:videocall/common/widgets/stateless/buttons/custom_outline_icon_b
 import 'package:videocall/common/widgets/stateless/divider/divider_with_text.dart';
 import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart';
 
 import '../../core/config/app_text_styles.dart';
 import '../../core/routes/app_navigation.dart';

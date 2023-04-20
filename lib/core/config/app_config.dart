@@ -1,20 +1,21 @@
 class AppConfig {
-  late Map<String, dynamic> _config;
-
-  String get baseUrl => _config[_Config.BASE_URL];
-
-  AppConfig() {
-    _config = _Config.constants;
-  }
+  // late Map<String, dynamic> _config;
+  //
+  // String get baseUrl => _config[_Config.BASE_URL];
+  //
+  // AppConfig._() {
+  //   _config = _Config.constants;
+  // }
+  static const baseUrl = 'localhost/v1';
 }
 
-class _Config {
-  static const BASE_URL = 'BASE_URL';
-
-  static Map<String, dynamic> constants = {
-    BASE_URL: 'https://api-dev',
-  };
-}
+// class _Config {
+//   static const BASE_URL = 'BASE_URL';
+//
+//   static Map<String, dynamic> constants = {
+//     BASE_URL: 'localhost/v1',
+//   };
+// }
 
 extension Validator on String {
   bool isValidEmail() {

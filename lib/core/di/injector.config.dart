@@ -46,7 +46,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i8.AuthUseCaeImpl(repo: gh<_i6.AuthRepository>()));
     gh.singleton<_i9.DioInterceptor>(
         _i9.DioInterceptor(gh<_i5.AuthLocalDataSrc>()));
-    gh.factory<_i10.WelcomeCubit>(() => _i10.WelcomeCubit());
+    gh.factory<_i10.WelcomeCubit>(
+        () => _i10.WelcomeCubit(authRepo: gh<_i6.AuthRepository>()));
     gh.singleton<_i11.BaseService>(_i11.BaseService(
       authLocalDataSrc: gh<_i5.AuthLocalDataSrc>(),
       interceptor: gh<_i9.DioInterceptor>(),

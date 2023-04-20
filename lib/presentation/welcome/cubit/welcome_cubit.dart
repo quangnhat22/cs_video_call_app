@@ -2,5 +2,14 @@ part of welcome;
 
 @Injectable()
 class WelcomeCubit extends Cubit<WelcomeState> {
-  WelcomeCubit() : super(WelcomeInitial());
+  WelcomeCubit({
+    required AuthRepository authRepo,
+  })  : _authRepo = authRepo,
+        super(WelcomeInitial());
+
+  final AuthRepository _authRepo;
+
+  Future<void> loginWithGoogle() async {
+    await _authRepo.loginWithGoogle();
+  }
 }

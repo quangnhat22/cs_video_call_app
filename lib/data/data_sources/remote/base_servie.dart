@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/config/app_config.dart';
 
 import '../local/auth_local_data_src.dart';
 import 'dio_interceptor.dart';
@@ -11,7 +12,7 @@ class BaseService {
   final DioInterceptor interceptor;
 
   // api route
-  //static const String GET_ABC = "/abc";
+  static const String authLoginWithFirebasePath = "/auth/login-with-firebase";
 
   BaseService({required this.authLocalDataSrc, required this.interceptor}) {
     initDio();
@@ -20,7 +21,7 @@ class BaseService {
   Future<Dio> initDio() async {
     dio = Dio(
       BaseOptions(
-          baseUrl: "https",
+          baseUrl: AppConfig.baseUrl,
           connectTimeout: const Duration(milliseconds: 10000),
           receiveTimeout: const Duration(milliseconds: 10000),
           responseType: ResponseType.json,
