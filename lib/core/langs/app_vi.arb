@@ -72,5 +72,8 @@
   "friend_birthday": "Ngày sinh",
   "friend_add_friend": "Thêm bạn bè",
   "friend_block": "Chặn",
-  "friend_unfriend": "Hủy kết bạn"
+  "friend_unfriend": "Hủy kết bạn",
+  "group_on_going": "Đang diễn ra",
+  "group_join_text_button": "Tham gia",
+  "group_start_text_button": "Bắt đầu"
 }

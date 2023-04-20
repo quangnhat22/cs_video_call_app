@@ -72,5 +72,8 @@
   "friend_birthday": "Birthday",
   "friend_add_friend": "Add friend",
   "friend_block": "Block",
-  "friend_unfriend": "Unfriend"
+  "friend_unfriend": "Unfriend",
+  "group_on_going": "On going",
+  "group_join_text_button": "Join",
+  "group_start_text_button": "Start"
 }
