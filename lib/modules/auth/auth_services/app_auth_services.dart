@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:videocall/modules/auth/auth_plugin/auth_plugin.dart';
 import 'package:videocall/modules/auth/auth_plugin/google_login.dart';
 import 'package:videocall/modules/auth/auth_services/auth_serivces.dart';
@@ -7,6 +8,7 @@ import 'package:videocall/modules/auth/models/login_data.dart';
 import '../auth_provider/google_provider.dart';
 import 'app_auth.dart';
 
+@Injectable(as: AuthServices)
 class AppAuthServices implements AuthServices {
   final _appAuth = AppAuth();
 

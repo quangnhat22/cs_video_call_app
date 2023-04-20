@@ -5,6 +5,25 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<AppBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<WelcomeCubit>(),
+        ),
+      ],
+      child: const WelcomeView(),
+    );
+  }
+}
+
+class WelcomeView extends StatelessWidget {
+  const WelcomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(

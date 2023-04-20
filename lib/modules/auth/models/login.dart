@@ -8,7 +8,7 @@ class Login {
 
   factory Login.fromJSON(Map<String, dynamic> json) {
     final int? code = json['code'];
-    var data;
+    LoginData? data;
     if (code == 200) {
       data = LoginData.fromJSON(json['data']);
     }
