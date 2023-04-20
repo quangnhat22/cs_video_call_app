@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
+import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
@@ -53,6 +54,11 @@ class AppRoutes {
         return _buildRoute(
           settings,
           const FriendsDashBoardPage(),
+        );
+      case RouteName.friendsInfor:
+        return _buildRoute(
+          settings,
+          const FriendsInforPage(),
         );
       case RouteName.groupsPage:
         return _buildRoute(

@@ -63,5 +63,13 @@
   "requests_received_text_button_segment": "Received",
   "user_status_online": "Online",
   "reject_received_requests": "Reject",
-  "accept_received_requests": "Accept"
+  "accept_received_requests": "Accept",
+  "friend_mutual_friends": "Mutual friends",
+  "friend_mutual_groups": "Mutual groups",
+  "friend_full_name": "Fullname",
+  "friend_phone": "Phone",
+  "friend_gender": "Gender",
+  "friend_birthday": "Birthday",
+  "friend_add_friend": "Add friend",
+  "friend_block": "Block"
 }

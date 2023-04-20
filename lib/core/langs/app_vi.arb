@@ -63,5 +63,13 @@
   "requests_received_text_button_segment": "Đã nhận",
   "user_status_online": "Đang hoạt động",
   "reject_received_requests": "Từ chối",
-  "accept_received_requests": "Chấp nhận"
+  "accept_received_requests": "Chấp nhận",
+  "friend_mutual_friends": "Bạn chung",
+  "friend_mutual_groups": "Nhóm chung",
+  "friend_full_name": "Họ và tên",
+  "friend_phone": "Số điện thoại",
+  "friend_gender": "Giới tính",
+  "friend_birthday": "Ngày sinh",
+  "friend_add_friend": "Thêm bạn bè",
+  "friend_block": "Chặn"
 }

@@ -11,9 +11,14 @@ class ReceivedRequestList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: const Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Text('Nguyễn Văn An'),
+              title: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GestureDetector(
+                    onTap: () {
+                      NavigationUtil.pushNamed(
+                          routeName: RouteName.friendsInfor);
+                    },
+                    child: const Text('Nguyễn Văn An')),
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

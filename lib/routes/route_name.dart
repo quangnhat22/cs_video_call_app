@@ -9,6 +9,7 @@ class RouteName {
   // auth
   static const String dashboardPage = '/';
   static const String friendsPage = '/friends';
+  static const String friendsInfor = '/friends-infor';
   static const String groupsPage = '/groups';
   static const String schedulesPage = '/schedules';
   static const String notificationsPage = '/notifications';
