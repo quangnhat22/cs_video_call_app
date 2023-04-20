@@ -11,11 +11,11 @@ import 'package:videocall/common/widgets/stateless/divider/divider_with_text.dar
 import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/modules/auth/auth_services/auth_serivces.dart';
-import 'package:videocall/routes/app_navigation.dart';
-import 'package:videocall/routes/route_name.dart';
-import 'package:videocall/utils/screen_utils.dart';
 
 import '../../core/config/app_text_styles.dart';
+import '../../core/routes/app_navigation.dart';
+import '../../core/routes/route_name.dart';
+import '../../core/utils/screen_utils.dart';
 import '../../modules/auth/models/login_data.dart';
 import '../app/bloc/app_bloc.dart';
 

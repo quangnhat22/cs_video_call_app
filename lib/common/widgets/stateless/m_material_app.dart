@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/app_theme.dart';
-import '../../../routes/app_routes.dart';
-import '../../../utils/global_keys.dart';
+import '../../../core/routes/app_routes.dart';
+import '../../../core/utils/global_keys.dart';
 
 class MMaterialApp extends StatelessWidget {
   const MMaterialApp(

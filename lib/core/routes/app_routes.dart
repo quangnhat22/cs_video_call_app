@@ -1,18 +1,18 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
+import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
-import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
-import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
-import 'package:videocall/routes/route_name.dart';
 
-import '../presentation/auth/login/login.dart';
-import '../presentation/setting/setting_dash_board/setting_dash_board.dart';
+import '../../presentation/auth/login/login.dart';
+import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
   static final routeObserver = RouteObserver<PageRoute>();

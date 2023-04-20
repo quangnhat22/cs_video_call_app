@@ -24,17 +24,22 @@ class GoogleLogin implements AuthLoginBase {
     try {
       final googleSignInAccount = await _googleSignIn.signIn();
       if (googleSignInAccount == null) {
-        return AuthResult(LoginStatus.cancelledByUser, null);
+        return AuthResult(
+          loginStatus: LoginStatus.cancelledByUser,
+        );
       } else {
         final googleSignInAuthentication =
             await googleSignInAccount.authentication;
         return AuthResult(
-          LoginStatus.loggedIn,
-          googleSignInAuthentication.accessToken,
+          loginStatus: LoginStatus.loggedIn,
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
         );
       }
     } catch (err) {
-      return AuthResult(LoginStatus.error, null);
+      return AuthResult(
+        loginStatus: LoginStatus.error,
+      );
     }
   }
 

@@ -16,9 +16,12 @@ class AppAuthServices implements AuthServices {
   Future<LoginData?> loginWithGoogle() async {
     final authGoogle = GoogleLogin();
     final authResult = await authGoogle.login();
-    if (authResult.accessToken != null) {
+    if (authResult.accessToken != null && authResult.idToken != null) {
       final result = await _appAuth.signInWithCredential(
-        GoogleAuthProvider.getCredential(accessToken: authResult.accessToken),
+        GoogleAuthProvider.getCredential(
+          accessToken: authResult.accessToken,
+          idToken: authResult.idToken,
+        ),
       );
       return result;
     }

@@ -2,7 +2,10 @@ import 'auth_credential.dart';
 
 /// An [AuthCredential] for authenticating via gmail.com.
 class GoogleAuthCredential extends AuthCredential {
-  const GoogleAuthCredential({this.accessToken}) : super(_url);
+  const GoogleAuthCredential({
+    this.accessToken,
+    this.idToken,
+  }) : super(_url);
 
   static const String _url = '/auth/gmail';
 
@@ -13,4 +16,5 @@ class GoogleAuthCredential extends AuthCredential {
 
   /// The Gmail access token.
   final String? accessToken;
+  final String? idToken;
 }

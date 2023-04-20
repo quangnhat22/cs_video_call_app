@@ -14,9 +14,15 @@ enum LoginStatus {
 class AuthResult {
   LoginStatus loginStatus;
   String? accessToken;
+  String? idToken;
   String? errMessage;
 
-  AuthResult(this.loginStatus, this.accessToken, {this.errMessage});
+  AuthResult({
+    required this.loginStatus,
+    this.errMessage,
+    this.accessToken,
+    this.idToken,
+  });
 }
 
 abstract class AuthLoginBase {

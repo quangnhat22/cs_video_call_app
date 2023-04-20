@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../common/widgets/stateless/m_material_app.dart';
-import '../../routes/app_routes.dart';
-import '../../routes/route_name.dart';
+import '../../core/routes/app_routes.dart';
+import '../../core/routes/route_name.dart';
 import 'bloc/app_bloc.dart';
 
 class App extends StatelessWidget {
