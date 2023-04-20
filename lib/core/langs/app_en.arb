@@ -71,5 +71,6 @@
   "friend_gender": "Gender",
   "friend_birthday": "Birthday",
   "friend_add_friend": "Add friend",
-  "friend_block": "Block"
+  "friend_block": "Block",
+  "friend_unfriend": "Unfriend"
 }

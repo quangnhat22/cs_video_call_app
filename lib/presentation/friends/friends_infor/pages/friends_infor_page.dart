@@ -1,6 +1,8 @@
 part of friends_infor;
 
 class FriendsInforPage extends StatelessWidget {
+  final bool isFriend = true;
+
   const FriendsInforPage({super.key});
 
   @override
@@ -36,6 +38,27 @@ class FriendsInforPage extends StatelessWidget {
       },
     ];
 
+    final List<Map<String, dynamic>> histories = [
+      {
+        'title':
+            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+        'type': 'incomming',
+        'duration': '15s'
+      },
+      {
+        'title':
+            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+        'type': 'outgoing',
+        'duration': '1h 40m'
+      },
+      {
+        'title':
+            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+        'type': 'missed',
+        'duration': ''
+      }
+    ];
+
     return Scaffold(
       appBar: MHomeAppBar(
         title: AppLocalizations.of(context)!.friends,
@@ -45,7 +68,11 @@ class FriendsInforPage extends StatelessWidget {
           children: [
             FriendMutualInfor(null, 'Trần Đình Khôi', 500, 12),
             FriendDetailsInfor(friendDetails),
-            const FriendActions()
+            if (isFriend) const FriendUnfriend(),
+            if (isFriend)
+              FriendCallsHistory(histories)
+            else
+              const FriendActions()
           ],
         ),
       ),

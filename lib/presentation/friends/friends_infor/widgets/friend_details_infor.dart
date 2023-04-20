@@ -7,10 +7,11 @@ class FriendDetailsInfor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.only(left: 12, right: 12, top: 90.h),
       child: Card(
         elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Column(
           children: friendDetails
               .mapIndexed((index, element) => Column(
@@ -19,6 +20,8 @@ class FriendDetailsInfor extends StatelessWidget {
                         title: Text(element['title']),
                         subtitle: const Text('Trần Đình Khôi'),
                         leading: element['leading'],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
                       ),
                       if (index != friendDetails.length - 1)
                         const Divider(

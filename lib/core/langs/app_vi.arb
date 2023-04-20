@@ -71,5 +71,6 @@
   "friend_gender": "Giới tính",
   "friend_birthday": "Ngày sinh",
   "friend_add_friend": "Thêm bạn bè",
-  "friend_block": "Chặn"
+  "friend_block": "Chặn",
+  "friend_unfriend": "Hủy kết bạn"
 }
