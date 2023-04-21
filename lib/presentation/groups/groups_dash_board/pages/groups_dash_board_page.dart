@@ -10,17 +10,28 @@ class GroupsDashBoardPage extends StatelessWidget {
       child: Scaffold(
         appBar: MHomeAppBar(
           title: AppLocalizations.of(context)!.groups,
-          bottomWidget: const TabBar(tabs: [
+          bottomWidget: TabBar(tabs: [
             Tab(
-              child: Text('Your Groups'),
+              child: Text(
+                  AppLocalizations.of(context)!.groups_tab_your_groups_title),
             ),
             Tab(
-              child: Text('Requests'),
+              child:
+                  Text(AppLocalizations.of(context)!.groups_tab_requests_title),
             )
           ]),
         ),
         body:
             const TabBarView(children: <Widget>[YourGroupsTab(), Text('123')]),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          shape: const StadiumBorder(),
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
     );
   }

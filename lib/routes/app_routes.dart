@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
+import 'package:videocall/presentation/groups/group_call_details/group_call_details.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
+import 'package:videocall/presentation/groups/groups_details/groups_details.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
@@ -80,6 +82,10 @@ class AppRoutes {
           settings,
           const SettingDashBoardPage(),
         );
+      case RouteName.teamDetails:
+        return _buildRoute(settings, const GroupsDetails());
+      case RouteName.teamCallDetails:
+        return _buildRoute(settings, const GroupCallDetails());
       default:
         return _errorRoute();
     }

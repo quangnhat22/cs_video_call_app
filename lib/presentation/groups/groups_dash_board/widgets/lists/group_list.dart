@@ -12,8 +12,19 @@ class GroupList extends StatelessWidget {
           return Column(
             children: <Widget>[
               ListTile(
-                title: const Text('Team anh em siêu nhơn'),
-                subtitle: Text(AppLocalizations.of(context)!.group_on_going),
+                title: GestureDetector(
+                  child: const Text(
+                    'Team anh em siêu nhơn',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    NavigationUtil.pushNamed(routeName: RouteName.teamDetails);
+                  },
+                ),
+                subtitle: Text(
+                  AppLocalizations.of(context)!.group_on_going,
+                  style: const TextStyle(color: Colors.green),
+                ),
                 leading: const CircleAvatar(child: Text('T')),
                 trailing: TextButton(
                     onPressed: () {},

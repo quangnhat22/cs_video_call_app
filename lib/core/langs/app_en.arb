@@ -75,5 +75,10 @@
   "friend_unfriend": "Unfriend",
   "group_on_going": "On going",
   "group_join_text_button": "Join",
-  "group_start_text_button": "Start"
+  "group_start_text_button": "Start",
+  "groups_tab_your_groups_title": "Your groups",
+  "groups_tab_requests_title": "Requests",
+  "group_details_tab_calls_title": "Calls",
+  "group_details_tab_discuss_title": "Discuss",
+  "group_details_tab_members_title": "Members"
 }

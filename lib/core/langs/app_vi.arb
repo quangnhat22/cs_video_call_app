@@ -75,5 +75,10 @@
   "friend_unfriend": "Hủy kết bạn",
   "group_on_going": "Đang diễn ra",
   "group_join_text_button": "Tham gia",
-  "group_start_text_button": "Bắt đầu"
+  "group_start_text_button": "Bắt đầu",
+  "groups_tab_your_groups_title": "Nhóm của bạn",
+  "groups_tab_requests_title": "Yêu cầu",
+  "group_details_tab_calls_title": "Cuộc gọi",
+  "group_details_tab_discuss_title": "Thảo luận",
+  "group_details_tab_members_title": "Thành viên"
 }

@@ -13,8 +13,6 @@ class _RequestsTabState extends State<RequestsTab> {
   Request view = Request.sent;
 
   void handleViewChange(Request selectedView) {
-    debugPrint((selectedView == Request.received).toString());
-
     setState(() {
       view = selectedView;
     });

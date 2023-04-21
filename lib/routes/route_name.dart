@@ -14,6 +14,8 @@ class RouteName {
   static const String schedulesPage = '/schedules';
   static const String notificationsPage = '/notifications';
   static const String settingPage = '/setting';
+  static const String teamDetails = '/team-details';
+  static const String teamCallDetails = '/team-call-details';
   //error
   static const String notFoundPage = '/not-found';
 }
