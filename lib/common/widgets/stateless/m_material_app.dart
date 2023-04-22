@@ -12,13 +12,15 @@ class MMaterialApp extends StatelessWidget {
       required this.keyMaterialApp,
       this.initialRoute,
       this.onGenerateRoute,
-      this.homeWidget})
+      this.homeWidget,
+      this.navigatorKey,})
       : super(key: key);
 
   final String keyMaterialApp;
   final String? initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Widget? homeWidget;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class MMaterialApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          navigatorKey: AppGlobalKeys.navigatorKey,
+          navigatorKey: navigatorKey,
           navigatorObservers: [
             AppRoutes.routeObserver,
           ],

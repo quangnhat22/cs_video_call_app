@@ -16,7 +16,7 @@ class AuthUseCaeImpl extends AuthUseCase {
 
   @override
   Future<void> loginWitGoogle() async {
-    await repo.loginWithGoogle();
+   return await repo.loginWithGoogle();
   }
 
   @override

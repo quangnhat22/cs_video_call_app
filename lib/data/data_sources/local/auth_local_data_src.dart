@@ -1,33 +1,49 @@
+import 'dart:developer';
+
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton()
+@Singleton()
 class AuthLocalDataSrc {
-  late final Box? _box;
-  final String authBox = "auth_box";
-  final String accessTokenKeyName = "access_token_key";
-  final String refreshTokenKeyName = "refresh_token_key";
+  static Box? _box;
+  final String _authBox = "auth_box";
+  final String _accessTokenKeyName = "access_token_key";
+  final String _refreshTokenKeyName = "refresh_token_key";
 
-  AuthLocalDataSrc() {
-    _openBox();
-  }
-
-  Future<void> _openBox() async {
-    _box = await Hive.openBox(authBox);
+  Future<Box> _openBox() async {
+    _box ??= await Hive.openBox(_authBox);
+    return _box!;
   }
 
   Future<void> saveAuth(String accessToken, String refreshToken) async {
-    await _box?.put(accessTokenKeyName, accessToken);
-    await _box?.put(refreshTokenKeyName, refreshToken);
+    await _openBox().then((box) async  {
+      await box.put(_accessTokenKeyName, accessToken);
+      await box.put(_refreshTokenKeyName, refreshToken);
+    });
   }
 
-  Future<String> getAccessToken() async {
-    return _box?.get(accessTokenKeyName, defaultValue: "no access token") ?? "";
+  Future<bool> checkTokenValid() async {
+    final accessToken = await getAccessToken();
+    final refreshToken = await getRefreshToken();
+    log(accessToken ?? "", name: "accessToken");
+    log(refreshToken ?? "", name: "refreshToken");
+    if (accessToken != null && refreshToken != null) {
+      return true;
+    }
+    return false;
+   }
+
+  Future<String?> getAccessToken() async {
+    return await _openBox().then((box) {
+      return box.get(_accessTokenKeyName, defaultValue: null);
+    });
   }
 
-  Future<String> getRefreshToken() async {
-    return _box?.get(refreshTokenKeyName, defaultValue: "no refresh token") ??
-        "";
+  Future<String?> getRefreshToken() async {
+    return await _openBox().then((box) {
+      return box.get(_refreshTokenKeyName,
+          defaultValue: null);
+    });
   }
 
   Future<void> deleteBoxAuth() async {
@@ -35,7 +51,7 @@ class AuthLocalDataSrc {
     //   return print(
     //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
     // });
-    await Hive.box(authBox).clear();
+    await Hive.box(_authBox).clear();
     // getBox().then((box) {
     //   return print(
     //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));

@@ -10,6 +10,11 @@ class WelcomeCubit extends Cubit<WelcomeState> {
   final AuthRepository _authRepo;
 
   Future<void> loginWithGoogle() async {
-    await _authRepo.loginWithGoogle();
+    try {
+      await _authRepo.loginWithGoogle();
+      emit(WelcomeSignInWithGoogleSuccess());
+    } catch (e) {
+      emit(WelcomeSignInWithGoogleFailure(message: e.toString()));
+    }
   }
 }

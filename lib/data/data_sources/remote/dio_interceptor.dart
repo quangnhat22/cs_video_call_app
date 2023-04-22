@@ -21,6 +21,7 @@ class DioInterceptor {
           if (response.statusCode == 401) {
             //dio.interceptors.req
           }
+          handler.next(response);
         }),
       ),
     );

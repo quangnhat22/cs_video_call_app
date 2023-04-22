@@ -24,23 +24,33 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: SafeArea(
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              child: Column(
-                children: const <Widget>[
-                  SizedBox(
-                    height: 12,
-                  ),
-                  WelcomePanel(),
-                  SizedBox(
-                    height: 26,
-                  ),
-                  WelcomeActions(),
-                ],
+    return BlocListener<WelcomeCubit, WelcomeState>(
+      listener: (context, state) {
+        if (state is WelcomeSignInWithGoogleSuccess) {
+          context.read<AppBloc>().add(AppUserChanged());
+        }
+        if (state is WelcomeSignInWithGoogleFailure) {
+          SnackBarApp.showSnackBar(context, state.message, TypesSnackBar.error);
+        }
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Center(
+            child: SafeArea(
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                child: Column(
+                  children: const <Widget>[
+                    SizedBox(
+                      height: 12,
+                    ),
+                    WelcomePanel(),
+                    SizedBox(
+                      height: 26,
+                    ),
+                    WelcomeActions(),
+                  ],
+                ),
               ),
             ),
           ),

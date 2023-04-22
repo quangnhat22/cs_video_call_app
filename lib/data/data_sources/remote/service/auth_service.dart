@@ -12,14 +12,19 @@ class AuthService {
     String idToken,
     String deviceName,
   ) async {
-    return await _service.dio.post(
-      BaseService.authLoginWithFirebasePath,
-      data: {
-        "id_token": idToken,
-        "device": {
-          "name": deviceName,
-        }
-      },
-    );
+    try {
+      return await _service.dio.post(
+        BaseService.authLoginWithFirebasePath,
+        data: {
+          "id_token": idToken,
+          "device": {
+            "name": deviceName,
+          }
+        },
+      );
+    }
+    catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

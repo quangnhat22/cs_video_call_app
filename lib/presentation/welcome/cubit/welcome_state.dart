@@ -1,19 +1,23 @@
 part of welcome;
 
-abstract class WelcomeState extends Equatable {}
+abstract class WelcomeState extends Equatable {
+  const WelcomeState();
 
-class WelcomeInitial extends WelcomeState {
   @override
   List<Object?> get props => [];
 }
 
-class WelcomeSignInWithGoogleSuccess extends Equatable {
-  const WelcomeSignInWithGoogleSuccess({
-    this.status = LoginState.success,
+class WelcomeInitial extends WelcomeState {}
+
+class WelcomeSignInWithGoogleSuccess extends WelcomeState {}
+
+class WelcomeSignInWithGoogleFailure extends WelcomeState {
+  const WelcomeSignInWithGoogleFailure({
+    this.message,
   });
 
-  final LoginState status;
+  final String? message;
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [message];
 }
