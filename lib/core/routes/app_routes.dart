@@ -7,6 +7,7 @@ import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
+import 'package:videocall/presentation/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
@@ -16,6 +17,18 @@ import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
   static final routeObserver = RouteObserver<PageRoute>();
+
+  static Route loadingRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case "/":
+        return _buildRoute(
+          settings,
+          const LoadingPage(),
+        );
+      default:
+        return _errorRoute();
+    }
+  }
 
   static Route unAuthorizedRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -86,14 +99,14 @@ class AppRoutes {
     );
   }
 
-  static MaterialPageRoute _buildRouteDialog(
-      RouteSettings settings, Widget builder) {
-    return MaterialPageRoute(
-      settings: settings,
-      fullscreenDialog: true,
-      builder: (BuildContext context) => builder,
-    );
-  }
+  // static MaterialPageRoute _buildRouteDialog(
+  //     RouteSettings settings, Widget builder) {
+  //   return MaterialPageRoute(
+  //     settings: settings,
+  //     fullscreenDialog: true,
+  //     builder: (BuildContext context) => builder,
+  //   );
+  // }
 
   static Route _errorRoute() {
     return MaterialPageRoute(builder: (_) {

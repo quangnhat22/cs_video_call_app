@@ -16,7 +16,7 @@ class AuthLocalDataSrc {
   }
 
   Future<void> saveAuth(String accessToken, String refreshToken) async {
-    await _openBox().then((box) async  {
+    await _openBox().then((box) async {
       await box.put(_accessTokenKeyName, accessToken);
       await box.put(_refreshTokenKeyName, refreshToken);
     });
@@ -31,7 +31,14 @@ class AuthLocalDataSrc {
       return true;
     }
     return false;
-   }
+  }
+
+  Stream<String?> checkAccessTokenStream() async* {
+    final box = await _openBox();
+    yield* box.watch(key: _accessTokenKeyName).map((event) {
+      return event.value;
+    });
+  }
 
   Future<String?> getAccessToken() async {
     return await _openBox().then((box) {
@@ -41,8 +48,7 @@ class AuthLocalDataSrc {
 
   Future<String?> getRefreshToken() async {
     return await _openBox().then((box) {
-      return box.get(_refreshTokenKeyName,
-          defaultValue: null);
+      return box.get(_refreshTokenKeyName, defaultValue: null);
     });
   }
 
@@ -52,9 +58,9 @@ class AuthLocalDataSrc {
     //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
     // });
     await Hive.box(_authBox).clear();
-    // getBox().then((box) {
+    // _openBox().then((box) {
     //   return print(
-    //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
+    //       box.get(_accessTokenKeyName, defaultValue: "no refresh token"));
     // });
   }
 }

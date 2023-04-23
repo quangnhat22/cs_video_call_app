@@ -9,7 +9,7 @@ class DioInterceptor {
   final AuthLocalDataSrc _authLocalDataSrc;
 
   Future<Dio> addInterceptor(Dio dio) async {
-    String query = "";
+    //String query = "";
     dio.interceptors.add(
       QueuedInterceptorsWrapper(
         onRequest: ((options, handler) async {

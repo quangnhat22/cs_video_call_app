@@ -1,4 +1,4 @@
-import 'package:dio/src/response.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/remote/base_servie.dart';
 
@@ -22,8 +22,7 @@ class AuthService {
           }
         },
       );
-    }
-    catch (e) {
+    } catch (e) {
       throw Exception(e.toString());
     }
   }

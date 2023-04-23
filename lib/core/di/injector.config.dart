@@ -23,8 +23,10 @@ import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart'
     as _i8;
 import 'package:videocall/domain/modules/auth/usecases/auth_usecase.dart'
     as _i10;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i12;
-import 'package:videocall/presentation/welcome/welcome.dart' as _i11;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i13;
+import 'package:videocall/presentation/setting/setting_dash_board/setting_dash_board.dart'
+    as _i11;
+import 'package:videocall/presentation/welcome/welcome.dart' as _i12;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -54,10 +56,12 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i10.AuthUseCase>(
         () => _i10.AuthUseCaeImpl(repo: gh<_i8.AuthRepository>()));
-    gh.factory<_i11.WelcomeCubit>(
-        () => _i11.WelcomeCubit(authRepo: gh<_i8.AuthRepository>()));
-    gh.lazySingleton<_i12.AppBloc>(
-        () => _i12.AppBloc(authRepo: gh<_i8.AuthRepository>()));
+    gh.factory<_i11.SettingCubit>(
+        () => _i11.SettingCubit(authRepo: gh<_i8.AuthRepository>()));
+    gh.factory<_i12.WelcomeCubit>(
+        () => _i12.WelcomeCubit(authRepo: gh<_i8.AuthRepository>()));
+    gh.lazySingleton<_i13.AppBloc>(
+        () => _i13.AppBloc(authRepo: gh<_i8.AuthRepository>()));
     return this;
   }
 }

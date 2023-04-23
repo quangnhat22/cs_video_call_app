@@ -4,17 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/app_theme.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/utils/global_keys.dart';
 
 class MMaterialApp extends StatelessWidget {
-  const MMaterialApp(
-      {Key? key,
-      required this.keyMaterialApp,
-      this.initialRoute,
-      this.onGenerateRoute,
-      this.homeWidget,
-      this.navigatorKey,})
-      : super(key: key);
+  const MMaterialApp({
+    Key? key,
+    required this.keyMaterialApp,
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.homeWidget,
+    this.navigatorKey,
+  }) : super(key: key);
 
   final String keyMaterialApp;
   final String? initialRoute;

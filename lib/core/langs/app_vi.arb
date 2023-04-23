@@ -35,5 +35,8 @@
   "welcome": "Chào mừng bạn",
   "start_chatting_with_a_new_account": "Bắt đầu trò chuyện với một tài khoản mới",
   "confirm_password_text_field_label": "Xác nhận mật khẩu",
-  "sign_up_text_button": "ĐĂNG KÝ"
+  "sign_up_text_button": "ĐĂNG KÝ",
+  "cancel": "Huỷ",
+  "confirm": "Xác nhận",
+  "are_you_sure_want_to_log_out": "Bạn có chắc chắn muốn thoát khỏi ứng dụng?"
 }

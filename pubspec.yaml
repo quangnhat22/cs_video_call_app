@@ -38,7 +38,6 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.2
   hive: ^2.2.3
-  bloc: ^8.1.1
   dio: ^5.1.1
   get_it: ^7.2.0
   injectable: ^2.1.1
@@ -84,6 +83,7 @@ flutter:
   assets:
     - assets/images/
     - assets/logos/
+    - assets/gifs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

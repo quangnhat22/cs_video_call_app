@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
@@ -38,7 +39,8 @@ class AuthRepositoryImpl extends AuthRepository {
         // handle res data
         if (res.statusCode == 200) {
           final data = res.data["data"];
-          await  _authLocalDataSrc.saveAuth(data["access_token"]["token"], data["refresh_token"]["token"]);
+          await _authLocalDataSrc.saveAuth(
+              data["access_token"]["token"], data["refresh_token"]["token"]);
         }
       }
     } catch (e) {
@@ -47,9 +49,8 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<void> logOut() async {
+    await _authLocalDataSrc.deleteBoxAuth();
   }
 
   @override
@@ -62,5 +63,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> signUpWithEmailAndPassword(String email, String password) {
     // TODO: implement signUpWithEmailAndPassword
     throw UnimplementedError();
+  }
+
+  @override
+  Stream<String?> checkAccessTokenStream() {
+    return _authLocalDataSrc.checkAccessTokenStream();
   }
 }

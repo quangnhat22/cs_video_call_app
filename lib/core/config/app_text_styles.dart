@@ -15,7 +15,7 @@ class AppTextStyles {
 
   static const TextStyle headlineTextStyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: AppFontSize.headlineFontSize,
+    fontSize: AppFontSize.headlineFontSize, //24
   );
 
   static const TextStyle mediumTitleTextStyle = TextStyle(
@@ -38,8 +38,10 @@ class AppTextStyles {
       fontSize: AppFontSize.headlineFontSize,
       color: Colors.white);
 
-  static const TextStyle authHeadSubtitleTextStyle =
-      TextStyle(fontSize: AppFontSize.normalFontSize, color: Colors.white);
+  static const TextStyle authHeadSubtitleTextStyle = TextStyle(
+    fontSize: AppFontSize.normalFontSize,
+    color: Colors.white,
+  );
 
   // static const TextStyle normalItalicPrimaryTextStyle = TextStyle(
   //   color: AppColor.primaryColor,

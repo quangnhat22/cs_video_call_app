@@ -24,38 +24,47 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<WelcomeCubit, WelcomeState>(
+    return BlocConsumer<WelcomeCubit, WelcomeState>(
       listener: (context, state) {
-        if (state is WelcomeSignInWithGoogleSuccess) {
-          context.read<AppBloc>().add(AppUserChanged());
-        }
-        if (state is WelcomeSignInWithGoogleFailure) {
-          SnackBarApp.showSnackBar(context, state.message, TypesSnackBar.error);
-        }
+        state.whenOrNull(
+          signInWithGoogleSuccess: () {
+            context.read<AppBloc>().add(AppUserChanged());
+          },
+          signInFail: (message) {
+            SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+          },
+        );
       },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: SafeArea(
-              child: Container(
-                margin: const EdgeInsets.all(20),
-                child: Column(
-                  children: const <Widget>[
-                    SizedBox(
-                      height: 12,
+      builder: (context, state) {
+        return state.maybeWhen(
+          signInWithGoogleInProgress: () => const LoadingPage(),
+          orElse: () {
+            return Scaffold(
+              body: SingleChildScrollView(
+                child: Center(
+                  child: SafeArea(
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Column(
+                        children: const <Widget>[
+                          SizedBox(
+                            height: 12,
+                          ),
+                          WelcomePanel(),
+                          SizedBox(
+                            height: 26,
+                          ),
+                          WelcomeActions(),
+                        ],
+                      ),
                     ),
-                    WelcomePanel(),
-                    SizedBox(
-                      height: 26,
-                    ),
-                    WelcomeActions(),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }
