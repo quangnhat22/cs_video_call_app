@@ -38,7 +38,6 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.2
   hive: ^2.2.3
-  bloc: ^8.1.1
   dio: ^5.1.1
   get_it: ^7.2.0
   injectable: ^2.1.1
@@ -49,6 +48,10 @@ dependencies:
   flutter_screenutil: ^5.7.0
   cached_network_image: ^3.2.3
   collection: ^1.17.0
+  firebase_auth: ^4.4.1
+  google_sign_in: ^6.1.0
+  device_info_plus: ^8.2.0
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +83,7 @@ flutter:
   assets:
     - assets/images/
     - assets/logos/
+    - assets/gifs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

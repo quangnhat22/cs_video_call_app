@@ -3,22 +3,23 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/app_theme.dart';
-import '../../../routes/app_routes.dart';
-import '../../../utils/global_keys.dart';
+import '../../../core/routes/app_routes.dart';
 
 class MMaterialApp extends StatelessWidget {
-  const MMaterialApp(
-      {Key? key,
-      required this.keyMaterialApp,
-      this.initialRoute,
-      this.onGenerateRoute,
-      this.homeWidget})
-      : super(key: key);
+  const MMaterialApp({
+    Key? key,
+    required this.keyMaterialApp,
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.homeWidget,
+    this.navigatorKey,
+  }) : super(key: key);
 
   final String keyMaterialApp;
   final String? initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Widget? homeWidget;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class MMaterialApp extends StatelessWidget {
           supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          navigatorKey: AppGlobalKeys.navigatorKey,
+          navigatorKey: navigatorKey,
           navigatorObservers: [
             AppRoutes.routeObserver,
           ],

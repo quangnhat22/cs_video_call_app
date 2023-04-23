@@ -5,6 +5,20 @@ class SettingDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<SettingCubit>(),
+      child: const SettingDashBoardView(),
+    );
+  }
+}
+
+class SettingDashBoardView extends StatelessWidget {
+  const SettingDashBoardView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: MHomeAppBar(title: AppLocalizations.of(context)!.setting),
       body: SingleChildScrollView(

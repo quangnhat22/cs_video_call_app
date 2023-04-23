@@ -1,20 +1,23 @@
 class AppConfig {
-  late Map<String, dynamic> _config;
+  // late Map<String, dynamic> _config;
+  //
+  // String get baseUrl => _config[_Config.BASE_URL];
+  //
+  // AppConfig._() {
+  //   _config = _Config.constants;
+  // }
 
-  String get baseUrl => _config[_Config.BASE_URL];
-
-  AppConfig() {
-    _config = _Config.constants;
-  }
+  // TODO: switch to [10.0.2.2] if using android emulator
+  static const baseUrl = 'http://192.168.1.6:8080/v1';
 }
 
-class _Config {
-  static const BASE_URL = 'BASE_URL';
-
-  static Map<String, dynamic> constants = {
-    BASE_URL: 'https://api-dev',
-  };
-}
+// class _Config {
+//   static const BASE_URL = 'BASE_URL';
+//
+//   static Map<String, dynamic> constants = {
+//     BASE_URL: 'localhost/v1',
+//   };
+// }
 
 extension Validator on String {
   bool isValidEmail() {
