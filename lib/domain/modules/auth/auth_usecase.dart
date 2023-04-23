@@ -1,6 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart';
+import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
 abstract class AuthUseCase {
   Future<void> loginWitGoogle();
@@ -8,6 +7,7 @@ abstract class AuthUseCase {
   Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<void> logOut();
   Stream<String?> checkAccessTokenStream();
+  Stream<String?> checkRefreshTokenStream();
 }
 
 @Injectable(as: AuthUseCase)
@@ -39,5 +39,10 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Stream<String?> checkAccessTokenStream() {
     return repo.checkAccessTokenStream();
+  }
+
+  @override
+  Stream<String?> checkRefreshTokenStream() {
+    return repo.checkRefreshTokenStream();
   }
 }

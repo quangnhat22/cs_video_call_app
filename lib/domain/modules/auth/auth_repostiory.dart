@@ -5,4 +5,5 @@ abstract class AuthRepository {
   Future<void> signUpWithEmailAndPassword(String email, String password);
   Future<void> logOut();
   Stream<String?> checkAccessTokenStream();
+  Stream<String?> checkRefreshTokenStream();
 }

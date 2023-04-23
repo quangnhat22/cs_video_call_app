@@ -22,8 +22,8 @@ class BaseService {
     dio = Dio(
       BaseOptions(
           baseUrl: AppConfig.baseUrl,
-          connectTimeout: const Duration(milliseconds: 30000),
-          receiveTimeout: const Duration(milliseconds: 30000),
+          connectTimeout: const Duration(milliseconds: 10000),
+          receiveTimeout: const Duration(milliseconds: 10000),
           responseType: ResponseType.json,
           contentType: Headers.jsonContentType,
           headers: {

@@ -1,10 +1,9 @@
-import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart';
-import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart';
+import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
@@ -67,6 +66,11 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Stream<String?> checkAccessTokenStream() {
-    return _authLocalDataSrc.checkAccessTokenStream();
+    return _authLocalDataSrc.getAccessTokenStream();
+  }
+
+  @override
+  Stream<String?> checkRefreshTokenStream() {
+    return _authLocalDataSrc.getRefreshTokenStream();
   }
 }

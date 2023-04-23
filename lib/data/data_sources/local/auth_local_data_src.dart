@@ -33,22 +33,29 @@ class AuthLocalDataSrc {
     return false;
   }
 
-  Stream<String?> checkAccessTokenStream() async* {
-    final box = await _openBox();
-    yield* box.watch(key: _accessTokenKeyName).map((event) {
-      return event.value;
-    });
-  }
-
   Future<String?> getAccessToken() async {
     return await _openBox().then((box) {
       return box.get(_accessTokenKeyName, defaultValue: null);
     });
   }
 
+  Stream<String?> getAccessTokenStream() async* {
+    final box = await _openBox();
+    yield* box.watch(key: _accessTokenKeyName).map((event) {
+      return event.value;
+    });
+  }
+
   Future<String?> getRefreshToken() async {
     return await _openBox().then((box) {
       return box.get(_refreshTokenKeyName, defaultValue: null);
+    });
+  }
+
+  Stream<String?> getRefreshTokenStream() async* {
+    final box = await _openBox();
+    yield* box.watch(key: _refreshTokenKeyName).map((event) {
+      return event.value;
     });
   }
 
