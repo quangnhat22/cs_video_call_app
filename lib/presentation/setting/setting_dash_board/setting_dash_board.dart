@@ -11,7 +11,7 @@ import 'package:videocall/common/widgets/stateless/buttons/custom_outline_icon_b
 import 'package:videocall/common/widgets/stateless/m_app_bar.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/utils/show_dialog.dart';
-import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart';
+import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
 import '../../../common/widgets/stateless/ink_well/inkwell_dynamic_border.dart';
 import '../../../common/widgets/stateless/list_tile/setting_list_tile.dart';

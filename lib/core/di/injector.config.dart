@@ -19,10 +19,8 @@ import 'package:videocall/data/data_sources/remote/dio_interceptor.dart' as _i5;
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart'
     as _i7;
 import 'package:videocall/data/repositories/auth_repository_impl.dart' as _i9;
-import 'package:videocall/domain/modules/auth/repositories/auth_repostiory.dart'
-    as _i8;
-import 'package:videocall/domain/modules/auth/usecases/auth_usecase.dart'
-    as _i10;
+import 'package:videocall/domain/modules/auth/auth_repostiory.dart' as _i8;
+import 'package:videocall/domain/modules/auth/auth_usecase.dart' as _i10;
 import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i13;
 import 'package:videocall/presentation/setting/setting_dash_board/setting_dash_board.dart'
     as _i11;

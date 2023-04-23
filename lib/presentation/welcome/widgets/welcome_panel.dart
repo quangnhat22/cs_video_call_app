@@ -8,8 +8,8 @@ class WelcomePanel extends StatelessWidget {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 240.w,
-          width: 240.h,
+          height: 240,
+          width: 240,
           child: AppAssets.welcomeImage,
         ),
         Padding(
