@@ -38,8 +38,8 @@ class ReceivedRequestList extends StatelessWidget {
                         style: const ButtonStyle(
                             padding: MaterialStatePropertyAll(
                                 EdgeInsets.symmetric(horizontal: 30))),
-                        child: Text(AppLocalizations.of(context)!
-                            .reject_received_requests),
+                        child:
+                            Text(AppLocalizations.of(context)!.reject_request),
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -50,8 +50,8 @@ class ReceivedRequestList extends StatelessWidget {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 30)),
                         onPressed: () {},
-                        child: Text(AppLocalizations.of(context)!
-                            .accept_received_requests),
+                        child:
+                            Text(AppLocalizations.of(context)!.accept_request),
                       )
                     ],
                   )

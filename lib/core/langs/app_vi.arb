@@ -62,8 +62,8 @@
   "requests_sent_text_button_segment": "Đã gọi",
   "requests_received_text_button_segment": "Đã nhận",
   "user_status_online": "Đang hoạt động",
-  "reject_received_requests": "Từ chối",
-  "accept_received_requests": "Chấp nhận",
+  "reject_request": "Từ chối",
+  "accept_request": "Chấp nhận",
   "friend_mutual_friends": "Bạn chung",
   "friend_mutual_groups": "Nhóm chung",
   "friend_full_name": "Họ và tên",
@@ -76,9 +76,14 @@
   "group_on_going": "Đang diễn ra",
   "group_join_text_button": "Tham gia",
   "group_start_text_button": "Bắt đầu",
+  "group_response_text_button": "Phản hồi",
+  "group_tentative_text_button": "Do dự",
   "groups_tab_your_groups_title": "Nhóm của bạn",
   "groups_tab_requests_title": "Yêu cầu",
   "group_details_tab_calls_title": "Cuộc gọi",
   "group_details_tab_discuss_title": "Thảo luận",
-  "group_details_tab_members_title": "Thành viên"
+  "group_details_tab_members_title": "Thành viên",
+  "group_call_details_tab_chat_title": "Trò chuyện",
+  "group_call_details_tab_details_title": "Chi tiết",
+  "group_call_participants_title": "Người tham dự"
 }

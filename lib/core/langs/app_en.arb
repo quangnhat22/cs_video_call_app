@@ -62,8 +62,8 @@
   "requests_sent_text_button_segment": "Sent",
   "requests_received_text_button_segment": "Received",
   "user_status_online": "Online",
-  "reject_received_requests": "Reject",
-  "accept_received_requests": "Accept",
+  "reject_request": "Reject",
+  "accept_request": "Accept",
   "friend_mutual_friends": "Mutual friends",
   "friend_mutual_groups": "Mutual groups",
   "friend_full_name": "Fullname",
@@ -76,9 +76,14 @@
   "group_on_going": "On going",
   "group_join_text_button": "Join",
   "group_start_text_button": "Start",
+  "group_response_text_button": "Response",
+  "group_tentative_text_button": "Tentative",
   "groups_tab_your_groups_title": "Your groups",
   "groups_tab_requests_title": "Requests",
   "group_details_tab_calls_title": "Calls",
   "group_details_tab_discuss_title": "Discuss",
-  "group_details_tab_members_title": "Members"
+  "group_details_tab_members_title": "Members",
+  "group_call_details_tab_chat_title": "Chat",
+  "group_call_details_tab_details_title": "Details",
+  "group_call_participants_title": "Participants"
 }

@@ -31,10 +31,7 @@ class GroupList extends StatelessWidget {
                     child: Text(
                         AppLocalizations.of(context)!.group_join_text_button)),
               ),
-              if (index != 11)
-                const Divider(
-                  height: 0,
-                )
+              if (index != 11) const DividerSpaceLeft()
             ],
           );
         }),

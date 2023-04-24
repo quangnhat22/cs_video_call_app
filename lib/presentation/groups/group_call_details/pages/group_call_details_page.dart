@@ -11,18 +11,20 @@ class GroupCallDetails extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Gặp nhau cuối tuần'),
             backgroundColor: Theme.of(context).colorScheme.background,
-            bottom: const TabBar(tabs: <Widget>[
+            bottom: TabBar(tabs: <Widget>[
               Tab(
-                child: Text('Chat'),
+                child: Text(AppLocalizations.of(context)!
+                    .group_call_details_tab_chat_title),
               ),
               Tab(
-                child: Text('Details'),
+                child: Text(AppLocalizations.of(context)!
+                    .group_call_details_tab_details_title),
               )
             ]),
           ),
           body: TabBarView(children: <Widget>[
             GroupCallChatTab(),
-            const Text('456'),
+            const GroupCallDetailsTab(),
           ]),
         ));
   }
