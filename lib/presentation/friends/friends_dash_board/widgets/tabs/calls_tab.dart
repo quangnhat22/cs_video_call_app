@@ -14,8 +14,12 @@ class CallsTab extends StatelessWidget {
           child: Column(
         children: <Widget>[
           Container(
-            height: constraints.maxHeight * 0.15,
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            height: constraints.maxHeight *
+                (AppScreenUtils.isLandscape() ? 0.3 : 0.15),
+            padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: AppScreenUtils.isLandscape() ? 20 : 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,7 +39,8 @@ class CallsTab extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: constraints.maxHeight * 0.85,
+            height: constraints.maxHeight *
+                (AppScreenUtils.isLandscape() ? 0.7 : 0.85),
             child: const CallList(),
           ),
         ],

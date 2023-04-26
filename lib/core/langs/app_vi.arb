@@ -85,5 +85,8 @@
   "group_details_tab_members_title": "Thành viên",
   "group_call_details_tab_chat_title": "Trò chuyện",
   "group_call_details_tab_details_title": "Chi tiết",
-  "group_call_participants_title": "Người tham dự"
+  "group_call_participants_title": "Người tham dự",
+  "members_text_title": "thành viên",
+  "owner_text": "Chủ nhóm",
+  "selected_text": "đã chọn"
 }

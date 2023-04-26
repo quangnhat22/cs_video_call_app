@@ -85,5 +85,8 @@
   "group_details_tab_members_title": "Members",
   "group_call_details_tab_chat_title": "Chat",
   "group_call_details_tab_details_title": "Details",
-  "group_call_participants_title": "Participants"
+  "group_call_participants_title": "Participants",
+  "members_text_title": "members",
+  "owner_text": "Owner",
+  "selected_text": "selected"
 }

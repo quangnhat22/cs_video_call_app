@@ -25,15 +25,20 @@ class _RequestsTabState extends State<RequestsTab> {
           child: Column(
         children: <Widget>[
           Container(
-            height: constraints.maxHeight * 0.15,
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            height: constraints.maxHeight *
+                (AppScreenUtils.isLandscape() ? 0.3 : 0.15),
+            margin: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: AppScreenUtils.isLandscape() ? 20 : 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[RequestSegmentedButton(handleViewChange)],
             ),
           ),
           SizedBox(
-            height: constraints.maxHeight * 0.85,
+            height: constraints.maxHeight *
+                (AppScreenUtils.isLandscape() ? 0.7 : 0.85),
             child: view == Request.sent
                 ? const SentRequestList()
                 : const ReceivedRequestList(),

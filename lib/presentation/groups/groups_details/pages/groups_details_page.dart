@@ -11,6 +11,9 @@ class _GroupsDetailsState extends State<GroupsDetails>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  final List<String> allMembers = ['Nguyễn Văn Quý', 'Lý Nhân Danh'];
+  final List<String> membersSuggestions = ['Trần Đức Nghĩa', 'Lê Hậu Nhân'];
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +35,19 @@ class _GroupsDetailsState extends State<GroupsDetails>
   Widget? _bottomButtons() {
     if (_tabController.index != 1) {
       return FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          if (_tabController.index == 2) {
+            final newMembers = await showSearch(
+                context: context, delegate: AddMembersSearch(allMembers));
+
+            if (newMembers != null) {
+              final arrayNewMembers = jsonDecode(newMembers);
+              if (arrayNewMembers.length > 0) {
+                debugPrint(arrayNewMembers[0]);
+              }
+            }
+          }
+        },
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         shape: const StadiumBorder(),
         child: Icon(
@@ -72,8 +87,8 @@ class _GroupsDetailsState extends State<GroupsDetails>
           ),
           body: TabBarView(controller: _tabController, children: <Widget>[
             GroupsCallsTabs(),
-            const Text('123'),
-            const Text('456')
+            const GroupDiscussTab(),
+            const GroupMembersTab()
           ]),
           floatingActionButton: _bottomButtons(),
         ));
