@@ -15,7 +15,9 @@ class ProfileSettings extends StatelessWidget {
         "title": AppLocalizations.of(context)!.edit_profile,
         "leading": const Icon(Icons.account_circle_outlined),
         "trailing": const Icon(Icons.chevron_right),
-        "onTap": () {}
+        "onTap": () {
+          NavigationUtil.pushNamed(routeName: RouteName.editProfilePage);
+        }
       },
       {
         "title": AppLocalizations.of(context)!.change_password,

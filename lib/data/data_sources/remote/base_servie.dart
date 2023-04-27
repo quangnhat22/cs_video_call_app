@@ -13,6 +13,7 @@ class BaseService {
 
   // api route
   static const String authLoginWithFirebasePath = "/auth/login-with-firebase";
+  static const String userPath = "/user";
 
   BaseService({required this.authLocalDataSrc, required this.interceptor}) {
     initDio();

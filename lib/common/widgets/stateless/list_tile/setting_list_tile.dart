@@ -22,7 +22,7 @@ class SettingListTile extends StatelessWidget {
                     title: item["title"] ?? '',
                     leading: item["leading"],
                     trailing: item["trailing"],
-                    onTap: () => item["onTap"],
+                    onTap: item["onTap"],
                     hasTopBorderRadius: index == 0 ? true : false,
                     hasBottomBorderRadius:
                         index == options.length - 1 ? true : false,
