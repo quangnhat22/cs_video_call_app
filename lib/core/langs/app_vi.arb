@@ -38,5 +38,8 @@
   "sign_up_text_button": "ĐĂNG KÝ",
   "cancel": "Huỷ",
   "confirm": "Xác nhận",
-  "are_you_sure_want_to_log_out": "Bạn có chắc chắn muốn thoát khỏi ứng dụng?"
+  "are_you_sure_want_to_log_out": "Bạn có chắc chắn muốn thoát khỏi ứng dụng?",
+  "username": "Username",
+  "full_name": "Họ và tên",
+  "phone_number": "Số điện thoại"
 }
