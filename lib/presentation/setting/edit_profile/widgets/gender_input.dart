@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/presentation/setting/edit_profile/widgets/select_gender_form_dialog.dart';
 
 class GenderInput extends StatefulWidget {
   const GenderInput({Key? key}) : super(key: key);
@@ -19,14 +20,14 @@ class _GenderInputState extends State<GenderInput> {
   Future<void> _showDialog(BuildContext ctx) {
     return showDialog(
       context: ctx,
-      builder: (context) => AlertDialog(
-        title: const Text('Your name'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const <Widget>[TextField()],
-        ),
+      builder: (context) => GenderFormDialog(
+        initGender: genderController.text,
       ),
-    );
+    ).then((value) {
+      setState(() {
+        genderController.text = value;
+      });
+    });
   }
 
   @override
@@ -36,13 +37,17 @@ class _GenderInputState extends State<GenderInput> {
       child: TextField(
         controller: genderController,
         decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.calendar_today),
-          label: Text("Enter Date"),
+          prefixIcon: Icon(Icons.people_outline),
+          suffixIcon: Icon(Icons.expand_more_outlined),
+          label: Text("Gender"),
           border: OutlineInputBorder(
-              borderSide: BorderSide(width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderSide: BorderSide(width: 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
         ),
-        readOnly: true, //set it true, so that user will not able to edit text
+        readOnly: true,
         onTap: () => _showDialog(context),
       ),
     );

@@ -25,7 +25,7 @@ class _BirthdayInputState extends State<BirthdayInput> {
         controller: dateInput,
         decoration: const InputDecoration(
           prefixIcon: Icon(Icons.calendar_today),
-          label: Text("Enter Date"),
+          label: Text("Birthday"),
           border: OutlineInputBorder(
               borderSide: BorderSide(width: 1),
               borderRadius: BorderRadius.all(Radius.circular(8))),

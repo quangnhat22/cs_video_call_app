@@ -41,5 +41,6 @@
   "are_you_sure_want_to_log_out": "Are you sure you want to logout?",
   "username": "Username",
   "full_name": "Full name",
-  "phone_number": "Phone number"
+  "phone_number": "Phone number",
+  "bio": "Bio"
 }

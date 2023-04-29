@@ -44,6 +44,8 @@ class CTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         validator: (value) => validateValue(value, context),
+        minLines: 1,
+        maxLines: null,
         decoration: InputDecoration(
           prefixIcon: icon,
           label: Text(label),

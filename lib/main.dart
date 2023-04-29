@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +18,12 @@ Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   // .dev
   Bloc.observer = AppObserver();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // .dev
+  //await FirebaseAuth.instance.useAuthEmulator('127.0.0.1', 9099);
   await Hive.initFlutter();
   await di.configureDependencies();
 }
