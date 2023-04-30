@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>974507363344-4ql2d6lfpfkoubso3upjddt2qbq2tde7.apps.googleusercontent.com</string>
+	<string>974507363344-pnn7p0d2oid00qi030idi3g5bkqtnrbq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.974507363344-4ql2d6lfpfkoubso3upjddt2qbq2tde7</string>
+	<string>com.googleusercontent.apps.974507363344-pnn7p0d2oid00qi030idi3g5bkqtnrbq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>974507363344-5fh82pse9q8oqclhp792jnlh1opff1t1.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCc_3XU7SvYjcz3zJrOADKCrygUHGtVdLc</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>xyz.coffeesolution.videocall</string>
+	<string>xyz.coffeesolution.csVideoCallApp</string>
 	<key>PROJECT_ID</key>
 	<string>cs-video-call</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:974507363344:ios:f72578f80886fd3e77ce95</string>
+	<string>1:974507363344:ios:50133c5a3159bcac77ce95</string>
 </dict>
 </plist>
