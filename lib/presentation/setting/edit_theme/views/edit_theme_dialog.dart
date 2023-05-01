@@ -1,69 +1,52 @@
-import 'package:flutter/material.dart';
-
-import '../../../../common/widgets/stateless/list_tile/radio_list_title.dart';
-import '../../../../core/config/app_config.dart';
+part of edit_theme;
 
 class EditThemeView extends StatelessWidget {
   const EditThemeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const EditThemeDialog();
+    return BlocProvider(
+      create: (_) => getIt<EditThemeCubit>(),
+      child: const EditThemeDialog(),
+    );
   }
 }
 
-class EditThemeDialog extends StatefulWidget {
-  const EditThemeDialog({Key? key}) : super(key: key);
+class EditThemeDialog extends StatelessWidget {
+  const EditThemeDialog({super.key});
 
-  @override
-  State<EditThemeDialog> createState() => _EditThemeDialogState();
-}
-
-class _EditThemeDialogState extends State<EditThemeDialog> {
-  String _selectGender = "";
-
-  @override
-  void initState() {
-    _selectGender = "Dark";
-    super.initState();
-  }
-
-  void _handleChangeRadioValue(String value) {
-    setState(() {
-      _selectGender = value;
-    });
+  void _handleChangeThemeValue(BuildContext ctx, String value) {
+    ctx.read<EditThemeCubit>().appThemeChanged(value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        Navigator.of(context).pop(_selectGender);
-        return Future.value(true);
+    return BlocBuilder<EditThemeCubit, EditThemeState>(
+      builder: (context, state) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.select_theme),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              CRadioListTitle(
+                value: AppThemeEnum.light.value,
+                groupValue: state.theme,
+                onChanged: (value) => _handleChangeThemeValue(context, value),
+              ),
+              CRadioListTitle(
+                value: AppThemeEnum.dark.value,
+                groupValue: state.theme,
+                onChanged: (value) => _handleChangeThemeValue(context, value),
+              ),
+              CRadioListTitle(
+                value: AppThemeEnum.system.value,
+                groupValue: state.theme,
+                onChanged: (value) => _handleChangeThemeValue(context, value),
+              ),
+            ],
+          ),
+        );
       },
-      child: AlertDialog(
-        title: const Text('Select Theme'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            CRadioListTitle(
-              value: AppGender.male.value,
-              groupValue: _selectGender,
-              onChanged: _handleChangeRadioValue,
-            ),
-            CRadioListTitle(
-              value: AppGender.female.value,
-              groupValue: _selectGender,
-              onChanged: _handleChangeRadioValue,
-            ),
-            CRadioListTitle(
-              value: AppGender.others.value,
-              groupValue: _selectGender,
-              onChanged: _handleChangeRadioValue,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

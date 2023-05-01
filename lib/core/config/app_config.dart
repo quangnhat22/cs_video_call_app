@@ -8,7 +8,7 @@ class AppConfig {
   // }
 
   // TODO: switch to [10.0.2.2] if using android emulator
-  static const baseUrl = 'http://192.168.1.6:8080/v1';
+  static const baseUrl = 'http://localhost:8080/v1';
 }
 
 // class _Config {
@@ -34,6 +34,28 @@ enum AppGender {
   others("Others");
 
   const AppGender(this.value);
+
+  final String value;
+}
+
+//theme in app
+enum AppThemeEnum {
+  light("Light"),
+  dark("Dark"),
+  system("System");
+
+  const AppThemeEnum(this.value);
+
+  final String value;
+}
+
+//langue in app
+enum AppLangEnum {
+  en("English"),
+  vi("Vietnamese"),
+  system("System");
+
+  const AppLangEnum(this.value);
 
   final String value;
 }

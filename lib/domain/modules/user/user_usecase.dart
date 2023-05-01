@@ -25,6 +25,7 @@ class UserUseCaseImpl extends UserUseCase {
       String? gender,
       String? phone,
       String? birthday}) async {
-    return userRepo.updateSelf(name, avatar, address, gender, phone, birthday);
+    return await userRepo.updateSelf(
+        name, avatar, address, gender, phone, birthday);
   }
 }

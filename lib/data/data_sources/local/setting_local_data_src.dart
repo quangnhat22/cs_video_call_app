@@ -19,31 +19,37 @@ class SettingLocalDataSrc {
     });
   }
 
-  Future<String?> getAccessToken() async {
+  Future<String> getThemeValue() async {
     return await _openBox().then((box) {
-      return box.get(_themeKeyName, defaultValue: null);
+      return box.get(_themeKeyName, defaultValue: "System");
     });
   }
 
-  Stream<String?> getAccessTokenStream() async* {
+  Stream<String?> getThemeStream() async* {
     final box = await _openBox();
     yield* box.watch(key: _themeKeyName).map((event) {
       return event.value;
     });
   }
 
-  // Future<String?> getRefreshToken() async {
-  //   return await _openBox().then((box) {
-  //     return box.get(_refreshTokenKeyName, defaultValue: null);
-  //   });
-  // }
-  //
-  // Stream<String?> getRefreshTokenStream() async* {
-  //   final box = await _openBox();
-  //   yield* box.watch(key: _refreshTokenKeyName).map((event) {
-  //     return event.value;
-  //   });
-  // }
+  Future<void> setLangLocal(String value) async {
+    await _openBox().then((box) async {
+      await box.put(_langKeyName, value);
+    });
+  }
+
+  Future<String> getLangValue() async {
+    return await _openBox().then((box) {
+      return box.get(_langKeyName, defaultValue: "System");
+    });
+  }
+
+  Stream<String?> getLangStream() async* {
+    final box = await _openBox();
+    yield* box.watch(key: _langKeyName).map((event) {
+      return event.value;
+    });
+  }
 
   Future<void> deleteBoxAuth() async {
     await Hive.box(_settingBox).clear();

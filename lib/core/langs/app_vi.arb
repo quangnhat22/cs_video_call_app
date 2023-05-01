@@ -42,5 +42,6 @@
   "username": "Username",
   "full_name": "Họ và tên",
   "phone_number": "Số điện thoại",
-  "bio": "Giới thiệu bản thân"
+  "bio": "Giới thiệu bản thân",
+  "select_theme": "Thay đổi chủ đề"
 }
