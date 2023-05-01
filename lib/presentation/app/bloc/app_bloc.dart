@@ -22,7 +22,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
 
     _refreshTokenSubscription = authRepo.checkAccessTokenStream().listen(
-          (event) {
+      (event) {
         log(event.toString(), name: "eventRefresh");
         add(AppUserChanged());
       },

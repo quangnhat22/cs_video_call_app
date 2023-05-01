@@ -52,6 +52,8 @@ dependencies:
   google_sign_in: ^6.1.0
   device_info_plus: ^8.2.0
   hive_flutter: ^1.1.0
+  avatar_stack: ^1.2.0
+  landscape_textfield: ^0.0.2
 
 dev_dependencies:
   flutter_test:
