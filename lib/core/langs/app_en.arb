@@ -78,5 +78,6 @@
   "full_name": "Full name",
   "phone_number": "Phone number",
   "bio": "Bio",
-  "select_theme": "Select Theme"
+  "select_theme": "Select Theme",
+  "select_language": "Select Language"
 }
