@@ -13,6 +13,8 @@ class MMaterialApp extends StatelessWidget {
     this.onGenerateRoute,
     this.homeWidget,
     this.navigatorKey,
+    this.themeMode,
+    this.locale,
   }) : super(key: key);
 
   final String keyMaterialApp;
@@ -20,6 +22,8 @@ class MMaterialApp extends StatelessWidget {
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
   final Widget? homeWidget;
   final GlobalKey<NavigatorState>? navigatorKey;
+  final ThemeMode? themeMode;
+  final Locale? locale;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +36,10 @@ class MMaterialApp extends StatelessWidget {
           title: 'CS Chat App',
           debugShowCheckedModeBanner: false,
           key: ValueKey(keyMaterialApp),
+          locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          themeMode: themeMode,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           navigatorKey: navigatorKey,
