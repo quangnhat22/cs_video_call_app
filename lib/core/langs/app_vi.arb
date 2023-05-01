@@ -73,5 +73,10 @@
   "group_call_participants_title": "Người tham dự",
   "members_text_title": "thành viên",
   "owner_text": "Chủ nhóm",
-  "selected_text": "đã chọn"
+  "selected_text": "đã chọn",
+  "username": "Username",
+  "full_name": "Họ và tên",
+  "phone_number": "Số điện thoại",
+  "bio": "Giới thiệu bản thân",
+  "select_theme": "Thay đổi chủ đề"
 }

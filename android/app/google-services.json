@@ -14,7 +14,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "974507363344-upkj0eqenqh8edh12fmce2msah7ir1ll.apps.googleusercontent.com",
+          "client_id": "974507363344-5fh82pse9q8oqclhp792jnlh1opff1t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.videocall",
+            "certificate_hash": "5fe80596f09272237e44b197aad4b9637d007b5a"
+          }
+        },
+        {
+          "client_id": "974507363344-b7c1u6g1fp6dqkiv79q04a2pss34ttkd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.videocall",
+            "certificate_hash": "d82441259d6b2125790d817fce14f210fcbe3e58"
+          }
+        },
+        {
+          "client_id": "974507363344-bf44jq6pffpqf6lmq5j5h2t4ms4jftbf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +43,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "974507363344-upkj0eqenqh8edh12fmce2msah7ir1ll.apps.googleusercontent.com",
+              "client_id": "974507363344-bf44jq6pffpqf6lmq5j5h2t4ms4jftbf.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "974507363344-4ql2d6lfpfkoubso3upjddt2qbq2tde7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.coffeesolution.videocall"
+              }
             }
           ]
         }
