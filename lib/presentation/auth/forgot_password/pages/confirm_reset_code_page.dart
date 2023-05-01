@@ -122,6 +122,5 @@ class ConfirmResetCodePage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

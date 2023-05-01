@@ -10,8 +10,9 @@ import 'package:avatar_stack/positions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/search/add_members_search.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
-import 'package:videocall/routes/app_navigation.dart';
-import 'package:videocall/routes/route_name.dart';
+
+import '../../../core/routes/app_navigation.dart';
+import '../../../core/routes/route_name.dart';
 
 part 'pages/groups_details_page.dart';
 

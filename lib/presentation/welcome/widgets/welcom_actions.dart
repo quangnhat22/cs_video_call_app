@@ -19,11 +19,8 @@ class WelcomeActions extends StatelessWidget {
             Navigator.pushNamed(context, RouteName.loginPage);
           },
         ),
-        CustomOutlineIconButton(
-          labelText: AppLocalizations.of(context)!.sign_in_with_google,
-          icon: AppAssets.logoGoogle,
+        LoginWithGoogleButton(
           widthBtn: _getWithByOrientation(),
-          handleOnClickButton: () {},
         ),
         DividerWithText(text: AppLocalizations.of(context)!.or),
         SignInButton(
