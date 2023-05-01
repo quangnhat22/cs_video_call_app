@@ -26,7 +26,7 @@ class EditLanguageDialog extends StatelessWidget {
     return BlocBuilder<EditLanguageCubit, EditLanguageState>(
       builder: (context, state) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.select_theme),
+          title: Text(AppLocalizations.of(context)!.select_language),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
