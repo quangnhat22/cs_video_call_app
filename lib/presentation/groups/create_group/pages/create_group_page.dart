@@ -41,25 +41,6 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     }
   }
 
-  Widget buildFriendList(List<String> friends) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        return CheckboxListTile(
-            title: Text(friends[index]),
-            subtitle: Text(
-              AppLocalizations.of(context)!.user_status_online,
-              style: const TextStyle(color: Colors.green),
-            ),
-            secondary: const CircleAvatar(child: Text('A')),
-            value: selectedFriends.contains(friends[index]),
-            onChanged: (bool? value) => handleSelectMembers(friends[index]));
-      },
-      itemCount: friends.length,
-    );
-  }
-
   void handleTextChange(String value) {
     if (value == '') {
       setState(() {
@@ -109,51 +90,33 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         builder: (context) {
           return AlertDialog(
             title: Text(
-                AppLocalizations.of(context)!.choose_image_source_dialog_title),
+              AppLocalizations.of(context)!.choose_image_source_dialog_title,
+              style: const TextStyle(fontSize: 20),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                InkWell(
+                InkWellDynamicBorder(
+                  title: AppLocalizations.of(context)!.camera_source_option,
+                  leading: const Icon(
+                    Icons.camera_alt,
+                    color: Colors.black,
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _getFromCamera();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(6),
-                          child: Icon(Icons.camera_alt),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.camera_source_option,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
-                InkWell(
+                InkWellDynamicBorder(
+                  title: AppLocalizations.of(context)!.gallery_source_option,
+                  leading: const Icon(
+                    Icons.image,
+                    color: Colors.black,
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _getFromGallery();
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(6),
-                          child: Icon(Icons.image),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.gallery_source_option,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    ),
-                  ),
                 )
               ],
             ),
@@ -176,7 +139,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              debugPrint(selectedFriends.toString());
+            },
             icon: const Icon(Icons.done),
           )
         ],
@@ -185,46 +150,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                height: 25.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 55,
-                        backgroundImage:
-                            imageFile != null ? FileImage(imageFile!) : null,
-                        child: imageFile != null
-                            ? null
-                            : IconButton(
-                                onPressed: () {
-                                  _showImageDialog();
-                                },
-                                icon: const Icon(
-                                  Icons.camera_alt_rounded,
-                                  size: 35,
-                                ),
-                              ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            _showImageDialog();
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.set_new_photo,
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
+              GroupSetPhoto(imageFile, _showImageDialog),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -236,40 +162,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                       label: Text(AppLocalizations.of(context)!.group_name)),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  AppLocalizations.of(context)!.add_members,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.mediumTitleTextStyle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: TextField(
-                  decoration: InputDecoration(
-                      suffixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.onInverseSurface,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      hintText: AppLocalizations.of(context)!.search_friends),
-                  onChanged: (value) {
-                    handleTextChange(value);
-                  },
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: Text(
-                  '${selectedFriends.length} ${AppLocalizations.of(context)!.selected_text}',
-                  textAlign: TextAlign.start,
-                  style: AppTextStyles.mediumTitleTextStyle,
-                ),
-              ),
-              buildFriendList(friendResults)
+              GroupAddMembers(selectedFriends, friendResults,
+                  handleSelectMembers, handleTextChange)
             ]),
       ),
     );

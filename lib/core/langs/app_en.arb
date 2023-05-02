@@ -74,7 +74,7 @@
   "members_text_title": "members",
   "owner_text": "Owner",
   "selected_text": "selected",
-  "choose_image_source_dialog_title": "Please choose an option",
+  "choose_image_source_dialog_title": "Please choose image source",
   "camera_source_option": "Take photo",
   "gallery_source_option": "Choose from gallery",
   "create_group_app_bar_title": "Create Group",
