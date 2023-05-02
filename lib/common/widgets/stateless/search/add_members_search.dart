@@ -10,7 +10,7 @@ class AddMembersSearch extends SearchDelegate<String> {
 
   AddMembersSearch(this.allMembers);
 
-  void handleAddMembers(String member, Function setState) {
+  void handleSelectMembers(String member, Function setState) {
     if (!selectedMembers.contains(member)) {
       setState(() {
         selectedMembers.add(member);
@@ -61,7 +61,7 @@ class AddMembersSearch extends SearchDelegate<String> {
                   controlAffinity: ListTileControlAffinity.trailing,
                   value: selectedMembers.contains(memberResults[index]),
                   onChanged: (bool? value) {
-                    handleAddMembers(memberResults[index], setState);
+                    handleSelectMembers(memberResults[index], setState);
                   },
                 );
               },

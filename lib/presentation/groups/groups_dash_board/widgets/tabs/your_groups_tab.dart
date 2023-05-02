@@ -9,29 +9,19 @@ class YourGroupsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (ctx, constraints) {
-      return SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: constraints.maxHeight *
-                  (AppScreenUtils.isLandscape() ? 0.3 : 0.15),
-              padding: EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: AppScreenUtils.isLandscape() ? 20 : 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [DropdownGroupsFilterButton(handleDropdownChange)],
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 20, top: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [DropdownGroupsFilterButton(handleDropdownChange)],
             ),
-            SizedBox(
-                height: constraints.maxHeight *
-                    (AppScreenUtils.isLandscape() ? 0.7 : 0.85),
-                child: const GroupList()),
-          ],
-        ),
-      );
-    });
+          ),
+          const GroupList(),
+        ],
+      ),
+    );
   }
 }

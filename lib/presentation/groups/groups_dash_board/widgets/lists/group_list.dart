@@ -8,6 +8,8 @@ class GroupList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: ((context, index) {
           return Column(
             children: <Widget>[

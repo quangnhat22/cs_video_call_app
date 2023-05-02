@@ -12,6 +12,7 @@ import 'package:videocall/presentation/notifications/notifications_dash_board/no
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
+import 'package:videocall/presentation/groups/create_group/create_group.dart';
 
 import '../../presentation/auth/login/login.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
@@ -93,6 +94,8 @@ class AppRoutes {
           settings,
           const EditProfilePage(),
         );
+      case RouteName.createGroup:
+        return _buildRoute(settings, const CreateGroupPage());
       default:
         return _errorRoute();
     }
