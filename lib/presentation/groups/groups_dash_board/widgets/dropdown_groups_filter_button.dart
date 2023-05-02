@@ -51,6 +51,5 @@ class _DropdownGroupsFilterButtonState
         ),
       ),
     );
-    ;
   }
 }

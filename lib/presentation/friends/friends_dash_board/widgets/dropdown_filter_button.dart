@@ -47,6 +47,5 @@ class _DropdownFilterButtonState extends State<DropdownFilterButton> {
         ),
       ),
     );
-    ;
   }
 }

@@ -4,11 +4,11 @@ import '../utils/global_keys.dart';
 
 class NavigationUtil {
   static NavigatorState? get _navigatorKey =>
-      AppGlobalKeys.navigatorKey.currentState;
+      AppGlobalKeys.authorNavigatorKey.currentState;
 
-  // static Future push({required Widget page}) async {
-  //   return await _navigatorKey?.push(MaterialPageRoute(builder: (_) => page));
-  // }
+  static Future push({required Widget page}) async {
+    return await _navigatorKey?.push(MaterialPageRoute(builder: (_) => page));
+  }
 
   static Future pushNamed({required String routeName, Object? args}) async {
     return await _navigatorKey?.pushNamed(

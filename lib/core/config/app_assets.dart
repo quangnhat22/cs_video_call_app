@@ -11,6 +11,12 @@ class AppAssets {
     fit: BoxFit.cover,
   );
 
+  static final loadingGif = Image.asset(
+    'assets/gifs/loading.gif',
+    height: 256.0,
+    width: 256.0,
+  );
+
   static final welcomeImage = Image.asset(
     'assets/images/welcome.png',
     fit: BoxFit.cover,
