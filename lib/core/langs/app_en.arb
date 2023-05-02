@@ -88,5 +88,13 @@
   "group_call_participants_title": "Participants",
   "members_text_title": "members",
   "owner_text": "Owner",
-  "selected_text": "selected"
+  "selected_text": "selected",
+  "choose_image_source_dialog_title": "Please choose an option",
+  "camera_source_option": "Take photo",
+  "gallery_source_option": "Choose from gallery",
+  "create_group_app_bar_title": "Create Group",
+  "set_new_photo": "Set New Photo",
+  "group_name": "Group name",
+  "add_members": "Add Members",
+  "search_friends": "Search friends"
 }

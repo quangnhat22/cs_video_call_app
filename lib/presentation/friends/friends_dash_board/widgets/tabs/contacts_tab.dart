@@ -5,10 +5,9 @@ class ContactsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const <Widget>[
-        Expanded(child: ContactList()),
-      ],
+    return const Padding(
+      padding: EdgeInsets.only(top: 8.0),
+      child: ContactList(),
     );
   }
 }

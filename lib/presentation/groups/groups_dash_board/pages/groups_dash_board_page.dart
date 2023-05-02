@@ -1,7 +1,33 @@
 part of groups_dash_board;
 
-class GroupsDashBoardPage extends StatelessWidget {
+class GroupsDashBoardPage extends StatefulWidget {
   const GroupsDashBoardPage({Key? key}) : super(key: key);
+
+  @override
+  State<GroupsDashBoardPage> createState() => _GroupsDashBoardPageState();
+}
+
+class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    _tabController.addListener(_handleTabIndex);
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_handleTabIndex);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabIndex() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +36,7 @@ class GroupsDashBoardPage extends StatelessWidget {
       child: Scaffold(
         appBar: MHomeAppBar(
           title: AppLocalizations.of(context)!.groups,
-          bottomWidget: TabBar(tabs: [
+          bottomWidget: TabBar(controller: _tabController, tabs: [
             Tab(
               child: Text(
                   AppLocalizations.of(context)!.groups_tab_your_groups_title),
@@ -21,12 +47,18 @@ class GroupsDashBoardPage extends StatelessWidget {
             )
           ]),
         ),
-        body:
-            const TabBarView(children: <Widget>[YourGroupsTab(), Text('123')]),
+        body: TabBarView(
+            controller: _tabController,
+            children: const <Widget>[YourGroupsTab(), GroupRequestsTab()]),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            if (_tabController.index == 0) {
+              NavigationUtil.pushNamed(routeName: RouteName.createGroup);
+            }
+          },
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           shape: const StadiumBorder(),
+          heroTag: _tabController.index,
           child: Icon(
             Icons.add,
             color: Theme.of(context).colorScheme.primary,

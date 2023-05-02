@@ -1,15 +1,17 @@
-part of friends_dash_board;
+part of groups_dash_board;
 
-class RequestSegmentedButton extends StatefulWidget {
+class GroupRequestsSegmentedButton extends StatefulWidget {
   final Function onViewChange;
 
-  const RequestSegmentedButton(this.onViewChange, {super.key});
+  const GroupRequestsSegmentedButton(this.onViewChange, {super.key});
 
   @override
-  State<RequestSegmentedButton> createState() => _RequestSegmentedButtonState();
+  State<GroupRequestsSegmentedButton> createState() =>
+      _GroupRequestsSegmentedButtonState();
 }
 
-class _RequestSegmentedButtonState extends State<RequestSegmentedButton> {
+class _GroupRequestsSegmentedButtonState
+    extends State<GroupRequestsSegmentedButton> {
   Request requestView = Request.sent;
 
   @override
