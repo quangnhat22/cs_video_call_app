@@ -10,12 +10,12 @@ part 'edit_theme_cubit.freezed.dart';
 class EditThemeCubit extends Cubit<EditThemeState> {
   EditThemeCubit({required this.usecase})
       : super(const EditThemeState.initial()) {
-    getCurrentLang();
+    getCurrentTheme();
   }
 
   final AppSettingsUseCase usecase;
 
-  Future<void> getCurrentLang() async {
+  Future<void> getCurrentTheme() async {
     final currentTheme = await usecase.getAppTheme();
     emit(state.copyWith(theme: currentTheme));
   }

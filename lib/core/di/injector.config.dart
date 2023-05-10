@@ -65,10 +65,8 @@ extension GetItInjectableX on _i1.GetIt {
         localDataSrc: gh<_i6.SettingLocalDataSrc>()));
     gh.factory<_i9.AppSettingsUseCase>(() => _i9.AppSettingsUseCaseImpl(
         appSettingsRepo: gh<_i7.AppSettingsRepository>()));
-    gh.singleton<_i10.BaseService>(_i10.BaseService(
-      authLocalDataSrc: gh<_i4.AuthLocalDataSrc>(),
-      interceptor: gh<_i5.DioInterceptor>(),
-    ));
+    gh.singleton<_i10.BaseService>(
+        _i10.BaseService(interceptor: gh<_i5.DioInterceptor>()));
     gh.factory<_i11.EditLanguageCubit>(
         () => _i11.EditLanguageCubit(usecase: gh<_i9.AppSettingsUseCase>()));
     gh.factory<_i12.EditThemeCubit>(
