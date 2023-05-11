@@ -16,9 +16,10 @@ class RouteName {
   static const String notificationsPage = '/notifications';
   static const String settingPage = '/setting';
   static const String editProfilePage = '/edit-profile';
-  static const String teamDetails = '/team-details';
-  static const String teamCallDetails = '/team-call-details';
-  static const String createGroup = '/create-group';
+  static const String teamDetailsPage = '/team-details';
+  static const String teamCallDetailsPage = '/team-call-details';
+  static const String createGroupPage = '/create-group';
+  static const String createSchedulePage = '/create-schedule';
   //error
   static const String notFoundPage = '/not-found';
 }

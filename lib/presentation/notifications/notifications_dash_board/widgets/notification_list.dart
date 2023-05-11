@@ -20,7 +20,7 @@ class NotificationList extends StatelessWidget {
                   children: <TextSpan>[
                 TextSpan(
                   text: names[index],
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 TextSpan(
                     text: AppLocalizations.of(context)!.want_to_friend_with_you)

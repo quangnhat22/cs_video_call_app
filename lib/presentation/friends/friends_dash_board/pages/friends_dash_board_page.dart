@@ -31,15 +31,7 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
 
   Widget? _bottomButtons() {
     if (_tabController.index == 2) {
-      return FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        shape: const StadiumBorder(),
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      );
+      return FloatingActionStadiumButton(() {}, null);
     }
     return null;
   }

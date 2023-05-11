@@ -12,7 +12,7 @@ class GroupSentRequestList extends StatelessWidget {
         return ListTile(
           title: const Text(
             'Team Siêu Nhơn',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.w500),
           ),
           subtitle: RichText(
               text: TextSpan(

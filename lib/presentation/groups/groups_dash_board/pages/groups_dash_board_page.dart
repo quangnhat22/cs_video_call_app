@@ -50,20 +50,11 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
         body: TabBarView(
             controller: _tabController,
             children: const <Widget>[YourGroupsTab(), GroupRequestsTab()]),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            if (_tabController.index == 0) {
-              NavigationUtil.pushNamed(routeName: RouteName.createGroup);
-            }
-          },
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          shape: const StadiumBorder(),
-          heroTag: _tabController.index,
-          child: Icon(
-            Icons.add,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+        floatingActionButton: FloatingActionStadiumButton(() {
+          if (_tabController.index == 0) {
+            NavigationUtil.pushNamed(routeName: RouteName.createGroupPage);
+          }
+        }, null),
       ),
     );
   }

@@ -77,7 +77,7 @@ class AppRoutes {
       case RouteName.schedulesPage:
         return _buildRoute(
           settings,
-          const ScheduleDashBoardPage(),
+          ScheduleDashBoardPage(),
         );
       case RouteName.notificationsPage:
         return _buildRoute(
@@ -94,8 +94,10 @@ class AppRoutes {
           settings,
           const EditProfilePage(),
         );
-      case RouteName.createGroup:
+      case RouteName.createGroupPage:
         return _buildRoute(settings, const CreateGroupPage());
+      case RouteName.createSchedulePage:
+        return _buildRoute(settings, const CreateSchedulePage());
       default:
         return _errorRoute();
     }
