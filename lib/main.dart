@@ -12,11 +12,13 @@ import 'package:videocall/presentation/app/app.dart';
 
 import 'app_bloc_observer.dart';
 import 'core/config/firebase_options.dart';
+import 'core/services/notification_controller.dart';
 
 const _useEmulator = true;
 
 void main() async {
   await _initialize();
+  await _initLocalNotification();
   runApp(const App());
 }
 
@@ -51,4 +53,12 @@ Future<void> _connectToFirebaseEmulator() async {
       .useStorageEmulator(localHostString, storagePort);
   FirebaseFirestore.instance
       .useFirestoreEmulator(localHostString, firestorePort);
+}
+
+Future<void> _initLocalNotification() async {
+  // Initialize cho Local Notification
+  await NotificationController.initializeLocalNotifications(debug: true);
+
+  // Initialize cho Push Notification
+  await NotificationController.initializeRemoteNotifications(debug: true);
 }
