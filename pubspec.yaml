@@ -56,6 +56,8 @@ dependencies:
   landscape_textfield: ^0.0.2
   image_picker: ^0.8.7+4
   image_cropper: ^3.0.3
+  firebase_storage: ^11.1.2
+  cloud_firestore: ^4.6.0
 
 dev_dependencies:
   flutter_test:

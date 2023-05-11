@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class AppConfig {
   // late Map<String, dynamic> _config;
   //
@@ -8,7 +10,9 @@ class AppConfig {
   // }
 
   // TODO: switch to [10.0.2.2] if using android emulator
-  static const baseUrl = 'http://10.0.2.2:8080/v1';
+  static final baseUrl = Platform.isAndroid
+      ? 'http://10.0.2.2:8080/v1'
+      : 'http://localhost:8080/v1';
 }
 
 // class _Config {
