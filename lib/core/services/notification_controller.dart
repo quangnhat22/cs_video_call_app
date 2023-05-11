@@ -21,6 +21,14 @@ class NotificationController {
               ledColor: Colors.deepPurple)
         ],
         debug: debug);
+
+    await AwesomeNotifications()
+        .requestPermissionToSendNotifications()
+        .then((isAllowed) async {
+      if (!isAllowed) {
+        await AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
   }
 
   // Hàm này dùng để Khởi tạo Push Notification.
