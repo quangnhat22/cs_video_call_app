@@ -8,9 +8,13 @@ class NotificationsDashBoardPage extends StatelessWidget {
     return Scaffold(
       appBar: MHomeAppBar(
         title: AppLocalizations.of(context)!.notifications,
+        actionButton: IconButton(
+          icon: const Icon(Icons.settings),
+          onPressed: () {},
+        ),
       ),
-      body: const Center(
-        child: Text("Notifications"),
+      body: SingleChildScrollView(
+        child: NotificationList(),
       ),
     );
   }

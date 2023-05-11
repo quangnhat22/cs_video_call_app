@@ -86,5 +86,6 @@
   "full_name": "Full name",
   "phone_number": "Phone number",
   "bio": "Bio",
-  "select_theme": "Select Theme"
+  "select_theme": "Select Theme",
+  "want_to_friend_with_you": " want to friend with you"
 }

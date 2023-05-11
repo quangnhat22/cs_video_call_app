@@ -86,5 +86,6 @@
   "full_name": "Họ và tên",
   "phone_number": "Số điện thoại",
   "bio": "Giới thiệu bản thân",
-  "select_theme": "Thay đổi chủ đề"
+  "select_theme": "Thay đổi chủ đề",
+  "want_to_friend_with_you": " muốn kết bạn với bạn"
 }
