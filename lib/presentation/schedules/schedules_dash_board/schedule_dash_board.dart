@@ -17,3 +17,4 @@ part 'widgets/schedule_in_progress.dart';
 part 'widgets/schedule_upcoming.dart';
 part 'widgets/schedule_today.dart';
 part 'widgets/schedule_yesterday.dart';
+part 'widgets/text_form_fields/title_text_form_field.dart';
