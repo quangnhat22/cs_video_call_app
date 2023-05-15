@@ -15,16 +15,14 @@ class TitleTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12),
-      child: TextFormField(
-        controller: titleController,
-        validator: (value) => validateTitle(value, context),
-        decoration: const InputDecoration(
-          label: Text('Meeting title'),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(width: 1),
-          ),
+    return TextFormField(
+      controller: titleController,
+      validator: (value) => validateTitle(value, context),
+      decoration: const InputDecoration(
+        hintText: 'Enter meeting title',
+        label: Text('Meeting title'),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(width: 1),
         ),
       ),
     );

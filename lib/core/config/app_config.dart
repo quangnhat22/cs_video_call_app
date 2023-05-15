@@ -59,3 +59,13 @@ enum AppLangEnum {
 
   final String value;
 }
+
+// period in creating schedule
+enum PeriodEnum {
+  start("Start"),
+  end("End");
+
+  const PeriodEnum(this.value);
+
+  final String value;
+}

@@ -11,7 +11,7 @@ class ScheduleInProgress extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 20),
           child: Text(
             AppLocalizations.of(context)!.in_progress,
             style: AppTextStyles.mediumTitleTextStyle,

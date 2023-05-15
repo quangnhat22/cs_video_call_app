@@ -97,7 +97,7 @@ class AppRoutes {
       case RouteName.createGroupPage:
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedulePage:
-        return _buildRoute(settings, CreateSchedulePage());
+        return _buildRoute(settings, const CreateSchedulePage());
       default:
         return _errorRoute();
     }
