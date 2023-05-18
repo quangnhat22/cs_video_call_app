@@ -3,6 +3,10 @@ part of friends_dash_board;
 class CallList extends StatelessWidget {
   const CallList({super.key});
 
+  void _onCallFriendBtn() {
+    NavigationUtil.pushNamed(routeName: RouteName.callPending);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -31,7 +35,7 @@ class CallList extends StatelessWidget {
                 Icons.call,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
-              onPressed: () {},
+              onPressed: _onCallFriendBtn,
             ));
       },
       itemCount: 12,

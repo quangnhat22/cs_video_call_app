@@ -20,10 +20,12 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<AppBloc>(),
+          create: (context) {
+            return getIt<AppBloc>();
+          },
         ),
         BlocProvider(
-          create: (_) => getIt<AppSettingCubit>(),
+          create: (context) => getIt<AppSettingCubit>(),
         ),
       ],
       child: BlocBuilder<AppBloc, AppState>(

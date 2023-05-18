@@ -15,10 +15,11 @@ class UserService {
     String? address,
     String? gender,
     String? phone,
-    String? birthday,) async {
+    String? birthday,
+  ) async {
     try {
       return await _service.dio.post(
-        "${BaseService.authLoginWithFirebasePath}/self",
+        "${BaseService.authPath}/self",
         data: {
           "name": name,
           "avatar": avatar,

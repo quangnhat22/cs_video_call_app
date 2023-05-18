@@ -19,6 +19,8 @@ class RouteName {
   static const String teamDetails = '/team-details';
   static const String teamCallDetails = '/team-call-details';
   static const String createGroup = '/create-group';
+  static const String callPending = '/call-pending';
+
   //error
   static const String notFoundPage = '/not-found';
 }

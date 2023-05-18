@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
-class NotificationController {
+@LazySingleton()
+class NotificationService {
   // Khởi tạo Local Notification ở đây với custom tùy thích
   static Future<void> initializeLocalNotifications(
       {required bool debug}) async {
@@ -37,11 +41,11 @@ class NotificationController {
     await Firebase.initializeApp();
     await AwesomeNotificationsFcm().initialize(
         // Handle Silent data
-        onFcmSilentDataHandle: NotificationController.mySilentDataHandle,
+        onFcmSilentDataHandle: NotificationService.mySilentDataHandle,
         // Method này dùng để phát hiện khi nhận được fcm token mới.
-        onFcmTokenHandle: NotificationController.myFcmTokenHandle,
+        onFcmTokenHandle: NotificationService.myFcmTokenHandle,
         // Method này dùng để phát hiện khi nhận được native token mới.
-        onNativeTokenHandle: NotificationController.myNativeTokenHandle,
+        onNativeTokenHandle: NotificationService.myNativeTokenHandle,
         // Bài sau mình sẽ đi chi tiết hơn về 3 Method trên nhé.
 
         // This license key is necessary only to remove the watermark for
@@ -112,15 +116,30 @@ class NotificationController {
     print("long task done");
   }
 
+  Future<String> getFirebaseMessagingToken() async {
+    String firebaseAppToken = '';
+    if (await AwesomeNotificationsFcm().isFirebaseAvailable) {
+      try {
+        firebaseAppToken =
+            await AwesomeNotificationsFcm().requestFirebaseAppToken();
+      } catch (exception) {
+        debugPrint('$exception');
+      }
+    } else {
+      debugPrint('Firebase is not available on this project');
+    }
+    return firebaseAppToken;
+  }
+
   /// Use this method to detect when a new fcm token is received
   @pragma("vm:entry-point")
   static Future<void> myFcmTokenHandle(String token) async {
-    debugPrint('FCM Token:"$token"');
+    log('FCM Token:"$token"');
   }
 
   /// Use this method to detect when a new native token is received
   @pragma("vm:entry-point")
   static Future<void> myNativeTokenHandle(String token) async {
-    debugPrint('Native Token:"$token"');
+    log('Native Token:"$token"');
   }
 }

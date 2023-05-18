@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -21,7 +22,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       },
     );
 
-    _refreshTokenSubscription = authRepo.checkAccessTokenStream().listen(
+    _refreshTokenSubscription = authRepo.checkRefreshTokenStream().listen(
       (event) {
         log(event.toString(), name: "eventRefresh");
         add(AppUserChanged());

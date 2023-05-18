@@ -26,6 +26,9 @@ class DioInterceptor {
           }
           handler.next(response);
         }),
+        onError: (e, handler) async {
+          handler.next(e);
+        },
       ),
     );
     return dio;

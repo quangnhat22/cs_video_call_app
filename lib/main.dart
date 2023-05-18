@@ -12,13 +12,13 @@ import 'package:videocall/presentation/app/app.dart';
 
 import 'app_bloc_observer.dart';
 import 'core/config/firebase_options.dart';
-import 'core/services/notification_controller.dart';
+import 'core/services/notification_service.dart';
 
-const _useEmulator = true;
+const _useEmulator = false;
 
 void main() async {
   await _initialize();
-  await _initLocalNotification();
+  // await _initLocalNotification();
   runApp(const App());
 }
 
@@ -27,6 +27,7 @@ Future<void> _initialize() async {
   Bloc.observer = AppObserver();
 
   await Firebase.initializeApp(
+    name: "CS Video call App",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
@@ -57,8 +58,8 @@ Future<void> _connectToFirebaseEmulator() async {
 
 Future<void> _initLocalNotification() async {
   // Initialize cho Local Notification
-  await NotificationController.initializeLocalNotifications(debug: true);
+  await NotificationService.initializeLocalNotifications(debug: true);
 
   // Initialize cho Push Notification
-  await NotificationController.initializeRemoteNotifications(debug: true);
+  await NotificationService.initializeRemoteNotifications(debug: true);
 }

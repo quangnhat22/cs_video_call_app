@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
+import 'package:videocall/presentation/call/call_demo/pages/call_pending_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
+import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
-import 'package:videocall/presentation/groups/create_group/create_group.dart';
 
 import '../../presentation/auth/login/login.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
@@ -96,6 +97,8 @@ class AppRoutes {
         );
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
+      case RouteName.callPending:
+        return _buildRoute(settings, const CallPendingPage());
       default:
         return _errorRoute();
     }

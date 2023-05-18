@@ -1,23 +1,27 @@
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
-@Injectable(as: AuthRepository)
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
-  AuthRepositoryImpl({
-    required AuthFirebase authFirebase,
-    required AuthService authService,
-    required AuthLocalDataSrc authLocalDataSrc,
-  })  : _authFirebase = authFirebase,
+  AuthRepositoryImpl(
+      {required AuthFirebase authFirebase,
+      required AuthService authService,
+      required AuthLocalDataSrc authLocalDataSrc,
+      required NotificationService notificationService})
+      : _authFirebase = authFirebase,
         _authService = authService,
-        _authLocalDataSrc = authLocalDataSrc;
+        _authLocalDataSrc = authLocalDataSrc,
+        _notificationService = notificationService;
 
   final AuthFirebase _authFirebase;
   final AuthService _authService;
   final AuthLocalDataSrc _authLocalDataSrc;
+  final NotificationService _notificationService;
 
   @override
   Future<bool> checkIsLoggedIn() async {
@@ -33,8 +37,11 @@ class AuthRepositoryImpl extends AuthRepository {
       if (idToken != null) {
         // get device name
         final deviceName = await DetectDeviceInfo.getDeviceName();
+        final fcmToken = await _getFCMToken();
+        print(fcmToken);
         //call api
-        final res = await _authService.loginWithFirebase(idToken, deviceName);
+        final res =
+            await _authService.loginWithFirebase(idToken, deviceName, fcmToken);
         // handle res data
         if (res.statusCode == 200) {
           final data = res.data["data"];
@@ -49,7 +56,15 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<void> logOut() async {
-    await _authLocalDataSrc.deleteBoxAuth();
+    try {
+      //await _authService.logOut();
+      await _authFirebase.logOut();
+      await _authLocalDataSrc.deleteBoxAuth();
+    } catch (e) {
+      throw Exception(e.toString());
+    } finally {
+      //  await _userRepo.clearBox();
+    }
   }
 
   @override
@@ -72,5 +87,9 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Stream<String?> checkRefreshTokenStream() {
     return _authLocalDataSrc.getRefreshTokenStream();
+  }
+
+  Future<String?> _getFCMToken() async {
+    return await _notificationService.getFirebaseMessagingToken();
   }
 }

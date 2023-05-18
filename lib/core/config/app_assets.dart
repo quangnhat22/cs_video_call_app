@@ -35,4 +35,9 @@ class AppAssets {
   static const emptyAvatar = AssetImage(
     'assets/images/empty_avatar.png',
   );
+
+  static final emptyAssetAvatar = Image.asset(
+    'assets/images/empty_avatar.png',
+    fit: BoxFit.cover,
+  );
 }

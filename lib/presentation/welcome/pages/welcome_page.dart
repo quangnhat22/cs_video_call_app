@@ -8,9 +8,6 @@ class WelcomePage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<AppBloc>(),
-        ),
-        BlocProvider(
           create: (_) => getIt<WelcomeCubit>(),
         ),
       ],
