@@ -28,7 +28,7 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
     super.initState();
   }
 
-  final _currencies = [
+  final groups = [
     "Food",
     "Transport",
     "Personal",
@@ -40,6 +40,17 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
   ];
 
   String? _currentSelectedValue;
+  final durations = [
+    '5',
+    '30',
+  ];
+  final List<String> allMembers = [
+    'Trần Văn Nhân',
+    'Đỗ Tự Cường',
+    'Lý Hoàng Oanh',
+    'Trần Văn Thành'
+  ];
+  final List<String> selectedMembers = [];
 
   void handleShowDatePicker(PeriodEnum period) async {
     DateTime? pickedDate = await showDatePicker(
@@ -80,6 +91,53 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
     }
   }
 
+  void handleShowAddNotiDialog(BuildContext context) {
+    final extraDurations = ['5', '30', '60', '90', '120'];
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context)!.add_notifications),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: extraDurations
+                  .map((e) => ListTile(
+                        title: Text(
+                            '${AppLocalizations.of(context)!.before} ${e.toString()} ${AppLocalizations.of(context)!.minutes}'),
+                        onTap: () {
+                          if (!durations.contains(e.toString())) {
+                            setState(() {
+                              durations.add(e.toString());
+                            });
+                          }
+                        },
+                      ))
+                  .toList()),
+        );
+      },
+    );
+  }
+
+  void handleRemoveNotifications(int index) {
+    setState(() {
+      durations.removeAt(index);
+    });
+  }
+
+  void handleAddParticipants(List<dynamic> newMembers) {
+    setState(() {
+      List<String> decodedMembers = List<String>.from(newMembers);
+      selectedMembers.addAll(decodedMembers);
+    });
+  }
+
+  void handleRemoveParticipant(int index) {
+    setState(() {
+      selectedMembers.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +173,7 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                     setState(() {
                       _currentSelectedValue = newValue!;
                     });
-                  }, _currencies),
+                  }, groups),
                   DescriptionTextFormField(descriptionController),
                   Row(
                     children: <Widget>[
@@ -124,7 +182,8 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                           child: TimePickerTextFormField(
                               startDateController,
                               handleShowDatePicker,
-                              'Start date',
+                              AppLocalizations.of(context)!
+                                  .start_date_label_text_form_field,
                               PeriodEnum.start)),
                       const SizedBox(
                         width: 10,
@@ -134,7 +193,8 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                           child: TimePickerTextFormField(
                               startTimeController,
                               handleShowTimePicker,
-                              'Start time',
+                              AppLocalizations.of(context)!
+                                  .start_time_label_text_form_field,
                               PeriodEnum.start)),
                     ],
                   ),
@@ -145,7 +205,8 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                           child: TimePickerTextFormField(
                               endDateController,
                               handleShowDatePicker,
-                              'End date',
+                              AppLocalizations.of(context)!
+                                  .end_date_label_text_form_field,
                               PeriodEnum.end)),
                       const SizedBox(
                         width: 10,
@@ -155,29 +216,15 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                           child: TimePickerTextFormField(
                               endTimeController,
                               handleShowTimePicker,
-                              'End time',
+                              AppLocalizations.of(context)!
+                                  .end_time_label_text_form_field,
                               PeriodEnum.end)),
                     ],
                   ),
-                  Card(
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) =>
-                          const DividerSpaceLeft(),
-                      itemBuilder: (context, index) => ListTile(
-                        title: const Text('Before 30 minutes'),
-                        leading: Icon(
-                          Icons.notifications_outlined,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        trailing: Icon(
-                          Icons.close,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                      itemCount: 2,
-                    ),
-                  )
+                  ScheduleAddNotifications(durations, handleRemoveNotifications,
+                      handleShowAddNotiDialog),
+                  ScheduleAddParticipants(allMembers, selectedMembers,
+                      handleAddParticipants, handleRemoveParticipant)
                 ],
               ),
             )),

@@ -10,13 +10,15 @@ class DescriptionTextFormField extends StatelessWidget {
     return SizedBox(
       height: 100.h,
       child: Expanded(
-        child: TextField(
+        child: TextFormField(
           controller: descController,
-          decoration: const InputDecoration(
-            label: Text('Description'),
-            hintText: 'Let participants know more about the meeting',
+          decoration: InputDecoration(
+            label: Text(AppLocalizations.of(context)!
+                .description_label_text_form_field),
+            hintText: AppLocalizations.of(context)!
+                .description_hint_text_text_form_field,
             alignLabelWithHint: true,
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderSide: BorderSide(width: 1),
             ),
           ),

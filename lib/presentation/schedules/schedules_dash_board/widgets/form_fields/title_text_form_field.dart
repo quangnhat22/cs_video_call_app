@@ -7,7 +7,7 @@ class TitleTextFormField extends StatelessWidget {
 
   String? validateTitle(String? value, BuildContext buildContext) {
     if (value == null || value.isEmpty) {
-      return 'Please enter meeting title';
+      return AppLocalizations.of(buildContext)!.title_validation_text;
     }
 
     return null;
@@ -18,10 +18,10 @@ class TitleTextFormField extends StatelessWidget {
     return TextFormField(
       controller: titleController,
       validator: (value) => validateTitle(value, context),
-      decoration: const InputDecoration(
-        hintText: 'Enter meeting title',
-        label: Text('Meeting title'),
-        border: OutlineInputBorder(
+      decoration: InputDecoration(
+        hintText: AppLocalizations.of(context)!.title_hint_text_text_form_field,
+        label: Text(AppLocalizations.of(context)!.title_label_text_form_field),
+        border: const OutlineInputBorder(
           borderSide: BorderSide(width: 1),
         ),
       ),

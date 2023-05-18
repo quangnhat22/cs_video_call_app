@@ -12,14 +12,18 @@ class SelectGroupButtonFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
         decoration: InputDecoration(
-            hintText: 'Please select a group',
-            label: const Text('Select a group'),
+            hintText:
+                AppLocalizations.of(context)!.group_hint_text_text_form_field,
+            label:
+                Text(AppLocalizations.of(context)!.group_label_text_form_field),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             filled: true,
             fillColor: Theme.of(context).colorScheme.onInverseSurface),
-        validator: (value) => value == null ? "Please select a group" : null,
+        validator: (value) => value == null
+            ? AppLocalizations.of(context)!.group_validation_text
+            : null,
         value: value,
         onChanged: handleSelect,
         items: list.map((String value) {
