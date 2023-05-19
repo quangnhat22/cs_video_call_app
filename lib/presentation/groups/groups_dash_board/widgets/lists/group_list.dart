@@ -17,7 +17,7 @@ class GroupList extends StatelessWidget {
                 title: GestureDetector(
                   child: const Text(
                     'Team anh em siêu nhơn',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                   onTap: () {
                     NavigationUtil.pushNamed(routeName: RouteName.teamDetails);

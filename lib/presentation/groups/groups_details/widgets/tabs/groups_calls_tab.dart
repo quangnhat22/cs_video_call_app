@@ -32,7 +32,7 @@ class GroupsCallsTabs extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             child: InkWell(
               onTap: () {
-                NavigationUtil.pushNamed(routeName: RouteName.teamCallDetails);
+                NavigationUtil.pushNamed(routeName: RouteName.teamDetails);
               },
               child: Column(
                 children: [

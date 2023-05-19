@@ -8,17 +8,21 @@ class RouteName {
   static const String forgotPasswordPage = '/forgot-password';
 
   // auth
-  static const String dashboardPage = '/';
-  static const String friendsPage = '/friends';
-  static const String friendsInfor = '/friends-infor';
-  static const String groupsPage = '/groups';
-  static const String schedulesPage = '/schedules';
-  static const String notificationsPage = '/notifications';
-  static const String settingPage = '/setting';
-  static const String editProfilePage = '/edit-profile';
+  static const String dashboard = '/';
+  static const String friends = '/friends';
+  static const String findFriend = '/find-friend';
+  static const String friendInfo = '/friends-info';
+  static const String groups = '/groups';
+  static const String schedules = '/schedules';
+  static const String notifications = '/notifications';
+  static const String settings = '/setting';
+  static const String editProfile = '/edit-profile';
   static const String teamDetails = '/team-details';
   static const String teamCallDetails = '/team-call-details';
   static const String createGroup = '/create-group';
+  static const String callPending = '/call-pending';
+  static const String createSchedule = '/create-schedule';
+
   //error
   static const String notFoundPage = '/not-found';
 }

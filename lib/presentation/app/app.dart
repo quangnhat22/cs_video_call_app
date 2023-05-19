@@ -20,10 +20,14 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<AppBloc>(),
+          create: (context) {
+            return getIt<AppBloc>()
+              ..add(AppStarted())
+              ..add(AppUserChanged());
+          },
         ),
         BlocProvider(
-          create: (_) => getIt<AppSettingCubit>(),
+          create: (context) => getIt<AppSettingCubit>(),
         ),
       ],
       child: BlocBuilder<AppBloc, AppState>(
@@ -46,7 +50,7 @@ class App extends StatelessWidget {
                   {
                     return MMaterialApp(
                       keyMaterialApp: "App_Authorized",
-                      initialRoute: RouteName.dashboardPage,
+                      initialRoute: RouteName.dashboard,
                       onGenerateRoute: AppRoutes.authorizedRoute,
                       navigatorKey: AppGlobalKeys.authorNavigatorKey,
                       homeWidget: const DashboardPage(),

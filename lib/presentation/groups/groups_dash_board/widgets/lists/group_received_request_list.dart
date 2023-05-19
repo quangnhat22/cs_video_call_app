@@ -14,11 +14,11 @@ class GroupReceivedRequestList extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0),
             child: GestureDetector(
                 onTap: () {
-                  NavigationUtil.pushNamed(routeName: RouteName.friendsInfor);
+                  NavigationUtil.pushNamed(routeName: RouteName.friendInfo);
                 },
                 child: const Text(
                   'Team Siêu nhơn',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.w500),
                 )),
           ),
           subtitle: Column(

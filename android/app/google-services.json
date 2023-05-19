@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "974507363344",
+    "firebase_url": "https://cs-video-call-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "cs-video-call",
     "storage_bucket": "cs-video-call.appspot.com"
   },
@@ -22,11 +23,27 @@
           }
         },
         {
+          "client_id": "974507363344-5u92fk4opcdb4mmu4r6sb84p5k828j47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.videocall",
+            "certificate_hash": "29a6db7ccf865ac7fa4a1a4c6b86536ec9ca1c22"
+          }
+        },
+        {
           "client_id": "974507363344-b7c1u6g1fp6dqkiv79q04a2pss34ttkd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "xyz.coffeesolution.videocall",
             "certificate_hash": "d82441259d6b2125790d817fce14f210fcbe3e58"
+          }
+        },
+        {
+          "client_id": "974507363344-jsm6csac8eb2p5de56bj613mdmfi5o5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.coffeesolution.videocall",
+            "certificate_hash": "9c147db9b8f137177c5bf2bea346cfc5f745f6c6"
           }
         },
         {

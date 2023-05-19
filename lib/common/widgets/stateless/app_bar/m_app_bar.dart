@@ -5,16 +5,17 @@ import 'package:videocall/core/config/app_theme.dart';
 import '../../../../core/config/app_assets.dart';
 
 class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MHomeAppBar({
-    super.key,
-    required this.title,
-    this.bottomWidget,
-    this.numberNotification = 0,
-  });
+  const MHomeAppBar(
+      {super.key,
+      required this.title,
+      this.bottomWidget,
+      this.numberNotification = 0,
+      this.actionButton});
 
   final String title;
   final PreferredSizeWidget? bottomWidget;
   final int numberNotification;
+  final Widget? actionButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +40,14 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         overflow: TextOverflow.ellipsis,
         style: AppTextStyles.titleAppBarTextStyle,
       ),
-      actions: <Widget>[
+      actions: [
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
             //showSearch(context: context, delegate: CustomSearch());
           },
         ),
+        if (actionButton != null) actionButton!
       ],
       bottom: bottomWidget,
     );

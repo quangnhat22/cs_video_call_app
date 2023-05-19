@@ -60,7 +60,7 @@ class FriendsInforPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: MHomeAppBar(
+      appBar: MPageAppBar(
         title: AppLocalizations.of(context)!.friends,
       ),
       body: SingleChildScrollView(

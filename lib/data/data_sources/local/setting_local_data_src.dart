@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@LazySingleton()
 class SettingLocalDataSrc {
   static Box? _box;
   final String _settingBox = "setting_box";

@@ -73,6 +73,11 @@
 				<string>***Something here***</string>
 			</array>
 		</dict>
+		<key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+        </dict>
 	</array>
 </dict>
 </plist>

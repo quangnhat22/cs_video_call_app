@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton()
+@LazySingleton()
 class AuthLocalDataSrc {
   static Box? _box;
   final String _authBox = "auth_box";
@@ -60,9 +60,9 @@ class AuthLocalDataSrc {
   }
 
   Future<void> deleteBoxAuth() async {
-    // getBox().then((box) {
+    // _openBox().then((box) {
     //   return print(
-    //       box.get(refreshTokenKeyName, defaultValue: "no refresh token"));
+    //       box.get(_accessTokenKeyName, defaultValue: "no refresh token"));
     // });
     await Hive.box(_authBox).clear();
     // _openBox().then((box) {

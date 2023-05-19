@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppAssets {
   static var iconApp = Image.asset(
@@ -34,5 +35,15 @@ class AppAssets {
 
   static const emptyAvatar = AssetImage(
     'assets/images/empty_avatar.png',
+  );
+
+  static final emptyAssetAvatar = Image.asset(
+    'assets/images/empty_avatar.png',
+    fit: BoxFit.cover,
+  );
+
+  static final notFoundSvg = SvgPicture.asset(
+    'assets/images/not_found.svg',
+    semanticsLabel: 'A red up arrow',
   );
 }

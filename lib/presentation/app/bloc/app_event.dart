@@ -7,4 +7,6 @@ abstract class AppEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class AppStarted extends AppEvent {}
+
 class AppUserChanged extends AppEvent {}

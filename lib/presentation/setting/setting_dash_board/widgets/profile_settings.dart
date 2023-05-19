@@ -16,7 +16,7 @@ class ProfileSettings extends StatelessWidget {
         "leading": const Icon(Icons.account_circle_outlined),
         "trailing": const Icon(Icons.chevron_right),
         "onTap": () {
-          NavigationUtil.pushNamed(routeName: RouteName.editProfilePage);
+          NavigationUtil.pushNamed(routeName: RouteName.editProfile);
         }
       },
       {
