@@ -5,6 +5,7 @@ import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
+import 'package:videocall/domain/modules/user/user_repository.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
@@ -12,12 +13,15 @@ class AuthRepositoryImpl extends AuthRepository {
       {required AuthFirebase authFirebase,
       required AuthService authService,
       required AuthLocalDataSrc authLocalDataSrc,
-      required NotificationService notificationService})
+      required NotificationService notificationService,
+      required UserRepository userRepo})
       : _authFirebase = authFirebase,
         _authService = authService,
         _authLocalDataSrc = authLocalDataSrc,
-        _notificationService = notificationService;
+        _notificationService = notificationService,
+        _userRepo = userRepo;
 
+  final UserRepository _userRepo;
   final AuthFirebase _authFirebase;
   final AuthService _authService;
   final AuthLocalDataSrc _authLocalDataSrc;
@@ -38,7 +42,6 @@ class AuthRepositoryImpl extends AuthRepository {
         // get device name
         final deviceName = await DetectDeviceInfo.getDeviceName();
         final fcmToken = await _getFCMToken();
-        print(fcmToken);
         //call api
         final res =
             await _authService.loginWithFirebase(idToken, deviceName, fcmToken);
@@ -57,13 +60,14 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<void> logOut() async {
     try {
-      //await _authService.logOut();
+      await _authService.logOut();
       await _authFirebase.logOut();
-      await _authLocalDataSrc.deleteBoxAuth();
     } catch (e) {
       throw Exception(e.toString());
     } finally {
-      //  await _userRepo.clearBox();
+      // clear local
+      await _userRepo.clearBox();
+      await _authLocalDataSrc.deleteBoxAuth();
     }
   }
 

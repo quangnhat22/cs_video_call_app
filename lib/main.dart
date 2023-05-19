@@ -18,7 +18,7 @@ const _useEmulator = false;
 
 void main() async {
   await _initialize();
-  // await _initLocalNotification();
+  await _initLocalNotification();
   runApp(const App());
 }
 
@@ -37,7 +37,20 @@ Future<void> _initialize() async {
   }
 
   await Hive.initFlutter();
+  // _registerAdapterHive();
   await di.configureDependencies();
+}
+
+void _registerAdapterHive() {
+  //Hive.registerAdapter(UserModelAdapter());
+}
+
+Future<void> _initLocalNotification() async {
+  // Initialize cho Local Notification
+  await NotificationService.initializeLocalNotifications(debug: true);
+
+  // Initialize cho Push Notification
+  await NotificationService.initializeRemoteNotifications(debug: true);
 }
 
 /// connect to the firebase emulator for Firestore and Authentication
@@ -54,12 +67,4 @@ Future<void> _connectToFirebaseEmulator() async {
       .useStorageEmulator(localHostString, storagePort);
   FirebaseFirestore.instance
       .useFirestoreEmulator(localHostString, firestorePort);
-}
-
-Future<void> _initLocalNotification() async {
-  // Initialize cho Local Notification
-  await NotificationService.initializeLocalNotifications(debug: true);
-
-  // Initialize cho Push Notification
-  await NotificationService.initializeRemoteNotifications(debug: true);
 }

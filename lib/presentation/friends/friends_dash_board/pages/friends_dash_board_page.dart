@@ -71,7 +71,7 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
           children: const <Widget>[
             CallsTab(),
             ContactsTab(),
-            RequestsTab(),
+            FriendsRequestPage(),
           ],
         ),
         floatingActionButton: _bottomButtons(),

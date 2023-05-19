@@ -87,5 +87,7 @@
   "phone_number": "Số điện thoại",
   "bio": "Giới thiệu bản thân",
   "select_theme": "Thay đổi chủ đề",
-  "select_language": "Thay đổi ngôn ngữ"
+  "select_language": "Thay đổi ngôn ngữ",
+  "please_not_empty": "Vui lòng không để ô này trống",
+  "find_friend": "Tìm kiếm bạn bè"
 }

@@ -87,5 +87,7 @@
   "phone_number": "Phone number",
   "bio": "Bio",
   "select_theme": "Select Theme",
-  "select_language": "Select Language"
+  "select_language": "Select Language",
+  "please_not_empty": "Please enter the fill",
+  "find_friend": "Find Friend"
 }

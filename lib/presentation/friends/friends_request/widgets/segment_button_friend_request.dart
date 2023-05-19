@@ -1,17 +1,17 @@
-part of friends_dash_board;
+part of friends_request;
 
-class FriendRequestsSegmentedButton extends StatefulWidget {
+class SegmentButtonFriendRequest extends StatefulWidget {
   final Function onViewChange;
 
-  const FriendRequestsSegmentedButton(this.onViewChange, {super.key});
+  const SegmentButtonFriendRequest(this.onViewChange, {super.key});
 
   @override
-  State<FriendRequestsSegmentedButton> createState() =>
-      _FriendRequestsSegmentedButtonState();
+  State<SegmentButtonFriendRequest> createState() =>
+      _SegmentButtonFriendRequestState();
 }
 
-class _FriendRequestsSegmentedButtonState
-    extends State<FriendRequestsSegmentedButton> {
+class _SegmentButtonFriendRequestState
+    extends State<SegmentButtonFriendRequest> {
   Request requestView = Request.sent;
 
   @override
@@ -23,15 +23,18 @@ class _FriendRequestsSegmentedButtonState
             value: Request.sent,
             label: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(AppLocalizations.of(context)!
-                  .requests_sent_text_button_segment),
+              child: Text(
+                AppLocalizations.of(context)!.requests_sent_text_button_segment,
+              ),
             )),
         ButtonSegment(
             value: Request.received,
             label: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(AppLocalizations.of(context)!
-                  .requests_received_text_button_segment),
+              child: Text(
+                AppLocalizations.of(context)!
+                    .requests_received_text_button_segment,
+              ),
             )),
       ],
       selected: <Request>{requestView},

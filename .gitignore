@@ -45,3 +45,6 @@ app.*.map.json
 
 # Config for App (Firebase and Base Url)
 /lib/core/config/firebase_options.dart
+
+*.freezed.dart
+*.g.dart

@@ -7,6 +7,7 @@ import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/call/call_demo/pages/call_pending_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
+import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/loading/loading_page.dart';
@@ -69,6 +70,11 @@ class AppRoutes {
         return _buildRoute(
           settings,
           const FriendsDashBoardPage(),
+        );
+      case RouteName.friendInfo:
+        return _buildRoute(
+          settings,
+          const FriendsInforPage(),
         );
       case RouteName.groupsPage:
         return _buildRoute(

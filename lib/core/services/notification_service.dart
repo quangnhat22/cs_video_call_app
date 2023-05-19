@@ -101,7 +101,6 @@ class NotificationService {
   @pragma("vm:entry-point")
   static Future<void> mySilentDataHandle(FcmSilentData silentData) async {
     print('"SilentData": ${silentData.toString()}');
-
     if (silentData.createdLifeCycle != NotificationLifeCycle.Foreground) {
       print("bg");
     } else {

@@ -20,13 +20,33 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get avatar => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  String? get gender => throw _privateConstructorUsedError;
+  @HiveField(3)
+  String? get email => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get phone => throw _privateConstructorUsedError;
-  String? get birthday => throw _privateConstructorUsedError;
+  @HiveField(5)
+  String? get gender => throw _privateConstructorUsedError;
+  @HiveField(6)
+  String? get bio => throw _privateConstructorUsedError;
+  @HiveField(7)
+  DateTime? get birthday => throw _privateConstructorUsedError;
+  @HiveField(8)
+  String? get relation => throw _privateConstructorUsedError;
+  @HiveField(9)
+  @JsonKey(name: "common_friend_count", ignore: true)
+  int? get commonFriendCount =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: "is_friend", ignore: true)
+  bool? get isFriend =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(name: "last_seen_at", ignore: true)
+  DateTime? get lastSeenAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,13 +60,31 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String id,
-      String? name,
-      String? avatar,
-      String? address,
-      String? gender,
-      String? phone,
-      String? birthday});
+      {@HiveField(0)
+          String id,
+      @HiveField(1)
+          String? name,
+      @HiveField(2)
+          String? avatar,
+      @HiveField(3)
+          String? email,
+      @HiveField(4)
+          String? phone,
+      @HiveField(5)
+          String? gender,
+      @HiveField(6)
+          String? bio,
+      @HiveField(7)
+          DateTime? birthday,
+      @HiveField(8)
+          String? relation,
+      @HiveField(9)
+      @JsonKey(name: "common_friend_count", ignore: true)
+          int? commonFriendCount,
+      @JsonKey(name: "is_friend", ignore: true)
+          bool? isFriend,
+      @JsonKey(name: "last_seen_at", ignore: true)
+          DateTime? lastSeenAt});
 }
 
 /// @nodoc
@@ -65,10 +103,15 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? name = freezed,
     Object? avatar = freezed,
-    Object? address = freezed,
-    Object? gender = freezed,
+    Object? email = freezed,
     Object? phone = freezed,
+    Object? gender = freezed,
+    Object? bio = freezed,
     Object? birthday = freezed,
+    Object? relation = freezed,
+    Object? commonFriendCount = freezed,
+    Object? isFriend = freezed,
+    Object? lastSeenAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -83,22 +126,42 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gender: freezed == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      relation: freezed == relation
+          ? _value.relation
+          : relation // ignore: cast_nullable_to_non_nullable
               as String?,
+      commonFriendCount: freezed == commonFriendCount
+          ? _value.commonFriendCount
+          : commonFriendCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFriend: freezed == isFriend
+          ? _value.isFriend
+          : isFriend // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      lastSeenAt: freezed == lastSeenAt
+          ? _value.lastSeenAt
+          : lastSeenAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -111,13 +174,31 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String? name,
-      String? avatar,
-      String? address,
-      String? gender,
-      String? phone,
-      String? birthday});
+      {@HiveField(0)
+          String id,
+      @HiveField(1)
+          String? name,
+      @HiveField(2)
+          String? avatar,
+      @HiveField(3)
+          String? email,
+      @HiveField(4)
+          String? phone,
+      @HiveField(5)
+          String? gender,
+      @HiveField(6)
+          String? bio,
+      @HiveField(7)
+          DateTime? birthday,
+      @HiveField(8)
+          String? relation,
+      @HiveField(9)
+      @JsonKey(name: "common_friend_count", ignore: true)
+          int? commonFriendCount,
+      @JsonKey(name: "is_friend", ignore: true)
+          bool? isFriend,
+      @JsonKey(name: "last_seen_at", ignore: true)
+          DateTime? lastSeenAt});
 }
 
 /// @nodoc
@@ -134,10 +215,15 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = null,
     Object? name = freezed,
     Object? avatar = freezed,
-    Object? address = freezed,
-    Object? gender = freezed,
+    Object? email = freezed,
     Object? phone = freezed,
+    Object? gender = freezed,
+    Object? bio = freezed,
     Object? birthday = freezed,
+    Object? relation = freezed,
+    Object? commonFriendCount = freezed,
+    Object? isFriend = freezed,
+    Object? lastSeenAt = freezed,
   }) {
     return _then(_$_UserModel(
       id: null == id
@@ -152,22 +238,42 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gender: freezed == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
       birthday: freezed == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      relation: freezed == relation
+          ? _value.relation
+          : relation // ignore: cast_nullable_to_non_nullable
               as String?,
+      commonFriendCount: freezed == commonFriendCount
+          ? _value.commonFriendCount
+          : commonFriendCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFriend: freezed == isFriend
+          ? _value.isFriend
+          : isFriend // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      lastSeenAt: freezed == lastSeenAt
+          ? _value.lastSeenAt
+          : lastSeenAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -176,35 +282,78 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   _$_UserModel(
-      {required this.id,
-      this.name,
-      this.avatar,
-      this.address,
-      this.gender,
-      this.phone,
-      this.birthday});
+      {@HiveField(0)
+          required this.id,
+      @HiveField(1)
+          this.name,
+      @HiveField(2)
+          this.avatar,
+      @HiveField(3)
+          this.email,
+      @HiveField(4)
+          this.phone,
+      @HiveField(5)
+          this.gender,
+      @HiveField(6)
+          this.bio,
+      @HiveField(7)
+          this.birthday,
+      @HiveField(8)
+          this.relation,
+      @HiveField(9)
+      @JsonKey(name: "common_friend_count", ignore: true)
+          this.commonFriendCount,
+      @JsonKey(name: "is_friend", ignore: true)
+          this.isFriend,
+      @JsonKey(name: "last_seen_at", ignore: true)
+          this.lastSeenAt});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(2)
   final String? avatar;
   @override
-  final String? address;
+  @HiveField(3)
+  final String? email;
   @override
-  final String? gender;
-  @override
+  @HiveField(4)
   final String? phone;
   @override
-  final String? birthday;
+  @HiveField(5)
+  final String? gender;
+  @override
+  @HiveField(6)
+  final String? bio;
+  @override
+  @HiveField(7)
+  final DateTime? birthday;
+  @override
+  @HiveField(8)
+  final String? relation;
+  @override
+  @HiveField(9)
+  @JsonKey(name: "common_friend_count", ignore: true)
+  final int? commonFriendCount;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(name: "is_friend", ignore: true)
+  final bool? isFriend;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(name: "last_seen_at", ignore: true)
+  final DateTime? lastSeenAt;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, avatar: $avatar, address: $address, gender: $gender, phone: $phone, birthday: $birthday)';
+    return 'UserModel(id: $id, name: $name, avatar: $avatar, email: $email, phone: $phone, gender: $gender, bio: $bio, birthday: $birthday, relation: $relation, commonFriendCount: $commonFriendCount, isFriend: $isFriend, lastSeenAt: $lastSeenAt)';
   }
 
   @override
@@ -215,17 +364,26 @@ class _$_UserModel implements _UserModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.birthday, birthday) ||
-                other.birthday == birthday));
+                other.birthday == birthday) &&
+            (identical(other.relation, relation) ||
+                other.relation == relation) &&
+            (identical(other.commonFriendCount, commonFriendCount) ||
+                other.commonFriendCount == commonFriendCount) &&
+            (identical(other.isFriend, isFriend) ||
+                other.isFriend == isFriend) &&
+            (identical(other.lastSeenAt, lastSeenAt) ||
+                other.lastSeenAt == lastSeenAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, avatar, address, gender, phone, birthday);
+  int get hashCode => Object.hash(runtimeType, id, name, avatar, email, phone,
+      gender, bio, birthday, relation, commonFriendCount, isFriend, lastSeenAt);
 
   @JsonKey(ignore: true)
   @override
@@ -243,31 +401,72 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   factory _UserModel(
-      {required final String id,
-      final String? name,
-      final String? avatar,
-      final String? address,
-      final String? gender,
-      final String? phone,
-      final String? birthday}) = _$_UserModel;
+      {@HiveField(0)
+          required final String id,
+      @HiveField(1)
+          final String? name,
+      @HiveField(2)
+          final String? avatar,
+      @HiveField(3)
+          final String? email,
+      @HiveField(4)
+          final String? phone,
+      @HiveField(5)
+          final String? gender,
+      @HiveField(6)
+          final String? bio,
+      @HiveField(7)
+          final DateTime? birthday,
+      @HiveField(8)
+          final String? relation,
+      @HiveField(9)
+      @JsonKey(name: "common_friend_count", ignore: true)
+          final int? commonFriendCount,
+      @JsonKey(name: "is_friend", ignore: true)
+          final bool? isFriend,
+      @JsonKey(name: "last_seen_at", ignore: true)
+          final DateTime? lastSeenAt}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String? get name;
   @override
+  @HiveField(2)
   String? get avatar;
   @override
-  String? get address;
+  @HiveField(3)
+  String? get email;
   @override
-  String? get gender;
-  @override
+  @HiveField(4)
   String? get phone;
   @override
-  String? get birthday;
+  @HiveField(5)
+  String? get gender;
+  @override
+  @HiveField(6)
+  String? get bio;
+  @override
+  @HiveField(7)
+  DateTime? get birthday;
+  @override
+  @HiveField(8)
+  String? get relation;
+  @override
+  @HiveField(9)
+  @JsonKey(name: "common_friend_count", ignore: true)
+  int? get commonFriendCount;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: "is_friend", ignore: true)
+  bool? get isFriend;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: "last_seen_at", ignore: true)
+  DateTime? get lastSeenAt;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

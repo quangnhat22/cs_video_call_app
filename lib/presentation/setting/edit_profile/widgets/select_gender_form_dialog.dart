@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/stateless/list_tile/radio_list_title.dart';
-import '../../../../core/config/app_config.dart';
+import '../../../../core/config/app_enum.dart';
 
 class GenderFormDialog extends StatefulWidget {
   const GenderFormDialog({
