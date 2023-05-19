@@ -5,3 +5,4 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/app_bar/m_app_bar.dart';
 
 part 'pages/notifications_dash_board_page.dart';
+part 'widgets/notification_list.dart';

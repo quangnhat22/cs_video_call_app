@@ -18,7 +18,7 @@ class GroupReceivedRequestList extends StatelessWidget {
                 },
                 child: const Text(
                   'Team Siêu nhơn',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.w500),
                 )),
           ),
           subtitle: Column(

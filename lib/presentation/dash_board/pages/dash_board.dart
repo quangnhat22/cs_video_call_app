@@ -10,12 +10,12 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   int _currentTabIndex = 0;
 
-  final List<Widget> _pages = const <Widget>[
-    FriendsDashBoardPage(),
-    GroupsDashBoardPage(),
+  final List<Widget> _pages = <Widget>[
+    const FriendsDashBoardPage(),
+    const GroupsDashBoardPage(),
     ScheduleDashBoardPage(),
-    NotificationsDashBoardPage(),
-    SettingDashBoardPage(),
+    const NotificationsDashBoardPage(),
+    const SettingDashBoardPage(),
   ];
 
   @override

@@ -90,7 +90,7 @@ class AppRoutes {
       case RouteName.schedulesPage:
         return _buildRoute(
           settings,
-          const ScheduleDashBoardPage(),
+          ScheduleDashBoardPage(),
         );
       case RouteName.notificationsPage:
         return _buildRoute(
@@ -109,6 +109,8 @@ class AppRoutes {
         );
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
+      case RouteName.createSchedulePage:
+        return _buildRoute(settings, const CreateSchedulePage());
       case RouteName.callPending:
         return _buildRoute(settings, const CallPendingPage());
       default:
