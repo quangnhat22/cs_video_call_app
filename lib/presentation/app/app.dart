@@ -50,7 +50,7 @@ class App extends StatelessWidget {
                   {
                     return MMaterialApp(
                       keyMaterialApp: "App_Authorized",
-                      initialRoute: RouteName.dashboardPage,
+                      initialRoute: RouteName.dashboard,
                       onGenerateRoute: AppRoutes.authorizedRoute,
                       navigatorKey: AppGlobalKeys.authorNavigatorKey,
                       homeWidget: const DashboardPage(),

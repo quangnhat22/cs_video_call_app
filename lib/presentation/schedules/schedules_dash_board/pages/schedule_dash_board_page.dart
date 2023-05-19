@@ -56,7 +56,7 @@ class ScheduleDashBoardPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionStadiumButton(() {
-        NavigationUtil.pushNamed(routeName: RouteName.createSchedulePage);
+        NavigationUtil.pushNamed(routeName: RouteName.createSchedule);
       }, null),
     );
   }

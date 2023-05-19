@@ -62,12 +62,12 @@ class AppRoutes {
   static Route authorizedRoute(RouteSettings settings) {
     log(settings.name.toString());
     switch (settings.name) {
-      case RouteName.dashboardPage:
+      case RouteName.dashboard:
         return _buildRoute(
           settings,
           const DashboardPage(),
         );
-      case RouteName.friendsPage:
+      case RouteName.friends:
         return _buildRoute(
           settings,
           const FriendsDashBoardPage(),
@@ -82,34 +82,34 @@ class AppRoutes {
           settings,
           const FriendsInforPage(),
         );
-      case RouteName.groupsPage:
+      case RouteName.groups:
         return _buildRoute(
           settings,
           const GroupsDashBoardPage(),
         );
-      case RouteName.schedulesPage:
+      case RouteName.schedules:
         return _buildRoute(
           settings,
           ScheduleDashBoardPage(),
         );
-      case RouteName.notificationsPage:
+      case RouteName.notifications:
         return _buildRoute(
           settings,
           const NotificationsDashBoardPage(),
         );
-      case RouteName.settingPage:
+      case RouteName.settings:
         return _buildRoute(
           settings,
           const SettingDashBoardPage(),
         );
-      case RouteName.editProfilePage:
+      case RouteName.editProfile:
         return _buildRoute(
           settings,
           const EditProfilePage(),
         );
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
-      case RouteName.createSchedulePage:
+      case RouteName.createSchedule:
         return _buildRoute(settings, const CreateSchedulePage());
       case RouteName.callPending:
         return _buildRoute(settings, const CallPendingPage());
