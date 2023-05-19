@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
 part 'app_event.dart';
@@ -38,6 +39,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   Future<void> _onAppUserChanged(
       AppUserChanged event, Emitter<AppState> emit) async {
+    NotificationService.initializeNotificationsEventListeners();
     final isLoggedIn = await authRepo.checkIsLoggedIn();
     emit(isLoggedIn ? AppAuthorized() : AppUnAuthorized());
   }
