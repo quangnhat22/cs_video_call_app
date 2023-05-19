@@ -6,7 +6,9 @@ part 'user_model.g.dart';
 
 @freezed
 @HiveType(typeId: 0)
-class UserModel with _$UserModel {
+abstract class UserModel extends HiveObject with _$UserModel {
+  UserModel._();
+
   factory UserModel({
     @HiveField(0)
         required String id,
