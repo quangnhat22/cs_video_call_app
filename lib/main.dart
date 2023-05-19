@@ -43,7 +43,7 @@ Future<void> _initialize() async {
 }
 
 void _registerAdapterHive() {
-  //Hive.registerAdapter(UserModelA());
+  Hive.registerAdapter(UserModelAdapter());
 }
 
 Future<void> _initLocalNotification() async {
