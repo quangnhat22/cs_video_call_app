@@ -21,7 +21,9 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) {
-            return getIt<AppBloc>();
+            return getIt<AppBloc>()
+              ..add(AppStarted())
+              ..add(AppUserChanged());
           },
         ),
         BlocProvider(

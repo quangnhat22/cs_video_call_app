@@ -6,6 +6,7 @@ import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/call/call_demo/pages/call_pending_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
+import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
@@ -70,6 +71,11 @@ class AppRoutes {
         return _buildRoute(
           settings,
           const FriendsDashBoardPage(),
+        );
+      case RouteName.findFriend:
+        return _buildRoute(
+          settings,
+          const FindNewFriendPage(),
         );
       case RouteName.friendInfo:
         return _buildRoute(

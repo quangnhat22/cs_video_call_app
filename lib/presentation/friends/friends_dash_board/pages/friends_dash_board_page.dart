@@ -18,7 +18,11 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+    _tabController = TabController(
+      length: 3,
+      vsync: this,
+      initialIndex: 0,
+    );
     _tabController.animation?.addListener(_handleAnimationTab);
     _tabController.addListener(_handleTabIndex);
   }
@@ -62,6 +66,12 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
     setState(() {
       _selectedIndex = _tabController.index;
     });
+    _tabController.animateTo(
+      _selectedIndex,
+      curve: Curves.linear,
+      duration: const Duration(milliseconds: 500),
+    );
+
     if (_tapIsBeingExecuted == true) {
       _tapIsBeingExecuted = false;
     } else {
@@ -70,21 +80,6 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
         _tapIsBeingExecuted = true;
       }
     }
-  }
-
-  Widget? _bottomButtons() {
-    if (_tabController.index == 2) {
-      return FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        shape: const StadiumBorder(),
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      );
-    }
-    return null;
   }
 
   @override
@@ -112,12 +107,14 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
         body: TabBarView(
           controller: _tabController,
           children: const <Widget>[
-            CallsTab(),
-            ContactsTab(),
+            FriendsCallPage(),
+            FriendsContactPage(),
             FriendsRequestPage(),
           ],
         ),
-        floatingActionButton: _bottomButtons(),
+        floatingActionButton: (_tabController.index == 2)
+            ? const FloatingButtonFindFriend()
+            : null,
       ),
     );
   }

@@ -33,8 +33,8 @@ class FindNewFriendView extends StatelessWidget {
           failure: (message) =>
               SnackBarApp.showSnackBar(context, message, TypesSnackBar.error),
           success: (userResult) {
-            // NavigationUtil.pushNamed(
-            //     routeName: Roures.friendInfo, args: userResult);
+            NavigationUtil.pushNamed(
+                routeName: RouteName.friendInfo, args: userResult);
           },
         );
       },
@@ -51,10 +51,10 @@ class FindNewFriendView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const InputFindFriend(),
-                  const ButtonFindFriend(),
+                  ButtonFindFriend(
+                    isInProgress: (state is FindFriendInProgress),
+                  ),
                   if (state is FindFriendNotFound) const NotFoundResult(),
-                  if (state is FindFriendInProgress)
-                    const CircularProgressIndicator(),
                 ],
               ),
             ),

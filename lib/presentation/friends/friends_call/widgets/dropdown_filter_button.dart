@@ -1,4 +1,4 @@
-part of friends_dash_board;
+part of friends_call;
 
 const List<String> listItem = <String>['Outgoing', 'Incoming', 'Missed'];
 

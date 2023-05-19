@@ -35,7 +35,7 @@ class ListFriendItem extends StatelessWidget {
               //NavigationUtil.pushNamed(route: RouteName.chatRoom, args: id);
             },
             icon: Icon(
-              Icons.comment_outlined,
+              Icons.call_outlined,
               color: Theme.of(context).colorScheme.onTertiaryContainer,
             )),
       ),
