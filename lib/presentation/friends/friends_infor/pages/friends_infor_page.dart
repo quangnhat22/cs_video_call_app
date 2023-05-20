@@ -1,79 +1,58 @@
 part of friends_infor;
 
-class FriendsInforPage extends StatelessWidget {
-  final bool isFriend = true;
+class FriendsInfoPage extends StatelessWidget {
+  const FriendsInfoPage({Key? key, required this.userInfo}) : super(key: key);
 
-  const FriendsInforPage({super.key});
+  final UserEntity userInfo;
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> friendDetails = [
-      {
-        'title': AppLocalizations.of(context)!.friend_full_name,
-        'leading': Icon(
-          Icons.badge,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<FriendInfoCubit>()..pageInited(userInfo),
         ),
-      },
-      {
-        'title': AppLocalizations.of(context)!.friend_phone,
-        'leading': Icon(
-          Icons.call,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+        BlocProvider(
+          create: (_) => getIt<FriendsActionCubit>(),
         ),
-      },
-      {
-        'title': AppLocalizations.of(context)!.friend_gender,
-        'leading': Icon(
-          Icons.people,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-        ),
-      },
-      {
-        'title': AppLocalizations.of(context)!.friend_birthday,
-        'leading': Icon(
-          Icons.today,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-        ),
-      },
-    ];
+      ],
+      child: const FriendsInfoView(),
+    );
+  }
+}
 
-    final List<Map<String, dynamic>> histories = [
-      {
-        'title':
-            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
-        'type': 'incomming',
-        'duration': '15s'
-      },
-      {
-        'title':
-            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
-        'type': 'outgoing',
-        'duration': '1h 40m'
-      },
-      {
-        'title':
-            '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
-        'type': 'missed',
-        'duration': ''
-      }
-    ];
+class FriendsInfoView extends StatelessWidget {
+  const FriendsInfoView({super.key});
 
-    return Scaffold(
-      appBar: MPageAppBar(
-        title: AppLocalizations.of(context)!.friends,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FriendMutualInfor(null, 'Trần Đình Khôi', 500, 12),
-            FriendDetailsInfor(friendDetails),
-            if (isFriend) const FriendUnfriend(),
-            if (isFriend)
-              FriendCallsHistory(histories)
-            else
-              const FriendActions()
-          ],
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<FriendsActionCubit, FriendsActionState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        state.whenOrNull(sentAddRequestSuccess: () {
+          SnackBarApp.showSnackBar(
+              context,
+              AppLocalizations.of(context)!.action_success,
+              TypesSnackBar.success);
+          NavigationUtil.pushNamedAndRemoveUntil(route: RouteName.dashboard);
+        }, sentAddRequestFailure: (message) {
+          SnackBarApp.showSnackBar(context,
+              AppLocalizations.of(context)!.action_fail, TypesSnackBar.error);
+        });
+      },
+      child: Scaffold(
+        appBar: MPageAppBar(
+          title: AppLocalizations.of(context)!.friends,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              const FriendMutualInfo(),
+              const FriendDetailsInfo(),
+              const FriendActions(),
+              FriendCallsHistory(),
+            ],
+          ),
         ),
       ),
     );

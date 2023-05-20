@@ -112,5 +112,7 @@
   "add_notifications": "Add notifications",
   "add_participants": "Add participants",
   "before": "Before",
-  "minutes": "minutes"
+  "minutes": "minutes",
+  "action_success": "Your action is success",
+  "action_fail": "Your action is fail! Try again"
 }

@@ -17,6 +17,7 @@ import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_d
 import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
+import '../../domain/entities/user_entity.dart';
 import '../../presentation/auth/login/login.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
@@ -80,7 +81,9 @@ class AppRoutes {
       case RouteName.friendInfo:
         return _buildRoute(
           settings,
-          const FriendsInforPage(),
+          FriendsInfoPage(
+            userInfo: settings.arguments as UserEntity,
+          ),
         );
       case RouteName.groups:
         return _buildRoute(

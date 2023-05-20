@@ -40,3 +40,17 @@ enum PeriodEnum {
 
   final String value;
 }
+
+//relation with other user
+enum AppFriendRelation {
+  self("self"),
+  friend("friend"),
+  received("received"),
+  sent("sent"),
+  blocked("blocked"),
+  non("non");
+
+  const AppFriendRelation(this.value);
+
+  final String value;
+}
