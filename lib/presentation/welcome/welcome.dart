@@ -25,6 +25,6 @@ part 'cubit/welcome_state.dart';
 part 'cubit/welcome.freezed.dart';
 part 'pages/welcome_page.dart';
 part 'widgets/login_with_google_button.dart';
-part 'widgets/sign_in_button.dart';
-part 'widgets/welcom_actions.dart';
+part 'widgets/sign_up_button.dart';
+part 'widgets/welcome_actions.dart';
 part 'widgets/welcome_panel.dart';

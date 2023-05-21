@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  final TextEditingController passwordController;
-
-  const PasswordTextFormField(this.passwordController, {super.key});
+  const PasswordTextFormField({super.key});
 
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
 
 class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
+  final TextEditingController _controller = TextEditingController();
   bool _passwordVisible = false;
 
   void showPassword() {
@@ -37,7 +36,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
-        controller: widget.passwordController,
+        controller: _controller,
         validator: validatePassword,
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.lock),
@@ -53,5 +52,11 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         obscureText: !_passwordVisible,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

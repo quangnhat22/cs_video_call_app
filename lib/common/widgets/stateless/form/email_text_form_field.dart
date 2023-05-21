@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:videocall/core/config/app_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class EmailTextFormField extends StatelessWidget {
-  final TextEditingController emailController;
+class EmailTextFormField extends StatefulWidget {
+  const EmailTextFormField({super.key});
 
-  const EmailTextFormField(this.emailController, {super.key});
+  @override
+  State<EmailTextFormField> createState() => _EmailTextFormFieldState();
+}
+
+class _EmailTextFormFieldState extends State<EmailTextFormField> {
+  final TextEditingController _controller = TextEditingController();
 
   String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
@@ -24,7 +29,7 @@ class EmailTextFormField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
-        controller: emailController,
+        controller: _controller,
         validator: (value) => validateEmail(value, context),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.mail),
@@ -36,5 +41,11 @@ class EmailTextFormField extends StatelessWidget {
         keyboardType: TextInputType.emailAddress,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.clear();
+    super.dispose();
   }
 }

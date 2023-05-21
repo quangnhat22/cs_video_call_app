@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppAssets {
   static var iconApp = Image.asset(
-    'assets/logos/logo_light.png',
+    'assets/logos/logo.png',
     fit: BoxFit.cover,
   );
 

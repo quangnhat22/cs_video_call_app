@@ -23,7 +23,7 @@ class WelcomeActions extends StatelessWidget {
           widthBtn: _getWithByOrientation(),
         ),
         DividerWithText(text: AppLocalizations.of(context)!.or),
-        SignInButton(
+        SignUpButton(
           width: _getWithByOrientation(),
         ),
       ],
