@@ -29,8 +29,11 @@ class SignUpContainer extends StatelessWidget {
     return BlocBuilder<SignUpPageViewCubit, SignUpPageViewState>(
       buildWhen: (previous, current) => previous.pageIndex != current.pageIndex,
       builder: (context, state) {
-        return SignUpMainView(
-          initialPage: state.pageIndex,
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: SignUpMainView(
+            initialPage: state.pageIndex,
+          ),
         );
       },
     );

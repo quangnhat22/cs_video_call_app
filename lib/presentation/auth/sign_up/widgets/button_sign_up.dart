@@ -6,7 +6,8 @@ class ButtonSignUp extends StatelessWidget {
   });
 
   void _onTapSignUpBtn(BuildContext ctx) {
-    ctx.read<SignUpFormCubit>().signUpFormSubmitted();
+    //ctx.read<SignUpFormCubit>().signUpFormSubmitted();
+    ctx.read<SignUpPageViewCubit>().pageIndexChanged(1);
   }
 
   @override

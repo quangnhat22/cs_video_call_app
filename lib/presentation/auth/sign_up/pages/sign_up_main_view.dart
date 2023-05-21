@@ -23,11 +23,23 @@ class _SignUpMainViewState extends State<SignUpMainView> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: _controller,
-      children: const <Widget>[
-        RegisterAccountView(),
-      ],
+    return BlocListener<SignUpPageViewCubit, SignUpPageViewState>(
+      listener: (context, state) {
+        _controller.animateToPage(
+          state.pageIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+        );
+      },
+      child: PageView(
+        controller: _controller,
+        children: const <Widget>[
+          RegisterAccountView(),
+          VerifiedView(),
+          SetUpProfilePage(),
+          AvatarPage(),
+        ],
+      ),
     );
   }
 }

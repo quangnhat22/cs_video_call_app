@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../forgot_password/view/reset_password_page.dart';
+
+import '../../forgot_password/forgot_password.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -90,89 +91,90 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   margin: const EdgeInsets.only(top: 1),
                   child: SingleChildScrollView(
-                    child: Column(children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 0),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.mail),
-                            label: Text('Email (*)'),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(width: 1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8))),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 0),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: IconButton(
-                                onPressed: showPassword,
-                                icon: Icon(_passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off)),
-                            label: const Text('Password (*)'),
-                            border: const OutlineInputBorder(
-                                borderSide: BorderSide(width: 1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8))),
-                          ),
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: !_passwordVisible,
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ResetPasswordPage()));
-                          },
-                          child: const Text(
-                            'Forgot Password?',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(0, 89, 120, 1)),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 100),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    const Color.fromRGBO(0, 89, 120, 1)),
-                                padding: MaterialStateProperty.all(
-                                    const EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 20)),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12)))),
-                            child: const Text('SIGN IN'),
-                          ),
-                        ),
-                      ),
-                      if (MediaQuery.of(context).orientation ==
-                          Orientation.landscape)
+                    child: Column(
+                      children: [
                         Container(
-                          margin: const EdgeInsets.only(top: 14),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 0),
+                          child: const TextField(
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.mail),
+                              label: Text('Email (*)'),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8))),
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 0),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: IconButton(
+                                  onPressed: showPassword,
+                                  icon: Icon(_passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off)),
+                              label: const Text('Password (*)'),
+                              border: const OutlineInputBorder(
+                                  borderSide: BorderSide(width: 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8))),
+                            ),
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: !_passwordVisible,
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ResetPasswordPage()));
+                            },
+                            child: const Text(
+                              'Forgot Password?',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(0, 89, 120, 1)),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 100),
                           child: SizedBox(
                             width: double.infinity,
-                            child: TextButton(
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color.fromRGBO(0, 89, 120, 1)),
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.symmetric(
+                                          vertical: 14, horizontal: 20)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12)))),
+                              child: const Text('SIGN IN'),
+                            ),
+                          ),
+                        ),
+                        if (MediaQuery.of(context).orientation ==
+                            Orientation.landscape)
+                          Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
@@ -180,10 +182,12 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: MaterialStateProperty.all(
                                         const EdgeInsets.symmetric(
                                             vertical: 14, horizontal: 20))),
-                                child: const Text('BACK TO WELCOME')),
-                          ),
-                        )
-                    ]),
+                                child: const Text('BACK TO WELCOME'),
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
                   ),
                 ),
               ),

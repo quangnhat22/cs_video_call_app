@@ -76,7 +76,8 @@ import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit
     as _i21;
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
     as _i41;
-import 'package:videocall/presentation/welcome/welcome.dart' as _i43;
+import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
+    as _i43;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
