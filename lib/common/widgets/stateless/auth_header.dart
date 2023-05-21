@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:videocall/common/widgets/stateless/buttons/float_back_button.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;
@@ -13,34 +15,18 @@ class AuthHeader extends StatelessWidget {
       padding: const EdgeInsets.only(top: 30, left: 12, right: 12),
       decoration: BoxDecoration(color: mainColor),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromRGBO(255, 251, 255, 1)),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
-              shape: MaterialStateProperty.all(const CircleBorder())),
-          child: Icon(
-            Icons.chevron_left,
-            color: mainColor,
-          ),
-        ),
-        Container(
-            margin: const EdgeInsets.only(top: 12),
+        FloatBackButton(Theme.of(context).colorScheme.onPrimary, mainColor),
+        Padding(
+            padding: const EdgeInsets.only(top: 12),
             child: Text(
               title,
-              style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+              style: AppTextStyles.authHeadTitleTextStyle,
             )),
-        Container(
-          margin: const EdgeInsets.only(top: 10),
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
           child: Text(
             subTitle,
-            style: const TextStyle(color: Colors.white),
+            style: AppTextStyles.authHeadSubtitleTextStyle,
           ),
         )
       ]),

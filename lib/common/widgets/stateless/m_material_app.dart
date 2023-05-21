@@ -1,34 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/config/app_theme.dart';
-import '../../../routes/app_routes.dart';
-import '../../../utils/global_keys.dart';
+import '../../../core/routes/app_routes.dart';
 
 class MMaterialApp extends StatelessWidget {
   const MMaterialApp({
     Key? key,
-    required this.initialRoute,
+    required this.keyMaterialApp,
+    this.initialRoute,
     this.onGenerateRoute,
+    this.homeWidget,
+    this.navigatorKey,
+    this.themeMode,
+    this.locale,
   }) : super(key: key);
 
-  final String initialRoute;
+  final String keyMaterialApp;
+  final String? initialRoute;
   final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
+  final Widget? homeWidget;
+  final GlobalKey<NavigatorState>? navigatorKey;
+  final ThemeMode? themeMode;
+  final Locale? locale;
 
   @override
-  MaterialApp build(BuildContext context) {
-    return MaterialApp(
-      title: 'CS Chat App',
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: AppTheme.lightTheme,
-      navigatorKey: AppGlobalKeys.navigatorKey,
-      navigatorObservers: [
-        AppRoutes.routeObserver,
-      ],
-      initialRoute: initialRoute,
-      onGenerateRoute: onGenerateRoute,
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'CS Chat App',
+          debugShowCheckedModeBanner: false,
+          key: ValueKey(keyMaterialApp),
+          locale: locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          themeMode: themeMode,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          navigatorKey: navigatorKey,
+          navigatorObservers: [
+            AppRoutes.routeObserver,
+          ],
+          initialRoute: initialRoute,
+          onGenerateRoute: onGenerateRoute,
+          home: child,
+        );
+      },
+      child: homeWidget,
     );
   }
 }
