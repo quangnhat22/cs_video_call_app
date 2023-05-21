@@ -3,10 +3,19 @@ import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
 abstract class AuthUseCase {
   Future<void> loginWitGoogle();
+
   Future<void> loginWithEmailAndPassword(String email, String password);
+
   Future<void> signUpWithEmailAndPassword(String email, String password);
+
+  Future<bool> sendEmailVerify();
+
   Future<void> logOut();
+
+  Future<void> removeFlagSignUpNavigator();
+
   Stream<String?> checkAccessTokenStream();
+
   Stream<String?> checkRefreshTokenStream();
 }
 
@@ -44,5 +53,15 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Stream<String?> checkRefreshTokenStream() {
     return repo.checkRefreshTokenStream();
+  }
+
+  @override
+  Future<void> removeFlagSignUpNavigator() {
+    return repo.removeFlagSignUpNavigator();
+  }
+
+  @override
+  Future<bool> sendEmailVerify() async {
+    return repo.sendEmailVerify();
   }
 }

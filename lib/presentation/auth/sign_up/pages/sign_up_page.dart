@@ -31,8 +31,11 @@ class SignUpContainer extends StatelessWidget {
       builder: (context, state) {
         return WillPopScope(
           onWillPop: () async => false,
-          child: SignUpMainView(
-            initialPage: state.pageIndex,
+          child: GestureDetector(
+            onTap: () => AppScreenUtils.hideInputKeyboard(),
+            child: SignUpMainView(
+              initialPage: state.pageIndex,
+            ),
           ),
         );
       },

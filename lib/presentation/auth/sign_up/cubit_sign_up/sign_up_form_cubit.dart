@@ -7,8 +7,8 @@ import 'package:videocall/core/utils/formz/email.dart';
 import 'package:videocall/core/utils/formz/password.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
-part 'sign_up_form_state.dart';
 part 'sign_up_form_cubit.freezed.dart';
+part 'sign_up_form_state.dart';
 
 @Injectable()
 class SignUpFormCubit extends Cubit<SignUpFormState> {

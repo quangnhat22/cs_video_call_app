@@ -21,7 +21,6 @@ class SignUpForm extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: <Widget>[
                 const InputEmail(),
