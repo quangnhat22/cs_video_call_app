@@ -41,8 +41,8 @@ class _LoginFormState extends State<LoginForm> {
           child: Form(
             key: _formKey,
             child: Column(children: [
-              EmailTextFormField(emailController),
-              PasswordTextFormField(passwordController),
+              const EmailTextFormField(),
+              const PasswordTextFormField(),
               SizedBox(
                 width: double.infinity,
                 child: GestureDetector(

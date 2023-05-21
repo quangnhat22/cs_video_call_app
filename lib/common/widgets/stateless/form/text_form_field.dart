@@ -6,16 +6,20 @@ enum InputType { text, phoneNumber, multiline }
 class CTextFormField extends StatelessWidget {
   const CTextFormField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.icon,
     required this.label,
+    this.onChange,
+    this.errorText,
     this.type = InputType.text,
   });
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final Icon icon;
   final String label;
   final InputType type;
+  final Function(String)? onChange;
+  final String? errorText;
 
   String? validateValue(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
@@ -43,12 +47,14 @@ class CTextFormField extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 12),
       child: TextFormField(
         controller: controller,
-        validator: (value) => validateValue(value, context),
+        onChanged: onChange,
+        //validator: (value) => validateValue(value, context),
         minLines: 1,
         maxLines: null,
         decoration: InputDecoration(
           prefixIcon: icon,
           label: Text(label),
+          errorText: errorText,
           border: const OutlineInputBorder(
               borderSide: BorderSide(width: 1),
               borderRadius: BorderRadius.all(Radius.circular(8))),
