@@ -62,8 +62,6 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       await _authService.logOut();
       await _authFirebase.logOut();
-    } catch (e) {
-      throw Exception(e.toString());
     } finally {
       // clear local
       await _userRepo.clearBox();
@@ -78,9 +76,14 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> signUpWithEmailAndPassword(String email, String password) {
-    // TODO: implement signUpWithEmailAndPassword
-    throw UnimplementedError();
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      final deviceName = await DetectDeviceInfo.getDeviceName();
+      final res = await _authService.register(email, password, deviceName);
+      if (res.statusCode == 200) {}
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

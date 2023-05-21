@@ -1,8 +1,8 @@
-part of welcome;
+part of 'welcome_cubit.dart';
 
 @freezed
 class WelcomeState with _$WelcomeState {
-  const factory WelcomeState.initial() = Initial;
+  const factory WelcomeState.initial() = _Initial;
   const factory WelcomeState.signInWithGoogleInProgress() =
       SignInWithGoogleInProgress;
   const factory WelcomeState.signInWithGoogleSuccess() =

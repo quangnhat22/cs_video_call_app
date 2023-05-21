@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/remote/base_servie.dart';
 
@@ -44,6 +45,8 @@ class AuthService {
           }
         },
       );
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.message);
     } catch (e) {
       throw Exception(e.toString());
     }

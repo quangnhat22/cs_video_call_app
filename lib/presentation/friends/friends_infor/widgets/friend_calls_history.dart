@@ -1,9 +1,28 @@
 part of friends_infor;
 
 class FriendCallsHistory extends StatelessWidget {
-  final List<Map<String, dynamic>> histories;
+  FriendCallsHistory({super.key});
 
-  const FriendCallsHistory(this.histories, {super.key});
+  final List<Map<String, dynamic>> histories = [
+    {
+      'title':
+          '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+      'type': 'incomming',
+      'duration': '15s'
+    },
+    {
+      'title':
+          '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+      'type': 'outgoing',
+      'duration': '1h 40m'
+    },
+    {
+      'title':
+          '${DateFormat.Hm().format(DateTime.now())} ${DateFormat.yMMMMd().format(DateTime.now())}',
+      'type': 'missed',
+      'duration': ''
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {

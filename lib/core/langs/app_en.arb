@@ -112,5 +112,10 @@
   "add_notifications": "Add notifications",
   "add_participants": "Add participants",
   "before": "Before",
-  "minutes": "minutes"
+  "minutes": "minutes",
+  "action_success": "Your action is success",
+  "action_fail": "Your action is fail! Try again",
+  "text_send_email" : "We have sent a verified email to you. Please check your email and click the link to verify your account",
+  "i_dont_get_it": "I don't get it",
+  "update_profile": "Update Profile"
 }

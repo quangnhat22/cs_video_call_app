@@ -26,7 +26,7 @@ class ResetPasswordPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 250, height: 250, child: AppAssets.appLogo),
+                    SizedBox(width: 250, height: 250, child: AppAssets.iconApp),
                     Text(
                       AppLocalizations.of(context)!.forgot_password,
                       style: const TextStyle(

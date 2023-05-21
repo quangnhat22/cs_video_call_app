@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AppAssets {
   static var iconApp = Image.asset(
-    'assets/logos/logo_light.png',
+    'assets/logos/logo.png',
     fit: BoxFit.cover,
   );
 
@@ -26,11 +26,6 @@ class AppAssets {
   static final logoGoogle = Image.asset(
     'assets/images/google.png',
     width: 26,
-  );
-
-  static final appLogo = Image.asset(
-    'assets/images/logo.png',
-    fit: BoxFit.cover,
   );
 
   static const emptyAvatar = AssetImage(

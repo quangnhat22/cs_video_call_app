@@ -10,7 +10,6 @@ class UserEntity {
   final String? bio;
   final DateTime? birthday;
   final int? commonFriendCount;
-  final bool? isFriend;
   final DateTime? lastSeenAt;
   final String relation;
 
@@ -24,7 +23,6 @@ class UserEntity {
     this.bio,
     this.birthday,
     this.commonFriendCount = 0,
-    this.isFriend,
     this.lastSeenAt,
     this.relation = "non",
   });
@@ -45,7 +43,6 @@ class UserEntity {
       bio: userModel.bio,
       birthday: userModel.birthday,
       commonFriendCount: userModel.commonFriendCount,
-      isFriend: userModel.isFriend,
       lastSeenAt: userModel.lastSeenAt,
       relation: userModel.relation ?? "non",
     );

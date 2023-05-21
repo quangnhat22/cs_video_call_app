@@ -5,21 +5,37 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            AuthHeader(
-                AppLocalizations.of(context)!.welcome,
-                AppLocalizations.of(context)!.start_chatting_with_a_new_account,
-                Theme.of(context).colorScheme.secondary),
-            const SignUpForm()
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<SignUpFormCubit>(),
         ),
-      ),
+        BlocProvider(
+          create: (_) => getIt<SignUpPageViewCubit>(),
+        ),
+      ],
+      child: const SignUpContainer(),
+    );
+  }
+}
+
+class SignUpContainer extends StatelessWidget {
+  const SignUpContainer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpPageViewCubit, SignUpPageViewState>(
+      buildWhen: (previous, current) => previous.pageIndex != current.pageIndex,
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: SignUpMainView(
+            initialPage: state.pageIndex,
+          ),
+        );
+      },
     );
   }
 }

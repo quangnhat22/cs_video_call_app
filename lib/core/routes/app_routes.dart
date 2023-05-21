@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:videocall/core/routes/app_transition_animation.dart';
 import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
@@ -17,6 +18,7 @@ import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_d
 import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
+import '../../domain/entities/user_entity.dart';
 import '../../presentation/auth/login/login.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
@@ -38,22 +40,13 @@ class AppRoutes {
   static Route unAuthorizedRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.welcomePage:
-        return _buildRoute(
-          settings,
-          const WelcomePage(),
-        );
+        return _buildRoute(settings, const WelcomePage());
       case RouteName.loginPage:
-        return _buildRoute(
-          settings,
-          const LoginPage(),
-        );
+        return _buildAnimationRoute(settings, const LoginPage());
       case RouteName.forgotPasswordPage:
-        return _buildRoute(
-          settings,
-          const ResetPasswordPage(),
-        );
+        return _buildAnimationRoute(settings, const ResetPasswordPage());
       case RouteName.signUpPage:
-        return _buildRoute(settings, const SignUpPage());
+        return _buildAnimationRoute(settings, const SignUpPage());
       default:
         return _errorRoute();
     }
@@ -80,7 +73,9 @@ class AppRoutes {
       case RouteName.friendInfo:
         return _buildRoute(
           settings,
-          const FriendsInforPage(),
+          FriendsInfoPage(
+            userInfo: settings.arguments as UserEntity,
+          ),
         );
       case RouteName.groups:
         return _buildRoute(
@@ -125,6 +120,13 @@ class AppRoutes {
     );
   }
 
+  static SlideRightRoute _buildAnimationRoute(
+      RouteSettings settings, Widget builder) {
+    return SlideRightRoute(
+      page: builder,
+    );
+  }
+
   // static MaterialPageRoute _buildRouteDialog(
   //     RouteSettings settings, Widget builder) {
   //   return MaterialPageRoute(
@@ -135,15 +137,17 @@ class AppRoutes {
   // }
 
   static Route _errorRoute() {
-    return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Coming soon'),
-        ),
-        body: const Center(
-          child: Text('Page not found'),
-        ),
-      );
-    });
+    return MaterialPageRoute(
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Coming soon'),
+          ),
+          body: const Center(
+            child: Text('Page not found'),
+          ),
+        );
+      },
+    );
   }
 }

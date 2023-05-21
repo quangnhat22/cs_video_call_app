@@ -112,5 +112,10 @@
   "add_notifications": "Thêm thông báo",
   "add_participants": "Thêm thành viên",
   "before": "Trước",
-  "minutes": "phút"
+  "minutes": "phút",
+  "action_success": "Yêu cầu của bạn đã gửi thành công!",
+  "action_fail": "Yêu cầu của bạn đã thất bại! Vui lòng thử lại.",
+  "text_send_email" : "Chúng tôi đã gửi email xác nhận tài khoản đến cho bạn. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
+  "i_dont_get_it": "Tôi chưa nhận được",
+  "update_profile": "Cập nhật thông tin"
 }
