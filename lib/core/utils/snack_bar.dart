@@ -5,11 +5,12 @@ enum TypesSnackBar { success, warning, error }
 class SnackBarApp {
   static void showSnackBar(
       BuildContext context, String? message, TypesSnackBar type) {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message ?? ""),
-      backgroundColor: _showBackgroundSnackBar(context, type),
-    ));
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(message ?? ""),
+        backgroundColor: _showBackgroundSnackBar(context, type),
+      ));
   }
 
   static Color? _showBackgroundSnackBar(

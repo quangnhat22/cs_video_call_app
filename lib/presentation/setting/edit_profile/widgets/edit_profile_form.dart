@@ -18,12 +18,6 @@ class EditProfileForm extends StatelessWidget {
 
     final formKey = GlobalKey<FormState>();
 
-    void signUp() {
-      if (formKey.currentState!.validate()) {
-        debugPrint('Sign up successfully');
-      }
-    }
-
     return SingleChildScrollView(
       child: Form(
         key: formKey,

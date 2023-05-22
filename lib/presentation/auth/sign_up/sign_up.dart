@@ -16,6 +16,7 @@ import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/sign_up/cubit_page_view/sign_up_page_view_cubit.dart';
+import 'package:videocall/presentation/auth/sign_up/cubit_send_email/send_email_cubit.dart';
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart';
 
 import '../../../core/utils/screen_utils.dart';
@@ -34,3 +35,5 @@ part 'widgets/sign_up/input_confirm_password.dart';
 part 'widgets/sign_up/input_email.dart';
 part 'widgets/sign_up/input_full_name.dart';
 part 'widgets/sign_up/input_password.dart';
+part 'widgets/text_notice_sent_email.dart';
+part 'widgets/button_email_received.dart';

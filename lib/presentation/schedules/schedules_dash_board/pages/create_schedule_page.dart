@@ -78,8 +78,12 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
     TimeOfDay? pickedTime =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
 
+    String formattedTime = "";
+
     if (pickedTime != null) {
-      String formattedTime = pickedTime.format(context);
+      if (context.mounted) {
+        formattedTime = pickedTime.format(context);
+      }
 
       if (period == PeriodEnum.start) {
         setState(() {

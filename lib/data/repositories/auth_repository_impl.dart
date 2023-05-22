@@ -123,8 +123,8 @@ class AuthRepositoryImpl extends AuthRepository {
         return true;
       }
       return false;
-    } catch (_) {
-      return false;
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

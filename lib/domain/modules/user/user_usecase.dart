@@ -14,7 +14,7 @@ abstract class UserUseCase {
 
   Future<bool> updateAvatar(String? filePath);
 
-  Future<void> getSelf();
+  Future<UserEntity> getSelf();
 
   Future<UserEntity?> getSelfFromLocal();
 
@@ -43,7 +43,7 @@ class UserUseCaseImpl extends UserUseCase {
   }
 
   @override
-  Future<void> getSelf() async {
+  Future<UserEntity> getSelf() async {
     return await repo.getSelf();
   }
 

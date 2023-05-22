@@ -12,7 +12,7 @@ class ListFriendCall extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          final int itemIndex = index ~/ 2;
+          //final int itemIndex = index ~/ 2;
           if (index.isEven) {
             return ListTile(
                 title: const Text('Trần Đình Khôi'),

@@ -27,20 +27,23 @@ class RegisterAccountView extends StatelessWidget {
           context.read<SignUpPageViewCubit>().pageIndexChanged(1);
         }
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              AuthHeader(
-                  AppLocalizations.of(context)!.welcome,
-                  AppLocalizations.of(context)!
-                      .start_chatting_with_a_new_account,
-                  Theme.of(context).colorScheme.secondary),
-              const SignUpForm()
-            ],
+      child: GestureDetector(
+        onTap: () => AppScreenUtils.hideInputKeyboard(),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: Stack(
+              fit: StackFit.expand,
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                AuthHeader(
+                    AppLocalizations.of(context)!.welcome,
+                    AppLocalizations.of(context)!
+                        .start_chatting_with_a_new_account,
+                    Theme.of(context).colorScheme.secondary),
+                const SignUpForm()
+              ],
+            ),
           ),
         ),
       ),
