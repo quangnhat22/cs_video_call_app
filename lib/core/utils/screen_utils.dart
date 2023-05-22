@@ -7,4 +7,8 @@ class AppScreenUtils {
   static bool isLandscape() {
     return ScreenUtil().orientation == Orientation.landscape;
   }
+
+  static void hideInputKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 }

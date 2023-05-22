@@ -30,7 +30,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> checkIsLoggedIn() async {
     final isTokenLocalAvailable = await _authLocalDataSrc.checkTokenValid();
-    return isTokenLocalAvailable ? true : false;
+    return isTokenLocalAvailable;
   }
 
   @override
@@ -49,7 +49,10 @@ class AuthRepositoryImpl extends AuthRepository {
         if (res.statusCode == 200) {
           final data = res.data["data"];
           await _authLocalDataSrc.saveAuth(
-              data["access_token"]["token"], data["refresh_token"]["token"]);
+            data["access_token"]["token"],
+            data["refresh_token"]["token"],
+            false,
+          );
         }
       }
     } catch (e) {
@@ -80,7 +83,14 @@ class AuthRepositoryImpl extends AuthRepository {
     try {
       final deviceName = await DetectDeviceInfo.getDeviceName();
       final res = await _authService.register(email, password, deviceName);
-      if (res.statusCode == 200) {}
+      if (res.statusCode == 200) {
+        final data = res.data["data"];
+        await _authLocalDataSrc.saveAuth(
+          data["access_token"]["token"],
+          data["refresh_token"]["token"],
+          true,
+        );
+      }
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -98,5 +108,23 @@ class AuthRepositoryImpl extends AuthRepository {
 
   Future<String?> _getFCMToken() async {
     return await _notificationService.getFirebaseMessagingToken();
+  }
+
+  @override
+  Future<void> removeFlagSignUpNavigator() async {
+    return await _authLocalDataSrc.setFlagKeepUnAuth(true);
+  }
+
+  @override
+  Future<bool> sendEmailVerify() async {
+    try {
+      final res = await _authService.sendVerifyEmail();
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

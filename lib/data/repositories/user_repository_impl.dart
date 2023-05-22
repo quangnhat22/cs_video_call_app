@@ -50,15 +50,20 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<void> getSelf() async {
+  Future<UserEntity> getSelf() async {
     try {
       final res = await _service.getSelf();
 
-      // save to local
       if (res.statusCode == 200) {
         final userInfo = UserModel.fromJson(res.data["data"]);
+
         _local.setUser(userInfo);
+
+        final userEntity = UserEntity.convertToUserEntity(userModel: userInfo);
+        return userEntity;
       }
+
+      return UserEntity.userEntityEmpty;
     } catch (e) {
       throw Exception(e.toString());
     }

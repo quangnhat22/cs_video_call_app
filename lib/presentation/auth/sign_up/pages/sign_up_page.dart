@@ -1,7 +1,12 @@
 part of sign_up;
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({
+    super.key,
+    this.initPageIndex = 0,
+  });
+
+  final int initPageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,8 @@ class SignUpPage extends StatelessWidget {
           create: (_) => getIt<SignUpFormCubit>(),
         ),
         BlocProvider(
-          create: (_) => getIt<SignUpPageViewCubit>(),
+          create: (_) =>
+              getIt<SignUpPageViewCubit>()..pageIndexChanged(initPageIndex),
         ),
       ],
       child: const SignUpContainer(),

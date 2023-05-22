@@ -15,7 +15,7 @@ class InputEmail extends StatelessWidget {
               {context.read<SignUpFormCubit>().emailChanged(email)},
           label: AppLocalizations.of(context)!.email_text_field_label,
           errorText: state.email.displayError != null
-              ? state.email.error.toString()
+              ? state.email.error?.message
               : null,
         );
       },

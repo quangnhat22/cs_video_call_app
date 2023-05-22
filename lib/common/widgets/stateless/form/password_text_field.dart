@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CPasswordTextField extends StatefulWidget {
   const CPasswordTextField({
@@ -43,7 +42,7 @@ class _CPasswordTextFieldState extends State<CPasswordTextField> {
               _passwordVisible ? Icons.visibility : Icons.visibility_off,
             ),
           ),
-          label: Text(AppLocalizations.of(context)!.password_text_field_label),
+          label: Text(widget.label),
           errorText: widget.errorText,
           border: const OutlineInputBorder(
             borderSide: BorderSide(width: 1),

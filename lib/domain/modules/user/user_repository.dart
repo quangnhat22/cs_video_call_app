@@ -10,7 +10,7 @@ abstract class UserRepository {
     String? bio,
   );
 
-  Future<void> getSelf();
+  Future<UserEntity> getSelf();
 
   Future<bool> updateAvatar(String? filePath);
 

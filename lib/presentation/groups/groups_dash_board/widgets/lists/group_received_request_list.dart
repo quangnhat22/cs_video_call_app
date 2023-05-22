@@ -74,6 +74,5 @@ class GroupReceivedRequestList extends StatelessWidget {
       },
       itemCount: 5,
     );
-    ;
   }
 }

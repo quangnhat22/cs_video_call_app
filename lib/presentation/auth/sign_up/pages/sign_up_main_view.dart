@@ -35,7 +35,7 @@ class _SignUpMainViewState extends State<SignUpMainView> {
         controller: _controller,
         children: const <Widget>[
           RegisterAccountView(),
-          VerifiedView(),
+          VerifyEmailPage(),
           SetUpProfilePage(),
           AvatarPage(),
         ],

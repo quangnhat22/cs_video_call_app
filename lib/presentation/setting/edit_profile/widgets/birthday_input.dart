@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -46,7 +48,7 @@ class _BirthdayInputState extends State<BirthdayInput> {
                   formattedDate; //set output date to TextField value.
             });
           } else {
-            print("Date is not selected");
+            log("Date is not selected");
           }
         },
       ),

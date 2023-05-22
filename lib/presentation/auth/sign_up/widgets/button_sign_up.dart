@@ -6,8 +6,7 @@ class ButtonSignUp extends StatelessWidget {
   });
 
   void _onTapSignUpBtn(BuildContext ctx) {
-    //ctx.read<SignUpFormCubit>().signUpFormSubmitted();
-    ctx.read<SignUpPageViewCubit>().pageIndexChanged(1);
+    ctx.read<SignUpFormCubit>().signUpFormSubmitted();
   }
 
   @override
@@ -23,8 +22,11 @@ class ButtonSignUp extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
                 AppLocalizations.of(context)!.sign_up_text_button,
-                () => _onTapSignUpBtn(context),
-                Theme.of(context).colorScheme.secondary,
+                    () => _onTapSignUpBtn(context),
+                Theme
+                    .of(context)
+                    .colorScheme
+                    .secondary,
               ),
             ),
           );
