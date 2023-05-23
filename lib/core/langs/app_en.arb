@@ -126,5 +126,7 @@
   },
   "i_dont_get_it": "I don't get it",
   "update_profile": "Update Profile",
-  "i_verified": "I verified"
+  "i_verified": "I verified",
+  "cant_update_profile" :"Can't update profile! Try again",
+  "update_profile_success" :"Update profile success"
 }

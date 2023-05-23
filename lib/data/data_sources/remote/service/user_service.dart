@@ -17,15 +17,15 @@ class UserService {
       DateTime? birthday,
       String? bio}) async {
     try {
-      return await _service.dio.patch(
+      return await _service.dio.put(
         "${BaseService.userPath}/self",
         data: {
           "name": name,
           "gender": gender?.toLowerCase(),
           "phone": phone,
-          "address": "123",
+          //"address": "123",
           "birthday": birthday?.toIso8601String(),
-          "bio": bio,
+          // "bio": bio,
           "avatar": avatar,
         },
       );

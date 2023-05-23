@@ -33,7 +33,6 @@ part 'widgets/button_sign_up.dart';
 part 'widgets/sign_up/form_sign_up.dart';
 part 'widgets/sign_up/input_confirm_password.dart';
 part 'widgets/sign_up/input_email.dart';
-part 'widgets/sign_up/input_full_name.dart';
 part 'widgets/sign_up/input_password.dart';
 part 'widgets/text_notice_sent_email.dart';
 part 'widgets/button_email_received.dart';
