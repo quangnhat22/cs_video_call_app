@@ -5,16 +5,25 @@ class AvatarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const AvatarView();
+  }
+}
+
+class AvatarView extends StatelessWidget {
+  const AvatarView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            const AuthHeader(
+            AuthHeader(
               'Add a photo',
               'Add a profile photo so your friends know it’s you!',
-              Color.fromRGBO(123, 106, 193, 1),
+              Theme.of(context).colorScheme.secondary,
             ),
             Positioned(
               left: 0,
@@ -46,16 +55,12 @@ class AvatarPage extends StatelessWidget {
                         height: 180,
                         child: AppAssets.emptyAssetAvatar,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: CustomElevatedButton('Choose a photo', () {},
-                            const Color.fromRGBO(123, 106, 193, 1)),
-                      ),
+                      const ButtonChooseAvatar(),
                       // Padding(
                       //   padding: const EdgeInsets.only(top: 14),
                       //   child: CustomOutlinedButton( buttonText: ,'Maybe later', () {},
                       //       const Color.fromRGBO(73, 57, 140, 1)),
-                      // )
+                      // ),
                     ],
                   ),
                 ),
