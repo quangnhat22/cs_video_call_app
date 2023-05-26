@@ -8,20 +8,8 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
   void handleForgotPassword() {
     Navigator.pushNamed(context, RouteName.forgotPasswordPage);
-  }
-
-  void handleLogin() {
-    if (_formKey.currentState!.validate()) {
-      /**
-       * Validate user account with controllers
-       */
-    }
   }
 
   @override
@@ -39,10 +27,9 @@ class _LoginFormState extends State<LoginForm> {
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
             child: Column(children: [
-              const EmailTextFormField(),
-              const PasswordTextFormField(),
+              const LoginInputEmail(),
+              const LoginInputPassword(),
               SizedBox(
                 width: double.infinity,
                 child: GestureDetector(
@@ -56,14 +43,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: CustomElevatedButton(
-                  AppLocalizations.of(context)!.sign_in_text_button,
-                  handleLogin,
-                  Theme.of(context).colorScheme.primary,
-                ),
-              ),
+              const LoginButton(),
               if (AppScreenUtils.isLandscape())
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 14),

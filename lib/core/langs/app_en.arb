@@ -128,5 +128,6 @@
   "update_profile": "Update Profile",
   "i_verified": "I verified",
   "cant_update_profile" :"Can't update profile! Try again",
-  "update_profile_success" :"Update profile success"
+  "update_profile_success" :"Update profile success",
+  "login_failed_message": "Login failed, please try again"
 }

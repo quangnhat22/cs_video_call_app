@@ -5,20 +5,45 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            AuthHeader(
-                AppLocalizations.of(context)!.welcome_back,
-                AppLocalizations.of(context)!
-                    .sign_in_your_account_to_see_your_chating,
-                Theme.of(context).colorScheme.primary),
-            const LoginForm()
-          ],
+    return BlocProvider(
+      create: (_) => getIt<LoginCubit>(),
+      child: const LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.statusSubmit == FormzSubmissionStatus.failure) {
+          SnackBarApp.showSnackBar(
+              context, 'Login failed', TypesSnackBar.error);
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: GestureDetector(
+          onTap: () {
+            AppScreenUtils.hideInputKeyboard();
+          },
+          child: SafeArea(
+            child: Stack(
+              fit: StackFit.expand,
+              alignment: AlignmentDirectional.bottomCenter,
+              children: [
+                AuthHeader(
+                    AppLocalizations.of(context)!.welcome_back,
+                    AppLocalizations.of(context)!
+                        .sign_in_your_account_to_see_your_chating,
+                    Theme.of(context).colorScheme.primary),
+                const LoginForm()
+              ],
+            ),
+          ),
         ),
       ),
     );
