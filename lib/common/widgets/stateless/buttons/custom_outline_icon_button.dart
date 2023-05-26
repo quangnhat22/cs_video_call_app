@@ -22,7 +22,7 @@ class CustomOutlineIconButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
       child: SizedBox(
-        width: widthBtn ?? 1.sw,
+        width: widthBtn ?? 0.8.sw,
         child: OutlinedButton.icon(
           onPressed: handleOnClickButton,
           icon: icon,

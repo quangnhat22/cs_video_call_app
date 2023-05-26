@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:videocall/core/routes/app_transition_animation.dart';
 import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/presentation/auth/avatar/avatar.dart';
+import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/call/call_demo/pages/call_pending_page.dart';
@@ -56,52 +58,29 @@ class AppRoutes {
     log(settings.name.toString());
     switch (settings.name) {
       case RouteName.dashboard:
-        return _buildRoute(
-          settings,
-          const DashboardPage(),
-        );
+        return _buildRoute(settings, const DashboardPage());
       case RouteName.friends:
-        return _buildRoute(
-          settings,
-          const FriendsDashBoardPage(),
-        );
+        return _buildRoute(settings, const FriendsDashBoardPage());
       case RouteName.findFriend:
-        return _buildRoute(
-          settings,
-          const FindNewFriendPage(),
-        );
+        return _buildRoute(settings, const FindNewFriendPage());
       case RouteName.friendInfo:
-        return _buildRoute(
-          settings,
-          FriendsInfoPage(
-            userInfo: settings.arguments as UserEntity,
-          ),
-        );
+        return _buildRoute(settings,
+            FriendsInfoPage(userInfo: settings.arguments as UserEntity));
       case RouteName.groups:
-        return _buildRoute(
-          settings,
-          const GroupsDashBoardPage(),
-        );
+        return _buildRoute(settings, const GroupsDashBoardPage());
       case RouteName.schedules:
-        return _buildRoute(
-          settings,
-          ScheduleDashBoardPage(),
-        );
+        return _buildRoute(settings, ScheduleDashBoardPage());
       case RouteName.notifications:
-        return _buildRoute(
-          settings,
-          const NotificationsDashBoardPage(),
-        );
+        return _buildRoute(settings, const NotificationsDashBoardPage());
       case RouteName.settings:
-        return _buildRoute(
-          settings,
-          const SettingDashBoardPage(),
-        );
+        return _buildRoute(settings, const SettingDashBoardPage());
+      case RouteName.emailVerify:
+        return _buildAnimationRoute(
+            settings, VerifyEmailPage(email: settings.arguments as String?));
+      case RouteName.updateAvatar:
+        return _buildAnimationRoute(settings, const AvatarPage());
       case RouteName.editProfile:
-        return _buildRoute(
-          settings,
-          const EditProfilePage(),
-        );
+        return _buildAnimationRoute(settings, const EditProfilePage());
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
@@ -127,14 +106,14 @@ class AppRoutes {
     );
   }
 
-  // static MaterialPageRoute _buildRouteDialog(
-  //     RouteSettings settings, Widget builder) {
-  //   return MaterialPageRoute(
-  //     settings: settings,
-  //     fullscreenDialog: true,
-  //     builder: (BuildContext context) => builder,
-  //   );
-  // }
+  static MaterialPageRoute _buildRouteDialog(
+      RouteSettings settings, Widget builder) {
+    return MaterialPageRoute(
+      settings: settings,
+      fullscreenDialog: true,
+      builder: (BuildContext context) => builder,
+    );
+  }
 
   static Route _errorRoute() {
     return MaterialPageRoute(
