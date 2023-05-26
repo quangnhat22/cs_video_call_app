@@ -72,9 +72,23 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> loginWithEmailAndPassword(String email, String password) {
-    // TODO: implement loginWithEmailAndPassword
-    throw UnimplementedError();
+  Future<void> loginWithEmailAndPassword(String email, String password) async {
+    try {
+      final deviceName = await DetectDeviceInfo.getDeviceName();
+      final fcmToken = await _getFCMToken();
+
+      final res =
+          await _authService.login(email, password, deviceName, fcmToken);
+
+      if (res.statusCode == 200) {
+        final data = res.data["data"];
+
+        await _authLocalDataSrc.saveAuth(
+            data["access_token"]["token"], data["refresh_token"]["token"]);
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

@@ -4,7 +4,7 @@ class ButtonDone extends StatelessWidget {
   const ButtonDone({super.key});
 
   void _onDoneUpdateAvatar(BuildContext ctx) {
-    ctx.read<AvatarCubit>().finishUpdateAvatar();
+    //ctx.read<AvatarCubit>().finishUpdateAvatar();
   }
 
   @override

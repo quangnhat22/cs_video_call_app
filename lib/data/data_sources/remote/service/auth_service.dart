@@ -56,13 +56,17 @@ class AuthService {
     String email,
     String password,
     String deviceName,
+    String? fcmToken,
   ) async {
     try {
       return await _service.dio.post(
         "${BaseService.authPath}/login",
         data: {
           "data": {"email": email, "password": password},
-          "device": {"name": deviceName},
+          "device": {
+            "name": deviceName,
+            "push_notification_token": fcmToken,
+          },
         },
       );
     } on DioError catch (e) {
