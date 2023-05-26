@@ -1,30 +1,44 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
+import 'package:videocall/domain/modules/auth/auth_usecase.dart';
 
 part 'send_email_state.dart';
 part 'send_email_cubit.freezed.dart';
 
 @Injectable()
 class SendEmailCubit extends Cubit<SendEmailState> {
-  SendEmailCubit({required AuthRepository authRepo})
-      : _authRepo = authRepo,
+  SendEmailCubit({
+    required AuthUseCase authUseCase,
+  })  : _useCase = authUseCase,
         super(const SendEmailState.initial());
 
-  final AuthRepository _authRepo;
+  final AuthUseCase _useCase;
+
+  void pageInited(String? email) {
+    emit(state.copyWith(email: email));
+  }
 
   Future<void> sendEmail() async {
     try {
-      emit(const SendEmailInProgress());
-      final isSendEmailSuccess = await _authRepo.sendEmailVerify();
+      emit(SendEmailInProgress(email: state.email));
+      final isSendEmailSuccess = await _useCase.sendEmailVerify();
       if (isSendEmailSuccess) {
-        emit(const SendEmailSuccess());
+        emit(SendEmailSuccess(email: state.email));
         return;
       }
-      emit(const SendEmailFailure(message: "Sent fail"));
+      emit(SendEmailFailure(email: state.email, message: "Sent fail"));
     } catch (e) {
-      emit(SendEmailFailure(message: e.toString()));
+      emit(SendEmailFailure(email: state.email, message: e.toString()));
+    }
+  }
+
+  Future<void> checkEmailVerify() async {
+    final res = await _useCase.checkEmailVerify();
+    if (res) {
+      emit(SendEmailVerified(email: state.email));
+    } else {
+      emit(const SendEmailNotVerified());
     }
   }
 }
