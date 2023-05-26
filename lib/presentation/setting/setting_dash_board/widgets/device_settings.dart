@@ -25,7 +25,7 @@ class DeviceSettings extends StatelessWidget {
     return BlocBuilder<SettingCubit, SettingState>(
       builder: (context, state) {
         return state.maybeWhen(
-          initial: (theme, lang) {
+          initial: (_, __, ___, ____, theme, lang) {
             return Card(
               child: Column(
                 children: <Widget>[

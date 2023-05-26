@@ -26,29 +26,12 @@ class ButtonChooseAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AvatarCubit, AvatarState>(
-      builder: (context, state) {
-        if (state is UpdateAvatarLocalSuccess) {
-          return TextButton(
-            onPressed: () => _handleOnChangePhotoBtn(context),
-            child: Text(
-              "Choose a photo",
-              style: AppTextStyles.titleAppBarTextStyle.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-                fontSize: 16.sp,
-              ),
-            ),
-          );
-        } else {
-          return Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: CustomElevatedButton(
-                'Choose a photo',
-                () => _handleOnChangePhotoBtn(context),
-                Theme.of(context).colorScheme.secondary),
-          );
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.only(top: 40),
+      child: CustomElevatedButton(
+          'Choose a photo',
+          () => _handleOnChangePhotoBtn(context),
+          Theme.of(context).colorScheme.secondary),
     );
   }
 }
