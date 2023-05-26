@@ -10,4 +10,8 @@ class AvatarState with _$AvatarState {
 
   const factory AvatarState.updateAvatarFailure({required String message}) =
       UpdateAvatarFailure;
+
+  const factory AvatarState.updateAvatarLocalSuccess({
+    String? urlImage,
+  }) = UpdateAvatarLocalSuccess;
 }
