@@ -49,10 +49,9 @@ class AuthRepositoryImpl extends AuthRepository {
         if (res.statusCode == 200) {
           final data = res.data["data"];
           await _authLocalDataSrc.saveAuth(
-            data["access_token"]["token"],
-            data["refresh_token"]["token"],
-            false,
-          );
+              data["access_token"]["token"], data["refresh_token"]["token"]);
+
+          await _userRepo.getSelf();
         }
       }
     } catch (e) {
@@ -86,10 +85,7 @@ class AuthRepositoryImpl extends AuthRepository {
       if (res.statusCode == 200) {
         final data = res.data["data"];
         await _authLocalDataSrc.saveAuth(
-          data["access_token"]["token"],
-          data["refresh_token"]["token"],
-          true,
-        );
+            data["access_token"]["token"], data["refresh_token"]["token"]);
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -111,16 +107,24 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> removeFlagSignUpNavigator() async {
-    return await _authLocalDataSrc.setFlagKeepUnAuth(true);
-  }
-
-  @override
   Future<bool> sendEmailVerify() async {
     try {
       final res = await _authService.sendVerifyEmail();
       if (res.statusCode == 200) {
         return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> checkEmailVerify() async {
+    try {
+      final res = await _authService.checkEmailVerified();
+      if (res.statusCode == 200) {
+        return res.data["data"];
       }
       return false;
     } catch (e) {

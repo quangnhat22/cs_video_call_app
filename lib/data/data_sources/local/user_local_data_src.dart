@@ -48,6 +48,17 @@ class UserLocalDataSrc {
           bio: bio ?? currentUser.bio,
         );
         setUser(tempUser);
+      } else {
+        final newUser = UserModel(
+          id: "local-id",
+          name: name,
+          avatar: avatar,
+          phone: phone,
+          bio: bio,
+          birthday: birthday,
+          gender: gender,
+        );
+        setUser(newUser);
       }
     });
   }

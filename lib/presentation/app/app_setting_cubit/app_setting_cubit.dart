@@ -39,6 +39,7 @@ class AppSettingCubit extends Cubit<AppSettingState> {
 
     final themeMode = _convertToThemeMode(themeString);
     final locale = _convertToLocale(langString);
+
     emit(state.copyWith(theme: themeMode, locale: locale));
   }
 

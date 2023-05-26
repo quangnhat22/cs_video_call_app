@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum InputType { text, phoneNumber, multiline }
 
@@ -12,6 +11,8 @@ class CTextFormField extends StatelessWidget {
     this.onChange,
     this.errorText,
     this.type = InputType.text,
+    this.isReadOnly = false,
+    this.onTap,
   });
 
   final TextEditingController? controller;
@@ -20,13 +21,8 @@ class CTextFormField extends StatelessWidget {
   final InputType type;
   final Function(String)? onChange;
   final String? errorText;
-
-  String? validateValue(String? value, BuildContext context) {
-    if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context)!.please_enter_email;
-    }
-    return null;
-  }
+  final VoidCallback? onTap;
+  final bool isReadOnly;
 
   TextInputType _checkType() {
     switch (type) {
@@ -56,10 +52,15 @@ class CTextFormField extends StatelessWidget {
           label: Text(label),
           errorText: errorText,
           border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
+            borderSide: BorderSide(width: 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+          ),
         ),
         keyboardType: _checkType(),
+        readOnly: isReadOnly,
+        onTap: onTap,
       ),
     );
   }

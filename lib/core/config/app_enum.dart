@@ -6,6 +6,16 @@ enum AppGender {
 
   const AppGender(this.value);
 
+  static AppGender checkGenderEnum(String? value) {
+    if (value == AppGender.male.value.toLowerCase()) {
+      return AppGender.male;
+    } else if (value == AppGender.female.value.toLowerCase()) {
+      return AppGender.female;
+    } else {
+      return AppGender.others;
+    }
+  }
+
   final String value;
 }
 

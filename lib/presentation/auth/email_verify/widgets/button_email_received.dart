@@ -1,13 +1,9 @@
-part of sign_up;
+part of email_verify;
 
 class ButttonVerifyReceiveEmail extends StatelessWidget {
   const ButttonVerifyReceiveEmail({
     super.key,
   });
-
-  void _handleOnVerifiedBtn(BuildContext ctx) {
-    ctx.read<SignUpPageViewCubit>().pageIndexChanged(2);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +14,7 @@ class ButttonVerifyReceiveEmail extends StatelessWidget {
           success: () {
             return CustomElevatedButton(
               AppLocalizations.of(context)!.i_verified,
-              () => _handleOnVerifiedBtn(context),
+              () => {},
               Theme.of(context).colorScheme.secondary,
             );
           },

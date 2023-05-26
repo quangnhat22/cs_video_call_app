@@ -5,16 +5,28 @@ class AvatarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<AvatarCubit>(),
+      child: const AvatarView(),
+    );
+  }
+}
+
+class AvatarView extends StatelessWidget {
+  const AvatarView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            const AuthHeader(
+            AuthHeader(
               'Add a photo',
               'Add a profile photo so your friends know it’s you!',
-              Color.fromRGBO(123, 106, 193, 1),
+              Theme.of(context).colorScheme.secondary,
             ),
             Positioned(
               left: 0,
@@ -38,25 +50,26 @@ class AvatarPage extends StatelessWidget {
                         topRight: Radius.circular(20))),
                 child: Container(
                   margin: const EdgeInsets.only(top: 1),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        height: 180,
-                        child: AppAssets.emptyAssetAvatar,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
-                        child: CustomElevatedButton('Choose a photo', () {},
-                            const Color.fromRGBO(123, 106, 193, 1)),
-                      ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 14),
-                      //   child: CustomOutlinedButton( buttonText: ,'Maybe later', () {},
-                      //       const Color.fromRGBO(73, 57, 140, 1)),
-                      // )
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        const AvatarUser(),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        const ButtonChooseAvatar(),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        const ButtonDone(),
+                        //const ActionsAvatar(),
+                      ],
+                    ),
                   ),
                 ),
               ),

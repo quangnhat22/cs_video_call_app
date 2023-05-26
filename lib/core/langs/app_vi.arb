@@ -126,5 +126,7 @@
   },
   "i_dont_get_it": "Tôi chưa nhận được",
   "update_profile": "Cập nhật thông tin",
-  "i_verified": "Tôi xác nhận"
+  "i_verified": "Tôi xác nhận",
+  "cant_update_profile" :"Cập nhật thông tin không thành công! Vui lòng thử lại.",
+  "update_profile_success" :"Cập nhật thông tin thành công"
 }

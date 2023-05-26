@@ -1,13 +1,22 @@
 part of dash_board;
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  Widget build(BuildContext context) {
+    return const DashBoardView();
+  }
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class DashBoardView extends StatefulWidget {
+  const DashBoardView({super.key});
+
+  @override
+  State<DashBoardView> createState() => _DashBoardViewState();
+}
+
+class _DashBoardViewState extends State<DashBoardView> {
   int _currentTabIndex = 0;
 
   final List<Widget> _pages = <Widget>[

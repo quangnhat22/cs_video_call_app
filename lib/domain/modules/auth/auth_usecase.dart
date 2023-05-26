@@ -10,9 +10,11 @@ abstract class AuthUseCase {
 
   Future<bool> sendEmailVerify();
 
+  Future<bool> checkEmailVerify();
+
   Future<void> logOut();
 
-  Future<void> removeFlagSignUpNavigator();
+  Future<bool> checkIsLoggedIn();
 
   Stream<String?> checkAccessTokenStream();
 
@@ -56,12 +58,17 @@ class AuthUseCaeImpl extends AuthUseCase {
   }
 
   @override
-  Future<void> removeFlagSignUpNavigator() {
-    return repo.removeFlagSignUpNavigator();
+  Future<bool> sendEmailVerify() async {
+    return repo.sendEmailVerify();
   }
 
   @override
-  Future<bool> sendEmailVerify() async {
-    return repo.sendEmailVerify();
+  Future<bool> checkEmailVerify() async {
+    return repo.checkEmailVerify();
+  }
+
+  @override
+  Future<bool> checkIsLoggedIn() {
+    return repo.checkIsLoggedIn();
   }
 }
