@@ -155,8 +155,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i36.AuthUseCase>(
         () => _i36.AuthUseCaeImpl(repo: gh<_i34.AuthRepository>()));
-    gh.factory<_i37.AvatarCubit>(
-        () => _i37.AvatarCubit(userUc: gh<_i33.UserUseCase>()));
+    gh.factory<_i37.AvatarCubit>(() => _i37.AvatarCubit(
+          userUc: gh<_i33.UserUseCase>(),
+          authUC: gh<_i36.AuthUseCase>(),
+        ));
     gh.factory<_i38.FindFriendBloc>(
         () => _i38.FindFriendBloc(userRepo: gh<_i31.UserRepository>()));
     gh.factory<_i39.FriendRequestActionCubit>(() =>
@@ -181,10 +183,8 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i46.WelcomeCubit>(
         () => _i46.WelcomeCubit(authRepo: gh<_i34.AuthRepository>()));
-    gh.lazySingleton<_i47.AppBloc>(() => _i47.AppBloc(
-          authRepo: gh<_i34.AuthRepository>(),
-          notificationControllerController: gh<_i12.NotificationController>(),
-        ));
+    gh.lazySingleton<_i47.AppBloc>(
+        () => _i47.AppBloc(authUC: gh<_i36.AuthUseCase>()));
     return this;
   }
 }

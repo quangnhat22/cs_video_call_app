@@ -3,6 +3,10 @@ part of avatar;
 class ButtonDone extends StatelessWidget {
   const ButtonDone({super.key});
 
+  void _onDoneUpdateAvatar(BuildContext ctx) {
+    ctx.read<AvatarCubit>().finishUpdateAvatar();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AvatarCubit, AvatarState>(
@@ -11,7 +15,7 @@ class ButtonDone extends StatelessWidget {
             updateAvatarLocalSuccess: (_) {
               return CustomElevatedButton(
                 "Done",
-                () {},
+                () => _onDoneUpdateAvatar(context),
                 Theme.of(context).colorScheme.secondary,
               );
             },

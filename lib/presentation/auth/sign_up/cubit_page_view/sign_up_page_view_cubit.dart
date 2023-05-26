@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/domain/entities/user_entity.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 import 'package:videocall/domain/modules/user/user_repository.dart';
 
@@ -13,11 +12,9 @@ class SignUpPageViewCubit extends Cubit<SignUpPageViewState> {
   SignUpPageViewCubit(
       {required AuthRepository authRepo, required UserRepository userRepo})
       : _authRepo = authRepo,
-        _userRepo = userRepo,
         super(const SignUpPageViewState.initial());
 
   final AuthRepository _authRepo;
-  final UserRepository _userRepo;
 
   void pageIndexChanged(int index) {
     emit(state.copyWith(pageIndex: index));
@@ -34,7 +31,7 @@ class SignUpPageViewCubit extends Cubit<SignUpPageViewState> {
 
   @override
   Future<void> close() {
-    _authRepo.removeFlagSignUpNavigator();
+    _authRepo.setFlagKeepUnAuth(true);
     _authRepo.logOut();
     return super.close();
   }

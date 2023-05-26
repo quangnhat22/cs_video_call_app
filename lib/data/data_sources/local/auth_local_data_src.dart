@@ -64,15 +64,22 @@ class AuthLocalDataSrc {
     });
   }
 
-  Future<bool> getFlagKeepUnAuth() async {
-    return await _openBox().then((box) {
-      return box.get(_flagKeepUnAuth, defaultValue: true);
-    });
-  }
-
   Stream<String?> getRefreshTokenStream() async* {
     final box = await _openBox();
     yield* box.watch(key: _refreshTokenKeyName).map((event) {
+      return event.value;
+    });
+  }
+
+  Future<bool> getFlagKeepUnAuth() async {
+    return await _openBox().then((box) {
+      return box.get(_flagKeepUnAuth, defaultValue: false);
+    });
+  }
+
+  Stream<bool?> getFlagKeepUnAuthStream() async* {
+    final box = await _openBox();
+    yield* box.watch(key: _flagKeepUnAuth).map((event) {
       return event.value;
     });
   }

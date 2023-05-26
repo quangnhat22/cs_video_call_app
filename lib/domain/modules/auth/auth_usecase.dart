@@ -12,11 +12,15 @@ abstract class AuthUseCase {
 
   Future<void> logOut();
 
-  Future<void> removeFlagSignUpNavigator();
+  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth);
+
+  Future<bool> checkIsLoggedIn();
 
   Stream<String?> checkAccessTokenStream();
 
   Stream<String?> checkRefreshTokenStream();
+
+  Stream<bool?> checkFlagKeepUnAuthStream();
 }
 
 @Injectable(as: AuthUseCase)
@@ -56,12 +60,22 @@ class AuthUseCaeImpl extends AuthUseCase {
   }
 
   @override
-  Future<void> removeFlagSignUpNavigator() {
-    return repo.removeFlagSignUpNavigator();
+  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth) {
+    return repo.setFlagKeepUnAuth(isKeepUnAuth);
   }
 
   @override
   Future<bool> sendEmailVerify() async {
     return repo.sendEmailVerify();
+  }
+
+  @override
+  Stream<bool?> checkFlagKeepUnAuthStream() {
+    return repo.checkFlagKeepUnAuthStream();
+  }
+
+  @override
+  Future<bool> checkIsLoggedIn() {
+    return repo.checkIsLoggedIn();
   }
 }

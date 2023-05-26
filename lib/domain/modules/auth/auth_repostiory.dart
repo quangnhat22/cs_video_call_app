@@ -1,6 +1,4 @@
 abstract class AuthRepository {
-  Future<bool> checkIsLoggedIn();
-
   Future<void> loginWithGoogle();
 
   Future<void> loginWithEmailAndPassword(String email, String password);
@@ -9,11 +7,15 @@ abstract class AuthRepository {
 
   Future<void> logOut();
 
-  Future<void> removeFlagSignUpNavigator();
+  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth);
 
   Future<bool> sendEmailVerify();
+
+  Future<bool> checkIsLoggedIn();
 
   Stream<String?> checkAccessTokenStream();
 
   Stream<String?> checkRefreshTokenStream();
+
+  Stream<bool?> checkFlagKeepUnAuthStream();
 }

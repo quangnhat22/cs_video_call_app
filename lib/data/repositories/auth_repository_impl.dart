@@ -111,8 +111,8 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> removeFlagSignUpNavigator() async {
-    return await _authLocalDataSrc.setFlagKeepUnAuth(true);
+  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth) async {
+    return await _authLocalDataSrc.setFlagKeepUnAuth(isKeepUnAuth ?? false);
   }
 
   @override
@@ -126,5 +126,10 @@ class AuthRepositoryImpl extends AuthRepository {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  @override
+  Stream<bool?> checkFlagKeepUnAuthStream() {
+    return _authLocalDataSrc.getFlagKeepUnAuthStream();
   }
 }
