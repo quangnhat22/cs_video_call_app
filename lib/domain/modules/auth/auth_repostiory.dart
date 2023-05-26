@@ -7,15 +7,13 @@ abstract class AuthRepository {
 
   Future<void> logOut();
 
-  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth);
-
   Future<bool> sendEmailVerify();
+
+  Future<bool> checkEmailVerify();
 
   Future<bool> checkIsLoggedIn();
 
   Stream<String?> checkAccessTokenStream();
 
   Stream<String?> checkRefreshTokenStream();
-
-  Stream<bool?> checkFlagKeepUnAuthStream();
 }

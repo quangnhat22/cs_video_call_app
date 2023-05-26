@@ -17,7 +17,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthUseCase _useCase;
   late final StreamSubscription<String?> _accessTokenSubscription;
   late final StreamSubscription<String?> _refreshTokenSubscription;
-  late final StreamSubscription<bool?> _flagKeepUnAuthStream;
 
   AppBloc({required AuthUseCase authUC})
       : _useCase = authUC,
@@ -39,13 +38,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         add(AppUserChanged());
       },
     );
-
-    _flagKeepUnAuthStream = _useCase.checkFlagKeepUnAuthStream().listen(
-      (event) {
-        log(event.toString(), name: "eventKeepUnAuth");
-        add(AppUserChanged());
-      },
-    );
   }
 
   void _onAppStarted(AppStarted event, Emitter<AppState> emit) {
@@ -62,7 +54,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   Future<void> close() {
     _accessTokenSubscription.cancel();
     _refreshTokenSubscription.cancel();
-    _flagKeepUnAuthStream.cancel();
     return super.close();
   }
 }

@@ -49,10 +49,9 @@ class AuthRepositoryImpl extends AuthRepository {
         if (res.statusCode == 200) {
           final data = res.data["data"];
           await _authLocalDataSrc.saveAuth(
-            data["access_token"]["token"],
-            data["refresh_token"]["token"],
-            false,
-          );
+              data["access_token"]["token"], data["refresh_token"]["token"]);
+
+          await _userRepo.getSelf();
         }
       }
     } catch (e) {
@@ -86,10 +85,7 @@ class AuthRepositoryImpl extends AuthRepository {
       if (res.statusCode == 200) {
         final data = res.data["data"];
         await _authLocalDataSrc.saveAuth(
-          data["access_token"]["token"],
-          data["refresh_token"]["token"],
-          true,
-        );
+            data["access_token"]["token"], data["refresh_token"]["token"]);
       }
     } catch (e) {
       throw Exception(e.toString());
@@ -111,11 +107,6 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> setFlagKeepUnAuth(bool? isKeepUnAuth) async {
-    return await _authLocalDataSrc.setFlagKeepUnAuth(isKeepUnAuth ?? false);
-  }
-
-  @override
   Future<bool> sendEmailVerify() async {
     try {
       final res = await _authService.sendVerifyEmail();
@@ -129,7 +120,15 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Stream<bool?> checkFlagKeepUnAuthStream() {
-    return _authLocalDataSrc.getFlagKeepUnAuthStream();
+  Future<bool> checkEmailVerify() async {
+    try {
+      final res = await _authService.checkEmailVerified();
+      if (res.statusCode == 200) {
+        return res.data["data"];
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

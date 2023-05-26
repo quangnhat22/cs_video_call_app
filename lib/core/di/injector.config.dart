@@ -51,15 +51,13 @@ import 'package:videocall/domain/modules/user/user_repository.dart' as _i31;
 import 'package:videocall/domain/modules/user/user_usecase.dart' as _i33;
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart'
     as _i24;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i47;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i46;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
     as _i37;
+import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
+    as _i42;
 import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
     as _i41;
-import 'package:videocall/presentation/auth/sign_up/cubit_page_view/sign_up_page_view_cubit.dart'
-    as _i45;
-import 'package:videocall/presentation/auth/sign_up/cubit_send_email/send_email_cubit.dart'
-    as _i42;
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart'
     as _i44;
 import 'package:videocall/presentation/friends/find_new_friend/bloc/find_friend_bloc.dart'
@@ -83,7 +81,7 @@ import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
     as _i43;
 import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
-    as _i46;
+    as _i45;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -155,10 +153,8 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i36.AuthUseCase>(
         () => _i36.AuthUseCaeImpl(repo: gh<_i34.AuthRepository>()));
-    gh.factory<_i37.AvatarCubit>(() => _i37.AvatarCubit(
-          userUc: gh<_i33.UserUseCase>(),
-          authUC: gh<_i36.AuthUseCase>(),
-        ));
+    gh.factory<_i37.AvatarCubit>(
+        () => _i37.AvatarCubit(userUc: gh<_i33.UserUseCase>()));
     gh.factory<_i38.FindFriendBloc>(
         () => _i38.FindFriendBloc(userRepo: gh<_i31.UserRepository>()));
     gh.factory<_i39.FriendRequestActionCubit>(() =>
@@ -177,14 +173,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i44.SignUpFormCubit>(
         () => _i44.SignUpFormCubit(authRepo: gh<_i34.AuthRepository>()));
-    gh.factory<_i45.SignUpPageViewCubit>(() => _i45.SignUpPageViewCubit(
-          authRepo: gh<_i34.AuthRepository>(),
-          userRepo: gh<_i31.UserRepository>(),
-        ));
-    gh.factory<_i46.WelcomeCubit>(
-        () => _i46.WelcomeCubit(authRepo: gh<_i34.AuthRepository>()));
-    gh.lazySingleton<_i47.AppBloc>(
-        () => _i47.AppBloc(authUC: gh<_i36.AuthUseCase>()));
+    gh.factory<_i45.WelcomeCubit>(
+        () => _i45.WelcomeCubit(authRepo: gh<_i34.AuthRepository>()));
+    gh.lazySingleton<_i46.AppBloc>(
+        () => _i46.AppBloc(authUC: gh<_i36.AuthUseCase>()));
     return this;
   }
 }

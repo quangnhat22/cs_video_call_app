@@ -1,4 +1,4 @@
-part of sign_up;
+part of email_verify;
 
 class ButtonFloatBackToLogin extends StatelessWidget {
   const ButtonFloatBackToLogin({super.key});

@@ -103,4 +103,15 @@ class AuthService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> checkEmailVerified() async {
+    try {
+      return await _service.dio
+          .get("${BaseService.authPath}/is-email-verified");
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
