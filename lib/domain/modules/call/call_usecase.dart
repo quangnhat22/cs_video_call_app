@@ -2,8 +2,12 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/call/call_repository.dart';
 
+typedef StreamStateCallBack = void Function(MediaStream stream);
+
 abstract class CallUseCase {
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer);
+  StreamStateCallBack? onAddRemoteStream;
+
+  Future<String?> createRoom(RTCVideoRenderer remoteRenderer, String friendId);
 
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo);
 
@@ -21,11 +25,16 @@ abstract class CallUseCase {
 class CallUseCaseImpl extends CallUseCase {
   final CallRepository _repo;
 
-  CallUseCaseImpl({required CallRepository callRepo}) : _repo = callRepo;
+  @override
+  final StreamStateCallBack onAddRemoteStream;
+
+  CallUseCaseImpl(
+      {required CallRepository callRepo, required this.onAddRemoteStream})
+      : _repo = callRepo;
 
   @override
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer) {
-    return _repo.createRoom(remoteRenderer);
+  Future<String?> createRoom(RTCVideoRenderer remoteRenderer, String friendId) {
+    return _repo.createRoom(remoteRenderer, friendId);
   }
 
   @override

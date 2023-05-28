@@ -1,32 +1,49 @@
 import 'dart:ui';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/presentation/call/call_demo/cubit_call/call_cubit.dart';
+import 'package:videocall/presentation/call/call_demo/widgets/video_container.dart';
 
-import '../../../../common/widgets/statefull/count_up.dart';
 import '../../../../core/config/app_assets.dart';
 
-enum CallStatus { calling, accepted, ringing }
+class CallPendingPage extends StatelessWidget {
+  const CallPendingPage({
+    Key? key,
+    this.friendId,
+    this.receivedAction,
+  }) : super(key: key);
 
-class CallPendingPage extends StatefulWidget {
-  const CallPendingPage({Key? key, this.callStatus}) : super(key: key);
+  final ReceivedAction? receivedAction;
+  final String? friendId;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<CallCubit>()
+        ..pageStarted(friendId: friendId, receivedAction: receivedAction),
+      child: const CallPendingView(),
+    );
+  }
+}
+
+class CallPendingView extends StatefulWidget {
+  const CallPendingView({
+    Key? key,
+    this.callStatus,
+  }) : super(key: key);
 
   final CallStatus? callStatus;
 
   @override
-  State<CallPendingPage> createState() => _CallPendingPageState();
+  State<CallPendingView> createState() => _CallPendingViewState();
 }
 
-class _CallPendingPageState extends State<CallPendingPage> {
-  late CallStatus callStatus;
-
-  @override
-  void initState() {
-    callStatus = widget.callStatus ?? CallStatus.ringing;
-    super.initState();
-  }
-
+class _CallPendingViewState extends State<CallPendingView> {
   @override
   Widget build(BuildContext context) {
     List<IconData> bottomSheetIcons = [
@@ -37,7 +54,7 @@ class _CallPendingPageState extends State<CallPendingPage> {
       Icons.phone_outlined
     ];
 
-    Widget _getBody() {
+    Widget _getBody(CallStatus callStatus) {
       switch (callStatus) {
         case CallStatus.calling:
           return Center(
@@ -86,50 +103,51 @@ class _CallPendingPageState extends State<CallPendingPage> {
             ),
           );
         case CallStatus.accepted:
-          return Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 100,
-                ),
-                Column(
-                  children: [
-                    Container(
-                      width: 150,
-                      height: 150,
-                      //avatar
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AppAssets.emptyAvatar, fit: BoxFit.cover)),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const Text(
-                      "Nguyen Van A",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const CountUp(
-                      style: TextStyle(
-                        color: Colors.white,
-                        shadows: [
-                          BoxShadow(color: Colors.black, blurRadius: 3)
-                        ],
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+          // return Center(
+          //   child: Column(
+          //     children: [
+          //       const SizedBox(
+          //         height: 100,
+          //       ),
+          //       Column(
+          //         children: [
+          //           Container(
+          //             width: 150,
+          //             height: 150,
+          //             //avatar
+          //             decoration: const BoxDecoration(
+          //                 shape: BoxShape.circle,
+          //                 image: DecorationImage(
+          //                     image: AppAssets.emptyAvatar, fit: BoxFit.cover)),
+          //           ),
+          //           const SizedBox(
+          //             height: 16,
+          //           ),
+          //           const Text(
+          //             "Nguyen Van A",
+          //             style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontSize: 26,
+          //                 fontWeight: FontWeight.bold),
+          //           ),
+          //           const SizedBox(
+          //             height: 8,
+          //           ),
+          //           const CountUp(
+          //             style: TextStyle(
+          //               color: Colors.white,
+          //               shadows: [
+          //                 BoxShadow(color: Colors.black, blurRadius: 3)
+          //               ],
+          //               fontSize: 16,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // );
+          return const VideosContainer();
         case CallStatus.ringing:
           return Column(
             children: [
@@ -139,7 +157,7 @@ class _CallPendingPageState extends State<CallPendingPage> {
                   Container(
                     width: 150,
                     height: 150,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                             image: AppAssets.emptyAvatar, fit: BoxFit.cover)),
@@ -274,68 +292,74 @@ class _CallPendingPageState extends State<CallPendingPage> {
       }
     }
 
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Container(
-            width: 1.sw,
-            height: 1.sh,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AppAssets.emptyAvatar,
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.0),
+    return BlocBuilder<CallCubit, CallState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Stack(
+            children: <Widget>[
+              Container(
+                width: 1.sw,
+                height: 1.sh,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AppAssets.emptyAvatar,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.0),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          _getBody(),
-          SlidingUpPanel(
-            panel: Container(
-              color: Colors.black87,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                    bottomSheetIcons.length,
-                    (index) => Icon(
-                          bottomSheetIcons[index],
-                          color: index == 4 ? Colors.redAccent : Colors.white,
-                        )),
-              ),
-            ),
-            minHeight: 90,
-            maxHeight: 200,
-            collapsed: Container(
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.only(
+              _getBody(state.callStatus),
+              SlidingUpPanel(
+                panel: Container(
+                  color: Colors.black87,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                        bottomSheetIcons.length,
+                        (index) => Icon(
+                              bottomSheetIcons[index],
+                              color:
+                                  index == 4 ? Colors.redAccent : Colors.white,
+                            )),
+                  ),
+                ),
+                minHeight: 90,
+                maxHeight: 200,
+                collapsed: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                        bottomSheetIcons.length,
+                        (index) => Icon(
+                              bottomSheetIcons[index],
+                              color:
+                                  index == 4 ? Colors.redAccent : Colors.white,
+                            )),
+                  ),
+                ),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(12.0),
                   topRight: Radius.circular(12.0),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                    bottomSheetIcons.length,
-                    (index) => Icon(
-                          bottomSheetIcons[index],
-                          color: index == 4 ? Colors.redAccent : Colors.white,
-                        )),
-              ),
-            ),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12.0),
-              topRight: Radius.circular(12.0),
-            ),
-          )
-        ],
-      ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

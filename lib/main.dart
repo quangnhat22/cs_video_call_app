@@ -15,7 +15,7 @@ import 'app_bloc_observer.dart';
 import 'core/config/firebase_options.dart';
 import 'core/services/notification_service.dart';
 
-const _useEmulator = true;
+const _useEmulator = false;
 
 void main() async {
   await _initialize();

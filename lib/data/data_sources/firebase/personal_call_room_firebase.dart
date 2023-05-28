@@ -28,7 +28,7 @@ class PersonalCallRoomFirebase {
     _senderCandidateCollection =
         _roomRef.collection(TypeCandidate.senderCandidate.value);
     _receiverCandidateCollection =
-        _roomRef.collection(TypeCandidate.senderCandidate.value);
+        _roomRef.collection(TypeCandidate.receiverCandidate.value);
     return _roomRef.id;
   }
 

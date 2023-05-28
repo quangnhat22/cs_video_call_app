@@ -15,7 +15,9 @@ class ListFriendItem extends StatelessWidget {
   final String? avatar;
 
   void _handleOnTapCallBtn() {
-    NavigationUtil.pushNamed(routeName: RouteName.callPending);
+    NavigationUtil.pushNamed(routeName: RouteName.callPending, args: {
+      "friend-id": id,
+    });
   }
 
   @override

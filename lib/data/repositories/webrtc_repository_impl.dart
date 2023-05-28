@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/firebase/personal_call_room_firebase.dart';
+import 'package:videocall/data/data_sources/remote/service/call_serivce.dart';
 import 'package:videocall/domain/modules/call/call_repository.dart';
 
 typedef StreamStateCallBack = void Function(MediaStream stream);
@@ -12,9 +13,12 @@ typedef StreamStateCallBack = void Function(MediaStream stream);
 @Injectable(as: CallRepository)
 class WebRTCRepositoryImpl extends CallRepository {
   final PersonalCallRoomFirebase _personalCallRoomFB;
+  final CallService _callService;
 
-  WebRTCRepositoryImpl({required PersonalCallRoomFirebase callRoomFirebase})
-      : _personalCallRoomFB = callRoomFirebase;
+  WebRTCRepositoryImpl({required PersonalCallRoomFirebase callRoomFirebase,
+    required CallService callService})
+      : _personalCallRoomFB = callRoomFirebase,
+        _callService = callService;
 
   Map<String, dynamic> configuration = {
     'iceServers': [
@@ -32,12 +36,13 @@ class WebRTCRepositoryImpl extends CallRepository {
   MediaStream? _remoteStream;
   String? _roomId;
 
-  //String? _currentRoomText;
-  StreamStateCallBack? _onAddRemoteStream;
 
   @override
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer) async {
+  Future<String?> createRoom(RTCVideoRenderer remoteRenderer,
+      String friendId) async {
     _roomId = _personalCallRoomFB.createChatRoom(null);
+    if (_roomId == null) return null;
+    _callService.createNewCall(friendId, _roomId!);
 
     log(
       'New room created with SDL offer, Room ID: $_roomId',
@@ -105,11 +110,11 @@ class WebRTCRepositoryImpl extends CallRepository {
     _personalCallRoomFB
         .getCandidatesStream(TypeCandidate.receiverCandidate)
         .listen(
-      (snapshot) {
+          (snapshot) {
         for (var change in snapshot.docChanges) {
           if (change.type == DocumentChangeType.added) {
             Map<String, dynamic> data =
-                change.doc.data() as Map<String, dynamic>;
+            change.doc.data() as Map<String, dynamic>;
             log('Got new remote ICE candidate: ${jsonEncode(data)}');
             _peerConnection!.addCandidate(
               RTCIceCandidate(
@@ -175,6 +180,8 @@ class WebRTCRepositoryImpl extends CallRepository {
 
       await _peerConnection!.setLocalDescription(answer);
 
+      await _personalCallRoomFB.setAnswer(answer);
+
       _personalCallRoomFB
           .getCandidatesStream(TypeCandidate.senderCandidate)
           .listen((snapshot) {
@@ -195,17 +202,20 @@ class WebRTCRepositoryImpl extends CallRepository {
   }
 
   @override
-  Future<void> openUserMedia(
-      RTCVideoRenderer localVideo, RTCVideoRenderer remoteVideo) async {
-    final stream = await navigator.mediaDevices.getUserMedia({
-      'video': true,
-      'audio': true,
-    });
+  Future<void> openUserMedia(RTCVideoRenderer localVideo,
+      RTCVideoRenderer remoteVideo) async {
+    try {
+      var stream = await navigator.mediaDevices.getUserMedia({
+        'video': true,
+        'audio': true,
+      });
+      _localStream = stream;
+      localVideo.srcObject = stream;
 
-    localVideo.srcObject = stream;
-    _localStream = stream;
-
-    remoteVideo.srcObject = await createLocalMediaStream('key');
+      remoteVideo.srcObject = await createLocalMediaStream('key');
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
@@ -234,8 +244,8 @@ class WebRTCRepositoryImpl extends CallRepository {
       await roomRef.delete();
     }
 
-    _localStream!.dispose();
-    _remoteStream!.dispose();
+    _localStream?.dispose();
+    _remoteStream?.dispose();
   }
 
   void _registerPeerConnectionListeners() {
@@ -257,7 +267,7 @@ class WebRTCRepositoryImpl extends CallRepository {
 
     _peerConnection?.onAddStream = (MediaStream stream) {
       log("Add remote stream");
-      _onAddRemoteStream?.call(stream);
+      super.onAddRemoteStream?.call(stream);
       _remoteStream = stream;
     };
   }
