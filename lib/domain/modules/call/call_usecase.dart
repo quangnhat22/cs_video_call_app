@@ -8,9 +8,13 @@ abstract class CallUseCase {
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo);
 
   Future<void> openUserMedia(
-      RTCVideoRenderer localVideo, RTCVideoRenderer remoteVideo);
+    RTCVideoRenderer localVideo,
+    RTCVideoRenderer remoteVideo,
+  );
 
   Future<void> hangUp(RTCVideoRenderer localVideo);
+
+  Future<void> closeRoom();
 }
 
 @Injectable(as: CallUseCase)
@@ -38,5 +42,11 @@ class CallUseCaseImpl extends CallUseCase {
   Future<void> openUserMedia(
       RTCVideoRenderer localVideo, RTCVideoRenderer remoteVideo) {
     return _repo.openUserMedia(localVideo, remoteVideo);
+  }
+
+  @override
+  Future<void> closeRoom() {
+    // TODO: implement closeRoom
+    throw UnimplementedError();
   }
 }

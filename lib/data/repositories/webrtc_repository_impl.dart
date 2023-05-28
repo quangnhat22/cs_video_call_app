@@ -4,12 +4,18 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/data/data_sources/firebase/personal_call_room_firebase.dart';
 import 'package:videocall/domain/modules/call/call_repository.dart';
 
 typedef StreamStateCallBack = void Function(MediaStream stream);
 
 @Injectable(as: CallRepository)
 class WebRTCRepositoryImpl extends CallRepository {
+  final PersonalCallRoomFirebase _personalCallRoomFB;
+
+  WebRTCRepositoryImpl({required PersonalCallRoomFirebase callRoomFirebase})
+      : _personalCallRoomFB = callRoomFirebase;
+
   Map<String, dynamic> configuration = {
     'iceServers': [
       {
@@ -31,12 +37,17 @@ class WebRTCRepositoryImpl extends CallRepository {
 
   @override
   Future<String?> createRoom(RTCVideoRenderer remoteRenderer) async {
-    //from cloud firestore
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentReference roomRef = db.collection('rooms').doc();
+    _roomId = _personalCallRoomFB.createChatRoom(null);
 
-    log('Create PeerConnection with configuration: $configuration',
-        name: "WebRTC - configuration peer connection");
+    log(
+      'New room created with SDL offer, Room ID: $_roomId',
+      name: "WebRTC - room id",
+    );
+
+    log(
+      'Create PeerConnection with configuration: $configuration',
+      name: "WebRTC - configuration peer connection",
+    );
 
     _peerConnection = await createPeerConnection(configuration);
 
@@ -46,27 +57,23 @@ class WebRTCRepositoryImpl extends CallRepository {
       _peerConnection?.addTrack(track, _localStream!);
     });
 
-    //code for collecting ICE Candidates Below
-    final callerCandidatesCollection = roomRef.collection('callerCandidates');
-
+    //collect sender candidate and upload to firebase
     _peerConnection?.onIceCandidate = (RTCIceCandidate candidate) {
       log('Got candidate: ${candidate.toMap()}');
-      callerCandidatesCollection.add(candidate.toMap());
+      _personalCallRoomFB.addCandidate(
+          TypeCandidate.senderCandidate, candidate);
     };
-    //Finish code for collecting ICE Candidate
 
     //Add code for creating room
     RTCSessionDescription offer = await _peerConnection!.createOffer();
     await _peerConnection!.setLocalDescription(offer);
-    log("created offer: $offer", name: "WebRTC - Created Offer");
 
-    Map<String, dynamic> roomWithOffer = {'offer': offer.toMap()};
-    await roomRef.set(roomWithOffer);
+    log(
+      "created offer: $offer",
+      name: "WebRTC - Created Offer",
+    );
 
-    _roomId = roomRef.id;
-
-    log('New room created with SDL offer, Room ID: $_roomId',
-        name: "WebRTC - room id");
+    _personalCallRoomFB.setOffer(offer);
 
     _peerConnection?.onTrack = (RTCTrackEvent track) {
       log('Got remote track: ${track.streams[0]}',
@@ -79,11 +86,10 @@ class WebRTCRepositoryImpl extends CallRepository {
       });
     };
 
-    // Listening for remote session description below
-    roomRef.snapshots().listen((snapshot) async {
-      print('Got updated room: ${snapshot.data()}');
-
+    _personalCallRoomFB.getChatRoomStream().listen((snapshot) async {
+      log('Got updated room: ${snapshot.data()}');
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
       if (_peerConnection?.getRemoteDescription() != null &&
           data['answer'] != null) {
         final answer = RTCSessionDescription(
@@ -91,36 +97,40 @@ class WebRTCRepositoryImpl extends CallRepository {
           data['answer']['type'],
         );
 
-        print("Someone tried to connect");
+        log("Someone tried to connect");
         await _peerConnection?.setRemoteDescription(answer);
       }
     });
-    // Listening for remote session description above
 
-    // Listen for remote Ice candidates below
-    roomRef.collection('calleeCandidates').snapshots().listen((snapshot) {
-      snapshot.docChanges.forEach((change) {
-        if (change.type == DocumentChangeType.added) {
-          Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
-          log('Got new remote ICE candidate: ${jsonEncode(data)}');
-          _peerConnection!.addCandidate(
-            RTCIceCandidate(
-              data['candidate'],
-              data['sdpMid'],
-              data['sdpMLineIndex'],
-            ),
-          );
+    _personalCallRoomFB
+        .getCandidatesStream(TypeCandidate.receiverCandidate)
+        .listen(
+      (snapshot) {
+        for (var change in snapshot.docChanges) {
+          if (change.type == DocumentChangeType.added) {
+            Map<String, dynamic> data =
+                change.doc.data() as Map<String, dynamic>;
+            log('Got new remote ICE candidate: ${jsonEncode(data)}');
+            _peerConnection!.addCandidate(
+              RTCIceCandidate(
+                data['candidate'],
+                data['sdpMid'],
+                data['sdpMLineIndex'],
+              ),
+            );
+          }
         }
-      });
-    });
+      },
+    );
+
     return _roomId;
   }
 
   @override
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo) async {
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentReference roomRef = db.collection('rooms').doc(roomId);
-    final roomSnapshot = await roomRef.get();
+    _personalCallRoomFB.createChatRoom(roomId);
+
+    final roomSnapshot = await _personalCallRoomFB.roomRef.get();
     log('Got room ${roomSnapshot.exists}');
 
     if (roomSnapshot.exists) {
@@ -133,14 +143,14 @@ class WebRTCRepositoryImpl extends CallRepository {
       });
 
       // Code for collecting ICE candidates below
-      final calleeCandidatesCollection = roomRef.collection('calleeCandidates');
       _peerConnection!.onIceCandidate = (RTCIceCandidate candidate) {
         if (candidate == null) {
           log('onIceCandidate: complete!');
           return;
         }
         log('onIceCandidate: ${candidate.toMap()}');
-        calleeCandidatesCollection.add(candidate.toMap());
+        _personalCallRoomFB.addCandidate(
+            TypeCandidate.receiverCandidate, candidate);
       };
       // Code for collecting ICE candidate above
 
@@ -159,21 +169,16 @@ class WebRTCRepositoryImpl extends CallRepository {
       await _peerConnection?.setRemoteDescription(
         RTCSessionDescription(offer['sdp'], offer['type']),
       );
+
       var answer = await _peerConnection!.createAnswer();
-      print('Created Answer $answer');
+      log('Created Answer $answer', name: "answer");
 
       await _peerConnection!.setLocalDescription(answer);
 
-      Map<String, dynamic> roomWithAnswer = {
-        'answer': {'type': answer.type, 'sdp': answer.sdp}
-      };
-
-      await roomRef.update(roomWithAnswer);
-      // Finished creating SDP answer
-
-      // Listening for remote ICE candidates below
-      roomRef.collection('callerCandidates').snapshots().listen((snapshot) {
-        snapshot.docChanges.forEach((document) {
+      _personalCallRoomFB
+          .getCandidatesStream(TypeCandidate.senderCandidate)
+          .listen((snapshot) {
+        for (var document in snapshot.docChanges) {
           var data = document.doc.data() as Map<String, dynamic>;
           log(data.toString());
           log('Got new remote ICE candidate: $data');
@@ -184,7 +189,7 @@ class WebRTCRepositoryImpl extends CallRepository {
               data['sdpMLineIndex'],
             ),
           );
-        });
+        }
       });
     }
   }

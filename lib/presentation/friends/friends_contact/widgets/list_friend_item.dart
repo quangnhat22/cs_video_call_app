@@ -14,6 +14,10 @@ class ListFriendItem extends StatelessWidget {
   final String? email;
   final String? avatar;
 
+  void _handleOnTapCallBtn() {
+    NavigationUtil.pushNamed(routeName: RouteName.callPending);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -30,10 +34,7 @@ class ListFriendItem extends StatelessWidget {
           heightImage: 48,
         ),
         trailing: IconButton(
-            onPressed: () {
-              //TODO: don't push to Chat Room becasue app don't support this feature
-              //NavigationUtil.pushNamed(route: RouteName.chatRoom, args: id);
-            },
+            onPressed: () => _handleOnTapCallBtn(),
             icon: Icon(
               Icons.call_outlined,
               color: Theme.of(context).colorScheme.onTertiaryContainer,

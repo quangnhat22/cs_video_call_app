@@ -86,7 +86,7 @@ class AppRoutes {
       case RouteName.createSchedule:
         return _buildRoute(settings, const CreateSchedulePage());
       case RouteName.callPending:
-        return _buildRoute(settings, const CallPendingPage());
+        return _buildAnimationRoute(settings, const CallPendingPage());
       default:
         return _errorRoute();
     }
