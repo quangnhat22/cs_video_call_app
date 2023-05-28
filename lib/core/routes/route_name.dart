@@ -17,6 +17,8 @@ class RouteName {
   static const String notifications = '/notifications';
   static const String settings = '/setting';
   static const String editProfile = '/edit-profile';
+  static const String emailVerify = '/email-verify';
+  static const String updateAvatar = '/update-avatar';
   static const String teamDetails = '/team-details';
   static const String teamCallDetails = '/team-call-details';
   static const String createGroup = '/create-group';

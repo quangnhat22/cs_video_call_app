@@ -1,12 +1,16 @@
 part of email_verify;
 
 class VerifyEmailPage extends StatelessWidget {
-  const VerifyEmailPage({super.key});
+  const VerifyEmailPage({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<SendEmailCubit>()..sendEmail(),
+      create: (_) => getIt<SendEmailCubit>()
+        ..pageInited(email)
+        ..sendEmail(),
       child: const VerifiedView(),
     );
   }
@@ -20,12 +24,22 @@ class VerifiedView extends StatelessWidget {
     return BlocListener<SendEmailCubit, SendEmailState>(
       listener: (context, state) {
         state.whenOrNull(
-          success: () {
+          success: (_) {
             SnackBarApp.showSnackBar(
                 context, "Send email success", TypesSnackBar.success);
           },
-          failure: (message) {
+          failure: (_, message) {
             SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+          },
+          notVerified: (_) {
+            SnackBarApp.showSnackBar(
+              context,
+              "You didn't verify! Try again",
+              TypesSnackBar.warning,
+            );
+          },
+          verified: (_) {
+            NavigationUtil.pop(result: true);
           },
         );
       },
@@ -47,9 +61,7 @@ class VerifiedView extends StatelessWidget {
                         child: AppAssets.iconApp,
                       ),
                       const TextNoticeSentEmail(),
-                      SizedBox(
-                        height: AppScreenUtils.isLandscape() ? 80.h : 120.h,
-                      ),
+                      SizedBox(height: 80.h),
                       const ButtonResendEmail(),
                       const SizedBox(
                         height: 32,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   final String buttonText;
@@ -15,7 +16,7 @@ class CustomOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: 0.8.sw,
       child: OutlinedButton(
           onPressed: onPressed,
           style: ButtonStyle(

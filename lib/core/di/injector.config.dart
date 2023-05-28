@@ -185,9 +185,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i47.ProfileFormCubit>(
         () => _i47.ProfileFormCubit(userUC: gh<_i37.UserUseCase>()));
     gh.factory<_i48.SendEmailCubit>(
-        () => _i48.SendEmailCubit(authRepo: gh<_i38.AuthRepository>()));
+        () => _i48.SendEmailCubit(authUseCase: gh<_i40.AuthUseCase>()));
     gh.factory<_i49.SettingCubit>(() => _i49.SettingCubit(
           authUseCase: gh<_i40.AuthUseCase>(),
+          userUseCase: gh<_i37.UserUseCase>(),
           appSettingsUseCase: gh<_i18.AppSettingsUseCase>(),
         ));
     gh.factory<_i50.SignUpFormCubit>(
