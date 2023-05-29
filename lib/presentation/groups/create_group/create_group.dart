@@ -13,6 +13,8 @@ import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
+import 'package:videocall/domain/entities/user_entity.dart';
+import 'package:videocall/presentation/friends/friends_contact/bloc/friends_contact_bloc.dart';
 import 'package:videocall/presentation/groups/create_group/cubit/create_group_cubit.dart';
 
 part 'pages/create_group_page.dart';

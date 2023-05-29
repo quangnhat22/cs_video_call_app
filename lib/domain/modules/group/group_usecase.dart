@@ -4,7 +4,7 @@ import 'package:videocall/domain/modules/group/group_repository.dart';
 
 abstract class GroupUseCase {
   Future<void> createGroup(
-      String? groupName, String? groupImage, List<UserEntity> members);
+      String? groupName, String? groupImage, List<UserEntity?>? members);
 }
 
 @Injectable(as: GroupUseCase)
@@ -15,7 +15,7 @@ class GroupUseCaseImpl extends GroupUseCase {
 
   @override
   Future<void> createGroup(
-      String? groupName, String? groupImage, List<UserEntity> members) {
+      String? groupName, String? groupImage, List<UserEntity?>? members) {
     return _repo.createGroup(groupName, groupImage, members);
   }
 }

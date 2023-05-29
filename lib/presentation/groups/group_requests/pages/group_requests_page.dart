@@ -1,15 +1,15 @@
-part of groups_dash_board;
+part of group_requests;
 
 enum Request { sent, received }
 
-class GroupRequestsTab extends StatefulWidget {
-  const GroupRequestsTab({super.key});
+class GroupRequestsPage extends StatefulWidget {
+  const GroupRequestsPage({super.key});
 
   @override
-  State<GroupRequestsTab> createState() => _GroupRequestsTabState();
+  State<GroupRequestsPage> createState() => _GroupRequestsPageState();
 }
 
-class _GroupRequestsTabState extends State<GroupRequestsTab> {
+class _GroupRequestsPageState extends State<GroupRequestsPage> {
   Request view = Request.sent;
 
   void handleViewChange(Request selectedView) {

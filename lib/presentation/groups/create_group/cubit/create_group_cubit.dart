@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -20,11 +21,15 @@ class CreateGroupCubit extends Cubit<CreateGroupState> {
       final createGroupState = state as _Initial;
       if (!createGroupState.isValid) return;
 
+      debugPrint(createGroupState.members.toString());
+
       await _groupUseCase.createGroup(createGroupState.groupName,
           createGroupState.groupImage, createGroupState.members);
       emit(const CreateGroupState.sendCreateRequestSuccess());
     } catch (e) {
       emit(SentCreateRequestGroupFailure(message: e.toString()));
+    } finally {
+      emit(const _Initial());
     }
   }
 
@@ -42,5 +47,23 @@ class CreateGroupCubit extends Cubit<CreateGroupState> {
         groupName: groupName,
         isValid:
             createGroupState.groupImage.isNotEmpty && groupName.isNotEmpty));
+  }
+
+  void groupMembersChanged(UserEntity member) {
+    final createGroupState = state as _Initial;
+    final existingMember = createGroupState.members.firstWhere(
+      (item) => item?.id == member.id,
+      orElse: () => null,
+    );
+
+    final updatedMembers = [...createGroupState.members];
+
+    if (existingMember == null) {
+      updatedMembers.add(member);
+    } else {
+      updatedMembers.removeWhere((element) => element?.id == member.id);
+    }
+
+    emit(createGroupState.copyWith(members: updatedMembers));
   }
 }

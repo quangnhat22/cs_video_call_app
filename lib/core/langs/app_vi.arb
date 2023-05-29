@@ -129,5 +129,9 @@
   "i_verified": "Tôi xác nhận",
   "cant_update_profile" :"Cập nhật thông tin không thành công! Vui lòng thử lại.",
   "update_profile_success" :"Cập nhật thông tin thành công",
-  "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại"
+  "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại",
+  "no_friends_found": "Không tìm thấy bạn bè",
+  "unknown_name": "Tên không xác định",
+   "create_group_failed": "Tạo nhóm thất bại!!",
+  "create_group_successfully": "Tạo nhóm thành công!!"
 }

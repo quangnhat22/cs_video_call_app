@@ -62,12 +62,16 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         listener: (context, state) {
           if (state is SentCreateRequestGroupFailure) {
             SnackBarApp.showSnackBar(
-                context, 'Create group failed!!', TypesSnackBar.error);
+                context, state.message, TypesSnackBar.error);
           }
 
           if (state is SentCreateRequestGroupSuccess) {
             SnackBarApp.showSnackBar(
-                context, 'Create group successfully!!', TypesSnackBar.success);
+                context,
+                AppLocalizations.of(context)!.create_group_successfully,
+                TypesSnackBar.success);
+
+            NavigationUtil.pop();
           }
         },
         child: Scaffold(
@@ -101,8 +105,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 children: <Widget>[
                   const GroupSetPhoto(),
                   const GroupTextFieldName(),
-                  GroupAddMembers(selectedFriends, friendResults,
-                      handleSelectMembers, handleTextChange),
+                  GroupAddMembers(handleSelectMembers, handleTextChange),
                 ]),
           ),
         ),

@@ -5,7 +5,7 @@ class CreateGroupState with _$CreateGroupState {
   const factory CreateGroupState.initial(
       {@Default('') String groupName,
       @Default('') String groupImage,
-      @Default([]) List<UserEntity> members,
+      @Default([]) List<UserEntity?> members,
       @Default(false) bool isValid}) = _Initial;
   const factory CreateGroupState.sendCreateRequestSuccess() =
       SentCreateRequestGroupSuccess;
