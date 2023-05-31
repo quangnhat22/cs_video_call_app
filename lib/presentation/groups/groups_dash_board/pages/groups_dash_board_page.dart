@@ -49,7 +49,7 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
         ),
         body: TabBarView(
             controller: _tabController,
-            children: const <Widget>[YourGroupsTab(), GroupRequestsTab()]),
+            children: const <Widget>[GroupListPage(), GroupRequestsPage()]),
         floatingActionButton: FloatingActionStadiumButton(() {
           if (_tabController.index == 0) {
             NavigationUtil.pushNamed(routeName: RouteName.createGroup);

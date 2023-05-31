@@ -20,7 +20,7 @@ class ListRequestFriendReceive extends StatelessWidget {
     return (listReceiveRequest.isEmpty)
         ? const Padding(
             padding: EdgeInsets.all(32.0),
-            child: Text("No request now !"),
+            child: Text("No received requests found!"),
           )
         : ListView.builder(
             shrinkWrap: true,

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/domain/entities/user_entity.dart';
 
 import '../../domain/modules/group/group_repository.dart';
 import '../data_sources/remote/service/group_service.dart';
@@ -10,11 +12,15 @@ class GroupRepositoryImpl extends GroupRepository {
   final GroupService _service;
 
   @override
-  Future<void> createGroup(String? groupName, String? imageUrl) async {
+  Future<void> createGroup(
+      String? groupName, String? groupImage, List<UserEntity?>? members) async {
     try {
-      await _service.createGroup(groupName, imageUrl);
+      final listMemberModel = members?.map((member) => member!.id).toList();
+
+      await _service.createGroup(groupName, groupImage, listMemberModel);
     } catch (e) {
-      throw Exception(e);
+      debugPrint('here');
+      throw Exception(e.toString());
     }
   }
 }

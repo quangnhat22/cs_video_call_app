@@ -1,7 +1,7 @@
-part of groups_dash_board;
+part of group_list;
 
-class YourGroupsTab extends StatelessWidget {
-  const YourGroupsTab({super.key});
+class GroupListPage extends StatelessWidget {
+  const GroupListPage({super.key});
 
   void handleDropdownChange(String selectedValue) {
     debugPrint(selectedValue);

@@ -1,4 +1,4 @@
-part of groups_dash_board;
+part of group_requests;
 
 class GroupSentRequestList extends StatelessWidget {
   const GroupSentRequestList({super.key});
