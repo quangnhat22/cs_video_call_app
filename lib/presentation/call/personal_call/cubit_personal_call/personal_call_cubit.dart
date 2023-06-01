@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/call/call_usecase.dart';
 
 part 'personal_call_cubit.freezed.dart';
+
 part 'personal_call_state.dart';
 
 @Injectable()
@@ -31,10 +32,8 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
   String? friendId;
   ReceivedAction? receivedAction;
 
-  void pageStarted(
-    String? friendId,
-    ReceivedAction? receivedAction,
-  ) {
+  void pageStarted(String? friendId,
+      ReceivedAction? receivedAction,) {
     signalingStateSub = _callUC.signalingState.listen((st) {
       switch (st) {
         case RTCSignalingState.RTCSignalingStateStable:
@@ -59,23 +58,28 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
     this.friendId = friendId;
   }
 
+  Future<void> openUserMedia({
+    required RTCVideoRenderer local,
+    required RTCVideoRenderer remote,
+  }) async {
+    await _callUC.openUserMedia(local, remote);
+    emit(state.copyWith(status: CallStateStatus.preparing));
+    //  await setUpRoom();
+  }
+
+  void onCallStart() {
+    emit(state.copyWith(status: CallStateStatus.start));
+  }
+
   Future<void> setUpRoom() async {
     if (friendId != null) {
       await _callUC.createRoom(friendId!);
     }
     if (receivedAction != null) {
       final res =
-          jsonDecode(receivedAction!.payload?["notification"] as String);
+      jsonDecode(receivedAction!.payload?["notification"] as String);
       await _callUC.joinRoom(res["prep"]["name"]);
     }
-  }
-
-  Future<void> openUserMedia({
-    required RTCVideoRenderer local,
-    required RTCVideoRenderer remote,
-  }) async {
-    await _callUC.openUserMedia(local, remote);
-    await setUpRoom();
   }
 
   Future<void> hangUp({

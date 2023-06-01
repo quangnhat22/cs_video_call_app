@@ -4,8 +4,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_accepted.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_call_actions.dart';
-import 'package:videocall/presentation/call/personal_call/widgets/personal_calling.dart';
-import 'package:videocall/presentation/call/personal_call/widgets/personal_ringing.dart';
+import 'package:videocall/presentation/call/personal_call/widgets/personal_call_preparing.dart';
 
 class PersonalCallMainBody extends StatefulWidget {
   const PersonalCallMainBody({Key? key}) : super(key: key);
@@ -53,7 +52,12 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        BlocBuilder<PersonalCallCubit, PersonalCallState>(
+        BlocConsumer<PersonalCallCubit, PersonalCallState>(
+          listener: (context, state) {
+            if (state.status == CallStateStatus.start) {
+              context.read<PersonalCallCubit>().setUpRoom();
+            }
+          },
           builder: (context, state) {
             switch (state.status) {
               case CallStateStatus.initial:
@@ -64,14 +68,15 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
                     ),
                   );
                 }
+              case CallStateStatus.preparing:
+              case CallStateStatus.start:
               case CallStateStatus.calling:
                 {
-                  return const PersonalCalling();
+                  return PersonalCallPreparing(
+                    localRenderer: _localRenderer,
+                  );
                 }
-              case CallStateStatus.ringing:
-                {
-                  return const PersonalRinging();
-                }
+
               case CallStateStatus.accepted:
                 {
                   return PersonalAccepted(
