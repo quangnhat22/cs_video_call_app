@@ -2,11 +2,17 @@ import 'dart:ui';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:injectable/injectable.dart';
+import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_call_actions.dart';
+import 'package:videocall/presentation/call/personal_call/widgets/personal_call_main_body.dart';
 
 import '../../../../core/config/app_assets.dart';
 
+@Injectable()
 class PersonalCallPage extends StatelessWidget {
   const PersonalCallPage({
     Key? key,
@@ -19,7 +25,18 @@ class PersonalCallPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PersonalCallView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<PersonalCallCubit>()
+            ..pageStarted(
+              friendId,
+              receivedAction,
+            ),
+        ),
+      ],
+      child: const PersonalCallView(),
+    );
   }
 }
 
@@ -49,6 +66,7 @@ class PersonalCallView extends StatelessWidget {
               ),
             ),
           ),
+          const PersonalCallMainBody(),
           const PersonalCallActions(),
         ],
       ),

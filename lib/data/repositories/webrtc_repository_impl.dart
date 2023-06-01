@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
@@ -8,17 +9,27 @@ import 'package:videocall/data/data_sources/firebase/personal_call_room_firebase
 import 'package:videocall/data/data_sources/remote/service/call_serivce.dart';
 import 'package:videocall/domain/modules/call/call_repository.dart';
 
-typedef StreamStateCallBack = void Function(MediaStream stream);
-
 @Injectable(as: CallRepository)
 class WebRTCRepositoryImpl extends CallRepository {
   final PersonalCallRoomFirebase _personalCallRoomFB;
   final CallService _callService;
 
-  WebRTCRepositoryImpl({required PersonalCallRoomFirebase callRoomFirebase,
-    required CallService callService})
+  final StreamController<RTCPeerConnectionState> _connectionState;
+  final StreamController<MediaStream> _onAddRemoteMediaStream;
+  final StreamController<RTCSignalingState> _signalingState;
+  final StreamController<MediaStreamTrack> _remoteTrackStream;
+  final StreamController<MediaStreamTrack> _localTrackStream;
+
+  WebRTCRepositoryImpl(
+      {required PersonalCallRoomFirebase callRoomFirebase,
+      required CallService callService})
       : _personalCallRoomFB = callRoomFirebase,
-        _callService = callService;
+        _callService = callService,
+        _connectionState = StreamController(),
+        _onAddRemoteMediaStream = StreamController.broadcast(),
+        _signalingState = StreamController.broadcast(),
+        _remoteTrackStream = StreamController.broadcast(),
+        _localTrackStream = StreamController.broadcast();
 
   Map<String, dynamic> configuration = {
     'iceServers': [
@@ -36,23 +47,11 @@ class WebRTCRepositoryImpl extends CallRepository {
   MediaStream? _remoteStream;
   String? _roomId;
 
-
   @override
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer,
-      String friendId) async {
+  Future<String?> createRoom(String friendId) async {
     _roomId = _personalCallRoomFB.createChatRoom(null);
     if (_roomId == null) return null;
     _callService.createNewCall(friendId, _roomId!);
-
-    log(
-      'New room created with SDL offer, Room ID: $_roomId',
-      name: "WebRTC - room id",
-    );
-
-    log(
-      'Create PeerConnection with configuration: $configuration',
-      name: "WebRTC - configuration peer connection",
-    );
 
     _peerConnection = await createPeerConnection(configuration);
 
@@ -62,22 +61,15 @@ class WebRTCRepositoryImpl extends CallRepository {
       _peerConnection?.addTrack(track, _localStream!);
     });
 
-    //collect sender candidate and upload to firebase
     _peerConnection?.onIceCandidate = (RTCIceCandidate candidate) {
       log('Got candidate: ${candidate.toMap()}');
       _personalCallRoomFB.addCandidate(
           TypeCandidate.senderCandidate, candidate);
     };
 
-    //Add code for creating room
+    ///create offer
     RTCSessionDescription offer = await _peerConnection!.createOffer();
     await _peerConnection!.setLocalDescription(offer);
-
-    log(
-      "created offer: $offer",
-      name: "WebRTC - Created Offer",
-    );
-
     _personalCallRoomFB.setOffer(offer);
 
     _peerConnection?.onTrack = (RTCTrackEvent track) {
@@ -91,6 +83,7 @@ class WebRTCRepositoryImpl extends CallRepository {
       });
     };
 
+    /// listen for waiting a answer from firbase
     _personalCallRoomFB.getChatRoomStream().listen((snapshot) async {
       log('Got updated room: ${snapshot.data()}');
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
@@ -102,19 +95,19 @@ class WebRTCRepositoryImpl extends CallRepository {
           data['answer']['type'],
         );
 
-        log("Someone tried to connect");
         await _peerConnection?.setRemoteDescription(answer);
       }
     });
 
+    /// listen receiver candidate from firebase
     _personalCallRoomFB
         .getCandidatesStream(TypeCandidate.receiverCandidate)
         .listen(
-          (snapshot) {
+      (snapshot) {
         for (var change in snapshot.docChanges) {
           if (change.type == DocumentChangeType.added) {
             Map<String, dynamic> data =
-            change.doc.data() as Map<String, dynamic>;
+                change.doc.data() as Map<String, dynamic>;
             log('Got new remote ICE candidate: ${jsonEncode(data)}');
             _peerConnection!.addCandidate(
               RTCIceCandidate(
@@ -132,11 +125,10 @@ class WebRTCRepositoryImpl extends CallRepository {
   }
 
   @override
-  Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo) async {
+  Future<void> joinRoom(String roomId) async {
     _personalCallRoomFB.createChatRoom(roomId);
 
     final roomSnapshot = await _personalCallRoomFB.roomRef.get();
-    log('Got room ${roomSnapshot.exists}');
 
     if (roomSnapshot.exists) {
       _peerConnection = await createPeerConnection(configuration);
@@ -202,8 +194,8 @@ class WebRTCRepositoryImpl extends CallRepository {
   }
 
   @override
-  Future<void> openUserMedia(RTCVideoRenderer localVideo,
-      RTCVideoRenderer remoteVideo) async {
+  Future<void> openUserMedia(
+      RTCVideoRenderer localVideo, RTCVideoRenderer remoteVideo) async {
     try {
       var stream = await navigator.mediaDevices.getUserMedia({
         'video': true,
@@ -255,10 +247,12 @@ class WebRTCRepositoryImpl extends CallRepository {
 
     _peerConnection?.onConnectionState = (RTCPeerConnectionState state) {
       log('Connection state change: $state');
+      _connectionState.add(state);
     };
 
     _peerConnection?.onSignalingState = (RTCSignalingState state) {
       log('Signaling state change: $state');
+      _signalingState.add(state);
     };
 
     _peerConnection?.onIceGatheringState = (RTCIceGatheringState state) {
@@ -267,8 +261,37 @@ class WebRTCRepositoryImpl extends CallRepository {
 
     _peerConnection?.onAddStream = (MediaStream stream) {
       log("Add remote stream");
-      super.onAddRemoteStream?.call(stream);
+      _onAddRemoteMediaStream.add(stream);
       _remoteStream = stream;
     };
+
+    _remoteStream?.onAddTrack = (MediaStreamTrack mediaStreamTrack) {
+      _remoteTrackStream.add(mediaStreamTrack);
+    };
+    _remoteStream?.onRemoveTrack = (MediaStreamTrack mediaStreamTrack) {
+      _remoteTrackStream.add(mediaStreamTrack);
+    };
+    _localStream?.onRemoveTrack = (mediaStreamTrack) {
+      _localTrackStream.add(mediaStreamTrack);
+    };
+    _localStream?.onAddTrack = (mediaStreamTrack) {
+      _localTrackStream.add(mediaStreamTrack);
+    };
   }
+
+  @override
+  Stream<MediaStream> get addRemoteMediaStream =>
+      _onAddRemoteMediaStream.stream;
+
+  @override
+  Stream<RTCPeerConnectionState> get connectionState => _connectionState.stream;
+
+  @override
+  Stream<RTCSignalingState> get signalingState => _signalingState.stream;
+
+  @override
+  Stream<MediaStreamTrack> get localTrackStream => _localTrackStream.stream;
+
+  @override
+  Stream<MediaStreamTrack> get remoteTrackStream => _remoteTrackStream.stream;
 }
