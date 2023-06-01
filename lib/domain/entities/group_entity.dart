@@ -21,11 +21,6 @@ class GroupEntity {
     return GroupEntity(
       id: model.id,
       name: model.name,
-      members: model.members
-          ?.map((member) => UserEntity.convertToUserEntity(
-                userModel: member,
-              ))
-          .toList(),
     );
   }
 }

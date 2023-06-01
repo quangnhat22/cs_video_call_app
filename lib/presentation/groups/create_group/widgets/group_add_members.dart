@@ -22,7 +22,6 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
     );
     setState(() {
       if (existingMember == null) {
-        debugPrint(member.id);
         selectedFriends.add(member);
       } else {
         selectedFriends.removeWhere((element) => element?.id == member.id);
