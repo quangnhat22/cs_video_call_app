@@ -47,4 +47,23 @@ class UserEntity {
       relation: userModel.relation ?? "non",
     );
   }
+
+  static UserModel convertToUserModel({
+    UserEntity? userEntity,
+  }) {
+    if (userEntity == null) return UserModel(id: '-1');
+    return UserModel(
+      id: userEntity.id,
+      name: userEntity.name,
+      avatar: userEntity.avatar,
+      email: userEntity.email,
+      phone: userEntity.phone,
+      gender: userEntity.gender,
+      bio: userEntity.bio,
+      birthday: userEntity.birthday,
+      commonFriendCount: userEntity.commonFriendCount,
+      lastSeenAt: userEntity.lastSeenAt,
+      relation: userEntity.relation,
+    );
+  }
 }

@@ -15,7 +15,7 @@ class ListRequestFriendSend extends StatelessWidget {
     return listSentRequest.isEmpty
         ? const Padding(
             padding: EdgeInsets.all(32.0),
-            child: Text("You didn't send request!"),
+            child: Text("You didn't send any requests!"),
           )
         : ListView.builder(
             shrinkWrap: true,

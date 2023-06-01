@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:videocall/core/routes/app_transition_animation.dart';
 import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/core/services/notification_controller.dart';
 import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
@@ -86,7 +88,23 @@ class AppRoutes {
       case RouteName.createSchedule:
         return _buildRoute(settings, const CreateSchedulePage());
       case RouteName.callPending:
-        return _buildRoute(settings, const CallPendingPage());
+        {
+          final argument = settings.arguments as Map<String, dynamic>;
+          ReceivedAction? receivedAction = settings.arguments == null
+              ? NotificationController.initialCallAction
+              : argument["received-action"] as ReceivedAction?;
+
+          String? friendId = argument["friend-id"] as String?;
+
+          return _buildAnimationRoute(
+            settings,
+            CallPendingPage(
+              receivedAction: receivedAction,
+              friendId: friendId,
+            ),
+          );
+        }
+
       default:
         return _errorRoute();
     }

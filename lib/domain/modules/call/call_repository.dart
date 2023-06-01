@@ -1,7 +1,9 @@
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 abstract class CallRepository {
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer);
+  void Function(MediaStream stream)? onAddRemoteStream;
+
+  Future<String?> createRoom(RTCVideoRenderer remoteRenderer, String friendId);
 
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo);
 

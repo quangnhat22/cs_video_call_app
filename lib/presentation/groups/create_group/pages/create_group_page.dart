@@ -21,8 +21,6 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   final List<String> selectedFriends = [];
   late List<String> friendResults;
 
-  File? imageFile;
-
   @override
   void initState() {
     super.initState();
@@ -56,115 +54,61 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     }
   }
 
-  void _getFromGallery() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    _cropImage(pickedFile!.path);
-  }
-
-  void _getFromCamera() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    _cropImage(pickedFile!.path);
-  }
-
-  void _cropImage(filePath) async {
-    CroppedFile? croppedFile = await ImageCropper()
-        .cropImage(sourcePath: filePath, maxHeight: 1080, maxWidth: 1080);
-    if (croppedFile != null) {
-      setState(() {
-        imageFile = File(croppedFile.path);
-      });
-    }
-  }
-
-  void _showImageDialog() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              AppLocalizations.of(context)!.choose_image_source_dialog_title,
-              style: const TextStyle(fontSize: 20),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                InkWellDynamicBorder(
-                  title: AppLocalizations.of(context)!.camera_source_option,
-                  leading: const Icon(
-                    Icons.camera_alt,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _getFromCamera();
-                  },
-                ),
-                InkWellDynamicBorder(
-                  title: AppLocalizations.of(context)!.gallery_source_option,
-                  leading: const Icon(
-                    Icons.image,
-                    color: Colors.black,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    _getFromGallery();
-                  },
-                )
-              ],
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.create_group_app_bar_title),
-        centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        leading: IconButton(
-          onPressed: () {
+    return BlocProvider<CreateGroupCubit>(
+      create: (_) => getIt<CreateGroupCubit>(),
+      child: BlocListener<CreateGroupCubit, CreateGroupState>(
+        listener: (context, state) {
+          if (state is SentCreateRequestGroupFailure) {
+            SnackBarApp.showSnackBar(
+                context, state.message, TypesSnackBar.error);
+          }
+
+          if (state is SentCreateRequestGroupSuccess) {
+            SnackBarApp.showSnackBar(
+                context,
+                AppLocalizations.of(context)!.create_group_successfully,
+                TypesSnackBar.success);
+
             NavigationUtil.pop();
-          },
-          icon: const Icon(Icons.arrow_back),
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title:
+                Text(AppLocalizations.of(context)!.create_group_app_bar_title),
+            centerTitle: true,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            leading: IconButton(
+              onPressed: () {
+                NavigationUtil.pop();
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
+            actions: [
+              BlocBuilder<CreateGroupCubit, CreateGroupState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      context.read<CreateGroupCubit>().sendCreateGroupRequest();
+                    },
+                    icon: const Icon(Icons.done),
+                  );
+                },
+              )
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const GroupSetPhoto(),
+                  const GroupTextFieldName(),
+                  GroupAddMembers(handleSelectMembers, handleTextChange),
+                ]),
+          ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              debugPrint(selectedFriends.toString());
-            },
-            icon: const Icon(Icons.done),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              GroupSetPhoto(imageFile, _showImageDialog),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      label: Text(AppLocalizations.of(context)!.group_name)),
-                ),
-              ),
-              GroupAddMembers(selectedFriends, friendResults,
-                  handleSelectMembers, handleTextChange)
-            ]),
       ),
     );
   }

@@ -1,4 +1,4 @@
-part of groups_dash_board;
+part of group_list;
 
 class GroupList extends StatelessWidget {
   const GroupList({super.key});

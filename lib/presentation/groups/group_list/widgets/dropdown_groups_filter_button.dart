@@ -1,4 +1,4 @@
-part of groups_dash_board;
+part of group_list;
 
 const List<String> listItem = <String>['All', 'Incoming', 'Missed'];
 
