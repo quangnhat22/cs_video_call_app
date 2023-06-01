@@ -3,6 +3,19 @@ part of group_list;
 class GroupListPage extends StatelessWidget {
   const GroupListPage({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) =>
+          getIt<GroupListBloc>()..add(const GroupListEvent.started()),
+      child: const GroupListView(),
+    );
+  }
+}
+
+class GroupListView extends StatelessWidget {
+  const GroupListView({super.key});
+
   void handleDropdownChange(String selectedValue) {
     debugPrint(selectedValue);
   }
@@ -19,7 +32,7 @@ class GroupListPage extends StatelessWidget {
               children: [DropdownGroupsFilterButton(handleDropdownChange)],
             ),
           ),
-          const GroupList(),
+          const GroupList()
         ],
       ),
     );

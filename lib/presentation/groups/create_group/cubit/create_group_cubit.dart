@@ -21,8 +21,6 @@ class CreateGroupCubit extends Cubit<CreateGroupState> {
       final createGroupState = state as _Initial;
       if (!createGroupState.isValid) return;
 
-      debugPrint(createGroupState.members.toString());
-
       await _groupUseCase.createGroup(createGroupState.groupName,
           createGroupState.groupImage, createGroupState.members);
       emit(const CreateGroupState.sendCreateRequestSuccess());

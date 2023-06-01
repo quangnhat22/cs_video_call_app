@@ -56,17 +56,17 @@ import 'package:videocall/domain/modules/user/user_repository.dart' as _i35;
 import 'package:videocall/domain/modules/user/user_usecase.dart' as _i37;
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart'
     as _i25;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i52;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i53;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
     as _i41;
 import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
-    as _i48;
+    as _i49;
 import 'package:videocall/presentation/auth/login/cubit/login_cubit.dart'
-    as _i46;
-import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
     as _i47;
+import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
+    as _i48;
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart'
-    as _i50;
+    as _i51;
 import 'package:videocall/presentation/friends/find_new_friend/bloc/find_friend_bloc.dart'
     as _i43;
 import 'package:videocall/presentation/friends/find_new_friend/cubit/find_friend_form_cubit.dart'
@@ -83,14 +83,16 @@ import 'package:videocall/presentation/friends/friends_request/list_friend_reque
     as _i34;
 import 'package:videocall/presentation/groups/create_group/cubit/create_group_cubit.dart'
     as _i42;
+import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart'
+    as _i46;
 import 'package:videocall/presentation/setting/edit_language/cubit/edit_language_cubit.dart'
     as _i20;
 import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit.dart'
     as _i21;
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
-    as _i49;
+    as _i50;
 import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
-    as _i51;
+    as _i52;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -180,23 +182,25 @@ extension GetItInjectableX on _i1.GetIt {
           useCase: gh<_i29.FriendUseCase>(),
           userUseCase: gh<_i37.UserUseCase>(),
         ));
-    gh.factory<_i46.LoginCubit>(
-        () => _i46.LoginCubit(authUseCase: gh<_i40.AuthUseCase>()));
-    gh.factory<_i47.ProfileFormCubit>(
-        () => _i47.ProfileFormCubit(userUC: gh<_i37.UserUseCase>()));
-    gh.factory<_i48.SendEmailCubit>(
-        () => _i48.SendEmailCubit(authUseCase: gh<_i40.AuthUseCase>()));
-    gh.factory<_i49.SettingCubit>(() => _i49.SettingCubit(
+    gh.factory<_i46.GroupListBloc>(
+        () => _i46.GroupListBloc(useCase: gh<_i33.GroupUseCase>()));
+    gh.factory<_i47.LoginCubit>(
+        () => _i47.LoginCubit(authUseCase: gh<_i40.AuthUseCase>()));
+    gh.factory<_i48.ProfileFormCubit>(
+        () => _i48.ProfileFormCubit(userUC: gh<_i37.UserUseCase>()));
+    gh.factory<_i49.SendEmailCubit>(
+        () => _i49.SendEmailCubit(authUseCase: gh<_i40.AuthUseCase>()));
+    gh.factory<_i50.SettingCubit>(() => _i50.SettingCubit(
           authUseCase: gh<_i40.AuthUseCase>(),
           userUseCase: gh<_i37.UserUseCase>(),
           appSettingsUseCase: gh<_i18.AppSettingsUseCase>(),
         ));
-    gh.factory<_i50.SignUpFormCubit>(
-        () => _i50.SignUpFormCubit(authRepo: gh<_i38.AuthRepository>()));
-    gh.factory<_i51.WelcomeCubit>(
-        () => _i51.WelcomeCubit(authRepo: gh<_i38.AuthRepository>()));
-    gh.lazySingleton<_i52.AppBloc>(
-        () => _i52.AppBloc(authUC: gh<_i40.AuthUseCase>()));
+    gh.factory<_i51.SignUpFormCubit>(
+        () => _i51.SignUpFormCubit(authRepo: gh<_i38.AuthRepository>()));
+    gh.factory<_i52.WelcomeCubit>(
+        () => _i52.WelcomeCubit(authRepo: gh<_i38.AuthRepository>()));
+    gh.lazySingleton<_i53.AppBloc>(
+        () => _i53.AppBloc(authUC: gh<_i40.AuthUseCase>()));
     return this;
   }
 }
