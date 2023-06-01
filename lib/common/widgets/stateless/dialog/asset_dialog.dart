@@ -42,6 +42,5 @@ class AssetDialog extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

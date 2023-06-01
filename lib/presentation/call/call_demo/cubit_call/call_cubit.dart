@@ -9,7 +9,6 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/call/call_usecase.dart';
 
 part 'call_cubit.freezed.dart';
-
 part 'call_state.dart';
 
 @Injectable()
@@ -56,16 +55,16 @@ class CallCubit extends Cubit<CallState> {
     //     remoteRenderer: state.remoteRenderer,
     //   ));
     // });
-    _callUseCase.on
+    //_callUseCase.on
 
-    emit(state.copyWith(callStatus: CallStatus.accepted));
+    //emit(state.copyWith(callStatus: CallStatus.accepted));
   }
 
   @override
   Future<void> close() {
     _callUseCase.hangUp(state.localRenderer!);
-    state.localRenderer!.dispose();
-    state.remoteRenderer!.dispose();
+    // state.localRenderer!.dispose();
+    // state.remoteRenderer!.dispose();
     return super.close();
   }
 }
