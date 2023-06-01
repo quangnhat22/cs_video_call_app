@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +17,6 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
       : _callUC = callUC,
         super(const PersonalCallState.initial());
 
-  final CallUseCase _callUC;
-
   Stream<MediaStream> get addRemoteMediaStream => _callUC.addRemoteMediaStream;
 
   Stream<MediaStreamTrack> get localTrackStream => _callUC.localTrackStream;
@@ -27,9 +24,10 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
   Stream<MediaStreamTrack> get remoteTrackStream => _callUC.remoteTrackStream;
 
   late StreamSubscription<RTCSignalingState> signalingStateSub;
-  late StreamSubscription<RTCPeerConnectionState> conntectionStateSub;
+  late StreamSubscription<RTCPeerConnectionState> connectionStateSub;
   late StreamSubscription<MediaStream> addRemoteMediaStreamSub;
 
+  final CallUseCase _callUC;
   String? friendId;
   ReceivedAction? receivedAction;
 
@@ -50,9 +48,11 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
         case RTCSignalingState.RTCSignalingStateHaveLocalPrAnswer:
           emit(state.copyWith(status: CallStateStatus.calling));
           break;
+        case RTCSignalingState.RTCSignalingStateClosed:
+          break;
       }
     });
-    conntectionStateSub = _callUC.connectionState.listen((event) {});
+    connectionStateSub = _callUC.connectionState.listen((event) {});
     addRemoteMediaStreamSub = _callUC.addRemoteMediaStream.listen((event) {});
 
     this.receivedAction = receivedAction;
@@ -64,7 +64,6 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
       await _callUC.createRoom(friendId!);
     }
     if (receivedAction != null) {
-      log(receivedAction.toString());
       final res =
           jsonDecode(receivedAction!.payload?["notification"] as String);
       await _callUC.joinRoom(res["prep"]["name"]);
@@ -82,6 +81,8 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
   @override
   Future<void> close() {
     signalingStateSub.cancel();
+    connectionStateSub.cancel();
+    addRemoteMediaStreamSub.cancel();
     return super.close();
   }
 }
