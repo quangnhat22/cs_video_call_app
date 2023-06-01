@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
-import 'package:videocall/presentation/call/personal_call/widgets/personal_call_actions.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_call_main_body.dart';
 
 import '../../../../core/config/app_assets.dart';
@@ -67,7 +66,6 @@ class PersonalCallView extends StatelessWidget {
             ),
           ),
           const PersonalCallMainBody(),
-          const PersonalCallActions(),
         ],
       ),
     );

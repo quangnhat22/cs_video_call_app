@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_accepted.dart';
+import 'package:videocall/presentation/call/personal_call/widgets/personal_call_actions.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_calling.dart';
 import 'package:videocall/presentation/call/personal_call/widgets/personal_ringing.dart';
 
@@ -31,6 +32,7 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
         _remoteRenderer.srcObject = stream;
         setState(() {});
       });
+
       context.read<PersonalCallCubit>().localTrackStream.listen((event) {
         setState(() {});
       });
@@ -49,42 +51,59 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PersonalCallCubit, PersonalCallState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case CallStateStatus.initial:
-            {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+    return Stack(
+      children: <Widget>[
+        BlocBuilder<PersonalCallCubit, PersonalCallState>(
+          builder: (context, state) {
+            switch (state.status) {
+              case CallStateStatus.initial:
+                {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              case CallStateStatus.calling:
+                {
+                  return const PersonalCalling();
+                }
+              case CallStateStatus.ringing:
+                {
+                  return const PersonalRinging();
+                }
+              case CallStateStatus.accepted:
+                {
+                  return PersonalAccepted(
+                    localRenderer: _localRenderer,
+                    remoteRenderer: _remoteRenderer,
+                  );
+                }
+              default:
+                {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
             }
-          case CallStateStatus.calling:
-            {
-              return const PersonalCalling();
-            }
-          case CallStateStatus.ringing:
-            {
-              return const PersonalRinging();
-            }
-          case CallStateStatus.accepted:
-            {
-              return PersonalAccepted(
-                localRenderer: _localRenderer,
-                remoteRenderer: _remoteRenderer,
-              );
-            }
-          default:
-            {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-        }
-      },
+          },
+        ),
+        PersonalCallActions(
+          localRender: _localRenderer,
+          remoteRender: _remoteRenderer,
+        ),
+      ],
     );
+  }
+
+  @override
+  void dispose() {
+    //context.read<PersonalCallCubit>().hangUp(local: _localRenderer);
+    _localRenderer.dispose();
+    _remoteRenderer.dispose();
+
+    super.dispose();
   }
 }

@@ -78,6 +78,12 @@ class PersonalCallCubit extends Cubit<PersonalCallState> {
     await setUpRoom();
   }
 
+  Future<void> hangUp({
+    required RTCVideoRenderer local,
+  }) async {
+    await _callUC.hangUp(local);
+  }
+
   @override
   Future<void> close() {
     signalingStateSub.cancel();

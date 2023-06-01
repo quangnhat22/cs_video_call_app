@@ -1,7 +1,8 @@
 part of 'personal_call_cubit.dart';
 
 enum CallStateStatus {
-  initial,
+  initial, // page initial
+  preparing, //not call, just prepare
   calling,
   ringing,
   waiting,
