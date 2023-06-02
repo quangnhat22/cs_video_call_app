@@ -1,18 +1,55 @@
+import 'dart:developer';
+
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/common/widgets/stateless/buttons/float_action_button_video.dart';
+import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
 
 class PersonalCallActions extends StatelessWidget {
-  const PersonalCallActions({Key? key}) : super(key: key);
+  const PersonalCallActions(
+      {Key? key, required this.localRender, required this.remoteRender})
+      : super(key: key);
 
-  void _handleOnVideoCameraBtn(BuildContext ctx) {}
+  final RTCVideoRenderer localRender;
+  final RTCVideoRenderer remoteRender;
 
-  void _handleOnFlipCameraBtn(BuildContext ctx) {}
+  void _handleOnVideoCameraBtn(BuildContext ctx) {
+    _closeMedia(
+      "video",
+      (bool isTrackEnabled) {
+        //setState(() => {isCameraOpen = isTrackEnabled});
+      },
+    )();
+  }
 
-  void _handleOnCallEndBtn(BuildContext ctx) {}
+  void _handleOnFlipCameraBtn(BuildContext ctx) {
+    final track = localRender.srcObject?.getVideoTracks().first;
+    if (track != null) {
+      Helper.switchCamera(track);
+      // setState(() {
+      //   isCameraSwitched != isCameraSwitched;
+      // });
+    }
+  }
 
-  void _handleOnVolumeBtn(BuildContext ctx) {}
+  void _handleOnCallEndBtn(BuildContext ctx) {
+    ctx.read<PersonalCallCubit>().hangUp(local: localRender);
+  }
+
+  void _handleOnVolumeBtn(BuildContext ctx) {
+    final track = remoteRender.srcObject?.getAudioTracks().first;
+    if (track != null) {
+      track.enabled = !track.enabled;
+      log("Enable camera ${track.enabled}");
+      // setState(() {
+      //   isVolumeUp = track.enabled;
+      // });
+    }
+  }
 
   Widget _buildRowBtnActions(BuildContext ctx) {
     return Row(
@@ -62,5 +99,18 @@ class PersonalCallActions extends StatelessWidget {
         child: _buildRowBtnActions(context),
       ),
     );
+  }
+
+  Function _closeMedia(String kind, Function(bool) setStateTrack) {
+    return () async {
+      final track = localRender.srcObject
+          ?.getTracks()
+          .firstWhereOrNull((track) => track.kind == kind);
+      if (track != null) {
+        track.enabled = !track.enabled;
+        log("Enable camera ${track.enabled}");
+        setStateTrack(track.enabled);
+      }
+    };
   }
 }

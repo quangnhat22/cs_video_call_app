@@ -9,7 +9,7 @@ import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
-import 'package:videocall/presentation/call/call_demo/pages/call_pending_page.dart';
+import 'package:videocall/presentation/call/personal_call/page/personal_call_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
@@ -98,7 +98,7 @@ class AppRoutes {
 
           return _buildAnimationRoute(
             settings,
-            CallPendingPage(
+            PersonalCallPage(
               receivedAction: receivedAction,
               friendId: friendId,
             ),

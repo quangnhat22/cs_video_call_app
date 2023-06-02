@@ -39,13 +39,12 @@ class CallCubit extends Cubit<CallState> {
     ));
 
     if (friendId != null) {
-      _callUseCase.createRoom(state.remoteRenderer!, friendId);
+      //_callUseCase.createRoom(state.remoteRenderer!, friendId);
     }
 
     if (receivedAction != null) {
       log(receivedAction.toString());
       final res = jsonDecode(receivedAction.payload?["notification"] as String);
-      _callUseCase.joinRoom(res["prep"]["name"], state.remoteRenderer!);
     }
 
     // _callUseCase.setOnAddRemoteStream((stream) {

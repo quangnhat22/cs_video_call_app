@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/data/models/user_model.dart';
-import 'package:videocall/domain/entities/user_entity.dart';
 
 import '../base_servie.dart';
 
@@ -21,6 +19,16 @@ class GroupService {
       });
     } on DioError catch (e) {
       throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getGroupList() async {
+    try {
+      return await _service.dio.get(BaseService.groupPath);
+    } on DioError catch (e) {
+      throw Exception(e.message);
     } catch (e) {
       throw Exception(e.toString());
     }

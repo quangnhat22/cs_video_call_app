@@ -5,11 +5,9 @@ import 'package:videocall/domain/modules/call/call_repository.dart';
 typedef StreamStateCallBack = void Function(MediaStream stream);
 
 abstract class CallUseCase {
-  StreamStateCallBack? onAddRemoteStream;
+  Future<String?> createRoom(String friendId);
 
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer, String friendId);
-
-  Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo);
+  Future<void> joinRoom(String roomId);
 
   Future<void> openUserMedia(
     RTCVideoRenderer localVideo,
@@ -19,22 +17,27 @@ abstract class CallUseCase {
   Future<void> hangUp(RTCVideoRenderer localVideo);
 
   Future<void> closeRoom();
+
+  Stream<MediaStream> get addRemoteMediaStream;
+
+  Stream<RTCPeerConnectionState> get connectionState;
+
+  Stream<RTCSignalingState> get signalingState;
+
+  Stream<MediaStreamTrack> get localTrackStream;
+
+  Stream<MediaStreamTrack> get remoteTrackStream;
 }
 
 @Injectable(as: CallUseCase)
 class CallUseCaseImpl extends CallUseCase {
   final CallRepository _repo;
 
-  @override
-  final StreamStateCallBack onAddRemoteStream;
-
-  CallUseCaseImpl(
-      {required CallRepository callRepo, required this.onAddRemoteStream})
-      : _repo = callRepo;
+  CallUseCaseImpl({required CallRepository callRepo}) : _repo = callRepo;
 
   @override
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer, String friendId) {
-    return _repo.createRoom(remoteRenderer, friendId);
+  Future<String?> createRoom(String friendId) {
+    return _repo.createRoom(friendId);
   }
 
   @override
@@ -43,8 +46,8 @@ class CallUseCaseImpl extends CallUseCase {
   }
 
   @override
-  Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo) {
-    return _repo.joinRoom(roomId, remoteVideo);
+  Future<void> joinRoom(String roomId) {
+    return _repo.joinRoom(roomId);
   }
 
   @override
@@ -58,4 +61,19 @@ class CallUseCaseImpl extends CallUseCase {
     // TODO: implement closeRoom
     throw UnimplementedError();
   }
+
+  @override
+  Stream<MediaStream> get addRemoteMediaStream => _repo.addRemoteMediaStream;
+
+  @override
+  Stream<RTCPeerConnectionState> get connectionState => _repo.connectionState;
+
+  @override
+  Stream<RTCSignalingState> get signalingState => _repo.signalingState;
+
+  @override
+  Stream<MediaStreamTrack> get localTrackStream => _repo.localTrackStream;
+
+  @override
+  Stream<MediaStreamTrack> get remoteTrackStream => _repo.remoteTrackStream;
 }
