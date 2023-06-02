@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:videocall/core/di/injector.dart' as di;
+import 'package:videocall/core/utils/check_permission.dart';
 import 'package:videocall/data/models/user_model.dart';
 import 'package:videocall/presentation/app/app.dart';
 
@@ -25,6 +26,8 @@ void main() async {
 
 Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AppCheckPermission.checkPermissions();
+  
   Bloc.observer = AppObserver();
 
   await Firebase.initializeApp(
