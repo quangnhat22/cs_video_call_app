@@ -132,6 +132,13 @@
   "login_failed_message": "Login failed, please try again",
   "no_friends_found": "No friends found",
   "unknown_name": "Unknown name",
+  "unknown_group": "Unknown group",
   "create_group_failed": "Create group failed!!",
-  "create_group_successfully": "Create group successfully!!"
+  "create_group_successfully": "Create group successfully!!",
+  "no_received_requests_found": "No received requests found!",
+  "no_sent_requests_found": "No sent requests found!",
+  "sent_by": "Sent by",
+  "sent_to": "Sent to",
+  "at": "at",
+  "recall_message_alert": "Recall successfully"
 }

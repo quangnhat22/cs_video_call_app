@@ -132,6 +132,13 @@
   "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại",
   "no_friends_found": "Không tìm thấy bạn bè",
   "unknown_name": "Tên không xác định",
-   "create_group_failed": "Tạo nhóm thất bại!!",
-  "create_group_successfully": "Tạo nhóm thành công!!"
+  "unknown_group": "Nhóm không xác định",
+  "create_group_failed": "Tạo nhóm thất bại!!",
+  "create_group_successfully": "Tạo nhóm thành công!!",
+  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào!",
+  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào!",
+  "sent_by": "Gửi bởi",
+  "sent_to": "Gửi đến",
+  "at": "ngày",
+  "recall_message_alert": "Thu hồi thành công"
 }
