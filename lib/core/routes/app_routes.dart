@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/core/routes/app_transition_animation.dart';
 import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/services/notification_controller.dart';
@@ -9,6 +10,8 @@ import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
+import 'package:videocall/presentation/call/group_call/pages/group_call_page.dart';
+import 'package:videocall/presentation/call/group_call/pages/group_calling.dart';
 import 'package:videocall/presentation/call/personal_call/page/personal_call_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
@@ -87,7 +90,7 @@ class AppRoutes {
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
         return _buildRoute(settings, const CreateSchedulePage());
-      case RouteName.callPending:
+      case RouteName.personalCall:
         {
           final argument = settings.arguments as Map<String, dynamic>;
           ReceivedAction? receivedAction = settings.arguments == null
@@ -104,7 +107,29 @@ class AppRoutes {
             ),
           );
         }
+      case RouteName.createGroupCall:
+        {
+          // final argument = settings.arguments as Map<String, dynamic>;
+          //
+          // Room room = argument["room"] as Room;
 
+          return _buildAnimationRoute(settings, const GroupCallPage());
+        }
+      case RouteName.groupCall:
+        {
+          final argument = settings.arguments as Map<String, dynamic>;
+
+          Room room = argument["room"] as Room;
+          EventsListener<RoomEvent> listener =
+              argument["listen"] as EventsListener<RoomEvent>;
+
+          return _buildAnimationRoute(
+              settings,
+              GroupCalling(
+                room: room,
+                listener: listener,
+              ));
+        }
       default:
         return _errorRoute();
     }

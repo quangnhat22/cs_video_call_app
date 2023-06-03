@@ -15,37 +15,11 @@ class GroupList extends StatelessWidget {
             itemBuilder: ((context, index) {
               return state.maybeWhen(
                 success: (groups) {
-                  return groups.isEmpty
-                      ? const Center(
-                          child: Text("No groups found!"),
-                        )
-                      : Column(
-                          children: <Widget>[
-                            ListTile(
-                              title: GestureDetector(
-                                child: Text(
-                                  groups[index].name!,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                onTap: () {
-                                  NavigationUtil.pushNamed(
-                                      routeName: RouteName.teamDetails);
-                                },
-                              ),
-                              subtitle: Text(
-                                AppLocalizations.of(context)!.group_on_going,
-                                style: const TextStyle(color: Colors.green),
-                              ),
-                              leading: const CircleAvatar(child: Text('T')),
-                              trailing: TextButton(
-                                  onPressed: () {},
-                                  child: Text(AppLocalizations.of(context)!
-                                      .group_join_text_button)),
-                            ),
-                            if (index != 11) const DividerSpaceLeft()
-                          ],
-                        );
+                  return GroupListItem(
+                    groupName: groups[index].name ?? "",
+                    groupAvatar: null,
+                  );
+                  if (index != groups.length - 1) const DividerSpaceLeft();
                 },
                 failure: (message) {
                   return const Center(
