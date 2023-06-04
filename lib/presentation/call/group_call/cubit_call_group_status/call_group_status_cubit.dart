@@ -46,7 +46,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   Future<void> connectRoom() async {
     await _room.connect(
       "ws://192.168.1.192:7880",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODU4NjY1NjgsImlzcyI6ImRldmtleSIsIm5hbWUiOiJ1c2VyNyIsIm5iZiI6MTY4NTc4MDE2OCwic3ViIjoidXNlcjciLCJ2aWRlbyI6eyJyb29tIjoibXktZmlyc3Qtcm9vbSIsInJvb21Kb2luIjp0cnVlfX0.kPJmqbiLNFSJ0Eh_01jjxxyzLng1v9XLsf823B_VlVI",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODU4ODkyMDQsImlzcyI6ImRldmtleSIsIm5iZiI6MTY4NTg2NzYwNCwidmlkZW8iOnsiY2FuUHVibGlzaCI6dHJ1ZSwiY2FuU3Vic2NyaWJlIjp0cnVlLCJyb29tIjoiNjQ3YzRjNTQ2NzEwM2MzMmU0MjM3NTNjIiwicm9vbUpvaW4iOnRydWV9fQ.R4lD9HNriqRGjOf2bgc5U7tpJdrwkzT6aOgIhcyzQrU",
       roomOptions: const RoomOptions(
         adaptiveStream: true,
         dynacast: true,
