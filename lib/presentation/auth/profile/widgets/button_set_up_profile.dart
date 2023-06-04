@@ -12,9 +12,9 @@ class ButtonSetUpProfile extends StatelessWidget {
     return BlocBuilder<ProfileFormCubit, ProfileFormState>(
       builder: (context, state) {
         return CustomElevatedButton(
-          AppLocalizations.of(context)!.update_profile,
-          () => _handleSubmitFormProfile(context),
-          Theme.of(context).colorScheme.secondary,
+          buttonText: AppLocalizations.of(context)!.update_profile,
+          onPressed: () => _handleSubmitFormProfile(context),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         );
       },
     );

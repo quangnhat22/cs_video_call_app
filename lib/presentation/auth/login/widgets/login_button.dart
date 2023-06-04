@@ -20,9 +20,9 @@ class LoginButton extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 60),
           child: CustomElevatedButton(
-            AppLocalizations.of(context)!.sign_in_text_button,
-            state.isValid ? () => handleLogin(context) : null,
-            state.isValid
+            buttonText: AppLocalizations.of(context)!.sign_in_text_button,
+            onPressed: state.isValid ? () => handleLogin(context) : null,
+            backgroundColor: state.isValid
                 ? Theme.of(context).colorScheme.primary
                 : Colors.grey[400]!,
           ),

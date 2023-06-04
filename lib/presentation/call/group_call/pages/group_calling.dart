@@ -13,11 +13,9 @@ class GroupCalling extends StatefulWidget {
   const GroupCalling({
     super.key,
     required this.room,
-    required this.listener,
   });
 
   final Room room;
-  final EventsListener<RoomEvent> listener;
 
   @override
   State<GroupCalling> createState() => _GroupCallingState();
@@ -34,9 +32,9 @@ class _GroupCallingState extends State<GroupCalling> {
     widget.room.addListener(_onRoomDidUpdate);
     _setUpListeners();
     _sortParticipants();
-    WidgetsBindingCompatible.instance?.addPostFrameCallback((_) {
-      _askPublish();
-    });
+    // WidgetsBindingCompatible.instance?.addPostFrameCallback((_) {
+    //   _askPublish();
+    // });
   }
 
   @override
@@ -44,7 +42,6 @@ class _GroupCallingState extends State<GroupCalling> {
     (() async {
       widget.room.removeListener(_onRoomDidUpdate);
       await _listener.dispose();
-      await widget.room.dispose();
     })();
     super.dispose();
   }
@@ -161,8 +158,26 @@ class _GroupCallingState extends State<GroupCalling> {
       }
     });
 
+  Future<bool?> _showPublishDialog() => showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('Publish'),
+          content: Text('Would you like to publish your Camera & Mic ?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('NO'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('YES'),
+            ),
+          ],
+        ),
+      );
+
   void _askPublish() async {
-    final result = await context.showPublishDialog();
+    final result = await _showPublishDialog();
     if (result != true) return;
     // video will fail when running in ios simulator
     try {

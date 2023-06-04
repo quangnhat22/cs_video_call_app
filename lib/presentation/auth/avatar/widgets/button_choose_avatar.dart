@@ -29,9 +29,9 @@ class ButtonChooseAvatar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: CustomElevatedButton(
-          'Choose a photo',
-          () => _handleOnChangePhotoBtn(context),
-          Theme.of(context).colorScheme.secondary),
+          buttonText: 'Choose a photo',
+          onPressed: () => _handleOnChangePhotoBtn(context),
+          backgroundColor: Theme.of(context).colorScheme.secondary),
     );
   }
 }
