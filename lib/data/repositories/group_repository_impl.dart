@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/data/data_sources/firebase/asset_firebase.dart';
 import 'package:videocall/data/models/group_model.dart';
 import 'package:videocall/data/models/group_request_model.dart';
 import 'package:videocall/domain/entities/group_entity.dart';
@@ -11,9 +12,13 @@ import '../data_sources/remote/service/group_service.dart';
 
 @Injectable(as: GroupRepository)
 class GroupRepositoryImpl extends GroupRepository {
-  GroupRepositoryImpl({required GroupService service}) : _service = service;
+  GroupRepositoryImpl(
+      {required GroupService service, required AssetFirebase assetFirebase})
+      : _service = service,
+        _assetFirebase = assetFirebase;
 
   final GroupService _service;
+  final AssetFirebase _assetFirebase;
 
   @override
   Future<void> createGroup(
@@ -21,7 +26,12 @@ class GroupRepositoryImpl extends GroupRepository {
     try {
       final listMemberModel = members?.map((member) => member!.id).toList();
 
-      await _service.createGroup(groupName, groupImage, listMemberModel);
+      String? imageUrl = groupImage;
+      if (groupImage != null) {
+        imageUrl = await _assetFirebase.uploadFile(groupImage);
+      }
+
+      await _service.createGroup(groupName, imageUrl, listMemberModel);
     } catch (e) {
       throw Exception(e.toString());
     }

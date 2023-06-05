@@ -1,5 +1,4 @@
 import '../../data/models/group_model.dart';
-import 'user_entity.dart';
 
 class GroupEntity {
   String id;
@@ -23,6 +22,8 @@ class GroupEntity {
     return GroupEntity(
       id: model.id,
       name: model.name,
+      imageUrl: model.imageUrl,
+      members: model.members,
     );
   }
 }

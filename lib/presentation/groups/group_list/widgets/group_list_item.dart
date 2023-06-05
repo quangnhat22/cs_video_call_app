@@ -19,32 +19,32 @@ class GroupListItem extends StatelessWidget {
     NavigationUtil.pushNamed(routeName: RouteName.teamDetails);
   }
 
-  void _onTapTrailingButton() {
-    NavigationUtil.pushNamed(routeName: RouteName.createGroupCall);
-  }
+  // void _onTapTrailingButton() {
+  //   NavigationUtil.pushNamed(routeName: RouteName.createGroupCall);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: GestureDetector(
-        onTap: _onTapItem,
-        child: Text(
+    return InkWell(
+      onTap: _onTapItem,
+      child: ListTile(
+        title: Text(
           groupName,
           style: const TextStyle(fontWeight: FontWeight.w500),
         ),
-      ),
-      subtitle: Text(
-        AppLocalizations.of(context)!.group_on_going,
-        style: const TextStyle(color: Colors.green),
-      ),
-      leading: CustomAvatarImage(
-        urlImage: groupAvatar,
-        widthImage: 1080,
-        heightImage: 1080,
-      ),
-      trailing: TextButton(
-        onPressed: _onTapTrailingButton,
-        child: Text(AppLocalizations.of(context)!.group_join_text_button),
+        subtitle: Text(
+          AppLocalizations.of(context)!.group_on_going,
+          style: const TextStyle(color: Colors.green),
+        ),
+        leading: CustomAvatarImage(
+          urlImage: groupAvatar,
+          widthImage: 50,
+          heightImage: 50,
+        ),
+        // trailing: TextButton(
+        //   onPressed: _onTapTrailingButton,
+        //   child: Text(AppLocalizations.of(context)!.group_join_text_button),
+        // ),
       ),
     );
   }

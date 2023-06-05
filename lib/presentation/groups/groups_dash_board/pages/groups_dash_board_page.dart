@@ -47,14 +47,10 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
             )
           ]),
         ),
-        body: TabBarView(
-            controller: _tabController,
-            children: const <Widget>[GroupListPage(), GroupRequestsPage()]),
-        floatingActionButton: FloatingActionStadiumButton(() {
-          if (_tabController.index == 0) {
-            NavigationUtil.pushNamed(routeName: RouteName.createGroup);
-          }
-        }, null),
+        body: TabBarView(controller: _tabController, children: const <Widget>[
+          GroupListPage(),
+          GroupRequestsPage(),
+        ]),
       ),
     );
   }
