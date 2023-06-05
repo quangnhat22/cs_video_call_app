@@ -8,7 +8,7 @@ class GroupModel with _$GroupModel {
   const factory GroupModel(
       {required String id,
       String? name,
-      // List<UserModel?>? members,
+      List<String?>? members,
       // ignore: invalid_annotation_target
       @JsonKey(name: 'image_url') String? imageUrl}) = _GroupModel;
 

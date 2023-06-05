@@ -9,9 +9,10 @@ class GroupList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: BlocBuilder<GroupListBloc, GroupListState>(
         builder: (context, state) {
-          return ListView.builder(
+          return ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
+            separatorBuilder: (context, index) => const DividerSpaceLeft(),
             itemBuilder: ((context, index) {
               return state.maybeWhen(
                 success: (groups) {
@@ -43,7 +44,6 @@ class GroupList extends StatelessWidget {
                                   child: Text(AppLocalizations.of(context)!
                                       .group_join_text_button)),
                             ),
-                            if (index != 11) const DividerSpaceLeft()
                           ],
                         );
                 },
