@@ -1,7 +1,9 @@
-import 'package:flutter/widgets.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/models/group_model.dart';
+import 'package:videocall/data/models/group_request_model.dart';
 import 'package:videocall/domain/entities/group_entity.dart';
+import 'package:videocall/domain/entities/group_request_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 
 import '../../domain/modules/group/group_repository.dart';
@@ -47,6 +49,112 @@ class GroupRepositoryImpl extends GroupRepository {
       }
 
       return List<GroupEntity>.empty();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<List<GroupRequestEntity>> getReceivedRequest() async {
+    try {
+      final res = await _service.getReceivedRequest();
+      if (res.statusCode == 201) {
+        final listReceivedRequestJson = res.data["data"] as List<dynamic>?;
+
+        if (listReceivedRequestJson != null) {
+          final receivedRequestModels = listReceivedRequestJson
+              .map((json) => GroupRequestModel.fromJson(json))
+              .toList();
+
+          final receivedEntities = receivedRequestModels
+              .map((model) =>
+                  GroupRequestEntity.convertToGroupRequestEntity(model: model))
+              .toList();
+
+          return receivedEntities;
+        }
+      }
+
+      return List<GroupRequestEntity>.empty();
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<List<GroupRequestEntity>> getSentRequest() async {
+    try {
+      final res = await _service.getSentRequest();
+      if (res.statusCode == 201) {
+        final listSentRequestJson = res.data["data"] as List<dynamic>?;
+
+        if (listSentRequestJson != null) {
+          final sentRequestModels = listSentRequestJson
+              .map((json) => GroupRequestModel.fromJson(json))
+              .toList();
+
+          final sentEntities = sentRequestModels
+              .map((model) =>
+                  GroupRequestEntity.convertToGroupRequestEntity(model: model))
+              .toList();
+
+          return sentEntities;
+        }
+      }
+
+      return List<GroupRequestEntity>.empty();
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> recallSentRequest(String groupId, String friendId) async {
+    try {
+      final res = await _service.recallSentRequest(groupId, friendId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> rejectReceivedRequest(String groupId) async {
+    try {
+      final res = await _service.rejectReceivedRequest(groupId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> acceptReceivedRequest(String groupId) async {
+    try {
+      final res = await _service.acceptReceivedRequest(groupId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } on DioError catch (e) {
+      throw Exception(e.message);
     } catch (e) {
       throw Exception(e.toString());
     }

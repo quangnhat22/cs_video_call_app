@@ -18,9 +18,10 @@ class ListRequestFriendReceive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (listReceiveRequest.isEmpty)
-        ? const Padding(
-            padding: EdgeInsets.all(32.0),
-            child: Text("No received requests found!"),
+        ? Padding(
+            padding: const EdgeInsets.all(32.0),
+            child:
+                Text(AppLocalizations.of(context)!.no_received_requests_found),
           )
         : ListView.builder(
             shrinkWrap: true,
