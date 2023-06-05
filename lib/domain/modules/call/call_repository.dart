@@ -1,9 +1,21 @@
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 
-abstract class CallRepository {
-  Future<String?> createRoom(RTCVideoRenderer remoteRenderer);
+typedef MediaStreamCallback = void Function(MediaStream stream);
 
-  Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo);
+abstract class CallRepository {
+  Stream<MediaStream> get addRemoteMediaStream;
+
+  Stream<RTCPeerConnectionState> get connectionState;
+
+  Stream<RTCSignalingState> get signalingState;
+
+  Stream<MediaStreamTrack> get localTrackStream;
+
+  Stream<MediaStreamTrack> get remoteTrackStream;
+
+  Future<String?> createRoom(String friendId);
+
+  Future<void> joinRoom(String roomId);
 
   Future<void> openUserMedia(
       RTCVideoRenderer localVideo, RTCVideoRenderer remoteVideo);
