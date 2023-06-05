@@ -1,4 +1,12 @@
-part of groups_details;
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/presentation/call/group_call/pages/group_call_main_page.dart';
+import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
+import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
+
+import '../../../../../common/widgets/stateless/search/add_members_search.dart';
 
 class GroupsDetails extends StatefulWidget {
   const GroupsDetails({super.key});
@@ -85,11 +93,14 @@ class _GroupsDetailsState extends State<GroupsDetails>
               IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
             ],
           ),
-          body: TabBarView(controller: _tabController, children: <Widget>[
-            GroupsCallsTabs(),
-            const GroupDiscussTab(),
-            const GroupMembersTab()
-          ]),
+          body: TabBarView(
+            controller: _tabController,
+            children: const <Widget>[
+              GroupCallPage(),
+              GroupDiscussTab(),
+              GroupMemberPage()
+            ],
+          ),
           floatingActionButton: _bottomButtons(),
         ));
   }

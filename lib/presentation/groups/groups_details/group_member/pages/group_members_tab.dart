@@ -1,7 +1,19 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class GroupMembersTab extends StatelessWidget {
-  const GroupMembersTab({super.key});
+import '../../../../../core/config/app_text_styles.dart';
+
+class GroupMemberPage extends StatelessWidget {
+  const GroupMemberPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class GroupMemberView extends StatelessWidget {
+  const GroupMemberView({super.key});
 
   @override
   Widget build(BuildContext context) {

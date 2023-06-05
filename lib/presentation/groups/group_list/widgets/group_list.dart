@@ -19,7 +19,7 @@ class GroupList extends StatelessWidget {
                     groupName: groups[index].name ?? "",
                     groupAvatar: null,
                   );
-                  if (index != groups.length - 1) const DividerSpaceLeft();
+                  //if (index != groups.length - 1) const DividerSpaceLeft();
                 },
                 failure: (message) {
                   return const Center(
