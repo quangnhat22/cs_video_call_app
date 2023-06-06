@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/firebase/asset_firebase.dart';
+import 'package:videocall/data/models/group_details_model.dart';
 import 'package:videocall/data/models/group_model.dart';
 import 'package:videocall/data/models/group_request_model.dart';
+import 'package:videocall/domain/entities/group_detail_entity.dart';
 import 'package:videocall/domain/entities/group_entity.dart';
 import 'package:videocall/domain/entities/group_request_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
@@ -26,7 +28,7 @@ class GroupRepositoryImpl extends GroupRepository {
     try {
       final listMemberModel = members?.map((member) => member!.id).toList();
 
-      String? imageUrl = groupImage;
+      String? imageUrl = groupImage ?? "";
       if (groupImage != null) {
         imageUrl = await _assetFirebase.uploadFile(groupImage);
       }
@@ -41,7 +43,7 @@ class GroupRepositoryImpl extends GroupRepository {
   Future<List<GroupEntity>> getGroupList() async {
     try {
       final res = await _service.getGroupList();
-      if (res.statusCode == 201) {
+      if (res.statusCode == 200) {
         final listGroupJson = res.data["data"] as List<dynamic>?;
 
         if (listGroupJson != null) {
@@ -165,6 +167,29 @@ class GroupRepositoryImpl extends GroupRepository {
       return false;
     } on DioError catch (e) {
       throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<GroupDetailEntity?> getGroupDetail(String id) async {
+    try {
+      final res = await _service.getGroupDetail(id);
+      if (res.statusCode == 200) {
+        final groupDetailJson = res.data["data"] as dynamic;
+
+        if (groupDetailJson != null) {
+          final groupDetailModel = GroupDetailsModel.fromJson(groupDetailJson);
+
+          final groupDetailEntity =
+              GroupDetailEntity.convertToGroupEntity(model: groupDetailModel);
+
+          return groupDetailEntity;
+        }
+      }
+
+      return null;
     } catch (e) {
       throw Exception(e.toString());
     }

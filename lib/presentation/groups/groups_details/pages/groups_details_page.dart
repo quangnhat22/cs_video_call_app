@@ -1,13 +1,42 @@
 part of groups_details;
 
-class GroupsDetails extends StatefulWidget {
-  const GroupsDetails({super.key});
+class GroupDetailPage extends StatelessWidget {
+  const GroupDetailPage({
+    super.key,
+    required this.groupId,
+  });
+
+  final String groupId;
 
   @override
-  State<GroupsDetails> createState() => _GroupsDetailsState();
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<GroupDetailBloc>()
+            ..add(GroupDetailEvent.started(groupId: groupId)),
+        ),
+        BlocProvider(
+          create: (_) => getIt<NewMemberCubit>()..getListFriend(),
+        ),
+        BlocProvider(
+          create: (_) =>
+              getIt<GroupMeetingCubit>()..getListGroupMeeting(groupId: groupId),
+        ),
+      ],
+      child: const GroupDetailView(),
+    );
+  }
 }
 
-class _GroupsDetailsState extends State<GroupsDetails>
+class GroupDetailView extends StatefulWidget {
+  const GroupDetailView({super.key});
+
+  @override
+  State<GroupDetailView> createState() => _GroupDetailViewState();
+}
+
+class _GroupDetailViewState extends State<GroupDetailView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -33,28 +62,8 @@ class _GroupsDetailsState extends State<GroupsDetails>
   }
 
   Widget? _bottomButtons() {
-    if (_tabController.index != 1) {
-      return FloatingActionButton(
-        onPressed: () async {
-          if (_tabController.index == 2) {
-            final newMembers = await showSearch(
-                context: context, delegate: AddMembersSearch(allMembers));
-
-            if (newMembers != null) {
-              final arrayNewMembers = jsonDecode(newMembers);
-              if (arrayNewMembers.length > 0) {
-                debugPrint(arrayNewMembers[0]);
-              }
-            }
-          }
-        },
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        shape: const StadiumBorder(),
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      );
+    if (_tabController.index == 2) {
+      return const FabInviteNewFriend();
     }
     return null;
   }

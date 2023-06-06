@@ -15,10 +15,8 @@ class CallGroupRepositoryImpl extends LiveKitCallRepository {
   @override
   Future<List<GroupMeetingEntity>> getListMeeting(String groupId) async {
     try {
-      final res = await _service.getGroupMeeting(groupId);
+      final res = await _service.getListGroupMeeting(groupId);
       if (res.statusCode == 200) {
-        // final token = res.data["data"] as String;
-        // room.connect("ws://192.168.1.192:7880", token);
         final listMeetingGroupJson = res.data["data"] as List<dynamic>?;
 
         if (listMeetingGroupJson != null) {

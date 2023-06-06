@@ -8,15 +8,17 @@ import '../../../../core/routes/route_name.dart';
 class GroupListItem extends StatelessWidget {
   const GroupListItem({
     Key? key,
+    required this.groupId,
     required this.groupName,
     this.groupAvatar,
   }) : super(key: key);
 
+  final String groupId;
   final String groupName;
   final String? groupAvatar;
 
   void _onTapItem() {
-    NavigationUtil.pushNamed(routeName: RouteName.teamDetails);
+    NavigationUtil.pushNamed(routeName: RouteName.teamDetails, args: groupId);
   }
 
   // void _onTapTrailingButton() {

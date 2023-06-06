@@ -73,7 +73,11 @@ class AppRoutes {
       case RouteName.groups:
         return _buildRoute(settings, const GroupsDashBoardPage());
       case RouteName.teamDetails:
-        return _buildRoute(settings, const GroupsDetails());
+        return _buildRoute(
+            settings,
+            GroupDetailPage(
+              groupId: settings.arguments as String,
+            ));
       case RouteName.schedules:
         return _buildRoute(settings, ScheduleDashBoardPage());
       case RouteName.notifications:
@@ -129,14 +133,14 @@ class AppRoutes {
     );
   }
 
-  static MaterialPageRoute _buildRouteDialog(
-      RouteSettings settings, Widget builder) {
-    return MaterialPageRoute(
-      settings: settings,
-      fullscreenDialog: true,
-      builder: (BuildContext context) => builder,
-    );
-  }
+  // static MaterialPageRoute _buildRouteDialog(
+  //     RouteSettings settings, Widget builder) {
+  //   return MaterialPageRoute(
+  //     settings: settings,
+  //     fullscreenDialog: true,
+  //     builder: (BuildContext context) => builder,
+  //   );
+  // }
 
   static Route _errorRoute() {
     return MaterialPageRoute(

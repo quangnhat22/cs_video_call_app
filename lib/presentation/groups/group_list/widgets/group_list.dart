@@ -23,6 +23,7 @@ class GroupList extends StatelessWidget {
               separatorBuilder: (context, index) => const DividerSpaceLeft(),
               itemBuilder: ((context, index) {
                 return GroupListItem(
+                  groupId: groups[index].id,
                   groupName: groups[index].name ?? "",
                   groupAvatar: groups[index].imageUrl,
                 );
