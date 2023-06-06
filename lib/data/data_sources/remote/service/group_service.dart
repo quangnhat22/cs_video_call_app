@@ -34,6 +34,16 @@ class GroupService {
     }
   }
 
+  Future<Response> getGroupDetail(String groupId) async {
+    try {
+      return await _service.dio.get('${BaseService.groupPath}/$groupId');
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<Response> getReceivedRequest() async {
     try {
       return await _service.dio

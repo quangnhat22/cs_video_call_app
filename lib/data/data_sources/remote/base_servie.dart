@@ -14,6 +14,8 @@ class BaseService {
   static const String userPath = "/user";
   static const String friendPath = "/friend";
   static const String groupPath = "/group";
+  static const String callPath = "/call";
+  static const String groupCallPath = "/meeting";
 
   BaseService({required this.interceptor}) {
     initDio();

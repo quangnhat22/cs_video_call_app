@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:videocall/domain/entities/group_detail_entity.dart';
 import 'package:videocall/domain/entities/group_entity.dart';
 import 'package:videocall/domain/entities/group_request_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
@@ -9,6 +10,8 @@ abstract class GroupUseCase {
       String? groupName, String? groupImage, List<UserEntity?>? members);
 
   Future<List<GroupEntity>> getGroupList();
+
+  Future<GroupDetailEntity?> getGroupDetail(String id);
 
   Future<List<GroupRequestEntity>> getReceivedRequest();
 
@@ -61,5 +64,10 @@ class GroupUseCaseImpl extends GroupUseCase {
   @override
   Future<bool> acceptReceivedGroup(String groupId) async {
     return await _repo.acceptReceivedRequest(groupId);
+  }
+
+  @override
+  Future<GroupDetailEntity?> getGroupDetail(String id) async {
+    return await _repo.getGroupDetail(id);
   }
 }

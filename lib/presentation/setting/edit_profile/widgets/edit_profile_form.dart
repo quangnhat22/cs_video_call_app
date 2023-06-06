@@ -53,9 +53,9 @@ class EditProfileForm extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: CustomElevatedButton(
-                  AppLocalizations.of(context)!.confirm,
-                  () {},
-                  Theme.of(context).colorScheme.primary,
+                  buttonText: AppLocalizations.of(context)!.confirm,
+                  onPressed: () {},
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

@@ -1,16 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/domain/entities/user_entity.dart';
 
 class AddMembersSearch extends SearchDelegate<String> {
-  final List<String> allMembers;
-  List<String> selectedMembers = [];
+  final List<UserEntity> allMembers;
+  List<UserEntity> selectedMembers = [];
 
   AddMembersSearch(this.allMembers);
 
-  void handleSelectMembers(String member, Function setState) {
+  void handleSelectMembers(UserEntity member, Function setState) {
     if (!selectedMembers.contains(member)) {
       setState(() {
         selectedMembers.add(member);
@@ -23,8 +25,14 @@ class AddMembersSearch extends SearchDelegate<String> {
   }
 
   void handleCloseDelegate(BuildContext context) {
-    query = jsonEncode(selectedMembers);
-    close(context, query);
+    try {
+      final List<String> selectMemberId =
+          selectedMembers.map((member) => member.id).toList();
+      query = jsonEncode(selectMemberId);
+      close(context, query);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   Widget buildAmountSelectedTitle(BuildContext context) {
@@ -38,11 +46,13 @@ class AddMembersSearch extends SearchDelegate<String> {
   }
 
   Widget buildSearchedResults(BuildContext context) {
-    final List<String> memberResults = allMembers
+    final List<UserEntity> memberResults = allMembers
         .where(
-          (member) => member.toLowerCase().contains(
-                query.toLowerCase(),
-              ),
+          (member) => member.name == null
+              ? false
+              : member.name!.toLowerCase().contains(
+                    query.toLowerCase(),
+                  ),
         )
         .toList();
 
@@ -56,8 +66,12 @@ class AddMembersSearch extends SearchDelegate<String> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return CheckboxListTile(
-                  title: Text(memberResults[index]),
-                  secondary: const CircleAvatar(child: Text('A')),
+                  title: Text(memberResults[index].name ?? ""),
+                  secondary: CustomAvatarImage(
+                    urlImage: memberResults[index].avatar,
+                    widthImage: 50,
+                    heightImage: 50,
+                  ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   value: selectedMembers.contains(memberResults[index]),
                   onChanged: (bool? value) {
