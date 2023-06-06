@@ -4,7 +4,7 @@ class ListFriendCall extends StatelessWidget {
   const ListFriendCall({Key? key}) : super(key: key);
 
   void _onCallFriendBtn() {
-    NavigationUtil.pushNamed(routeName: RouteName.callPending);
+    NavigationUtil.pushNamed(routeName: RouteName.personalCall);
   }
 
   @override

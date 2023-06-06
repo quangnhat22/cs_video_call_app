@@ -67,8 +67,11 @@ dependencies:
   flutter_sticky_header: ^0.6.5
   shimmer: ^3.0.0
   sliding_up_panel: ^2.0.0+1
-  livekit_client: ^1.3.3
+  livekit_client:
+    git:
+      url: https://github.com/livekit/client-sdk-flutter
   permission_handler: ^10.2.0
+  flutter_background: ^1.2.0
 
 
 dev_dependencies:

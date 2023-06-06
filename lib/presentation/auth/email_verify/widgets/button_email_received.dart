@@ -17,9 +17,9 @@ class ButttonVerifyReceiveEmail extends StatelessWidget {
         return state.maybeWhen(
           success: (_) {
             return CustomElevatedButton(
-              AppLocalizations.of(context)!.i_verified,
-              () => _onVerifiedEmailBtn(context),
-              Theme.of(context).colorScheme.secondary,
+              buttonText: AppLocalizations.of(context)!.i_verified,
+              onPressed: () => _onVerifiedEmailBtn(context),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
             );
           },
           orElse: () {

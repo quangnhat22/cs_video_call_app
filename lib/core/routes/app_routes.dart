@@ -9,6 +9,7 @@ import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
+import 'package:videocall/presentation/call/group_call/pages/group_call_main_page.dart';
 import 'package:videocall/presentation/call/personal_call/page/personal_call_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
@@ -16,6 +17,7 @@ import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_b
 import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
+import 'package:videocall/presentation/groups/groups_details/groups_details.dart';
 import 'package:videocall/presentation/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
@@ -70,6 +72,12 @@ class AppRoutes {
             FriendsInfoPage(userInfo: settings.arguments as UserEntity));
       case RouteName.groups:
         return _buildRoute(settings, const GroupsDashBoardPage());
+      case RouteName.teamDetails:
+        return _buildRoute(
+            settings,
+            GroupDetailPage(
+              groupId: settings.arguments as String,
+            ));
       case RouteName.schedules:
         return _buildRoute(settings, ScheduleDashBoardPage());
       case RouteName.notifications:
@@ -87,7 +95,7 @@ class AppRoutes {
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
         return _buildRoute(settings, const CreateSchedulePage());
-      case RouteName.callPending:
+      case RouteName.personalCall:
         {
           final argument = settings.arguments as Map<String, dynamic>;
           ReceivedAction? receivedAction = settings.arguments == null
@@ -104,7 +112,8 @@ class AppRoutes {
             ),
           );
         }
-
+      case RouteName.createGroupCall:
+        return _buildAnimationRoute(settings, const GroupCallPage());
       default:
         return _errorRoute();
     }
@@ -124,14 +133,14 @@ class AppRoutes {
     );
   }
 
-  static MaterialPageRoute _buildRouteDialog(
-      RouteSettings settings, Widget builder) {
-    return MaterialPageRoute(
-      settings: settings,
-      fullscreenDialog: true,
-      builder: (BuildContext context) => builder,
-    );
-  }
+  // static MaterialPageRoute _buildRouteDialog(
+  //     RouteSettings settings, Widget builder) {
+  //   return MaterialPageRoute(
+  //     settings: settings,
+  //     fullscreenDialog: true,
+  //     builder: (BuildContext context) => builder,
+  //   );
+  // }
 
   static Route _errorRoute() {
     return MaterialPageRoute(

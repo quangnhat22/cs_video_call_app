@@ -21,12 +21,9 @@ class ButtonSignUp extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: CustomElevatedButton(
-                AppLocalizations.of(context)!.sign_up_text_button,
-                    () => _onTapSignUpBtn(context),
-                Theme
-                    .of(context)
-                    .colorScheme
-                    .secondary,
+                buttonText: AppLocalizations.of(context)!.sign_up_text_button,
+                onPressed: () => _onTapSignUpBtn(context),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
           );

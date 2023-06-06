@@ -47,7 +47,7 @@ class NotificationController {
 
       case 'ACCEPT':
         NavigationUtil.loadSingletonPage(
-          targetPage: RouteName.callPending,
+          targetPage: RouteName.personalCall,
           receivedAction: receivedAction,
         );
         break;

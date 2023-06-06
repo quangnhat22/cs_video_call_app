@@ -60,9 +60,9 @@ class NotificationService {
     if (await AwesomeNotificationsFcm().isFirebaseAvailable) {
       try {
         final token = await AwesomeNotificationsFcm().requestFirebaseAppToken();
-        print('==================FCM Token==================');
-        print(token);
-        print('======================================');
+        log('==================FCM Token==================');
+        log(token);
+        log('======================================');
         return token;
       } catch (exception) {
         debugPrint('$exception');
@@ -82,7 +82,7 @@ class NotificationService {
 
   // Hàm gọi Local notification khi nhấn nút Send notification trên ứng dụng
   Future<void> localNotification() async {
-    String timezom = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    //String timezom = await AwesomeNotifications().getLocalTimeZoneIdentifier();
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: 1,
@@ -100,19 +100,19 @@ class NotificationService {
   /// (even while terminated)
   @pragma("vm:entry-point")
   static Future<void> mySilentDataHandle(FcmSilentData silentData) async {
-    print('"SilentData": ${silentData.toString()}');
+    log('"SilentData": ${silentData.toString()}');
     if (silentData.createdLifeCycle != NotificationLifeCycle.Foreground) {
-      print("bg");
+      log("bg");
     } else {
-      print("FOREGROUND");
+      log("FOREGROUND");
     }
 
-    print("starting long task");
-    await Future.delayed(Duration(seconds: 4));
-    final url = Uri.parse("http://google.com");
+    log("starting long task");
+    await Future.delayed(const Duration(seconds: 4));
+    // final url = Uri.parse("http://google.com");
     // final re = await http.get(url);
-    // print(re.body);
-    print("long task done");
+    // log(re.body);
+    log("long task done");
   }
 
   Future<String> getFirebaseMessagingToken() async {

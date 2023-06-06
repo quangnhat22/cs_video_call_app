@@ -7,7 +7,7 @@ class AppColors {
     brightness: Brightness.light,
     primary: Color(0xFF006689),
     onPrimary: Color(0xFFFFFFFF),
-    primaryContainer: Color(0xFFC2E8FF),
+    primaryContainer: Color(0xFFC2E8FF), //0x
     onPrimaryContainer: Color(0xFF001E2C),
     //onPrimaryFixedVariant: Color(0xFF004D68),
     secondary: Color(0xFF6151A6),
@@ -29,7 +29,7 @@ class AppColors {
     outline: Color(0xFF71787D),
     background: Color(0xFFFFFFFF),
     onBackground: Color(0xFF191C1E),
-    surface: Color(0xFFF8F9FC),
+    surface: Color(0xFFFFFFFF), //FFF8F9FC
     onSurface: Color(0xFF191C1E),
     surfaceVariant: Color(0xFFDCE3E9),
     onSurfaceVariant: Color(0xFF41484D),

@@ -41,26 +41,8 @@ class PersonalCallView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: <Widget>[
-          // Container(
-          //   width: 1.sw,
-          //   height: 1.sh,
-          //   decoration: const BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AppAssets.emptyAvatar,
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          //   child: BackdropFilter(
-          //     filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //         color: Colors.white.withOpacity(0.0),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          const PersonalCallMainBody(),
+        children: const <Widget>[
+          PersonalCallMainBody(),
         ],
       ),
     );
