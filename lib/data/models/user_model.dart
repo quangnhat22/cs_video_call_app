@@ -26,6 +26,8 @@ class UserModel extends HiveObject with _$UserModel {
         String? bio,
     @HiveField(7)
         DateTime? birthday,
+    @HiveField(10)
+        String? address,
     @HiveField(8)
         String? relation,
     @HiveField(9)

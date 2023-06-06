@@ -56,47 +56,49 @@ import 'package:videocall/domain/modules/user/user_repository.dart' as _i36;
 import 'package:videocall/domain/modules/user/user_usecase.dart' as _i38;
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart'
     as _i25;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i55;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i56;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
     as _i42;
 import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
-    as _i51;
+    as _i52;
 import 'package:videocall/presentation/auth/login/cubit/login_cubit.dart'
-    as _i49;
-import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
     as _i50;
+import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
+    as _i51;
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart'
-    as _i53;
+    as _i54;
 import 'package:videocall/presentation/friends/find_new_friend/bloc/find_friend_bloc.dart'
-    as _i44;
+    as _i45;
 import 'package:videocall/presentation/friends/find_new_friend/cubit/find_friend_form_cubit.dart'
     as _i10;
 import 'package:videocall/presentation/friends/friends_contact/bloc/friends_contact_bloc.dart'
-    as _i46;
+    as _i47;
 import 'package:videocall/presentation/friends/friends_infor/friend_action_cubit/friends_action_cubit.dart'
     as _i30;
 import 'package:videocall/presentation/friends/friends_infor/friend_info_cubit/friend_info_cubit.dart'
     as _i11;
 import 'package:videocall/presentation/friends/friends_request/friend_request_action_cubit/friend_request_action_cubit.dart'
-    as _i45;
+    as _i46;
 import 'package:videocall/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart'
     as _i34;
 import 'package:videocall/presentation/groups/create_group/cubit/create_group_cubit.dart'
     as _i43;
 import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart'
-    as _i47;
-import 'package:videocall/presentation/groups/group_requests/group_request_action_cubit/group_request_action_cubit.dart'
     as _i48;
+import 'package:videocall/presentation/groups/group_requests/group_request_action_cubit/group_request_action_cubit.dart'
+    as _i49;
 import 'package:videocall/presentation/groups/group_requests/list_group_request_bloc/list_group_request_bloc.dart'
     as _i35;
 import 'package:videocall/presentation/setting/edit_language/cubit/edit_language_cubit.dart'
     as _i20;
+import 'package:videocall/presentation/setting/edit_profile/cubit/edit_profile_cubit.dart'
+    as _i44;
 import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit.dart'
     as _i21;
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
-    as _i52;
+    as _i53;
 import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
-    as _i54;
+    as _i55;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -180,35 +182,37 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i42.AvatarCubit(userUc: gh<_i38.UserUseCase>()));
     gh.factory<_i43.CreateGroupCubit>(
         () => _i43.CreateGroupCubit(groupUseCase: gh<_i33.GroupUseCase>()));
-    gh.factory<_i44.FindFriendBloc>(
-        () => _i44.FindFriendBloc(userRepo: gh<_i36.UserRepository>()));
-    gh.factory<_i45.FriendRequestActionCubit>(() =>
-        _i45.FriendRequestActionCubit(friendUseCase: gh<_i29.FriendUseCase>()));
-    gh.factory<_i46.FriendsContactBloc>(() => _i46.FriendsContactBloc(
+    gh.factory<_i44.EditProfileCubit>(
+        () => _i44.EditProfileCubit(userUseCase: gh<_i38.UserUseCase>()));
+    gh.factory<_i45.FindFriendBloc>(
+        () => _i45.FindFriendBloc(userRepo: gh<_i36.UserRepository>()));
+    gh.factory<_i46.FriendRequestActionCubit>(() =>
+        _i46.FriendRequestActionCubit(friendUseCase: gh<_i29.FriendUseCase>()));
+    gh.factory<_i47.FriendsContactBloc>(() => _i47.FriendsContactBloc(
           useCase: gh<_i29.FriendUseCase>(),
           userUseCase: gh<_i38.UserUseCase>(),
         ));
-    gh.factory<_i47.GroupListBloc>(
-        () => _i47.GroupListBloc(useCase: gh<_i33.GroupUseCase>()));
-    gh.factory<_i48.GroupRequestActionCubit>(() =>
-        _i48.GroupRequestActionCubit(groupUseCase: gh<_i33.GroupUseCase>()));
-    gh.factory<_i49.LoginCubit>(
-        () => _i49.LoginCubit(authUseCase: gh<_i41.AuthUseCase>()));
-    gh.factory<_i50.ProfileFormCubit>(
-        () => _i50.ProfileFormCubit(userUC: gh<_i38.UserUseCase>()));
-    gh.factory<_i51.SendEmailCubit>(
-        () => _i51.SendEmailCubit(authUseCase: gh<_i41.AuthUseCase>()));
-    gh.factory<_i52.SettingCubit>(() => _i52.SettingCubit(
+    gh.factory<_i48.GroupListBloc>(
+        () => _i48.GroupListBloc(useCase: gh<_i33.GroupUseCase>()));
+    gh.factory<_i49.GroupRequestActionCubit>(() =>
+        _i49.GroupRequestActionCubit(groupUseCase: gh<_i33.GroupUseCase>()));
+    gh.factory<_i50.LoginCubit>(
+        () => _i50.LoginCubit(authUseCase: gh<_i41.AuthUseCase>()));
+    gh.factory<_i51.ProfileFormCubit>(
+        () => _i51.ProfileFormCubit(userUC: gh<_i38.UserUseCase>()));
+    gh.factory<_i52.SendEmailCubit>(
+        () => _i52.SendEmailCubit(authUseCase: gh<_i41.AuthUseCase>()));
+    gh.factory<_i53.SettingCubit>(() => _i53.SettingCubit(
           authUseCase: gh<_i41.AuthUseCase>(),
           userUseCase: gh<_i38.UserUseCase>(),
           appSettingsUseCase: gh<_i18.AppSettingsUseCase>(),
         ));
-    gh.factory<_i53.SignUpFormCubit>(
-        () => _i53.SignUpFormCubit(authRepo: gh<_i39.AuthRepository>()));
-    gh.factory<_i54.WelcomeCubit>(
-        () => _i54.WelcomeCubit(authRepo: gh<_i39.AuthRepository>()));
-    gh.lazySingleton<_i55.AppBloc>(
-        () => _i55.AppBloc(authUC: gh<_i41.AuthUseCase>()));
+    gh.factory<_i54.SignUpFormCubit>(
+        () => _i54.SignUpFormCubit(authRepo: gh<_i39.AuthRepository>()));
+    gh.factory<_i55.WelcomeCubit>(
+        () => _i55.WelcomeCubit(authRepo: gh<_i39.AuthRepository>()));
+    gh.lazySingleton<_i56.AppBloc>(
+        () => _i56.AppBloc(authUC: gh<_i41.AuthUseCase>()));
     return this;
   }
 }
