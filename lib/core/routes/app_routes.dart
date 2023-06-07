@@ -21,7 +21,7 @@ import 'package:videocall/presentation/groups/groups_details/groups_details.dart
 import 'package:videocall/presentation/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
-import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
+import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../domain/entities/user_entity.dart';

@@ -4,7 +4,6 @@ part of 'edit_profile_cubit.dart';
 class EditProfileState with _$EditProfileState {
   const factory EditProfileState.initial({
     @Default(TextFormz.pure()) TextFormz fullName,
-    @Default(TextFormz.pure()) TextFormz address,
     @Default(PhoneNumber.pure()) PhoneNumber phoneNumber,
     DateTime? dob,
     @Default(AppGender.others) AppGender gender,

@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
-import 'package:videocall/common/widgets/stateless/app_bar/page_app_bar.dart';
-import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/core/utils/screen_utils.dart';
-import 'package:videocall/core/utils/snack_bar.dart';
-import 'package:videocall/presentation/setting/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:videocall/presentation/setting/edit_profile/widgets/edit_profile_form.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+part of edit_profile;
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -51,11 +42,9 @@ class EditProfileView extends StatelessWidget {
           onTap: () {
             AppScreenUtils.hideInputKeyboard();
           },
-          child: const Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: EditProfileForm(),
-            ),
+          child: const Padding(
+            padding: EdgeInsets.all(12),
+            child: EditProfileForm(),
           ),
         ),
       ),

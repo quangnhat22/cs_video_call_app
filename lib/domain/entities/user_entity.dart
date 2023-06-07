@@ -58,6 +58,7 @@ class UserEntity {
     return UserModel(
       id: userEntity.id,
       name: userEntity.name,
+      address: userEntity.address,
       avatar: userEntity.avatar,
       email: userEntity.email,
       phone: userEntity.phone,

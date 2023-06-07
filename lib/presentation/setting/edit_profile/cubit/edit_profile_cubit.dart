@@ -22,9 +22,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     final userInfo = await _userUseCase.getSelfFromLocal();
     emit(state.copyWith(
       fullName: TextFormz.dirty(userInfo?.name ?? ""),
-      address: TextFormz.dirty(userInfo?.address ?? ""),
       phoneNumber: PhoneNumber.dirty(userInfo?.phone ?? ""),
-      dob: userInfo?.birthday,
+      dob: userInfo?.birthday ?? DateTime.now(),
       gender: AppGender.checkGenderEnum(userInfo?.gender),
       bio: TextFormz.dirty(userInfo?.bio ?? ""),
     ));
@@ -35,39 +34,48 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
     emit(state.copyWith(
         fullName: fullName,
-        isValid: Formz.validate([fullName, state.address, state.phoneNumber])));
-  }
-
-  void addressChanged(String value) {
-    final address = TextFormz.dirty(value);
-
-    emit(state.copyWith(
-        address: address,
-        isValid: Formz.validate([address, state.fullName, state.phoneNumber])));
+        isValid: Formz.validate([
+          fullName,
+          state.phoneNumber,
+        ])));
   }
 
   void phoneNumberChanged(String? value) {
-    final phoneNumber = PhoneNumber.dirty(value ?? "");
+    final phoneNumber = PhoneNumber.dirty(value!);
 
     emit(
       state.copyWith(
           phoneNumber: phoneNumber,
-          isValid:
-              Formz.validate([phoneNumber, state.fullName, state.address])),
+          isValid: Formz.validate([
+            phoneNumber,
+            state.fullName,
+          ])),
     );
   }
 
   void birthdayChanged(DateTime value) {
-    emit(state.copyWith(dob: value));
+    emit(state.copyWith(
+        dob: value,
+        isValid: Formz.validate([
+          state.phoneNumber,
+          state.fullName,
+        ])));
   }
 
   void genderChanged(AppGender value) {
-    emit(state.copyWith(gender: value));
+    emit(state.copyWith(
+        gender: value,
+        isValid: Formz.validate([
+          state.phoneNumber,
+          state.fullName,
+        ])));
   }
 
-  void bioChanged(String? value) {
-    final bio = TextFormz.dirty(value ?? '');
-    emit(state.copyWith(bio: bio));
+  void bioChanged(String value) {
+    final bio = TextFormz.dirty(value);
+    emit(state.copyWith(
+      bio: bio,
+    ));
   }
 
   Future<void> updateUserInfo() async {
@@ -77,7 +85,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
       final isUpdateSuccess = await _userUseCase.updateSelf(
         name: state.fullName.value,
-        address: state.address.value,
         phone: state.phoneNumber.value,
         birthday: state.dob?.toUtc(),
         gender: state.gender.value,

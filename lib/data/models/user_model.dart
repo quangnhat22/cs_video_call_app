@@ -26,8 +26,6 @@ class UserModel extends HiveObject with _$UserModel {
         String? bio,
     @HiveField(7)
         DateTime? birthday,
-    @HiveField(10)
-        String? address,
     @HiveField(8)
         String? relation,
     @HiveField(9)
@@ -40,6 +38,8 @@ class UserModel extends HiveObject with _$UserModel {
     // ignore: invalid_annotation_target
     @JsonKey(name: "last_seen_at", ignore: true)
         DateTime? lastSeenAt,
+    @HiveField(10)
+        String? address,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

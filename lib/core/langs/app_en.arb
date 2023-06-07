@@ -86,6 +86,8 @@
   "full_name": "Full name",
   "phone_number": "Phone number",
   "bio": "Bio",
+  "gender": "Gender",
+  "address": "Address",
   "select_theme": "Select Theme",
   "select_language": "Select Language",
   "please_not_empty": "Please enter the fill",
@@ -140,5 +142,8 @@
   "sent_by": "Sent by",
   "sent_to": "Sent to",
   "at": "at",
-  "recall_message_alert": "Recall successfully"
+  "recall_message_alert": "Recall successfully",
+  "male": "Male",
+  "female": "Female",
+  "others": "Others"
 }

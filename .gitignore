@@ -48,4 +48,4 @@ app.*.map.json
 
 *.freezed.dart
 *.g.dart
-injector.config.dart
+di/injector.config.dart

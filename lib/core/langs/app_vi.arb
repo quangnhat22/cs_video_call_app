@@ -86,6 +86,8 @@
   "full_name": "Họ và tên",
   "phone_number": "Số điện thoại",
   "bio": "Giới thiệu bản thân",
+  "gender": "Gender",
+  "address": "Địa chỉ",
   "select_theme": "Thay đổi chủ đề",
   "select_language": "Thay đổi ngôn ngữ",
   "please_not_empty": "Vui lòng không để ô này trống",
@@ -140,5 +142,8 @@
   "sent_by": "Gửi bởi",
   "sent_to": "Gửi đến",
   "at": "ngày",
-  "recall_message_alert": "Thu hồi thành công"
+  "recall_message_alert": "Thu hồi thành công",
+  "male": "Nam",
+  "female": "Nữ",
+  "others": "Khác"
 }

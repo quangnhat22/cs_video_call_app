@@ -6,7 +6,6 @@ import '../../entities/user_entity.dart';
 abstract class UserUseCase {
   Future<bool> updateSelf(
       {String? name,
-      String? address,
       String? avatar,
       String? gender,
       String? phone,
@@ -35,7 +34,6 @@ class UserUseCaseImpl extends UserUseCase {
   @override
   Future<bool> updateSelf(
       {String? name,
-      String? address,
       String? avatar,
       String? gender,
       String? phone,
