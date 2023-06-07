@@ -14,7 +14,7 @@ class InputPassword extends StatelessWidget {
           onChange: (password) =>
               context.read<SignUpFormCubit>().passwordChanged(password),
           errorText: state.password.displayError != null
-              ? state.password.error.toString()
+              ? AppLocalizations.of(context)!.password_is_invalid
               : null,
         );
       },

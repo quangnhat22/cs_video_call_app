@@ -27,6 +27,8 @@
   "back_to_welcome": "BACK TO WELCOME",
   "please_enter_email": "Please enter email",
   "email_is_invalid": "Email is invalid",
+  "password_is_invalid": "Password is invalid",
+  "confirm_password_is_incorrect": "Confirm password is incorrect",
   "please_enter_password": "Please enter password",
   "please_enter_confirm_password": "Please enter confirm password",
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
@@ -146,4 +148,5 @@
   "male": "Male",
   "female": "Female",
   "others": "Others"
+
 }
