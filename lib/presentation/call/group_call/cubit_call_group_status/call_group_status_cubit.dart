@@ -13,6 +13,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   CallGroupStatusCubit() : super(const CallGroupStatusState.initial());
 
   late final Room _room;
+  final isOwnerRoom = false;
 
   Future<void> setUpRoom() async {
     try {

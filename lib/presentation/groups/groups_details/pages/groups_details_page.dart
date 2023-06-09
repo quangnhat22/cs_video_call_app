@@ -62,6 +62,9 @@ class _GroupDetailViewState extends State<GroupDetailView>
   }
 
   Widget? _bottomButtons() {
+    if (_tabController.index == 0) {
+      return const FabCreateNewMeeting();
+    }
     if (_tabController.index == 2) {
       return const FabInviteNewFriend();
     }

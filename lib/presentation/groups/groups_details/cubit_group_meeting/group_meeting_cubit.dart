@@ -4,8 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/domain/modules/call/livekit_call_usecase.dart';
 
-part 'group_meeting_state.dart';
 part 'group_meeting_cubit.freezed.dart';
+part 'group_meeting_state.dart';
 
 @Injectable()
 class GroupMeetingCubit extends Cubit<GroupMeetingState> {

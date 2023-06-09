@@ -6,6 +6,7 @@ class GroupMeetingState with _$GroupMeetingState {
 
   const factory GroupMeetingState.getListInProgress() =
       GroupMeetingGetListInProgress;
+
   const factory GroupMeetingState.getListSuccess({
     required List<GroupMeetingEntity> listMeeting,
   }) = GroupMeetingGetListSuccess;
