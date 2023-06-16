@@ -55,10 +55,10 @@ class CreateGroupView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const GroupSetPhoto(),
-                const GroupTextFieldName(),
-                //GroupAddMembers(handleSelectMembers, handleTextChange),
+              children: const <Widget>[
+                GroupSetPhoto(),
+                GroupTextFieldName(),
+                GroupAddMembers(),
               ]),
         ),
       ),
