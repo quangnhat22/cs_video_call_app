@@ -49,3 +49,4 @@ app.*.map.json
 *.freezed.dart
 *.g.dart
 di/injector.config.dart
+.fvm
