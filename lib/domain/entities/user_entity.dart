@@ -3,6 +3,7 @@ import '../../data/models/user_model.dart';
 class UserEntity {
   final String id;
   final String? name;
+  final String? address;
   final String? avatar;
   final String? email;
   final String? phone;
@@ -16,6 +17,7 @@ class UserEntity {
   UserEntity({
     required this.id,
     this.name,
+    this.address,
     this.avatar,
     this.email,
     this.phone,
@@ -36,6 +38,7 @@ class UserEntity {
     return UserEntity(
       id: userModel.id,
       name: userModel.name,
+      address: userModel.address,
       avatar: userModel.avatar,
       email: userModel.email,
       phone: userModel.phone,
@@ -55,6 +58,7 @@ class UserEntity {
     return UserModel(
       id: userEntity.id,
       name: userEntity.name,
+      address: userEntity.address,
       avatar: userEntity.avatar,
       email: userEntity.email,
       phone: userEntity.phone,

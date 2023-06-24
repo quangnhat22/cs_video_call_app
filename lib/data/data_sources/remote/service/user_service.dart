@@ -11,6 +11,7 @@ class UserService {
 
   Future<Response> updateSelf(
       {String? name,
+      String? address,
       String? avatar,
       String? gender,
       String? phone,
@@ -21,11 +22,11 @@ class UserService {
         "${BaseService.userPath}/self",
         data: {
           "name": name,
+          "address": address,
           "gender": gender?.toLowerCase(),
           "phone": phone,
-          //"address": "123",
           "birthday": birthday?.toIso8601String(),
-          // "bio": bio,
+          "bio": bio,
           "avatar": avatar,
         },
       );

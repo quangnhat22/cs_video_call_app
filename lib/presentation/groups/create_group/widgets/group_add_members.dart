@@ -1,10 +1,7 @@
 part of create_group;
 
 class GroupAddMembers extends StatefulWidget {
-  final Function onSelectMembers;
-  final Function onTextChange;
-
-  const GroupAddMembers(this.onSelectMembers, this.onTextChange, {super.key});
+  const GroupAddMembers({super.key});
 
   @override
   State<GroupAddMembers> createState() => _GroupAddMembersState();
@@ -56,9 +53,9 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
                     borderRadius: BorderRadius.circular(24),
                   ),
                   hintText: AppLocalizations.of(context)!.search_friends),
-              onChanged: (value) {
-                widget.onTextChange(value);
-              },
+              // onChanged: (value) {
+              //   widget.onTextChange(value);
+              // },
             ),
           ),
           Padding(

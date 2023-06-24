@@ -27,6 +27,8 @@
   "back_to_welcome": "BACK TO WELCOME",
   "please_enter_email": "Please enter email",
   "email_is_invalid": "Email is invalid",
+  "password_is_invalid": "Password is invalid",
+  "confirm_password_is_incorrect": "Confirm password is incorrect",
   "please_enter_password": "Please enter password",
   "please_enter_confirm_password": "Please enter confirm password",
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
@@ -86,6 +88,8 @@
   "full_name": "Full name",
   "phone_number": "Phone number",
   "bio": "Bio",
+  "gender": "Gender",
+  "address": "Address",
   "select_theme": "Select Theme",
   "select_language": "Select Language",
   "please_not_empty": "Please enter the fill",
@@ -150,5 +154,8 @@
         "example": "09:40"
       }
     }
-  }
+  },
+  "male": "Male",
+  "female": "Female",
+  "others": "Others"
 }

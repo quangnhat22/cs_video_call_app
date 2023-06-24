@@ -70,7 +70,7 @@ class GroupRepositoryImpl extends GroupRepository {
   Future<List<GroupRequestEntity>> getReceivedRequest() async {
     try {
       final res = await _service.getReceivedRequest();
-      if (res.statusCode == 201) {
+      if (res.statusCode == 200) {
         final listReceivedRequestJson = res.data["data"] as List<dynamic>?;
 
         if (listReceivedRequestJson != null) {
@@ -99,7 +99,7 @@ class GroupRepositoryImpl extends GroupRepository {
   Future<List<GroupRequestEntity>> getSentRequest() async {
     try {
       final res = await _service.getSentRequest();
-      if (res.statusCode == 201) {
+      if (res.statusCode == 200) {
         final listSentRequestJson = res.data["data"] as List<dynamic>?;
 
         if (listSentRequestJson != null) {

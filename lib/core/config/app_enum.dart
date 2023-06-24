@@ -2,7 +2,7 @@
 enum AppGender {
   male("Male"),
   female("Female"),
-  others("Others");
+  others("Other");
 
   const AppGender(this.value);
 
