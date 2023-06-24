@@ -94,7 +94,7 @@ class AppRoutes {
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
-        return _buildRoute(settings, const CreateSchedulePage());
+        return _buildAnimationRoute(settings, const CreateSchedulePage());
       case RouteName.personalCall:
         {
           final argument = settings.arguments as Map<String, dynamic>;

@@ -119,7 +119,7 @@
   "minutes": "phút",
   "action_success": "Yêu cầu của bạn đã gửi thành công!",
   "action_fail": "Yêu cầu của bạn đã thất bại! Vui lòng thử lại.",
-  "text_send_email" : "Chúng tôi đã gửi email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
+  "text_send_email": "Chúng tôi đã gửi email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
   "@text_send_email": {
     "placeholders": {
       "user_email": {
@@ -131,8 +131,8 @@
   "i_dont_get_it": "Tôi chưa nhận được",
   "update_profile": "Cập nhật thông tin",
   "i_verified": "Tôi xác nhận",
-  "cant_update_profile" :"Cập nhật thông tin không thành công! Vui lòng thử lại.",
-  "update_profile_success" :"Cập nhật thông tin thành công",
+  "cant_update_profile": "Cập nhật thông tin không thành công! Vui lòng thử lại.",
+  "update_profile_success": "Cập nhật thông tin thành công",
   "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại",
   "no_friends_found": "Không tìm thấy bạn bè",
   "unknown_name": "Tên không xác định",
@@ -145,6 +145,16 @@
   "sent_to": "Gửi đến",
   "at": "ngày",
   "recall_message_alert": "Thu hồi thành công",
+  "join": "Tham gia",
+  "meeting_started_time": "Bắt đầu lúc {time}",
+  "@meeting_started_time": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "09:40"
+      }
+    }
+  },
   "male": "Nam",
   "female": "Nữ",
   "others": "Khác"
