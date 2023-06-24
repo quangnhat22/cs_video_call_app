@@ -18,7 +18,7 @@ class InputConfirmPassword extends StatelessWidget {
           label:
               AppLocalizations.of(context)!.confirm_password_text_field_label,
           errorText: state.confirmedPassword.displayError != null
-              ? state.confirmedPassword.error.toString()
+              ? AppLocalizations.of(context)!.confirm_password_is_incorrect
               : null,
         );
       },

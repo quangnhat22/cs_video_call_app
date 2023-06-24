@@ -1,7 +1,4 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+part of edit_profile;
 
 class BirthdayInput extends StatefulWidget {
   const BirthdayInput({Key? key}) : super(key: key);
@@ -11,47 +8,45 @@ class BirthdayInput extends StatefulWidget {
 }
 
 class _BirthdayInputState extends State<BirthdayInput> {
-  TextEditingController dateInput = TextEditingController();
+  final TextEditingController _dateInputController = TextEditingController();
 
-  @override
-  void initState() {
-    dateInput.text = ""; //set the initial value of text field
-    super.initState();
+  void _onTapBirthdayInput(BuildContext ctx) async {
+    DateTime? pickedDate = await showDatePicker(
+        context: ctx,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1970),
+        lastDate: DateTime.now());
+
+    if (pickedDate != null && ctx.mounted) {
+      ctx.read<EditProfileCubit>().birthdayChanged(pickedDate);
+    } else {
+      return;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: TextField(
-        controller: dateInput,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.calendar_today),
-          label: Text("Birthday"),
-          border: OutlineInputBorder(
-              borderSide: BorderSide(width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-        ),
-        readOnly: true, //set it true, so that user will not able to edit text
-        onTap: () async {
-          DateTime? pickedDate = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
-              //DateTime.now() - not to allow to choose before today.
-              lastDate: DateTime(2101));
-
-          if (pickedDate != null) {
-            String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-            setState(() {
-              dateInput.text =
-                  formattedDate; //set output date to TextField value.
-            });
-          } else {
-            log("Date is not selected");
-          }
-        },
+    return BlocListener<EditProfileCubit, EditProfileState>(
+      listenWhen: (previous, current) => previous.dob != current.dob,
+      listener: (context, state) {
+        if (state.dob != null) {
+          _dateInputController.text =
+              AppDateTimeFormat.formatDDMMYYYY(state.dob);
+        }
+      },
+      child: CTextFormField(
+        controller: _dateInputController,
+        icon: const Icon(Icons.calendar_today),
+        label: AppLocalizations.of(context)!.friend_birthday,
+        isReadOnly: true,
+        onTap: () => _onTapBirthdayInput(context),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _dateInputController.dispose();
+    super.dispose();
   }
 }

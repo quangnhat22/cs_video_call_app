@@ -30,6 +30,7 @@ class UserLocalDataSrc {
 
   Future<void> updateUser({
     String? name,
+    String? address,
     String? avatar,
     String? phone,
     String? bio,

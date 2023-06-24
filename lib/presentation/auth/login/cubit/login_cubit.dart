@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthUseCase _usecase;
 
   void emailChanged(String value) {
-    final email = Email.dirty(value);
+    final email = Email.dirty(value.trim());
 
     emit(state.copyWith(
         email: email, isValid: Formz.validate([email, state.password])));

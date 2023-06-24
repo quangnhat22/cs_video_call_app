@@ -7,22 +7,26 @@ class CTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     required this.icon,
+    this.suffixIcon,
     required this.label,
     this.onChange,
     this.errorText,
     this.type = InputType.text,
     this.isReadOnly = false,
     this.onTap,
+    this.obscureText,
   });
 
   final TextEditingController? controller;
   final Icon icon;
+  final IconButton? suffixIcon;
   final String label;
   final InputType type;
   final Function(String)? onChange;
   final String? errorText;
   final VoidCallback? onTap;
   final bool isReadOnly;
+  final bool? obscureText;
 
   TextInputType _checkType() {
     switch (type) {
@@ -46,9 +50,10 @@ class CTextFormField extends StatelessWidget {
         onChanged: onChange,
         //validator: (value) => validateValue(value, context),
         minLines: 1,
-        maxLines: null,
+        maxLines: 1,
         decoration: InputDecoration(
           prefixIcon: icon,
+          suffixIcon: suffixIcon,
           label: Text(label),
           errorText: errorText,
           border: const OutlineInputBorder(
@@ -58,6 +63,7 @@ class CTextFormField extends StatelessWidget {
             ),
           ),
         ),
+        obscureText: obscureText ?? false,
         keyboardType: _checkType(),
         readOnly: isReadOnly,
         onTap: onTap,
