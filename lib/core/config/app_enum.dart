@@ -2,7 +2,7 @@
 enum AppGender {
   male("Male"),
   female("Female"),
-  others("Others");
+  others("Other");
 
   const AppGender(this.value);
 
@@ -61,6 +61,15 @@ enum AppFriendRelation {
   non("non");
 
   const AppFriendRelation(this.value);
+
+  final String value;
+}
+
+enum AppMeetingStatus {
+  onGoing("on-going"),
+  ended("ended");
+
+  const AppMeetingStatus(this.value);
 
   final String value;
 }

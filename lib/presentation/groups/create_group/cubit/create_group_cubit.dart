@@ -20,30 +20,30 @@ class CreateGroupCubit extends Cubit<CreateGroupState> {
       final createGroupState = state as _Initial;
       if (!createGroupState.isValid) return;
 
-      await _groupUseCase.createGroup(createGroupState.groupName,
-          createGroupState.groupImage, createGroupState.members);
-      emit(const CreateGroupState.sendCreateRequestSuccess());
+      emit(const SentCreateRequestGroupInProgress());
+      await _groupUseCase.createGroup(
+        createGroupState.groupName,
+        createGroupState.groupImage,
+        createGroupState.members,
+      );
+      emit(const SentCreateRequestGroupSuccess());
     } catch (e) {
       emit(SentCreateRequestGroupFailure(message: e.toString()));
-    } finally {
-      emit(const _Initial());
     }
   }
 
   void groupImageChanged(String groupImage) {
     final createGroupState = state as _Initial;
     emit(createGroupState.copyWith(
-        groupImage: groupImage,
-        isValid:
-            groupImage.isNotEmpty && createGroupState.groupName.isNotEmpty));
+      groupImage: groupImage,
+      isValid: createGroupState.groupName.isNotEmpty,
+    ));
   }
 
   void groupNameChanged(String groupName) {
     final createGroupState = state as _Initial;
     emit(createGroupState.copyWith(
-        groupName: groupName,
-        isValid:
-            createGroupState.groupImage.isNotEmpty && groupName.isNotEmpty));
+        groupName: groupName, isValid: groupName.isNotEmpty));
   }
 
   void groupMembersChanged(UserEntity member) {

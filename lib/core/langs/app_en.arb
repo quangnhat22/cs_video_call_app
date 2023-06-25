@@ -27,6 +27,8 @@
   "back_to_welcome": "BACK TO WELCOME",
   "please_enter_email": "Please enter email",
   "email_is_invalid": "Email is invalid",
+  "password_is_invalid": "Password is invalid",
+  "confirm_password_is_incorrect": "Confirm password is incorrect",
   "please_enter_password": "Please enter password",
   "please_enter_confirm_password": "Please enter confirm password",
   "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
@@ -86,6 +88,8 @@
   "full_name": "Full name",
   "phone_number": "Phone number",
   "bio": "Bio",
+  "gender": "Gender",
+  "address": "Address",
   "select_theme": "Select Theme",
   "select_language": "Select Language",
   "please_not_empty": "Please enter the fill",
@@ -115,7 +119,7 @@
   "minutes": "minutes",
   "action_success": "Your action is success",
   "action_fail": "Your action is fail! Try again",
-  "text_send_email" : "We have sent a verified email to {user_email}. Please check your email and click the link to verify your account",
+  "text_send_email": "We have sent a verified email to {user_email}. Please check your email and click the link to verify your account",
   "@text_send_email": {
     "placeholders": {
       "user_email": {
@@ -127,11 +131,31 @@
   "i_dont_get_it": "I don't get it",
   "update_profile": "Update Profile",
   "i_verified": "I verified",
-  "cant_update_profile" :"Can't update profile! Try again",
-  "update_profile_success" :"Update profile success",
+  "cant_update_profile": "Can't update profile! Try again",
+  "update_profile_success": "Update profile success",
   "login_failed_message": "Login failed, please try again",
   "no_friends_found": "No friends found",
   "unknown_name": "Unknown name",
+  "unknown_group": "Unknown group",
   "create_group_failed": "Create group failed!!",
-  "create_group_successfully": "Create group successfully!!"
+  "create_group_successfully": "Create group successfully!!",
+  "no_received_requests_found": "No received requests found!",
+  "no_sent_requests_found": "No sent requests found!",
+  "sent_by": "Sent by",
+  "sent_to": "Sent to",
+  "at": "at",
+  "recall_message_alert": "Recall successfully",
+  "join": "Join",
+  "meeting_started_time": "Started {time}",
+  "@meeting_started_time": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "09:40"
+      }
+    }
+  },
+  "male": "Male",
+  "female": "Female",
+  "others": "Others"
 }

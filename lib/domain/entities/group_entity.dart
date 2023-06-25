@@ -1,14 +1,15 @@
 import '../../data/models/group_model.dart';
-import 'user_entity.dart';
 
 class GroupEntity {
   String id;
   String? name;
-  List<UserEntity?>? members;
+  String? imageUrl;
+  List<String?>? members;
 
   GroupEntity({
     required this.id,
     this.name,
+    this.imageUrl,
     this.members,
   });
 
@@ -21,6 +22,8 @@ class GroupEntity {
     return GroupEntity(
       id: model.id,
       name: model.name,
+      imageUrl: model.imageUrl,
+      members: model.members,
     );
   }
 }

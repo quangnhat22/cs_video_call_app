@@ -19,7 +19,7 @@ class SignUpFormCubit extends Cubit<SignUpFormState> {
   final AuthRepository _repo;
 
   void emailChanged(String value) {
-    final email = Email.dirty(value);
+    final email = Email.dirty(value.trim());
     emit(
       state.copyWith(
         email: email,

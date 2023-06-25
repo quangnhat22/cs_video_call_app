@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
+
+import 'base_servie.dart';
 
 @Singleton()
 class DioInterceptor {
@@ -21,17 +21,48 @@ class DioInterceptor {
           handler.next(options);
         }),
         onResponse: ((response, handler) async {
-          if (response.statusCode == 401) {
-            log("401", name: "401");
-          }
           handler.next(response);
         }),
         onError: (e, handler) async {
+          if (e.response?.statusCode == 401) {
+            _handleAccessTokenExpired(dio);
+
+            //recall request:
+            final String? accessToken =
+                await _authLocalDataSrc.getAccessToken();
+            e.requestOptions.headers
+                .putIfAbsent('Authorization', () => 'Bearer $accessToken');
+            final opts = Options(
+                method: e.requestOptions.method,
+                headers: e.requestOptions.headers);
+            final cloneReq = await dio.request(e.requestOptions.path,
+                options: opts,
+                data: e.requestOptions.data,
+                queryParameters: e.requestOptions.queryParameters);
+            return handler.resolve(cloneReq);
+          }
           handler.next(e);
         },
       ),
     );
     return dio;
+  }
+
+  Future<void> _handleAccessTokenExpired(Dio dio) async {
+    try {
+      final refreshToken = await _authLocalDataSrc.getRefreshToken();
+      if (refreshToken != null) {
+        final res = await dio.post("${BaseService.authPath}/access-token",
+            data: {"refresh_token": refreshToken});
+        if (res.statusCode == 200) {
+          final newAccessToken = res.data["data"]["token"];
+          await _authLocalDataSrc.saveAuth(newAccessToken, refreshToken);
+          // await _authLocal.set ;
+        }
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
 // static Future<Dio> addInterceptorRefreshToken(Dio dio) async {

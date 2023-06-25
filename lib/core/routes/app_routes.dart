@@ -21,7 +21,7 @@ import 'package:videocall/presentation/groups/groups_details/group_detail_dash_b
 import 'package:videocall/presentation/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
-import 'package:videocall/presentation/setting/edit_profile/pages/edit_profile_page.dart';
+import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../domain/entities/user_entity.dart';
@@ -73,7 +73,11 @@ class AppRoutes {
       case RouteName.groups:
         return _buildRoute(settings, const GroupsDashBoardPage());
       case RouteName.teamDetails:
-        return _buildRoute(settings, const GroupsDetails());
+        return _buildRoute(
+            settings,
+            GroupDetailPage(
+              groupId: settings.arguments as String,
+            ));
       case RouteName.schedules:
         return _buildRoute(settings, ScheduleDashBoardPage());
       case RouteName.notifications:
@@ -90,7 +94,7 @@ class AppRoutes {
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
-        return _buildRoute(settings, const CreateSchedulePage());
+        return _buildAnimationRoute(settings, const CreateSchedulePage());
       case RouteName.personalCall:
         {
           final argument = settings.arguments as Map<String, dynamic>;

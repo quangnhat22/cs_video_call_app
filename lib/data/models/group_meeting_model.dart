@@ -9,6 +9,7 @@ class GroupMeetingModel with _$GroupMeetingModel {
     required String id,
     String? title,
     String? description,
+    // ignore: invalid_annotation_target
     @JsonKey(name: "time_start") DateTime? timeStart,
     String? groupId,
     String? status,

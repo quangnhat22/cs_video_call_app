@@ -125,10 +125,10 @@ class _ControlsState extends State<Controls> {
           builder: (context) => ScreenSelectDialog(),
         );
         if (source == null) {
-          print('cancelled screenshare');
+          log('cancelled screenshare');
           return;
         }
-        print('DesktopCapturerSource: ${source.id}');
+        log('DesktopCapturerSource: ${source.id}');
         var track = await LocalVideoTrack.createScreenShareTrack(
           ScreenShareCaptureOptions(
             sourceId: source.id,
@@ -137,7 +137,7 @@ class _ControlsState extends State<Controls> {
         );
         await participant.publishVideoTrack(track);
       } catch (e) {
-        print('could not publish video: $e');
+        log('could not publish video: $e');
       }
       return;
     }

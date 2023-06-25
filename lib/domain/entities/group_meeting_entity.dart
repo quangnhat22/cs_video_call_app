@@ -1,3 +1,4 @@
+import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/data/models/group_meeting_model.dart';
 
 class GroupMeetingEntity {
@@ -6,7 +7,7 @@ class GroupMeetingEntity {
   final String? description;
   final DateTime? timeStart;
   final String? groupId;
-  final String? status;
+  final AppMeetingStatus? meetingStatus;
 
   GroupMeetingEntity({
     required this.id,
@@ -14,7 +15,7 @@ class GroupMeetingEntity {
     this.description,
     this.timeStart,
     this.groupId,
-    this.status,
+    this.meetingStatus,
   });
 
   static final groupMeetingEntityEmpty = GroupMeetingEntity(id: "-1");
@@ -29,7 +30,9 @@ class GroupMeetingEntity {
       description: model.description,
       timeStart: model.timeStart,
       groupId: model.groupId,
-      status: model.status,
+      meetingStatus: (model.status == "on-going")
+          ? AppMeetingStatus.onGoing
+          : AppMeetingStatus.ended,
     );
   }
 }

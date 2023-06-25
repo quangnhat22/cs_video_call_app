@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:videocall/presentation/setting/edit_profile/widgets/select_gender_form_dialog.dart';
+part of edit_profile;
 
 class GenderInput extends StatefulWidget {
   const GenderInput({Key? key}) : super(key: key);
@@ -9,47 +8,42 @@ class GenderInput extends StatefulWidget {
 }
 
 class _GenderInputState extends State<GenderInput> {
-  TextEditingController genderController = TextEditingController();
-
-  @override
-  void initState() {
-    genderController.text = ""; //set the initial value of text field
-    super.initState();
-  }
-
-  Future<void> _showDialog(BuildContext ctx) {
-    return showDialog(
-      context: ctx,
-      builder: (context) => GenderFormDialog(
-        initGender: genderController.text,
-      ),
-    ).then((value) {
-      setState(() {
-        genderController.text = value;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: TextField(
-        controller: genderController,
-        decoration: const InputDecoration(
-          prefixIcon: Icon(Icons.people_outline),
-          suffixIcon: Icon(Icons.expand_more_outlined),
-          label: Text("Gender"),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(width: 1),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8),
+    return BlocBuilder<EditProfileCubit, EditProfileState>(
+      buildWhen: (previous, current) => previous.gender != current.gender,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child: DropdownButtonFormField(
+            items: [
+              DropdownMenuItem(
+                  value: AppGender.male,
+                  child: Text(AppLocalizations.of(context)!.male)),
+              DropdownMenuItem(
+                  value: AppGender.female,
+                  child: Text(AppLocalizations.of(context)!.female)),
+              DropdownMenuItem(
+                  value: AppGender.others,
+                  child: Text(AppLocalizations.of(context)!.others)),
+            ],
+            value: state.gender,
+            onChanged: (value) {
+              context
+                  .read<EditProfileCubit>()
+                  .genderChanged(value as AppGender);
+            },
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.face_outlined),
+              label: Text('${AppLocalizations.of(context)!.gender} (*)'),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(width: 1),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
             ),
           ),
-        ),
-        readOnly: true,
-        onTap: () => _showDialog(context),
-      ),
+        );
+      },
     );
   }
 }

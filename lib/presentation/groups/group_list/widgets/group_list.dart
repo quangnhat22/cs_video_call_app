@@ -5,42 +5,37 @@ class GroupList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: BlocBuilder<GroupListBloc, GroupListState>(
-        builder: (context, state) {
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: ((context, index) {
-              return state.maybeWhen(
-                success: (groups) {
-                  return GroupListItem(
-                    groupName: groups[index].name ?? "",
-                    groupAvatar: null,
-                  );
-                  //if (index != groups.length - 1) const DividerSpaceLeft();
-                },
-                failure: (message) {
-                  return const Center(
-                    child: Text("Something wrong! Try again."),
-                  );
-                },
-                orElse: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              );
-            }),
-            itemCount: state.maybeWhen(
-              success: (groups) => groups.length,
-              failure: (message) => 0,
-              orElse: () => 0,
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<GroupListBloc, GroupListState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          failure: (message) {
+            return const Center(
+              child: Text("Something wrong! Try again."),
+            );
+          },
+          success: (groups) {
+            if (groups.isEmpty) {
+              return const Center(child: Text("No groups found!"));
+            }
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) => const DividerSpaceLeft(),
+              itemBuilder: ((context, index) {
+                return GroupListItem(
+                  groupId: groups[index].id,
+                  groupName: groups[index].name ?? "",
+                  groupAvatar: groups[index].imageUrl,
+                );
+              }),
+              itemCount: groups.length,
+            );
+          },
+          orElse: () {
+            return const ListSkeleton();
+          },
+        );
+      },
     );
   }
 }

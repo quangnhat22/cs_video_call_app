@@ -22,19 +22,33 @@ class GroupListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 20, top: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [DropdownGroupsFilterButton(handleDropdownChange)],
-            ),
-          ),
-          const GroupList()
-        ],
+    return Scaffold(
+      // body: SingleChildScrollView(
+      //   child: Column(
+      //     children: <Widget>[
+      //       Padding(
+      //         padding: const EdgeInsets.only(right: 20, top: 16),
+      //         child: Row(
+      //           mainAxisAlignment: MainAxisAlignment.end,
+      //           children: [DropdownGroupsFilterButton(handleDropdownChange)],
+      //         ),
+      //       ),
+      //       const GroupList()
+      //     ],
+      //   ),
+      body: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: GroupList(),
       ),
+
+      floatingActionButton: FloatingActionStadiumButton(() {
+        NavigationUtil.pushNamed(routeName: RouteName.createGroup)
+            .then((value) {
+          if (value == true) {
+            context.read<GroupListBloc>().add(const GroupListEvent.started());
+          }
+        });
+      }, null),
     );
   }
 }

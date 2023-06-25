@@ -41,7 +41,7 @@ class CallGroupService {
     }
   }
 
-  Future<Response> getGroupMeeting(
+  Future<Response> getListGroupMeeting(
     String groupId,
   ) async {
     try {

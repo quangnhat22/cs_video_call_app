@@ -34,20 +34,20 @@ class ScheduleAddParticipants extends StatelessWidget {
           ListTile(
             title: GestureDetector(
               onTap: () async {
-                List<String> filteredMembers = allMembers
-                    .where((element) => !selectedMembers.contains(element))
-                    .toList();
-                final newMembers = await showSearch(
-                    context: context,
-                    delegate: AddMembersSearch(filteredMembers));
+                // List<String> filteredMembers = allMembers
+                //     .where((element) => !selectedMembers.contains(element))
+                //     .toList();
+                // final newMembers = await showSearch(
+                //     context: context,
+                //     delegate: AddMembersSearch(filteredMembers));
 
-                if (newMembers != null) {
-                  final decodedMembers = jsonDecode(newMembers);
+                // if (newMembers != null) {
+                //   final decodedMembers = jsonDecode(newMembers);
 
-                  // debugPrint(decodedMembers[0]);
+                //   // debugPrint(decodedMembers[0]);
 
-                  onAddParticipants(decodedMembers);
-                }
+                //   onAddParticipants(decodedMembers);
+                // }
               },
               child: Text(
                 AppLocalizations.of(context)!.add_participants,

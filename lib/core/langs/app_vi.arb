@@ -27,6 +27,8 @@
   "back_to_welcome": "QUAY LẠI",
   "please_enter_email": "Vui lòng nhập email",
   "email_is_invalid": "Email không hợp lệ",
+  "password_is_invalid": "Mật khẩu không hợp lệ",
+  "confirm_password_is_invalid": "Xác nhận mật khẩu không đúng",
   "please_enter_password": "Vui lòng nhập mật khẩu",
   "please_enter_confirm_password": "Vui lòng nhập lại mật khẩu",
   "password_must_be_at_least_8_characters": "Mật khẩu phải có ít nhất 8 kí tự",
@@ -86,6 +88,8 @@
   "full_name": "Họ và tên",
   "phone_number": "Số điện thoại",
   "bio": "Giới thiệu bản thân",
+  "gender": "Gender",
+  "address": "Địa chỉ",
   "select_theme": "Thay đổi chủ đề",
   "select_language": "Thay đổi ngôn ngữ",
   "please_not_empty": "Vui lòng không để ô này trống",
@@ -115,7 +119,7 @@
   "minutes": "phút",
   "action_success": "Yêu cầu của bạn đã gửi thành công!",
   "action_fail": "Yêu cầu của bạn đã thất bại! Vui lòng thử lại.",
-  "text_send_email" : "Chúng tôi đã gửi email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
+  "text_send_email": "Chúng tôi đã gửi email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
   "@text_send_email": {
     "placeholders": {
       "user_email": {
@@ -127,11 +131,31 @@
   "i_dont_get_it": "Tôi chưa nhận được",
   "update_profile": "Cập nhật thông tin",
   "i_verified": "Tôi xác nhận",
-  "cant_update_profile" :"Cập nhật thông tin không thành công! Vui lòng thử lại.",
-  "update_profile_success" :"Cập nhật thông tin thành công",
+  "cant_update_profile": "Cập nhật thông tin không thành công! Vui lòng thử lại.",
+  "update_profile_success": "Cập nhật thông tin thành công",
   "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại",
   "no_friends_found": "Không tìm thấy bạn bè",
   "unknown_name": "Tên không xác định",
-   "create_group_failed": "Tạo nhóm thất bại!!",
-  "create_group_successfully": "Tạo nhóm thành công!!"
+  "unknown_group": "Nhóm không xác định",
+  "create_group_failed": "Tạo nhóm thất bại!!",
+  "create_group_successfully": "Tạo nhóm thành công!!",
+  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào!",
+  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào!",
+  "sent_by": "Gửi bởi",
+  "sent_to": "Gửi đến",
+  "at": "ngày",
+  "recall_message_alert": "Thu hồi thành công",
+  "join": "Tham gia",
+  "meeting_started_time": "Bắt đầu lúc {time}",
+  "@meeting_started_time": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "09:40"
+      }
+    }
+  },
+  "male": "Nam",
+  "female": "Nữ",
+  "others": "Khác"
 }

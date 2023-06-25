@@ -1,113 +1,65 @@
 part of create_group;
 
-class CreateGroupPage extends StatefulWidget {
+class CreateGroupPage extends StatelessWidget {
   const CreateGroupPage({super.key});
 
   @override
-  State<CreateGroupPage> createState() => _CreateGroupPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<CreateGroupCubit>(),
+      child: const CreateGroupView(),
+    );
+  }
 }
 
-class _CreateGroupPageState extends State<CreateGroupPage> {
-  final List<String> allFriends = [
-    'Trần Đình Khôi',
-    'Trần Đình Lộc',
-    'Nguyễn Đình Nhật Quang',
-    'Võ Minh Nhật',
-    'Hoàng Thu Thủy',
-    'Lý Nhân Nghĩa',
-    'Đỗ Trí Nhân',
-  ];
-
-  final List<String> selectedFriends = [];
-  late List<String> friendResults;
-
-  @override
-  void initState() {
-    super.initState();
-    friendResults = [...allFriends];
-  }
-
-  void handleSelectMembers(String member) {
-    if (!selectedFriends.contains(member)) {
-      setState(() {
-        selectedFriends.add(member);
-      });
-    } else {
-      setState(() {
-        selectedFriends.remove(member);
-      });
-    }
-  }
-
-  void handleTextChange(String value) {
-    if (value == '') {
-      setState(() {
-        friendResults = [...allFriends];
-      });
-    } else {
-      setState(() {
-        friendResults = allFriends
-            .where(
-                (friend) => friend.toLowerCase().contains(value.toLowerCase()))
-            .toList();
-      });
-    }
-  }
+class CreateGroupView extends StatelessWidget {
+  const CreateGroupView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CreateGroupCubit>(
-      create: (_) => getIt<CreateGroupCubit>(),
-      child: BlocListener<CreateGroupCubit, CreateGroupState>(
-        listener: (context, state) {
-          if (state is SentCreateRequestGroupFailure) {
-            SnackBarApp.showSnackBar(
-                context, state.message, TypesSnackBar.error);
-          }
+    return BlocListener<CreateGroupCubit, CreateGroupState>(
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        if (state is SentCreateRequestGroupFailure) {
+          SnackBarApp.showSnackBar(
+            context,
+            state.message,
+            TypesSnackBar.error,
+          );
+          NavigationUtil.pop();
+        }
 
-          if (state is SentCreateRequestGroupSuccess) {
-            SnackBarApp.showSnackBar(
-                context,
-                AppLocalizations.of(context)!.create_group_successfully,
-                TypesSnackBar.success);
-
-            NavigationUtil.pop();
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            title:
-                Text(AppLocalizations.of(context)!.create_group_app_bar_title),
-            centerTitle: true,
-            backgroundColor: Theme.of(context).colorScheme.background,
-            leading: IconButton(
-              onPressed: () {
-                NavigationUtil.pop();
-              },
-              icon: const Icon(Icons.arrow_back),
-            ),
-            actions: [
-              BlocBuilder<CreateGroupCubit, CreateGroupState>(
-                builder: (context, state) {
-                  return IconButton(
-                    onPressed: () {
-                      context.read<CreateGroupCubit>().sendCreateGroupRequest();
-                    },
-                    icon: const Icon(Icons.done),
-                  );
-                },
-              )
-            ],
+        if (state is SentCreateRequestGroupSuccess) {
+          SnackBarApp.showSnackBar(
+              context,
+              AppLocalizations.of(context)!.create_group_successfully,
+              TypesSnackBar.success);
+          NavigationUtil.pop(result: true);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.create_group_app_bar_title),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          leading: IconButton(
+            onPressed: () {
+              NavigationUtil.pop();
+            },
+            icon: const Icon(Icons.arrow_back),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const GroupSetPhoto(),
-                  const GroupTextFieldName(),
-                  GroupAddMembers(handleSelectMembers, handleTextChange),
-                ]),
-          ),
+          actions: const [
+            ButtonAddNewGroup(),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                GroupSetPhoto(),
+                GroupTextFieldName(),
+                GroupAddMembers(),
+              ]),
         ),
       ),
     );

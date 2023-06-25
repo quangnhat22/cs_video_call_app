@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -13,6 +13,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   CallGroupStatusCubit() : super(const CallGroupStatusState.initial());
 
   late final Room _room;
+  final isOwnerRoom = false;
 
   Future<void> setUpRoom() async {
     try {

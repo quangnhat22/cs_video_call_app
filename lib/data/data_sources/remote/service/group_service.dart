@@ -33,4 +33,68 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> getGroupDetail(String groupId) async {
+    try {
+      return await _service.dio.get('${BaseService.groupPath}/$groupId');
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getReceivedRequest() async {
+    try {
+      return await _service.dio
+          .get('${BaseService.groupPath}/request/received');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> getSentRequest() async {
+    try {
+      return await _service.dio.get('${BaseService.groupPath}/request/sent');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> recallSentRequest(String groupId, String friendId) async {
+    try {
+      return await _service.dio
+          .delete('${BaseService.groupPath}/request/$groupId/$friendId');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> rejectReceivedRequest(String groupId) async {
+    try {
+      return await _service.dio
+          .delete('${BaseService.groupPath}/request/$groupId/reject');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> acceptReceivedRequest(String groupId) async {
+    try {
+      return await _service.dio
+          .post('${BaseService.groupPath}/request/$groupId/accept');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

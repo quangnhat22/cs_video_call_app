@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -125,7 +126,7 @@ class _GroupCallingState extends State<GroupCalling> {
   void _setUpListeners() => _listener
     ..on<RoomDisconnectedEvent>((event) async {
       if (event.reason != null) {
-        print('Room disconnected: reason => ${event.reason}');
+        log('Room disconnected: reason => ${event.reason}');
       }
       WidgetsBindingCompatible.instance
           ?.addPostFrameCallback((timeStamp) => Navigator.pop(context));
@@ -136,21 +137,20 @@ class _GroupCallingState extends State<GroupCalling> {
     ..on<LocalTrackPublishedEvent>((_) => _sortParticipants())
     ..on<LocalTrackUnpublishedEvent>((_) => _sortParticipants())
     ..on<ParticipantNameUpdatedEvent>((event) {
-      print(
-          'Participant name updated: ${event.participant.identity}, name => ${event.name}');
+      log('Participant name updated: ${event.participant.identity}, name => ${event.name}');
     })
     ..on<DataReceivedEvent>((event) {
       String decoded = 'Failed to decode';
       try {
         decoded = utf8.decode(event.data);
       } catch (_) {
-        print('Failed to decode: $_');
+        log('Failed to decode: $_');
       }
       context.showDataReceivedDialog(decoded);
     })
     ..on<AudioPlaybackStatusChanged>((event) async {
       if (!widget.room.canPlaybackAudio) {
-        print('Audio playback failed for iOS Safari ..........');
+        log('Audio playback failed for iOS Safari ..........');
         bool? yesno = await context.showPlayAudioManuallyDialog();
         if (yesno == true) {
           await widget.room.startAudio();
@@ -161,8 +161,8 @@ class _GroupCallingState extends State<GroupCalling> {
   Future<bool?> _showPublishDialog() => showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('Publish'),
-          content: Text('Would you like to publish your Camera & Mic ?'),
+          title: const Text('Publish'),
+          content: const Text('Would you like to publish your Camera & Mic ?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
@@ -183,13 +183,13 @@ class _GroupCallingState extends State<GroupCalling> {
     try {
       await widget.room.localParticipant?.setCameraEnabled(true);
     } catch (error) {
-      print('could not publish video: $error');
+      log('could not publish video: $error');
       await context.showErrorDialog(error);
     }
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(true);
     } catch (error) {
-      print('could not publish audio: $error');
+      log('could not publish audio: $error');
       await context.showErrorDialog(error);
     }
   }

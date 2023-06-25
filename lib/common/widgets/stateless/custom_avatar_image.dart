@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:videocall/common/widgets/stateless/skeleton/skeleton.dart';
 import 'package:videocall/core/config/app_assets.dart';
 
 class CustomAvatarImage extends StatelessWidget {
   const CustomAvatarImage({
     Key? key,
     this.urlImage,
-    this.maxRadiusEmptyImg,
+    this.maxRadiusEmptyImg = 24,
     this.widthImage,
     this.heightImage,
   }) : super(key: key);
@@ -49,7 +50,7 @@ class CustomAvatarImage extends StatelessWidget {
         ),
       ),
       //placeholder: (context, url) => const Skeleton.circle(),
-      placeholder: (context, url) => const CircularProgressIndicator(),
+      placeholder: (context, url) => const Skeleton.circle(),
       errorWidget: (context, url, error) {
         return const Icon(Icons.error);
       },
