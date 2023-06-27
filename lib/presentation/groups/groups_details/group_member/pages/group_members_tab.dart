@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../core/config/app_text_styles.dart';
+import '../../groups_details.dart';
 
 class GroupMemberPage extends StatelessWidget {
   const GroupMemberPage({super.key});
