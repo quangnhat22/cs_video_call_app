@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/widgets/list_group_meeting.dart';
 
-class GroupsCallPage extends StatelessWidget {
-  const GroupsCallPage({super.key});
+class GroupMeetingView extends StatelessWidget {
+  const GroupMeetingView({super.key});
 
   @override
   Widget build(BuildContext context) {

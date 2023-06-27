@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/call/group_call/pages/group_call_main_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
+import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
 
 import '../../bloc/group_detail_bloc.dart';
@@ -112,7 +113,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
           body: TabBarView(
             controller: _tabController,
             children: const <Widget>[
-              GroupCallPage(),
+              GroupMeetingView(),
               GroupDiscussTab(),
               GroupMemberPage()
             ],
