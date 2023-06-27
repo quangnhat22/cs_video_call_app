@@ -1,4 +1,5 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 
 class GroupMemberItem extends StatelessWidget {
   const GroupMemberItem({

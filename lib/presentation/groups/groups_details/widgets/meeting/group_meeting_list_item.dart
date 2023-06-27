@@ -1,4 +1,10 @@
-part of groups_details;
+import 'package:avatar_stack/avatar_stack.dart';
+import 'package:avatar_stack/positions.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/core/config/app_enum.dart';
+import 'package:videocall/core/utils/date_time_format.dart';
+import 'package:videocall/domain/entities/group_meeting_entity.dart';
 
 class GroupMeetingListItem extends StatelessWidget {
   const GroupMeetingListItem({

@@ -9,17 +9,17 @@ class AuthService {
 
   final BaseService _service;
 
-  Future<Response> register(
-    String email,
-    String password,
-    String deviceName,
-  ) async {
+  Future<Response> register(String email, String password, String deviceName,
+      String? fcmToken) async {
     try {
       return await _service.dio.post(
         "${BaseService.authPath}/register",
         data: {
           "data": {"email": email, "password": password},
-          "device": {"name": deviceName},
+          "device": {
+            "name": deviceName,
+            "push_notification_token": fcmToken,
+          },
         },
       );
     } on DioError catch (e) {

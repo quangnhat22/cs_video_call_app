@@ -6,11 +6,11 @@ import 'package:videocall/presentation/call/group_call/pages/group_call_main_pag
 import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
 
-import '../../../../../common/widgets/stateless/search/add_members_search.dart';
 import '../../bloc/group_detail_bloc.dart';
 import '../../cubit_group_meeting/group_meeting_cubit.dart';
 import '../../cubit_inivite_new_member/new_member_cubit.dart';
-import '../../groups_details.dart';
+import '../../widgets/meeting/fab_create_new_meeting.dart';
+import '../../widgets/member/fab_invite_new_member.dart';
 
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({

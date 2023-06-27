@@ -1,4 +1,9 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
+import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart';
+
+import 'group_meeting_list_item.dart';
 
 class GroupMeetingList extends StatelessWidget {
   const GroupMeetingList({super.key});
@@ -14,7 +19,7 @@ class GroupMeetingList extends StatelessWidget {
           getListFail: (message) {
             return Center(
               //TODO: support language
-              child: Text(message ?? "Somethign wrong! Try again!"),
+              child: Text(message ?? "Something wrong! Try again!"),
             );
           },
           getListSuccess: (listMeeting) {

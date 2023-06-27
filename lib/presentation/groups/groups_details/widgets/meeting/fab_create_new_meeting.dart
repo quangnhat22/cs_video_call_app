@@ -1,4 +1,9 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:videocall/core/routes/app_navigation.dart';
+import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/core/utils/snack_bar.dart';
+import 'package:videocall/presentation/groups/groups_details/cubit_inivite_new_member/new_member_cubit.dart';
 
 class FabCreateNewMeeting extends StatelessWidget {
   const FabCreateNewMeeting({super.key});
