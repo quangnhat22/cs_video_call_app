@@ -8,7 +8,7 @@ class GroupMemberPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const GroupMemberView();
   }
 }
 
@@ -20,7 +20,10 @@ class GroupMemberView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[GroupMemberNumber(), GroupMemberList()],
+        children: const <Widget>[
+          GroupMemberNumber(),
+          GroupMemberList(),
+        ],
       ),
     );
   }

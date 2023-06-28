@@ -4,15 +4,13 @@ import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/domain/modules/call/livekit_call_repository.dart';
 
 abstract class LiveKitCallUseCase {
-  Future<void> createMeeting({
-    required Room room,
+  Future<String?> createMeeting({
     required String groupId,
     String? title,
     String? description,
   });
 
-  Future<void> joinMeeting({
-    required Room room,
+  Future<String?> joinMeeting({
     required String groupId,
     required String meetingId,
   });
@@ -28,14 +26,13 @@ class LiveKitCallUseCaseImpl extends LiveKitCallUseCase {
       : _repo = callGroupRepo;
 
   @override
-  Future<void> createMeeting({
-    required Room room,
+  Future<String?> createMeeting({
     required String groupId,
     String? title,
     String? description,
-  }) {
-    return _repo.createMeeting(
-        room: room, groupId: groupId, title: title, description: description);
+  }) async {
+    return await _repo.createMeeting(
+        groupId: groupId, title: title, description: description);
   }
 
   @override
@@ -44,11 +41,8 @@ class LiveKitCallUseCaseImpl extends LiveKitCallUseCase {
   }
 
   @override
-  Future<void> joinMeeting(
-      {required Room room,
-      required String groupId,
-      required String meetingId}) {
-    return _repo.joinMeeting(
-        room: room, groupId: groupId, meetingId: meetingId);
+  Future<String?> joinMeeting(
+      {required String groupId, required String meetingId}) async {
+    return await _repo.joinMeeting(groupId: groupId, meetingId: meetingId);
   }
 }

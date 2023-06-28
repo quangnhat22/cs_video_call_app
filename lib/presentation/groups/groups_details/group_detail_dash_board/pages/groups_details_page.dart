@@ -113,7 +113,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
           body: TabBarView(
             controller: _tabController,
             children: const <Widget>[
-              GroupMeetingView(),
+              GroupMeetingPage(),
               GroupDiscussTab(),
               GroupMemberPage()
             ],

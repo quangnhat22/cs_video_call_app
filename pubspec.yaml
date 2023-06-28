@@ -72,6 +72,7 @@ dependencies:
       url: https://github.com/livekit/client-sdk-flutter
   permission_handler: ^10.2.0
   flutter_background: ^1.2.0
+  fluttertoast: ^8.2.2
 
 
 dev_dependencies:
@@ -107,6 +108,14 @@ flutter:
     - assets/images/
     - assets/logos/
     - assets/gifs/
+
+# flutter_intl:                                   
+#   enabled: true                                 
+#   class_name: I10n                              
+#   main_locale: en                               
+#   arb_dir: lib/core/langs     
+#   template_arb_file: app_en.arb       
+#   output_dir: app_localizations.dart   
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

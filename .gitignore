@@ -50,3 +50,4 @@ app.*.map.json
 *.g.dart
 di/injector.config.dart
 .fvm
+.vscode
