@@ -1,7 +1,9 @@
 part of global_search;
 
 class SearchResult extends StatelessWidget {
-  const SearchResult({super.key});
+  final List<UserEntity>? filteredFriends;
+
+  const SearchResult({super.key, this.filteredFriends});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +11,11 @@ class SearchResult extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[FriendSearchResult()],
+        children: <Widget>[
+          FriendSearchResult(
+            friends: filteredFriends,
+          )
+        ],
       ),
     );
   }

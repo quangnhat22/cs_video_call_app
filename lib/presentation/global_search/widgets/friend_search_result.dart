@@ -1,10 +1,14 @@
 part of global_search;
 
 class FriendSearchResult extends StatelessWidget {
-  const FriendSearchResult({super.key});
+  final List<UserEntity>? friends;
+
+  const FriendSearchResult({super.key, this.friends});
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+    int randomNumber = random.nextInt(10);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -45,7 +49,7 @@ class FriendSearchResult extends StatelessWidget {
               ),
             ),
           ),
-          itemCount: 10,
+          itemCount: randomNumber,
         ),
       ],
     );

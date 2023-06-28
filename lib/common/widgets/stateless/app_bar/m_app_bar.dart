@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:videocall/domain/modules/search/search_usecase.dart';
 import 'package:videocall/presentation/global_search/global_search.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/config/app_theme.dart';
 
 import '../../../../core/config/app_assets.dart';
 
+@Injectable()
 class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MHomeAppBar(
       {super.key,
       required this.title,
+      required SearchUseCase useCase,
       this.bottomWidget,
       this.numberNotification = 0,
-      this.actionButton});
+      this.actionButton})
+      : _useCase = useCase;
 
   final String title;
   final PreferredSizeWidget? bottomWidget;
   final int numberNotification;
   final Widget? actionButton;
+  final SearchUseCase _useCase;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,8 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            showSearch(context: context, delegate: GlobalSearch());
+            showSearch(
+                context: context, delegate: GlobalSearch(useCase: _useCase));
           },
         ),
         if (actionButton != null) actionButton!
