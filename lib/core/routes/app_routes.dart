@@ -18,14 +18,16 @@ import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart'
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
-import 'package:videocall/presentation/loading/loading_page.dart';
+import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
+
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../domain/entities/user_entity.dart';
 import '../../presentation/auth/login/login.dart';
+import '../../presentation/schedules/create_meeting/pages/create_meeting_page.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
@@ -94,7 +96,11 @@ class AppRoutes {
       case RouteName.createGroup:
         return _buildRoute(settings, const CreateGroupPage());
       case RouteName.createSchedule:
-        return _buildAnimationRoute(settings, const CreateSchedulePage());
+        return _buildAnimationRoute(
+            settings,
+            CreateMeetingPage(
+              groupId: settings.arguments as String,
+            ));
       case RouteName.personalCall:
         {
           final argument = settings.arguments as Map<String, dynamic>;
@@ -113,7 +119,11 @@ class AppRoutes {
           );
         }
       case RouteName.createGroupCall:
-        return _buildAnimationRoute(settings, const GroupCallPage());
+        return _buildAnimationRoute(
+            settings,
+            GroupCallPage(
+              token: settings.arguments as String,
+            ));
       default:
         return _errorRoute();
     }

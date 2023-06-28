@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 enum TypesSnackBar { success, warning, error }
 
 class SnackBarApp {
   static void showSnackBar(
-      BuildContext context, String? message, TypesSnackBar type) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        content: Text(message ?? ""),
-        backgroundColor: _showBackgroundSnackBar(context, type),
-      ));
+      BuildContext? context, String? message, TypesSnackBar type) {
+    if (context != null) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text(message ?? ""),
+          backgroundColor: _showBackgroundSnackBar(context, type),
+        ));
+    } else {
+      Fluttertoast.showToast(
+          msg: message ?? '',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: _showBackgroundSnackBarWithoutContext(type),
+          fontSize: 16.0);
+    }
   }
 
   static Color? _showBackgroundSnackBar(
@@ -22,6 +33,17 @@ class SnackBarApp {
         return Colors.amber;
       case TypesSnackBar.error:
         return Theme.of(context).colorScheme.error;
+    }
+  }
+
+  static Color? _showBackgroundSnackBarWithoutContext(TypesSnackBar type) {
+    switch (type) {
+      case TypesSnackBar.success:
+        return Colors.green;
+      case TypesSnackBar.warning:
+        return Colors.amberAccent;
+      case TypesSnackBar.error:
+        return Colors.redAccent;
     }
   }
 }

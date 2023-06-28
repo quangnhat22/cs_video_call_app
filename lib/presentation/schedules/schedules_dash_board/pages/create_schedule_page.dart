@@ -172,63 +172,63 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
                 runSpacing: 24,
                 children: <Widget>[
                   TitleTextFormField(titleController),
-                  SelectGroupButtonFormField(_currentSelectedValue,
-                      (String? newValue) {
-                    setState(() {
-                      _currentSelectedValue = newValue!;
-                    });
-                  }, groups),
+                  // SelectGroupButtonFormField(_currentSelectedValue,
+                  //     (String? newValue) {
+                  //   setState(() {
+                  //     _currentSelectedValue = newValue!;
+                  //   });
+                  // }, groups),
                   DescriptionTextFormField(descriptionController),
-                  Row(
-                    children: <Widget>[
-                      Flexible(
-                          flex: 1,
-                          child: TimePickerTextFormField(
-                              startDateController,
-                              handleShowDatePicker,
-                              AppLocalizations.of(context)!
-                                  .start_date_label_text_form_field,
-                              PeriodEnum.start)),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: TimePickerTextFormField(
-                              startTimeController,
-                              handleShowTimePicker,
-                              AppLocalizations.of(context)!
-                                  .start_time_label_text_form_field,
-                              PeriodEnum.start)),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Flexible(
-                          flex: 1,
-                          child: TimePickerTextFormField(
-                              endDateController,
-                              handleShowDatePicker,
-                              AppLocalizations.of(context)!
-                                  .end_date_label_text_form_field,
-                              PeriodEnum.end)),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Flexible(
-                          flex: 1,
-                          child: TimePickerTextFormField(
-                              endTimeController,
-                              handleShowTimePicker,
-                              AppLocalizations.of(context)!
-                                  .end_time_label_text_form_field,
-                              PeriodEnum.end)),
-                    ],
-                  ),
-                  ScheduleAddNotifications(durations, handleRemoveNotifications,
-                      handleShowAddNotiDialog),
-                  ScheduleAddParticipants(allMembers, selectedMembers,
-                      handleAddParticipants, handleRemoveParticipant)
+                  // Row(
+                  //   children: <Widget>[
+                  //     Flexible(
+                  //         flex: 1,
+                  //         child: TimePickerTextFormField(
+                  //             startDateController,
+                  //             handleShowDatePicker,
+                  //             AppLocalizations.of(context)!
+                  //                 .start_date_label_text_form_field,
+                  //             PeriodEnum.start)),
+                  //     const SizedBox(
+                  //       width: 10,
+                  //     ),
+                  //     Flexible(
+                  //         flex: 1,
+                  //         child: TimePickerTextFormField(
+                  //             startTimeController,
+                  //             handleShowTimePicker,
+                  //             AppLocalizations.of(context)!
+                  //                 .start_time_label_text_form_field,
+                  //             PeriodEnum.start)),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     Flexible(
+                  //         flex: 1,
+                  //         child: TimePickerTextFormField(
+                  //             endDateController,
+                  //             handleShowDatePicker,
+                  //             AppLocalizations.of(context)!
+                  //                 .end_date_label_text_form_field,
+                  //             PeriodEnum.end)),
+                  //     const SizedBox(
+                  //       width: 10,
+                  //     ),
+                  //     Flexible(
+                  //         flex: 1,
+                  //         child: TimePickerTextFormField(
+                  //             endTimeController,
+                  //             handleShowTimePicker,
+                  //             AppLocalizations.of(context)!
+                  //                 .end_time_label_text_form_field,
+                  //             PeriodEnum.end)),
+                  //   ],
+                  // ),
+                  // ScheduleAddNotifications(durations, handleRemoveNotifications,
+                  //     handleShowAddNotiDialog),
+                  // ScheduleAddParticipants(allMembers, selectedMembers,
+                  //     handleAddParticipants, handleRemoveParticipant)
                 ],
               ),
             )),

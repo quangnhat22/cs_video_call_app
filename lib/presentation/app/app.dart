@@ -4,7 +4,7 @@ import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/utils/global_keys.dart';
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
-import 'package:videocall/presentation/loading/loading_page.dart';
+import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../common/widgets/stateless/m_material_app.dart';

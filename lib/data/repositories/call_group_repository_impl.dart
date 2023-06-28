@@ -1,5 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/data/data_sources/remote/service/call_group_service.dart';
 import 'package:videocall/data/models/group_meeting_model.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
@@ -40,33 +40,36 @@ class CallGroupRepositoryImpl extends LiveKitCallRepository {
   }
 
   @override
-  Future<void> createMeeting(
-      {required Room room,
-      required String groupId,
-      String? title,
-      String? description}) async {
+  Future<String?> createMeeting(
+      {required String groupId, String? title, String? description}) async {
     try {
       final res = await _service.createNewMeeting(groupId, title, description);
       if (res.statusCode == 201) {
         final token = res.data["data"] as String;
-        room.connect("ws://192.168.1.192:7880", token);
+        return token;
+        //room.connect("ws://192.168.1.192:7880", token);
       }
+      return null;
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
   @override
-  Future<void> joinMeeting(
-      {required Room room,
-      required String groupId,
-      required String meetingId}) async {
+  Future<String?> joinMeeting(
+      {required String groupId, required String meetingId}) async {
     try {
       final res = await _service.joinMeeting(groupId, meetingId);
       if (res.statusCode == 201) {
         final token = res.data["data"] as String;
-        room.connect("ws://192.168.1.192:7880", token);
+        return token;
+        //room.connect("ws://192.168.1.192:7880", token);
       }
+      return null;
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -13,7 +13,14 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   CallGroupStatusCubit() : super(const CallGroupStatusState.initial());
 
   late final Room _room;
+
+  late String _token;
+
   final isOwnerRoom = false;
+
+  void pageInited(String token) {
+    _token = token;
+  }
 
   Future<void> setUpRoom() async {
     try {
@@ -46,8 +53,8 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
   Future<void> connectRoom() async {
     await _room.connect(
-      "ws://192.168.1.192:7880",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODU4ODkyMDQsImlzcyI6ImRldmtleSIsIm5iZiI6MTY4NTg2NzYwNCwidmlkZW8iOnsiY2FuUHVibGlzaCI6dHJ1ZSwiY2FuU3Vic2NyaWJlIjp0cnVlLCJyb29tIjoiNjQ3YzRjNTQ2NzEwM2MzMmU0MjM3NTNjIiwicm9vbUpvaW4iOnRydWV9fQ.R4lD9HNriqRGjOf2bgc5U7tpJdrwkzT6aOgIhcyzQrU",
+      "ws://192.168.3.227:7880",
+      _token,
       roomOptions: const RoomOptions(
         adaptiveStream: true,
         dynacast: true,
