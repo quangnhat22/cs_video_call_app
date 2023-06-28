@@ -1,10 +1,12 @@
 import 'package:avatar_stack/avatar_stack.dart';
 import 'package:avatar_stack/positions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
+import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart';
 
 class GroupMeetingListItem extends StatelessWidget {
   const GroupMeetingListItem({
@@ -16,7 +18,9 @@ class GroupMeetingListItem extends StatelessWidget {
 
   void _onTapGroupMeetingItem(BuildContext ctx) {}
 
-  void _handleOnTapJoin(BuildContext ctx) {}
+  void _handleOnTapJoin(BuildContext ctx, String meetingId) async {
+    await ctx.read<GroupMeetingCubit>().joinMeeting(meetingId: meetingId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,8 @@ class GroupMeetingListItem extends StatelessWidget {
                 trailing:
                     (meetingEntity.meetingStatus == AppMeetingStatus.onGoing)
                         ? TextButton(
-                            onPressed: () => _handleOnTapJoin(context),
+                            onPressed: () =>
+                                _handleOnTapJoin(context, meetingEntity.id),
                             child: Text(
                               AppLocalizations.of(context)!.join,
                             ),
