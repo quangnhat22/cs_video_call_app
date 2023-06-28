@@ -31,7 +31,6 @@ class GroupMeetingListItem extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(meetingEntity.title ?? ""),
-                // subtitle: const Text('Started at 09:59 June 6,2023'),
                 subtitle: Text(
                     'Started at ${AppDateTimeFormat.convertToHourMinuteFollowDay(meetingEntity.timeStart ?? DateTime.now())}'),
                 leading: const CircleAvatar(

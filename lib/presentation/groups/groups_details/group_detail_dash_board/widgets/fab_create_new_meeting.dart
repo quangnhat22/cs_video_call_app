@@ -14,8 +14,14 @@ class FabCreateNewMeeting extends StatelessWidget {
     if (groupDetailState is GroupGetDetailSuccess &&
         groupDetailState.groupDetail.groupDetails?.id != null) {
       NavigationUtil.pushNamed(
-          routeName: RouteName.createSchedule,
-          args: groupDetailState.groupDetail.groupDetails!.id);
+              routeName: RouteName.createSchedule,
+              args: groupDetailState.groupDetail.groupDetails!.id)
+          .then((token) {
+        if (token != null) {
+          NavigationUtil.pushNamed(
+              routeName: RouteName.createGroupCall, args: token);
+        }
+      });
     }
   }
 

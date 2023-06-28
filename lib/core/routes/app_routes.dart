@@ -119,7 +119,11 @@ class AppRoutes {
           );
         }
       case RouteName.createGroupCall:
-        return _buildAnimationRoute(settings, const GroupCallPage());
+        return _buildAnimationRoute(
+            settings,
+            GroupCallPage(
+              token: settings.arguments as String,
+            ));
       default:
         return _errorRoute();
     }
