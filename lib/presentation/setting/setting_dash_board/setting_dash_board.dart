@@ -11,6 +11,7 @@ import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/show_dialog.dart';
+import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 import 'package:videocall/presentation/setting/edit_language/edit_language.dart';
 import 'package:videocall/presentation/setting/edit_theme/edit_theme.dart';
 

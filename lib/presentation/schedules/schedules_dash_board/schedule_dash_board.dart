@@ -1,6 +1,7 @@
 library schedule_dash_board;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -8,8 +9,10 @@ import 'package:videocall/common/widgets/stateless/app_bar/m_app_bar.dart';
 import 'package:videocall/common/widgets/stateless/buttons/floating_action_stadium_button.dart';
 import 'package:videocall/common/widgets/stateless/divider/divider_space_left.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
+import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 
 import '../../../core/config/app_enum.dart';
 

@@ -5,16 +5,19 @@ class NotificationsDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.notifications,
-        actionButton: IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {},
+    return BlocProvider(
+      create: (context) => getIt<GlobalSearchBloc>(),
+      child: Scaffold(
+        appBar: MHomeAppBar(
+          title: AppLocalizations.of(context)!.notifications,
+          actionButton: IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {},
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: NotificationList(),
+        body: SingleChildScrollView(
+          child: NotificationList(),
+        ),
       ),
     );
   }

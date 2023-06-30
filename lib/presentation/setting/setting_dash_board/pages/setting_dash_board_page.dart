@@ -34,37 +34,40 @@ class SettingDashBoardView extends StatelessWidget {
           });
         }
       },
-      child: Scaffold(
-        appBar: MHomeAppBar(title: AppLocalizations.of(context)!.setting),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  const ProfileInfo(),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  const ProfileSettings(),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  const DeviceSettings(),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                  const AboutUsButton(),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                  const LogOutButton(),
-                ],
+      child: BlocProvider(
+        create: (context) => getIt<GlobalSearchBloc>(),
+        child: Scaffold(
+          appBar: MHomeAppBar(title: AppLocalizations.of(context)!.setting),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    const ProfileInfo(),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    const ProfileSettings(),
+                    SizedBox(
+                      height: 4.h,
+                    ),
+                    const DeviceSettings(),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    const AboutUsButton(),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    const LogOutButton(),
+                  ],
+                ),
               ),
             ),
           ),

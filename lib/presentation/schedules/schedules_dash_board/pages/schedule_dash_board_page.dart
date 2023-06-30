@@ -26,38 +26,41 @@ class ScheduleDashBoardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.schedules,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            children: <Widget>[
-              if (inProgressSchedules.isNotEmpty)
-                ScheduleInProgress(inProgressSchedules),
-              const SizedBox(
-                height: 20,
-              ),
-              if (upcomingSchedules.isNotEmpty)
-                ScheduleUpcoming(upcomingSchedules),
-              const SizedBox(
-                height: 20,
-              ),
-              if (todaySchedules.isNotEmpty) ScheduleToday(todaySchedules),
-              const SizedBox(
-                height: 20,
-              ),
-              if (yesterdaySchedules.isNotEmpty)
-                ScheduleYesterday(yesterdaySchedules)
-            ],
+    return BlocProvider(
+      create: (context) => getIt<GlobalSearchBloc>(),
+      child: Scaffold(
+        appBar: MHomeAppBar(
+          title: AppLocalizations.of(context)!.schedules,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: <Widget>[
+                if (inProgressSchedules.isNotEmpty)
+                  ScheduleInProgress(inProgressSchedules),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (upcomingSchedules.isNotEmpty)
+                  ScheduleUpcoming(upcomingSchedules),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (todaySchedules.isNotEmpty) ScheduleToday(todaySchedules),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (yesterdaySchedules.isNotEmpty)
+                  ScheduleYesterday(yesterdaySchedules)
+              ],
+            ),
           ),
         ),
+        floatingActionButton: FloatingActionStadiumButton(() {
+          NavigationUtil.pushNamed(routeName: RouteName.createSchedule);
+        }, null),
       ),
-      floatingActionButton: FloatingActionStadiumButton(() {
-        NavigationUtil.pushNamed(routeName: RouteName.createSchedule);
-      }, null),
     );
   }
 }
