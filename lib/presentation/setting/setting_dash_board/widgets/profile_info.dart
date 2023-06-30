@@ -26,9 +26,18 @@ class ProfileInfo extends StatelessWidget {
               name != null
                   ? Text(
                       name,
-                      style: AppTextStyles.authHeadTitleTextStyle,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     )
-                  : Container(),
+                  : Text(
+                      AppLocalizations.of(context)!.unknown_name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
               const SizedBox(
                 height: 12,
               ),

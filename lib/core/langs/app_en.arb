@@ -135,6 +135,7 @@
   "update_profile_success" :"Update profile success",
   "login_failed_message": "Login failed, please try again",
   "no_friends_found": "No friends found",
+  "unknown": "Unknown",
   "unknown_name": "Unknown name",
   "unknown_group": "Unknown group",
   "create_group_failed": "Create group failed!!",

@@ -135,6 +135,7 @@
   "update_profile_success" :"Cập nhật thông tin thành công",
   "login_failed_message": "Đăng nhập thất bại, vui lòng thử lại",
   "no_friends_found": "Không tìm thấy bạn bè",
+  "unknown": "Không xác định",
   "unknown_name": "Tên không xác định",
   "unknown_group": "Nhóm không xác định",
   "create_group_failed": "Tạo nhóm thất bại!!",
