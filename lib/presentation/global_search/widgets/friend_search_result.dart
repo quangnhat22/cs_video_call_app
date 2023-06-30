@@ -5,53 +5,91 @@ class FriendSearchResult extends StatelessWidget {
 
   const FriendSearchResult({super.key, this.friends});
 
+  Widget buildLoadingSpinner() {
+    return const Padding(
+      padding: EdgeInsets.only(top: 60),
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    Random random = Random();
-    int randomNumber = random.nextInt(10);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const SizedBox(
-          height: 8,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            AppLocalizations.of(context)!.friends,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              debugPrint('123');
-            },
-            child: const ListTile(
-              title: Text(
-                '123',
-                style: TextStyle(fontWeight: FontWeight.w500),
+    return BlocBuilder<GlobalSearchBloc, GlobalSearchState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return state.maybeWhen(
+          getResultSuccess: (friends) {
+            return friends == null
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 60),
+                      child: Text(
+                        AppLocalizations.of(context)!.no_result_found,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          AppLocalizations.of(context)!.friends,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => InkWell(
+                          onTap: () {},
+                          child: ListTile(
+                            title: Text(
+                              friends[index].name!,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            leading: CustomAvatarImage(
+                              urlImage: friends[index].avatar,
+                              maxRadiusEmptyImg: 20,
+                              widthImage: 48,
+                              heightImage: 48,
+                            ),
+                          ),
+                        ),
+                        itemCount: friends.length,
+                      ),
+                    ],
+                  );
+          },
+          getResultInProgress: () {
+            return buildLoadingSpinner();
+          },
+          getResultFailed: (message) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: Center(
+                child: Text(AppLocalizations.of(context)!.error_message),
               ),
-              subtitle: Text('123'),
-              leading: CustomAvatarImage(
-                urlImage: 'https://i.pravatar.cc/',
-                maxRadiusEmptyImg: 20,
-                widthImage: 48,
-                heightImage: 48,
-              ),
-            ),
-          ),
-          itemCount: randomNumber,
-        ),
-      ],
+            );
+          },
+          orElse: () {
+            return buildLoadingSpinner();
+          },
+        );
+      },
     );
   }
 }

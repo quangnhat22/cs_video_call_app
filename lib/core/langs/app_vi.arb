@@ -147,5 +147,7 @@
   "recall_message_alert": "Thu hồi thành công",
   "male": "Nam",
   "female": "Nữ",
-  "others": "Khác"
+  "others": "Khác",
+  "no_result_found": "No result found!",
+  "error_message": "Something went wrong! Please try again."
 }

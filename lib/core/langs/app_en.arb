@@ -147,6 +147,7 @@
   "recall_message_alert": "Recall successfully",
   "male": "Male",
   "female": "Female",
-  "others": "Others"
-
+  "others": "Others",
+  "no_result_found": "No result found!",
+  "error_message": "Something went wrong! Please try again."
 }

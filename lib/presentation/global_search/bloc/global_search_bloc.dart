@@ -28,7 +28,7 @@ class GlobalSearchBloc extends Bloc<GlobalSearchEvent, GlobalSearchState> {
 
       final friendsResult = await _searchUseCase.searchGlobally(event.query);
 
-      emit(GlobalSearchState.getResultSuccess(friends: friendsResult!.friends));
+      emit(GlobalSearchState.getResultSuccess(friends: friendsResult?.friends));
     } catch (e) {
       emit(GetSearchResultFailed(message: e.toString()));
     }

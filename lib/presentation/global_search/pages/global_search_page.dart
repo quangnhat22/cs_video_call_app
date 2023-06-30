@@ -38,6 +38,7 @@ class GlobalSearch extends SearchDelegate<String> {
 
     return SearchResult(
       filteredFriends: filteredFriends,
+      query: query.trim(),
     );
   }
 
@@ -51,6 +52,7 @@ class GlobalSearch extends SearchDelegate<String> {
 
     return SearchResult(
       filteredFriends: filteredFriends,
+      query: query.trim(),
     );
   }
 }
