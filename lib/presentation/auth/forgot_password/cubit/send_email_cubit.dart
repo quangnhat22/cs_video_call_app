@@ -22,21 +22,18 @@ class SendEmailCubit extends Cubit<SendEmailState> {
     emit(state.copyWith(email: email, isValid: Formz.validate([email])));
   }
 
-  Future<String?>? submitEmail() async {
-    if (!state.isValid) return null;
+  Future<void> submitEmail() async {
     emit(state.copyWith(statusSubmit: FormzSubmissionStatus.inProgress));
 
     try {
-      final resetCode = await _authUseCase.sendResetPasswordCode();
+      await _authUseCase.sendResetPasswordCode();
       emit(state.copyWith(statusSubmit: FormzSubmissionStatus.success));
-      return resetCode;
     } catch (e) {
       emit(
         state.copyWith(
           statusSubmit: FormzSubmissionStatus.failure,
         ),
       );
-      return null;
     }
   }
 }

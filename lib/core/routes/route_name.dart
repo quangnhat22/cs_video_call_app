@@ -28,6 +28,7 @@ class RouteName {
   static const String createGroupCall = "/create-group-call";
   static const String groupCall = "/group-call";
   static const String globalSearch = "/global-search";
+  static const String devices = "/devices";
 
   //error
   static const String notFoundPage = '/not-found';
