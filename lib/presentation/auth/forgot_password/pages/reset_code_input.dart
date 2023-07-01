@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+part of forgot_password;
 
 class ResetCodeInput extends StatelessWidget {
   const ResetCodeInput({super.key});
@@ -10,16 +9,16 @@ class ResetCodeInput extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 18),
       width: 50,
       height: 50,
-      decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 220, 219, 219),
-          borderRadius: BorderRadius.all(Radius.circular(8))),
-      child: TextField(
+      decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
+      child: TextFormField(
         inputFormatters: [
           LengthLimitingTextInputFormatter(1),
         ],
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20, color: Colors.black),
         onChanged: (value) {
           if (value.length == 1) {
             FocusScope.of(context).nextFocus();

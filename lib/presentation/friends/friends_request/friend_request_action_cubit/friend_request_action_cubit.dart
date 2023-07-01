@@ -22,7 +22,8 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
       if (isSuccess) {
         emit(const FriendActionSuccess());
       } else {
-        emit(const FriendActionFailure(message: "Something wrong! Try again."));
+        emit(const FriendActionFailure(
+            message: "Something went wrong! Please try again."));
       }
     } catch (e) {
       emit(FriendActionFailure(message: e.toString()));
@@ -36,7 +37,8 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
       if (isSuccess) {
         emit(const FriendActionSuccess());
       } else {
-        emit(const FriendActionFailure(message: "Something wrong! Try again."));
+        emit(const FriendActionFailure(
+            message: "Something went wrong! Please try again."));
       }
     } catch (e) {
       emit(FriendActionFailure(message: e.toString()));
@@ -50,7 +52,8 @@ class FriendRequestActionCubit extends Cubit<FriendRequestActionState> {
       if (isSuccess) {
         emit(const FriendActionSuccess());
       } else {
-        emit(const FriendActionFailure(message: "Something wrong! Try again."));
+        emit(const FriendActionFailure(
+            message: "Something went wrong! Please try again."));
       }
     } catch (e) {
       emit(FriendActionFailure(message: e.toString()));

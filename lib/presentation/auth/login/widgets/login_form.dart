@@ -21,25 +21,25 @@ class _LoginFormState extends State<LoginForm> {
       height: AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh,
       child: Container(
         padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: SingleChildScrollView(
           child: Form(
             child: Column(children: [
               const LoginInputEmail(),
               const LoginInputPassword(),
-              SizedBox(
-                width: double.infinity,
-                child: GestureDetector(
-                  onTap: handleForgotPassword,
+              GestureDetector(
+                onTap: handleForgotPassword,
+                child: Align(
+                  alignment: Alignment.centerRight,
                   child: Text(
                     AppLocalizations.of(context)!.forgot_password,
-                    textAlign: TextAlign.end,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary),
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.lightColorScheme.primary,
+                    ),
                   ),
                 ),
               ),
@@ -50,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: CustomTextButton(
                       AppLocalizations.of(context)!.back_to_welcome, () {
                     Navigator.pop(context);
-                  }, Theme.of(context).colorScheme.primary),
+                  }, AppColors.lightColorScheme.primary),
                 )
             ]),
           ),

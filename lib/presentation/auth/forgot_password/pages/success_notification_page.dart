@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/login/login.dart';
+part of forgot_password;
 
 class SuccessNotificationPage extends StatelessWidget {
   const SuccessNotificationPage({super.key});
@@ -21,7 +20,7 @@ class SuccessNotificationPage extends StatelessWidget {
               SizedBox(
                 width: 170,
                 height: 170,
-                child: Image.asset('assets/images/success.png'),
+                child: AppAssets.successImage,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 40),
@@ -30,9 +29,9 @@ class SuccessNotificationPage extends StatelessWidget {
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(8))),
-                child: const Text(
-                  'Awesome!!',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.awesome,
+                  style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(52, 168, 83, 1)),
@@ -56,10 +55,10 @@ class SuccessNotificationPage extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 40),
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Text(
-                      'You have successfully reset password',
+                    child: Text(
+                      AppLocalizations.of(context)!.reset_password_successfully,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(52, 168, 83, 1)),
@@ -84,7 +83,8 @@ class SuccessNotificationPage extends StatelessWidget {
                                 builder: (context) => const LoginPage(),
                               ));
                         },
-                        child: const Text('BACK TO LOGIN')),
+                        child:
+                            Text(AppLocalizations.of(context)!.back_to_login)),
                   )
                 ]),
               ))

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/forgot_password/pages/success_notification_page.dart';
+part of forgot_password;
 
 class NewPasswordPage extends StatefulWidget {
   const NewPasswordPage({super.key});
@@ -75,13 +74,7 @@ class _NewPasswordPageState extends State<NewPasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
-                  SizedBox(
-                      width: 250,
-                      height: 250,
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        fit: BoxFit.cover,
-                      )),
+                  SizedBox(width: 250, height: 250, child: AppAssets.iconApp),
                   const Text(
                     'Create new password',
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),

@@ -145,4 +145,18 @@ class AuthRepositoryImpl extends AuthRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<String?> sendResetPasswordCode() async {
+    try {
+      final res = await _authService.sendEmailResetPasswordCode();
+      if (res.statusCode == 200) {
+        return res.data["data"];
+      }
+
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

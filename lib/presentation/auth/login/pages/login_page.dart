@@ -21,7 +21,9 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state.statusSubmit == FormzSubmissionStatus.failure) {
           SnackBarApp.showSnackBar(
-              context, 'Login failed', TypesSnackBar.error);
+              context,
+              AppLocalizations.of(context)!.login_failed_message,
+              TypesSnackBar.error);
         }
       },
       child: Scaffold(
@@ -39,8 +41,8 @@ class LoginView extends StatelessWidget {
                     AppLocalizations.of(context)!.welcome_back,
                     AppLocalizations.of(context)!
                         .sign_in_your_account_to_see_your_chating,
-                    Theme.of(context).colorScheme.primary),
-                const LoginForm()
+                    AppColors.lightColorScheme.primary),
+                const LoginForm(),
               ],
             ),
           ),

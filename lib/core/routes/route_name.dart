@@ -6,6 +6,7 @@ class RouteName {
   static const String loginPage = '/login';
   static const String signUpPage = '/sign-up';
   static const String forgotPasswordPage = '/forgot-password';
+  static const String confirmResetPasswordCode = '/confirm-reset-password-code';
 
   // auth
   static const String dashboard = '/';

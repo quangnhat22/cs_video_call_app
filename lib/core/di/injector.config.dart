@@ -80,17 +80,19 @@ import 'package:videocall/domain/modules/user/user_repository.dart' as _i57;
 import 'package:videocall/domain/modules/user/user_usecase.dart' as _i59;
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart'
     as _i37;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i78;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i79;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
     as _i63;
 import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
+    as _i75;
+import 'package:videocall/presentation/auth/forgot_password/cubit/send_email_cubit.dart'
     as _i74;
 import 'package:videocall/presentation/auth/login/cubit/login_cubit.dart'
     as _i72;
 import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
     as _i73;
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart'
-    as _i76;
+    as _i77;
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart'
     as _i6;
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart'
@@ -136,9 +138,9 @@ import 'package:videocall/presentation/setting/edit_profile/cubit/edit_profile_c
 import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit.dart'
     as _i29;
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
-    as _i75;
+    as _i76;
 import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
-    as _i77;
+    as _i78;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -290,17 +292,19 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i73.ProfileFormCubit(userUC: gh<_i59.UserUseCase>()));
     gh.factory<_i74.SendEmailCubit>(
         () => _i74.SendEmailCubit(authUseCase: gh<_i62.AuthUseCase>()));
-    gh.factory<_i75.SettingCubit>(() => _i75.SettingCubit(
+    gh.factory<_i75.SendEmailCubit>(
+        () => _i75.SendEmailCubit(authUseCase: gh<_i62.AuthUseCase>()));
+    gh.factory<_i76.SettingCubit>(() => _i76.SettingCubit(
           authUseCase: gh<_i62.AuthUseCase>(),
           userUseCase: gh<_i59.UserUseCase>(),
           appSettingsUseCase: gh<_i24.AppSettingsUseCase>(),
         ));
-    gh.factory<_i76.SignUpFormCubit>(
-        () => _i76.SignUpFormCubit(authRepo: gh<_i60.AuthRepository>()));
-    gh.factory<_i77.WelcomeCubit>(
-        () => _i77.WelcomeCubit(authRepo: gh<_i60.AuthRepository>()));
-    gh.lazySingleton<_i78.AppBloc>(
-        () => _i78.AppBloc(authUC: gh<_i62.AuthUseCase>()));
+    gh.factory<_i77.SignUpFormCubit>(
+        () => _i77.SignUpFormCubit(authRepo: gh<_i60.AuthRepository>()));
+    gh.factory<_i78.WelcomeCubit>(
+        () => _i78.WelcomeCubit(authRepo: gh<_i60.AuthRepository>()));
+    gh.lazySingleton<_i79.AppBloc>(
+        () => _i79.AppBloc(authUC: gh<_i62.AuthUseCase>()));
     return this;
   }
 }

@@ -50,7 +50,7 @@ class ProfileSettings extends StatelessWidget {
               if (!isEmailVerify) const DividerSpaceLeft(),
               if (!isEmailVerify)
                 InkWellDynamicBorder(
-                  title: "Verify email",
+                  title: AppLocalizations.of(context)!.verify_email,
                   leading: const Icon(Icons.email_outlined),
                   onTap: () => _onVerifyEmail(state.email),
                   hasTopBorderRadius: false,

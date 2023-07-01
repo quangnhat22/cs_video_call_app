@@ -53,6 +53,8 @@ class AppRoutes {
         return _buildAnimationRoute(settings, const ResetPasswordPage());
       case RouteName.signUpPage:
         return _buildAnimationRoute(settings, const SignUpPage());
+      case RouteName.confirmResetPasswordCode:
+        return _buildAnimationRoute(settings, const ConfirmResetCodePage());
       default:
         return _errorRoute();
     }

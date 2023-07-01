@@ -9,13 +9,14 @@ class GroupList extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           failure: (message) {
-            return const Center(
-              child: Text("Something wrong! Try again."),
+            return Center(
+              child: Text(AppLocalizations.of(context)!.error_message),
             );
           },
           success: (groups) {
             if (groups.isEmpty) {
-              return const Center(child: Text("No groups found!"));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.no_groups_found));
             }
             return ListView.separated(
               shrinkWrap: true,
