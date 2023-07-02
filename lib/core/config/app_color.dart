@@ -83,7 +83,7 @@ class AppColors {
     shadow: Color(0xFF000000),
     surfaceTint: Color(0xFF77D1FF),
     outlineVariant: Color(0xFF41484D),
-    scrim: Color(0xFF000000),
+    scrim: Color.fromARGB(255, 200, 197, 197),
     // surfaceContainerHighest: Color(0xFF323537),
     // surfaceContainerHigh: Color(0xFF282A2C),
     // surfaceContainer: Color(0xFF1D2022),

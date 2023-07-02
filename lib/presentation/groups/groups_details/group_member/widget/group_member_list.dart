@@ -44,8 +44,8 @@ class GroupMemberList extends StatelessWidget {
           },
           orElse: () {
             //TODO: support vi en
-            return const Center(
-              child: Text("Something wrong! Try again."),
+            return Center(
+              child: Text(AppLocalizations.of(context)!.error_message),
             );
           },
         );

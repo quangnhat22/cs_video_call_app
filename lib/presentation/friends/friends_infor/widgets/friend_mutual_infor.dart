@@ -34,8 +34,9 @@ class FriendMutualInfo extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Text(
-                      state.user.name ?? "",
-                      style: const TextStyle(fontSize: 20),
+                      state.user.name ??
+                          AppLocalizations.of(context)!.unknown_name,
+                      style: const TextStyle(fontSize: 20, color: Colors.black),
                     ),
                   )
                 ],

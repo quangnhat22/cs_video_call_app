@@ -25,6 +25,7 @@
   "forgot_password": "Forgot Password?",
   "sign_in_text_button": "SIGN IN",
   "back_to_welcome": "BACK TO WELCOME",
+  "back_to_login": "BACK TO LOGIN",
   "please_enter_email": "Please enter email",
   "email_is_invalid": "Email is invalid",
   "password_is_invalid": "Password is invalid",
@@ -73,6 +74,7 @@
   "group_call_details_tab_chat_title": "Chat",
   "group_call_details_tab_details_title": "Details",
   "group_call_participants_title": "Participants",
+  "devices_title": "Devices",
   "members_text_title": "members",
   "owner_text": "Owner",
   "selected_text": "selected",
@@ -135,6 +137,7 @@
   "update_profile_success": "Update profile success",
   "login_failed_message": "Login failed, please try again",
   "no_friends_found": "No friends found",
+  "no_groups_found": "No groups found",
   "unknown": "Unknown",
   "unknown_name": "Unknown name",
   "unknown_group": "Unknown group",
@@ -160,5 +163,11 @@
   "female": "Female",
   "others": "Others",
   "no_result_found": "No result found!",
-  "error_message": "Something went wrong! Please try again."
+  "error_message": "Something went wrong! Please try again.",
+  "verify_email": "Verify email",
+  "awesome": "Awesome!!",
+  "reset_password_successfully": "You have successfully reset password",
+  "send_email": "SEND EMAIL",
+  "failed_to_send_email": "Failed to send email, please try again",
+  "just_sent_reset_code_to": "We have just send reset code to"
 }

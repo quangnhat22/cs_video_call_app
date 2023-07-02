@@ -41,4 +41,8 @@ class AppAssets {
     'assets/images/not_found.svg',
     semanticsLabel: 'A red up arrow',
   );
+
+  static final successImage = Image.asset(
+    'assets/images/success.png',
+  );
 }

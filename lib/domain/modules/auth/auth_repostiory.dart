@@ -16,4 +16,6 @@ abstract class AuthRepository {
   Stream<String?> checkAccessTokenStream();
 
   Stream<String?> checkRefreshTokenStream();
+
+  Future<String?> sendResetPasswordCode();
 }

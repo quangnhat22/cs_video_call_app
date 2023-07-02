@@ -50,7 +50,7 @@ class SignUpView extends StatelessWidget {
                     AppLocalizations.of(context)!.welcome,
                     AppLocalizations.of(context)!
                         .start_chatting_with_a_new_account,
-                    Theme.of(context).colorScheme.secondary),
+                    AppColors.lightColorScheme.secondary),
                 const SignUpForm()
               ],
             ),
