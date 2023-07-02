@@ -13,8 +13,8 @@ class ListFriend extends StatelessWidget {
         return state.maybeWhen(
           success: (friends) {
             return friends.isEmpty
-                ? const Center(
-                    child: Text("No friends now!"),
+                ? Center(
+                    child: Text(AppLocalizations.of(context)!.no_friends_found),
                   )
                 : ListView.separated(
                     shrinkWrap: true,
@@ -32,8 +32,8 @@ class ListFriend extends StatelessWidget {
                   );
           },
           failure: (message) {
-            return const Center(
-              child: Text("Something wrong! Try again."),
+            return Center(
+              child: Text(AppLocalizations.of(context)!.error_message),
             );
           },
           orElse: () {

@@ -10,6 +10,7 @@ import 'package:videocall/common/widgets/stateless/buttons/custom_elevated_butto
 import 'package:videocall/common/widgets/stateless/buttons/custom_text_button.dart';
 import 'package:videocall/common/widgets/stateless/form/password_text_field.dart';
 import 'package:videocall/common/widgets/stateless/form/text_form_field.dart';
+import 'package:videocall/core/config/app_color.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart';
 

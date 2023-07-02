@@ -31,26 +31,29 @@ class _GroupsDashBoardPageState extends State<GroupsDashBoardPage>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: MHomeAppBar(
-          title: AppLocalizations.of(context)!.groups,
-          bottomWidget: TabBar(controller: _tabController, tabs: [
-            Tab(
-              child: Text(
-                  AppLocalizations.of(context)!.groups_tab_your_groups_title),
-            ),
-            Tab(
-              child:
-                  Text(AppLocalizations.of(context)!.groups_tab_requests_title),
-            )
+    return BlocProvider(
+      create: (context) => getIt<GlobalSearchBloc>(),
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: MHomeAppBar(
+            title: AppLocalizations.of(context)!.groups,
+            bottomWidget: TabBar(controller: _tabController, tabs: [
+              Tab(
+                child: Text(
+                    AppLocalizations.of(context)!.groups_tab_your_groups_title),
+              ),
+              Tab(
+                child: Text(
+                    AppLocalizations.of(context)!.groups_tab_requests_title),
+              )
+            ]),
+          ),
+          body: TabBarView(controller: _tabController, children: const <Widget>[
+            GroupListPage(),
+            GroupRequestsPage(),
           ]),
         ),
-        body: TabBarView(controller: _tabController, children: const <Widget>[
-          GroupListPage(),
-          GroupRequestsPage(),
-        ]),
       ),
     );
   }

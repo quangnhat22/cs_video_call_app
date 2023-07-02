@@ -31,8 +31,8 @@ class CustomOutlineIconButton extends StatelessWidget {
             labelText,
           ),
           style: ButtonStyle(
-            foregroundColor:
-                MaterialStateProperty.all(color ?? Colors.grey[700]),
+            foregroundColor: MaterialStateProperty.all(
+                color ?? Theme.of(context).colorScheme.scrim),
             side: MaterialStateProperty.resolveWith<BorderSide>(
               (states) => BorderSide(
                 color: color ?? Colors.grey[700]!,

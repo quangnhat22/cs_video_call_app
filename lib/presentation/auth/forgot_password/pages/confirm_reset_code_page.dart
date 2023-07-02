@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:videocall/presentation/auth/forgot_password/pages/new_password_page.dart';
-
-import './reset_code_input.dart';
+part of forgot_password;
 
 class ConfirmResetCodePage extends StatelessWidget {
   const ConfirmResetCodePage({super.key});
@@ -39,16 +36,10 @@ class ConfirmResetCodePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
-                        width: 250,
-                        height: 250,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          fit: BoxFit.cover,
-                        )),
-                    const Text(
-                      'We have just send reset code to',
-                      style: TextStyle(fontSize: 16),
+                    SizedBox(width: 250, height: 250, child: AppAssets.iconApp),
+                    Text(
+                      AppLocalizations.of(context)!.just_sent_reset_code_to,
+                      style: const TextStyle(fontSize: 16),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 8, bottom: 30),

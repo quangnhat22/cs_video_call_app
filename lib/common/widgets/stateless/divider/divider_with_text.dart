@@ -18,21 +18,21 @@ class DividerWithText extends StatelessWidget {
         width: withDivider,
         child: Row(
           children: <Widget>[
-            const Expanded(
+            Expanded(
               child: Padding(
-                padding: EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 20),
                 child: Divider(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.scrim,
                   height: 36,
                 ),
               ),
             ),
             Text(text),
-            const Expanded(
+            Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 20),
                 child: Divider(
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.scrim,
                   height: 36,
                 ),
               ),

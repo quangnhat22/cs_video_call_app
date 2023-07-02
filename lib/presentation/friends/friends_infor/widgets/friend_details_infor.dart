@@ -10,7 +10,9 @@ class FriendDetailsInfo extends StatelessWidget {
       required BuildContext ctx}) {
     return ListTile(
       title: Text(title),
-      subtitle: Text(subtitle),
+      subtitle: subtitle.isEmpty
+          ? Text(AppLocalizations.of(ctx)!.unknown)
+          : Text(subtitle),
       leading: Icon(
         leading,
         color: Theme.of(ctx).colorScheme.onPrimaryContainer,

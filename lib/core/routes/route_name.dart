@@ -6,6 +6,7 @@ class RouteName {
   static const String loginPage = '/login';
   static const String signUpPage = '/sign-up';
   static const String forgotPasswordPage = '/forgot-password';
+  static const String confirmResetPasswordCode = '/confirm-reset-password-code';
 
   // auth
   static const String dashboard = '/';
@@ -26,6 +27,8 @@ class RouteName {
   static const String personalCall = '/personal-call';
   static const String createGroupCall = "/create-group-call";
   static const String groupCall = "/group-call";
+  static const String globalSearch = "/global-search";
+  static const String devices = "/devices";
 
   //error
   static const String notFoundPage = '/not-found';

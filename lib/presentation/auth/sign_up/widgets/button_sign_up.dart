@@ -22,8 +22,11 @@ class ButtonSignUp extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
                 buttonText: AppLocalizations.of(context)!.sign_up_text_button,
-                onPressed: () => _onTapSignUpBtn(context),
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+                onPressed:
+                    state.isValid ? () => _onTapSignUpBtn(context) : null,
+                backgroundColor: state.isValid
+                    ? Theme.of(context).colorScheme.secondary
+                    : Colors.grey[400],
               ),
             ),
           );

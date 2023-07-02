@@ -11,7 +11,7 @@ class SearchService {
 
   Future<Response> searchGlobally(String? query) async {
     try {
-      return await _service.dio.get("${BaseService.searchPath}/term=$query");
+      return await _service.dio.get("${BaseService.searchPath}?term=$query");
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

@@ -20,14 +20,13 @@ import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_boar
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
-
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
+import 'package:videocall/presentation/setting/devices/devices.dart';
 import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
 import '../../domain/entities/user_entity.dart';
 import '../../presentation/auth/login/login.dart';
-import '../../presentation/schedules/create_meeting/pages/create_meeting_page.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
 class AppRoutes {
@@ -124,6 +123,8 @@ class AppRoutes {
             GroupCallPage(
               token: settings.arguments as String,
             ));
+      case RouteName.devices:
+        return _buildAnimationRoute(settings, const DevicesPage());
       default:
         return _errorRoute();
     }

@@ -19,6 +19,8 @@ abstract class AuthUseCase {
   Stream<String?> checkAccessTokenStream();
 
   Stream<String?> checkRefreshTokenStream();
+
+  Future<String?> sendResetPasswordCode();
 }
 
 @Injectable(as: AuthUseCase)
@@ -70,5 +72,10 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Future<bool> checkIsLoggedIn() {
     return repo.checkIsLoggedIn();
+  }
+
+  @override
+  Future<String?> sendResetPasswordCode() {
+    return repo.sendResetPasswordCode();
   }
 }

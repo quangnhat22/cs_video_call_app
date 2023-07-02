@@ -51,7 +51,10 @@ class DeviceSettings extends StatelessWidget {
                     title: AppLocalizations.of(context)!.notifications,
                     leading: const Icon(Icons.notifications_outlined),
                     trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
+                    onTap: () {
+                      NavigationUtil.pushNamed(
+                          routeName: RouteName.notifications);
+                    },
                     hasTopBorderRadius: false,
                     hasBottomBorderRadius: false,
                   ),
@@ -60,7 +63,9 @@ class DeviceSettings extends StatelessWidget {
                     title: AppLocalizations.of(context)!.devices,
                     leading: const Icon(Icons.devices_outlined),
                     trailing: const Icon(Icons.chevron_right),
-                    onTap: () {},
+                    onTap: () {
+                      NavigationUtil.pushNamed(routeName: RouteName.devices);
+                    },
                     hasTopBorderRadius: false,
                     hasBottomBorderRadius: true,
                   ),
