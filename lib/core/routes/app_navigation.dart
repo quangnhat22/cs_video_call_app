@@ -45,7 +45,7 @@ class NavigationUtil {
   }
 
   static pop({Object? result}) {
-    _navigatorKey?.pop(result);
+    return _navigatorKey?.pop(result);
   }
 
   static loadSingletonPage(

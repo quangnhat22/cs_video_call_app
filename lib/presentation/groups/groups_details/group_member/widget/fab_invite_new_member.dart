@@ -1,4 +1,11 @@
-part of groups_details;
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:videocall/common/widgets/stateless/search/add_members_search.dart';
+import 'package:videocall/core/utils/snack_bar.dart';
+
+import '../../cubit_inivite_new_member/new_member_cubit.dart';
 
 class FabInviteNewFriend extends StatelessWidget {
   const FabInviteNewFriend({super.key});

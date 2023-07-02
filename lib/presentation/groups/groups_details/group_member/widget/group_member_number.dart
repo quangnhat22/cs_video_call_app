@@ -1,4 +1,9 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
+
+import '../../bloc/group_detail_bloc.dart';
 
 class GroupMemberNumber extends StatelessWidget {
   const GroupMemberNumber({

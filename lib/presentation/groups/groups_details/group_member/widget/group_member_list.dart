@@ -1,4 +1,9 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
+import 'package:videocall/presentation/groups/groups_details/bloc/group_detail_bloc.dart';
+
+import 'group_member_item.dart';
 
 class GroupMemberList extends StatelessWidget {
   const GroupMemberList({super.key});

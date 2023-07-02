@@ -64,3 +64,12 @@ enum AppFriendRelation {
 
   final String value;
 }
+
+enum AppMeetingStatus {
+  onGoing("on-going"),
+  ended("ended");
+
+  const AppMeetingStatus(this.value);
+
+  final String value;
+}

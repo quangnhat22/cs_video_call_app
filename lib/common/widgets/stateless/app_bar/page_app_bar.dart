@@ -7,11 +7,13 @@ class MPageAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.bottomWidget,
     this.numberNotification = 0,
+    this.actionWidgets,
   });
 
   final String title;
   final PreferredSizeWidget? bottomWidget;
   final int numberNotification;
+  final List<Widget>? actionWidgets;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class MPageAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: AppTextStyles.titleAppBarTextStyle,
       ),
       bottom: bottomWidget,
+      actions: actionWidgets,
     );
   }
 

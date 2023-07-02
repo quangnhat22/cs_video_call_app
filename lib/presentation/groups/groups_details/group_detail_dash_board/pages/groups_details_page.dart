@@ -1,4 +1,16 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
+import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
+import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
+
+import '../../bloc/group_detail_bloc.dart';
+import '../../cubit_group_meeting/group_meeting_cubit.dart';
+import '../../cubit_inivite_new_member/new_member_cubit.dart';
+import '../widgets/fab_create_new_meeting.dart';
+import '../../group_member/widget/fab_invite_new_member.dart';
 
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({
@@ -62,6 +74,9 @@ class _GroupDetailViewState extends State<GroupDetailView>
   }
 
   Widget? _bottomButtons() {
+    if (_tabController.index == 0) {
+      return const FabCreateNewMeeting();
+    }
     if (_tabController.index == 2) {
       return const FabInviteNewFriend();
     }
@@ -94,11 +109,14 @@ class _GroupDetailViewState extends State<GroupDetailView>
               IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
             ],
           ),
-          body: TabBarView(controller: _tabController, children: <Widget>[
-            GroupsCallsTabs(),
-            const GroupDiscussTab(),
-            const GroupMembersTab()
-          ]),
+          body: TabBarView(
+            controller: _tabController,
+            children: const <Widget>[
+              GroupMeetingPage(),
+              GroupDiscussTab(),
+              GroupMemberPage()
+            ],
+          ),
           floatingActionButton: _bottomButtons(),
         ));
   }

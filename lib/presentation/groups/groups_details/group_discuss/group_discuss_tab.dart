@@ -1,4 +1,6 @@
-part of groups_details;
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class GroupDiscussTab extends StatefulWidget {
   const GroupDiscussTab({super.key});

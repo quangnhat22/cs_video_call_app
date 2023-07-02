@@ -95,7 +95,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> signUpWithEmailAndPassword(String email, String password) async {
     try {
       final deviceName = await DetectDeviceInfo.getDeviceName();
-      final res = await _authService.register(email, password, deviceName);
+      final fcmToken = await _getFCMToken();
+
+      final res =
+          await _authService.register(email, password, deviceName, fcmToken);
       if (res.statusCode == 200) {
         final data = res.data["data"];
         await _authLocalDataSrc.saveAuth(

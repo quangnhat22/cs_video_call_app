@@ -6,12 +6,19 @@ import 'package:videocall/presentation/call/group_call/pages/group_call_waiting_
 import 'package:videocall/presentation/call/group_call/pages/group_calling.dart';
 
 class GroupCallPage extends StatelessWidget {
-  const GroupCallPage({Key? key}) : super(key: key);
+  const GroupCallPage({
+    Key? key,
+    required this.token,
+  }) : super(key: key);
+
+  final String token;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<CallGroupStatusCubit>()..setUpRoom(),
+      create: (_) => getIt<CallGroupStatusCubit>()
+        ..pageInited(token)
+        ..setUpRoom(),
       child: const GroupCallView(),
     );
   }
