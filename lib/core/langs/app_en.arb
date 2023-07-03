@@ -69,7 +69,7 @@
   "groups_tab_your_groups_title": "Your groups",
   "groups_tab_requests_title": "Requests",
   "group_details_tab_calls_title": "Calls",
-  "group_details_tab_discuss_title": "Discuss",
+  "group_details_tab_messages_title": "Messages",
   "group_details_tab_members_title": "Members",
   "group_call_details_tab_chat_title": "Chat",
   "group_call_details_tab_details_title": "Details",
@@ -173,5 +173,7 @@
   "no_devices_found": "No devices found",
   "last_accessed_at": "Last accessed at",
   "empty_call_list_message": "Your group has no calls",
-  "no_members_found": "No members found"
+  "no_members_found": "No members found",
+  "no_messages_found": "No messages found",
+  "unknown_meeting_title": "Unknown meeting title"
 }

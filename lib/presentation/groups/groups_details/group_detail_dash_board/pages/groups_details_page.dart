@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
-import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
+import 'package:videocall/presentation/groups/groups_details/group_messages/group_messages.dart';
 
 import '../../bloc/group_detail_bloc.dart';
 import '../../cubit_group_meeting/group_meeting_cubit.dart';
@@ -103,7 +103,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
               ),
               Tab(
                 child: Text(AppLocalizations.of(context)!
-                    .group_details_tab_discuss_title),
+                    .group_details_tab_messages_title),
               ),
               Tab(
                 child: Text(AppLocalizations.of(context)!
@@ -120,7 +120,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
               GroupMeetingPage(
                 groupId: widget.groupId,
               ),
-              const GroupDiscussTab(),
+              GroupMessagesPage(groupId: widget.groupId),
               const GroupMemberPage()
             ],
           ),

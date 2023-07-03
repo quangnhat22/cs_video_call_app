@@ -1,0 +1,1 @@
+library group_details;

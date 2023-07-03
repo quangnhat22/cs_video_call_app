@@ -69,7 +69,7 @@
   "groups_tab_your_groups_title": "Nhóm của bạn",
   "groups_tab_requests_title": "Yêu cầu",
   "group_details_tab_calls_title": "Cuộc gọi",
-  "group_details_tab_discuss_title": "Thảo luận",
+  "group_details_tab_messages_title": "Tin nhắn",
   "group_details_tab_members_title": "Thành viên",
   "group_call_details_tab_chat_title": "Trò chuyện",
   "group_call_details_tab_details_title": "Chi tiết",
@@ -173,5 +173,7 @@
   "no_devices_found": "Không tìm thấy thiết bị nào",
   "last_accessed_at": "Truy cập lần cuối vào",
   "empty_call_list_message": "Nhóm của bạn chưa có cuộc gọi nào",
-  "no_members_found": "Chưa có thành viên nào"
+  "no_members_found": "Chưa có thành viên nào",
+  "no_messages_found": "Chưa có tin nhắn nào",
+  "unknown_meeting_title": "Tên cuộc hợp không xác định"
 }
