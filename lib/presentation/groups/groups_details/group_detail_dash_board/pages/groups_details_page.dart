@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
 import 'package:videocall/presentation/groups/groups_details/group_discuss/group_discuss_tab.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
@@ -15,10 +16,10 @@ import '../../group_member/widget/fab_invite_new_member.dart';
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({
     super.key,
-    required this.groupId,
+    required this.groupArgs,
   });
 
-  final String groupId;
+  final GroupArguments groupArgs;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +27,30 @@ class GroupDetailPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => getIt<GroupDetailBloc>()
-            ..add(GroupDetailEvent.started(groupId: groupId)),
+            ..add(GroupDetailEvent.started(groupId: groupArgs.groupId)),
         ),
         BlocProvider(
           create: (_) => getIt<NewMemberCubit>()..getListFriend(),
         ),
         BlocProvider(
-          create: (_) =>
-              getIt<GroupMeetingCubit>()..getListGroupMeeting(groupId: groupId),
+          create: (_) => getIt<GroupMeetingCubit>()
+            ..getListGroupMeeting(groupId: groupArgs.groupId),
         ),
       ],
-      child: const GroupDetailView(),
+      child: GroupDetailView(
+        groupId: groupArgs.groupId,
+        groupName: groupArgs.groupName,
+      ),
     );
   }
 }
 
 class GroupDetailView extends StatefulWidget {
-  const GroupDetailView({super.key});
+  const GroupDetailView(
+      {super.key, required this.groupId, required this.groupName});
+
+  final String groupId;
+  final String groupName;
 
   @override
   State<GroupDetailView> createState() => _GroupDetailViewState();
@@ -51,9 +59,6 @@ class GroupDetailView extends StatefulWidget {
 class _GroupDetailViewState extends State<GroupDetailView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final List<String> allMembers = ['Nguyễn Văn Quý', 'Lý Nhân Danh'];
-  final List<String> membersSuggestions = ['Trần Đức Nghĩa', 'Lê Hậu Nhân'];
 
   @override
   void initState() {
@@ -89,7 +94,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Team Anh Em Siêu Nhơn'),
+            title: Text(widget.groupName),
             backgroundColor: Theme.of(context).colorScheme.background,
             bottom: TabBar(controller: _tabController, tabs: <Widget>[
               Tab(
@@ -111,10 +116,12 @@ class _GroupDetailViewState extends State<GroupDetailView>
           ),
           body: TabBarView(
             controller: _tabController,
-            children: const <Widget>[
-              GroupMeetingPage(),
-              GroupDiscussTab(),
-              GroupMemberPage()
+            children: <Widget>[
+              GroupMeetingPage(
+                groupId: widget.groupId,
+              ),
+              const GroupDiscussTab(),
+              const GroupMemberPage()
             ],
           ),
           floatingActionButton: _bottomButtons(),

@@ -5,6 +5,13 @@ import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import '../../../../core/routes/app_navigation.dart';
 import '../../../../core/routes/route_name.dart';
 
+class GroupArguments {
+  final String groupName;
+  final String groupId;
+
+  GroupArguments(this.groupName, this.groupId);
+}
+
 class GroupListItem extends StatelessWidget {
   const GroupListItem({
     Key? key,
@@ -18,7 +25,9 @@ class GroupListItem extends StatelessWidget {
   final String? groupAvatar;
 
   void _onTapItem() {
-    NavigationUtil.pushNamed(routeName: RouteName.teamDetails, args: groupId);
+    NavigationUtil.pushNamed(
+        routeName: RouteName.teamDetails,
+        args: GroupArguments(groupName, groupId));
   }
 
   // void _onTapTrailingButton() {
