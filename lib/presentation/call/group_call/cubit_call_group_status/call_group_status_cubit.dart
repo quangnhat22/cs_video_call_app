@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:videocall/core/config/app_config.dart';
 
 part 'call_group_status_cubit.freezed.dart';
 part 'call_group_status_state.dart';
@@ -53,7 +54,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
   Future<void> connectRoom() async {
     await _room.connect(
-      "ws://192.168.3.227:7880",
+      "ws://${AppConfig.httpUrl}:7880",
       _token,
       roomOptions: const RoomOptions(
         adaptiveStream: true,

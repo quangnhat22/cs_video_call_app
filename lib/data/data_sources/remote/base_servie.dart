@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/config/app_config.dart';
+import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
+import 'package:videocall/data/data_sources/local/local_data_src.dart';
 
 import 'dio_interceptor.dart';
 
 @Singleton()
 class BaseService {
-  late Dio dio;
-  final DioInterceptor interceptor;
+  late final Dio dio;
+  final AuthLocalDataSrc _authLocalDataSrc;
+  final LocalDataSource _localDataSource;
 
   // api route
   static const String authPath = "/auth";
@@ -19,12 +22,17 @@ class BaseService {
   static const String searchPath = "/search";
   static const String devicePath = "/device";
 
-  BaseService({required this.interceptor}) {
-    initDio();
+  BaseService(this._authLocalDataSrc, this._localDataSource) {
+    dio = initDio();
+    dio.interceptors.add(DioInterceptor(
+      _authLocalDataSrc,
+      _localDataSource,
+      dio,
+    ));
   }
 
-  Future<Dio> initDio() async {
-    dio = Dio(
+  static Dio initDio() {
+    final dio = Dio(
       BaseOptions(
           baseUrl: AppConfig.baseUrl,
           connectTimeout: const Duration(milliseconds: 10000),
@@ -35,7 +43,6 @@ class BaseService {
             // "authorization": "Bearer ${GlobalData.ins.localToken}",
           }),
     );
-    dio = await interceptor.addInterceptor(dio);
     return dio;
   }
 }

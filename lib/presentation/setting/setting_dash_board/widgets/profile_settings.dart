@@ -26,6 +26,7 @@ class ProfileSettings extends StatelessWidget {
               InkWellDynamicBorder(
                 title: AppLocalizations.of(context)!.change_profile_photo,
                 leading: const Icon(Icons.add_a_photo_outlined),
+                trailing: const Icon(Icons.chevron_right),
                 onTap: () => _onPickAvatar(context),
                 hasTopBorderRadius: true,
                 hasBottomBorderRadius: false,

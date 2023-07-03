@@ -6,7 +6,7 @@ class AvatarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<AvatarCubit>(),
+      create: (_) => getIt<AvatarCubit>()..initValue(),
       child: const AvatarView(),
     );
   }
@@ -19,17 +19,18 @@ class AvatarView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AvatarCubit, AvatarState>(
       listener: (context, state) {
-        state.whenOrNull(
-          updateAvatarSuccess: () {
-            //TODO: local
-            SnackBarApp.showSnackBar(
-                context, "Update success", TypesSnackBar.success);
-          },
-          updateAvatarFailure: (message) {
-            //TODO: local
-            SnackBarApp.showSnackBar(context, message, TypesSnackBar.success);
-          },
-        );
+        if (state.statusUpload == StatusUploadAvatar.success) {
+          SnackBarApp.showSnackBar(
+              context,
+              AppLocalizations.of(context)!.update_avatar_success,
+              TypesSnackBar.success);
+        }
+        if (state.statusUpload == StatusUploadAvatar.fail) {
+          SnackBarApp.showSnackBar(
+              context,
+              AppLocalizations.of(context)!.update_avatar_success,
+              TypesSnackBar.error);
+        }
       },
       child: Scaffold(
         body: SafeArea(
@@ -38,8 +39,8 @@ class AvatarView extends StatelessWidget {
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               AuthHeader(
-                'Add a photo',
-                'Add a profile photo so your friends know it’s you!',
+                AppLocalizations.of(context)!.add_photo,
+                AppLocalizations.of(context)!.add_photo_so_your_friend_know,
                 Theme.of(context).colorScheme.secondary,
               ),
               Positioned(

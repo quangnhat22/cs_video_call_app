@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -241,11 +242,12 @@ class _ControlsState extends State<Controls> {
 
   void _onTapSendData() async {
     final result = await context.showSendDataDialog();
-    // if (result == true) {
-    //   await widget.participant.publishData(
-    //    // utf8.encode('This is a sample data message'),
-    //   );
-    // }
+    if (result == true) {
+      await widget.participant.publishData(
+        utf8.encode('This is a sample data message'),
+        topic: "hello",
+      );
+    }
   }
 
   @override
