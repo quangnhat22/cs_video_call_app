@@ -117,6 +117,8 @@
   "end_time_label_text_form_field": "Giờ kết thúc",
   "add_notifications": "Thêm thông báo",
   "add_participants": "Thêm thành viên",
+  "add_photo": "Thêm hình ảnh",
+  "add_photo_so_your_friend_know" :"Thêm avatar để bạn bè có thể biết rõ bạn hơn!",
   "before": "Trước",
   "minutes": "phút",
   "action_success": "Yêu cầu của bạn đã gửi thành công!",
@@ -175,5 +177,7 @@
   "no_devices_found": "Không tìm thấy thiết bị nào",
   "last_accessed_at": "Truy cập lần cuối vào",
   "empty_call_list_message": "Nhóm của bạn chưa có cuộc gọi nào",
-  "no_members_found": "Chưa có thành viên nào"
+  "no_members_found": "Chưa có thành viên nào",
+  "update_avatar_success": "Cập nhật avatar thành công!",
+  "update_avatar_fail": "Cập nhật avatar thất bại! Vui lòng thử lại."
 }

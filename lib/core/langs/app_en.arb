@@ -117,6 +117,8 @@
   "end_time_label_text_form_field": "End time",
   "add_notifications": "Add notifications",
   "add_participants": "Add participants",
+  "add_photo": "Add Photo",
+  "add_photo_so_your_friend_know" :"Add a profile photo so your friends know it’s you!",
   "before": "Before",
   "minutes": "minutes",
   "action_success": "Your action is success",
@@ -175,5 +177,7 @@
   "no_devices_found": "No devices found",
   "last_accessed_at": "Last accessed at",
   "empty_call_list_message": "Your group has no calls",
-  "no_members_found": "No members found"
+  "no_members_found": "No members found",
+  "update_avatar_success": "Update avatar success",
+  "update_avatar_fail": "Update avatar fail! Try again"
 }

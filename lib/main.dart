@@ -27,7 +27,7 @@ void main() async {
 Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppCheckPermission.checkPermissions();
-  
+
   Bloc.observer = AppObserver();
 
   await Firebase.initializeApp(
@@ -68,4 +68,12 @@ Future<void> _connectToFirebaseEmulator() async {
       .useStorageEmulator(localHostString, storagePort);
   FirebaseFirestore.instance
       .useFirestoreEmulator(localHostString, firestorePort);
+}
+
+// overlay entry point
+@pragma("vm:entry-point")
+void overlayMain() {
+  runApp(const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Material(child: Text("My overlay"))));
 }

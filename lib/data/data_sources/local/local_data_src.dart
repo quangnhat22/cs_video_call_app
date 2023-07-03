@@ -14,6 +14,6 @@ class LocalDataSource {
   Future<void> deleteAllLocal() async {
     await _authLocal.deleteBoxAuth();
     await _settingLocal.deleteBoxSetting();
-    _userLocal.deleteBoxUser();
+    await _userLocal.deleteBoxUser();
   }
 }

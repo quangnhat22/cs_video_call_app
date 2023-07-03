@@ -10,6 +10,7 @@ import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/utils/assets_picker.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../common/widgets/stateless/auth_header.dart';
 import '../../../common/widgets/stateless/buttons/custom_elevated_button.dart';

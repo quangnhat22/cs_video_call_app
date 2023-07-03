@@ -25,22 +25,27 @@ class AvatarCubit extends Cubit<AvatarState> {
 
   late final StreamSubscription<UserEntity?> _userSub;
 
+  void initValue() async {
+    final userInfo = await _userUC.getSelfFromLocal();
+    emit(state.copyWith(urlImage: userInfo?.avatar));
+  }
+
   Future<void> updateAvatar(String filePath) async {
     try {
-      emit(const UpdateAvatarInProgress());
+      emit(state.copyWith(statusUpload: StatusUploadAvatar.inProgress));
       final isUpdateSuccess = await _userUC.updateAvatar(filePath);
       if (isUpdateSuccess) {
-        emit(const UpdateAvatarSuccess());
+        emit(state.copyWith(statusUpload: StatusUploadAvatar.success));
       } else {
-        emit(const UpdateAvatarFailure(message: "Update fail! Try again"));
+        emit(state.copyWith(statusUpload: StatusUploadAvatar.fail));
       }
-    } catch (e) {
-      emit(UpdateAvatarFailure(message: e.toString()));
+    } catch (_) {
+      emit(state.copyWith(statusUpload: StatusUploadAvatar.fail));
     }
   }
 
   void changeAvatarLocal(String urlImage) {
-    emit(UpdateAvatarLocalSuccess(urlImage: urlImage));
+    emit(state.copyWith(urlImage: urlImage));
   }
 
   @override

@@ -1,17 +1,11 @@
 part of 'avatar_cubit.dart';
 
+enum StatusUploadAvatar { initial, inProgress, success, fail }
+
 @freezed
 class AvatarState with _$AvatarState {
-  const factory AvatarState.initial() = _Initial;
-
-  const factory AvatarState.updateAvatarInProgress() = UpdateAvatarInProgress;
-
-  const factory AvatarState.updateAvatarSuccess() = UpdateAvatarSuccess;
-
-  const factory AvatarState.updateAvatarFailure({required String message}) =
-      UpdateAvatarFailure;
-
-  const factory AvatarState.updateAvatarLocalSuccess({
+  const factory AvatarState.initial({
     String? urlImage,
-  }) = UpdateAvatarLocalSuccess;
+    @Default(StatusUploadAvatar.initial) StatusUploadAvatar statusUpload,
+  }) = _Initial;
 }
