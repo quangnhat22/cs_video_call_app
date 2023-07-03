@@ -5,7 +5,12 @@ class DeviceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DevicesBloc, DevicesState>(
+    return BlocConsumer<DevicesBloc, DevicesState>(
+      listener: (context, state) {
+        if (state is DevicesDeleteSuccess) {
+          context.read<DevicesBloc>().add(const DevicesEvent.started());
+        }
+      },
       builder: (context, state) {
         return state.maybeWhen(
           failure: (message) {
@@ -15,7 +20,8 @@ class DeviceList extends StatelessWidget {
           },
           success: (devices) {
             if (devices.isEmpty) {
-              return const Center(child: Text('No devices found'));
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.no_devices_found));
             }
 
             return ListView.builder(
