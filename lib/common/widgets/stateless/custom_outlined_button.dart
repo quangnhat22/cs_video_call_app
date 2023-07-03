@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback? onPressed;
   final Color foregroundColor;
+  final double? width;
 
   const CustomOutlinedButton({
     super.key,
     required this.buttonText,
     this.onPressed,
     required this.foregroundColor,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 0.8.sw,
+      width: width ?? double.infinity,
       child: OutlinedButton(
           onPressed: onPressed,
           style: ButtonStyle(

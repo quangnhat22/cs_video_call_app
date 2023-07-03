@@ -11,6 +11,8 @@ class SendEmailState with _$SendEmailState {
       {@Default("") String? email, required String message}) = SendEmailFailure;
   const factory SendEmailState.verified({@Default("") String? email}) =
       SendEmailVerified;
+  const factory SendEmailState.verifying({@Default("") String? email}) =
+      SendEmailVerifying;
   const factory SendEmailState.notVerified({@Default("") String? email}) =
       SendEmailNotVerified;
 }

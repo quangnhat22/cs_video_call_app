@@ -34,11 +34,16 @@ class SendEmailCubit extends Cubit<SendEmailState> {
   }
 
   Future<void> checkEmailVerify() async {
-    final res = await _useCase.checkEmailVerify();
-    if (res) {
-      emit(SendEmailVerified(email: state.email));
-    } else {
-      emit(const SendEmailNotVerified());
+    try {
+      emit(SendEmailVerifying(email: state.email));
+      final res = await _useCase.checkEmailVerify();
+      if (res) {
+        emit(SendEmailVerified(email: state.email));
+      } else {
+        emit(SendEmailNotVerified(email: state.email));
+      }
+    } catch (e) {
+      emit(SendEmailNotVerified(email: state.email));
     }
   }
 }

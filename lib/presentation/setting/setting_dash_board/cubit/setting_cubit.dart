@@ -33,10 +33,6 @@ class SettingCubit extends Cubit<SettingState> {
   final AppSettingsUseCase appSettingsUseCase;
   late StreamSubscription<UserEntity?> userSubcription;
 
-  void emailVerified() {
-    emit(state.copyWith(isEmailVerified: true));
-  }
-
   Future<void> getValueThemeAndLang() async {
     final theme = await appSettingsUseCase.getAppTheme();
     final lang = await appSettingsUseCase.getAppLang();
@@ -48,23 +44,28 @@ class SettingCubit extends Cubit<SettingState> {
     await userUseCase.getSelf();
   }
 
+  Future<bool> checkEmailVerify() async {
+    if (state.isEmailVerified == true) {
+      return true;
+    } else {
+      bool checkVerifyEmail = await authUseCase.checkEmailVerify();
+      emit(state.copyWith(isEmailVerified: checkVerifyEmail));
+      return checkVerifyEmail;
+    }
+  }
+
   Future<void> userInforChanged() async {
     final userInfo = await userUseCase.getSelfFromLocal();
 
-    //check email verify
-    bool isEmailVerify =
-        state.isEmailVerified ?? await authUseCase.checkEmailVerify();
-    if (!isEmailVerify) {
-      isEmailVerify = await authUseCase.checkEmailVerify();
-    }
-
     if (userInfo != null) {
-      emit(state.copyWith(
-        name: userInfo.name,
-        avatar: userInfo.avatar,
-        email: userInfo.email,
-        isEmailVerified: isEmailVerify,
-      ));
+      await checkEmailVerify();
+      emit(
+        state.copyWith(
+          name: userInfo.name,
+          avatar: userInfo.avatar,
+          email: userInfo.email,
+        ),
+      );
     }
   }
 

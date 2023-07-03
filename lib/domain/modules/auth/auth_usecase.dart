@@ -12,6 +12,8 @@ abstract class AuthUseCase {
 
   Future<bool> checkEmailVerify();
 
+  Future<bool> checkProfileUpdated();
+
   Future<void> logOut();
 
   Future<bool> checkIsLoggedIn();
@@ -77,5 +79,10 @@ class AuthUseCaeImpl extends AuthUseCase {
   @override
   Future<String?> sendResetPasswordCode() {
     return repo.sendResetPasswordCode();
+  }
+
+  @override
+  Future<bool> checkProfileUpdated() {
+    return repo.checkProfileUpdated();
   }
 }

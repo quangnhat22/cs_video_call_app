@@ -30,16 +30,25 @@ class UserModel extends HiveObject with _$UserModel {
         String? relation,
     @HiveField(9)
     // ignore: invalid_annotation_target
-    @JsonKey(name: "common_friend_count", ignore: true)
+    @JsonKey(name: "common_friend_count")
         int? commonFriendCount,
-    // ignore: invalid_annotation_target
-    @JsonKey(name: "is_friend", ignore: true)
-        bool? isFriend,
-    // ignore: invalid_annotation_target
-    @JsonKey(name: "last_seen_at", ignore: true)
-        DateTime? lastSeenAt,
     @HiveField(10)
         String? address,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "is_friend")
+        bool? isFriend,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "last_seen_at")
+        DateTime? lastSeenAt,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "common_group_count")
+        int? commonGroupCount,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "email_verified")
+        bool? emailVerified,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "profile_updated")
+        bool? profileUpdated,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

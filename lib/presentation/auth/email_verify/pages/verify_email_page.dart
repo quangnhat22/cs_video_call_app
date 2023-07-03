@@ -26,7 +26,10 @@ class VerifiedView extends StatelessWidget {
         state.whenOrNull(
           success: (_) {
             SnackBarApp.showSnackBar(
-                context, "Send email success", TypesSnackBar.success);
+              context,
+              AppLocalizations.of(context)!.send_email_success,
+              TypesSnackBar.success,
+            );
           },
           failure: (_, message) {
             SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
@@ -34,7 +37,7 @@ class VerifiedView extends StatelessWidget {
           notVerified: (_) {
             SnackBarApp.showSnackBar(
               context,
-              "You didn't verify! Try again",
+              AppLocalizations.of(context)!.you_didnt_verify,
               TypesSnackBar.warning,
             );
           },

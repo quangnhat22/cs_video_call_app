@@ -8,7 +8,8 @@ class SettingDashBoardPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<SettingCubit>()
         ..getValueThemeAndLang()
-        ..getSelf(),
+        ..getSelf()
+        ..checkEmailVerify(),
       child: const SettingDashBoardView(),
     );
   }
@@ -29,7 +30,8 @@ class SettingDashBoardView extends StatelessWidget {
                   routeName: RouteName.emailVerify, args: state.email)
               .then((value) {
             if (value) {
-              context.read<SettingCubit>().emailVerified();
+              if (context.mounted) {}
+              context.read<SettingCubit>().checkEmailVerify();
             }
           });
         }

@@ -11,6 +11,8 @@ abstract class AuthRepository {
 
   Future<bool> checkEmailVerify();
 
+  Future<bool> checkProfileUpdated();
+
   Future<bool> checkIsLoggedIn();
 
   Stream<String?> checkAccessTokenStream();

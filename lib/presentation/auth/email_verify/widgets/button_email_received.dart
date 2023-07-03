@@ -15,15 +15,15 @@ class ButttonVerifyReceiveEmail extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return state.maybeWhen(
-          success: (_) {
+          inProgress: (_) {
+            return const LinearProgressIndicator();
+          },
+          orElse: () {
             return CustomElevatedButton(
               buttonText: AppLocalizations.of(context)!.i_verified,
               onPressed: () => _onVerifiedEmailBtn(context),
               backgroundColor: Theme.of(context).colorScheme.secondary,
             );
-          },
-          orElse: () {
-            return const LinearProgressIndicator();
           },
         );
       },

@@ -162,4 +162,14 @@ class AuthRepositoryImpl extends AuthRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<bool> checkProfileUpdated() async {
+    try {
+      final userEntity = await _userRepo.getSelf();
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
