@@ -169,5 +169,7 @@
   "reset_password_successfully": "You have successfully reset password",
   "send_email": "SEND EMAIL",
   "failed_to_send_email": "Failed to send email, please try again",
-  "just_sent_reset_code_to": "We have just send reset code to"
+  "just_sent_reset_code_to": "We have just send reset code to",
+  "no_devices_found": "No devices found",
+  "last_accessed_at": "Last accessed at"
 }

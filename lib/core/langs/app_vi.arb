@@ -169,5 +169,7 @@
   "reset_password_successfully": "You have successfully reset password",
   "send_email": "SEND EMAIL",
   "failed_to_send_email": "Gửi email không thành công, vui lòng thử lại",
-  "just_sent_reset_code_to": "Chúng tôi vừa gửi mã khôi phục đến"
+  "just_sent_reset_code_to": "Chúng tôi vừa gửi mã khôi phục đến",
+  "no_devices_found": "Không tìm thấy thiết bị nào",
+  "last_accessed_at": "Truy cập lần cuối vào"
 }

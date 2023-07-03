@@ -9,4 +9,5 @@ class DevicesState with _$DevicesState {
   const factory DevicesState.failure({
     required String message,
   }) = DevicesFailure;
+  const factory DevicesState.deleteSuccess() = DevicesDeleteSuccess;
 }

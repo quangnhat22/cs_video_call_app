@@ -5,16 +5,25 @@ class DeviceItem extends StatelessWidget {
 
   final DeviceEntity deviceEntity;
 
+  void _handleDeleteDevice(
+      BuildContext ctx, String deviceId, String deviceName) {
+    ctx
+        .read<DevicesBloc>()
+        .add(ConfirmDeleteDevice(deviceId: deviceId, deviceName: deviceName));
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: ListTile(
         title: Text(deviceEntity.name ?? ''),
         subtitle: Text(
-            'Last accessed at ${DateFormat('dd-MM-yyyy').format(DateTime.parse(deviceEntity.createdAt!))}'),
+            '${AppLocalizations.of(context)!.last_accessed_at} ${DateFormat('dd-MM-yyyy').format(DateTime.parse(deviceEntity.createdAt!))}'),
         leading: const Icon(Icons.smartphone),
         trailing: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _handleDeleteDevice(context, deviceEntity.id, deviceEntity.name!);
+            },
             icon: const Icon(
               Icons.delete,
               color: Colors.redAccent,
