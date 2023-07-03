@@ -171,5 +171,9 @@
   "failed_to_send_email": "Failed to send email, please try again",
   "just_sent_reset_code_to": "We have just send reset code to",
   "send_email_success": "Send email success",
-  "you_didnt_verify": "You didn't verify! Try again"
+  "you_didnt_verify": "You didn't verify! Try again",
+  "no_devices_found": "No devices found",
+  "last_accessed_at": "Last accessed at",
+  "empty_call_list_message": "Your group has no calls",
+  "no_members_found": "No members found"
 }

@@ -169,5 +169,11 @@
   "reset_password_successfully": "You have successfully reset password",
   "send_email": "SEND EMAIL",
   "failed_to_send_email": "Gửi email không thành công, vui lòng thử lại",
-  "just_sent_reset_code_to": "Chúng tôi vừa gửi mã khôi phục đến"
+  "just_sent_reset_code_to": "Chúng tôi vừa gửi mã khôi phục đến",
+  "send_email_success": "Send email success",
+  "you_didnt_verify": "You didn't verify! Try again",
+  "no_devices_found": "Không tìm thấy thiết bị nào",
+  "last_accessed_at": "Truy cập lần cuối vào",
+  "empty_call_list_message": "Nhóm của bạn chưa có cuộc gọi nào",
+  "no_members_found": "Chưa có thành viên nào"
 }

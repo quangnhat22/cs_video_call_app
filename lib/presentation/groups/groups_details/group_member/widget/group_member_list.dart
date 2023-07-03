@@ -18,8 +18,8 @@ class GroupMemberList extends StatelessWidget {
           getDetailSuccess: (groupDetail) {
             final members = groupDetail.members;
             if (members == null || members.isEmpty) {
-              return const Center(
-                child: Text("No member now!"),
+              return Center(
+                child: Text(AppLocalizations.of(context)!.no_members_found),
               );
             }
             return Padding(
@@ -44,7 +44,6 @@ class GroupMemberList extends StatelessWidget {
             );
           },
           orElse: () {
-            //TODO: support vi en
             return Center(
               child: Text(AppLocalizations.of(context)!.error_message),
             );

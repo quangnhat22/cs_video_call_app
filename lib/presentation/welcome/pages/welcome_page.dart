@@ -24,9 +24,9 @@ class WelcomeView extends StatelessWidget {
     return BlocConsumer<WelcomeCubit, WelcomeState>(
       listener: (context, state) {
         state.whenOrNull(
-          signInWithGoogleSuccess: () {
-            context.read<AppBloc>().add(AppUserChanged());
-          },
+          // signInWithGoogleSuccess: () {
+          //   context.read<AppBloc>().add(AppUserChanged());
+          // },
           signInFail: (message) {
             SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
           },

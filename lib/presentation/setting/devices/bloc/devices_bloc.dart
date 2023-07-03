@@ -16,6 +16,7 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
     on<DevicesEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
+        confirmDelete: (event) => _deleteDevice(event, emit),
       );
     });
   }
@@ -28,6 +29,17 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
 
       final devices = await _deviceUseCase.getDevices();
       emit(DevicesSuccess(devices: devices));
+    } catch (e) {
+      emit(DevicesState.failure(message: e.toString()));
+    }
+  }
+
+  Future<void> _deleteDevice(
+      ConfirmDeleteDevice event, Emitter<DevicesState> emit) async {
+    try {
+      emit(const DevicesLoading());
+      await _deviceUseCase.deleteDevice(event.deviceId, event.deviceName);
+      emit(const DevicesDeleteSuccess());
     } catch (e) {
       emit(DevicesState.failure(message: e.toString()));
     }

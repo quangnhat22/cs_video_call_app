@@ -3,8 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 
-part 'welcome_state.dart';
 part 'welcome_cubit.freezed.dart';
+part 'welcome_state.dart';
 
 @Injectable()
 class WelcomeCubit extends Cubit<WelcomeState> {
@@ -18,7 +18,7 @@ class WelcomeCubit extends Cubit<WelcomeState> {
     try {
       emit(const WelcomeState.signInWithGoogleInProgress());
       await _authRepo.loginWithGoogle();
-      emit(const WelcomeState.signInWithGoogleSuccess());
+      // emit(const WelcomeState.signInWithGoogleSuccess());
     } catch (e) {
       emit(WelcomeState.signInFail(e.toString()));
     }

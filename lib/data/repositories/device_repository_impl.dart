@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/data/models/device_model.dart';
 import 'package:videocall/domain/entities/device_entity.dart';
 import 'package:videocall/domain/modules/device/device_repository.dart';
@@ -7,10 +8,14 @@ import '../data_sources/remote/service/device_service.dart';
 
 @Injectable(as: DeviceRepository)
 class DeviceRepositoryImpl extends DeviceRepository {
-  DeviceRepositoryImpl({required DeviceService deviceService})
-      : _deviceService = deviceService;
+  DeviceRepositoryImpl({
+    required DeviceService deviceService,
+    required NotificationService notificationService,
+  })  : _deviceService = deviceService,
+        _notificationService = notificationService;
 
   final DeviceService _deviceService;
+  final NotificationService _notificationService;
 
   @override
   Future<List<DeviceEntity>> getDevices() async {
@@ -35,5 +40,22 @@ class DeviceRepositoryImpl extends DeviceRepository {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  @override
+  Future<bool> deleteDevice(String deviceId, String deviceName) async {
+    final fcmToken = await _getFCMToken();
+
+    final res =
+        await _deviceService.deleteDevice(deviceId, deviceName, fcmToken ?? '');
+    if (res.statusCode == 200) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<String?> _getFCMToken() async {
+    return await _notificationService.getFirebaseMessagingToken();
   }
 }

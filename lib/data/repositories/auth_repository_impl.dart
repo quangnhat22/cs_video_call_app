@@ -3,29 +3,22 @@ import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
+import 'package:videocall/data/data_sources/local/local_data_src.dart';
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 import 'package:videocall/domain/modules/user/user_repository.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
-  AuthRepositoryImpl(
-      {required AuthFirebase authFirebase,
-      required AuthService authService,
-      required AuthLocalDataSrc authLocalDataSrc,
-      required NotificationService notificationService,
-      required UserRepository userRepo})
-      : _authFirebase = authFirebase,
-        _authService = authService,
-        _authLocalDataSrc = authLocalDataSrc,
-        _notificationService = notificationService,
-        _userRepo = userRepo;
+  AuthRepositoryImpl(this._localDataSource, this._userRepo, this._authService,
+      this._authFirebase, this._authLocalDataSrc, this._notificationService);
 
   final UserRepository _userRepo;
   final AuthFirebase _authFirebase;
   final AuthService _authService;
   final AuthLocalDataSrc _authLocalDataSrc;
   final NotificationService _notificationService;
+  final LocalDataSource _localDataSource;
 
   @override
   Future<bool> checkIsLoggedIn() async {
@@ -65,9 +58,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await _authService.logOut();
       await _authFirebase.logOut();
     } finally {
-      // clear local
-      await _userRepo.clearBox();
-      await _authLocalDataSrc.deleteBoxAuth();
+      await _localDataSource.deleteAllLocal();
     }
   }
 

@@ -18,4 +18,19 @@ class DeviceService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> deleteDevice(
+      String deviceId, String deviceName, String fcmToken) async {
+    try {
+      return await _service.dio
+          .delete('${BaseService.devicePath}/$deviceId', data: {
+        "name": deviceName,
+        "push_notification_token": fcmToken,
+      });
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
