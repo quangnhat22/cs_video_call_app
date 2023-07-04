@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 import 'package:videocall/presentation/global_search/global_search.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/config/app_theme.dart';
@@ -49,10 +47,7 @@ class MHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.search),
           onPressed: () {
-            showSearch(
-                context: context,
-                delegate:
-                    GlobalSearch(BlocProvider.of<GlobalSearchBloc>(context)));
+            showSearch(context: context, delegate: GlobalSearch());
           },
         ),
         if (actionButton != null) actionButton!

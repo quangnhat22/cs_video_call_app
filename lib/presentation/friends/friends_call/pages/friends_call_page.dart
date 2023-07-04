@@ -12,8 +12,8 @@ class FriendsCallPage extends StatelessWidget {
 class FriendsCallView extends StatelessWidget {
   const FriendsCallView({Key? key}) : super(key: key);
 
-  void handleDropdownChange(String selectedValue) {
-    debugPrint(selectedValue);
+  void handleDropdownChange(AppCallStatus status) {
+    debugPrint(status.value);
   }
 
   @override
