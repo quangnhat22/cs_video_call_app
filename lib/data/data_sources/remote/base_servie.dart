@@ -21,6 +21,7 @@ class BaseService {
   static const String groupCallPath = "/meeting";
   static const String searchPath = "/search";
   static const String devicePath = "/device";
+  static const String notficationPath = "/notification";
 
   BaseService(this._authLocalDataSrc, this._localDataSource) {
     dio = initDio();

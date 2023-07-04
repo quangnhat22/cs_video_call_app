@@ -49,6 +49,16 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
   }
 
   @override
+  void dispose() async {
+    _localRenderer.srcObject?.dispose();
+    _remoteRenderer.srcObject?.dispose();
+    await _localRenderer.dispose();
+    await _remoteRenderer.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -101,14 +111,5 @@ class _PersonalCallMainBodyState extends State<PersonalCallMainBody> {
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    //context.read<PersonalCallCubit>().hangUp(local: _localRenderer);\
-    _localRenderer.dispose();
-    _remoteRenderer.dispose();
-
-    super.dispose();
   }
 }

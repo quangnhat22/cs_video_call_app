@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/common/widgets/stateless/buttons/float_action_button_video.dart';
+import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart';
 
 class PersonalCallActions extends StatelessWidget {
@@ -36,8 +37,9 @@ class PersonalCallActions extends StatelessWidget {
     }
   }
 
-  void _handleOnCallEndBtn(BuildContext ctx) {
-    ctx.read<PersonalCallCubit>().hangUp(local: localRender);
+  void _handleOnCallEndBtn(BuildContext ctx) async {
+    await ctx.read<PersonalCallCubit>().hangUp(local: localRender);
+    NavigationUtil.pop();
   }
 
   void _handleOnVolumeBtn(BuildContext ctx) {

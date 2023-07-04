@@ -19,6 +19,11 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
   final isOwnerRoom = false;
 
+  //for room
+  bool _isOpenCamera = true;
+  bool _isSwitchCameraFront = true;
+  bool _isOpenMic = false;
+
   void pageInited(String token) {
     _token = token;
   }
@@ -45,10 +50,16 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   }
 
   void changedCameraPreviewStatus(bool value) async {
+    _isOpenCamera = value;
     _room.localParticipant?.setCameraEnabled(value);
   }
 
+  void changedCameraPosition(bool value) async {
+    _isSwitchCameraFront = value;
+  }
+
   void changedAudioPreviewStatus(bool value) async {
+    _isOpenMic = value;
     _room.localParticipant?.setMicrophoneEnabled(value);
   }
 
@@ -56,13 +67,13 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
     await _room.connect(
       "ws://${AppConfig.httpUrl}:7880",
       _token,
-      roomOptions: const RoomOptions(
+      roomOptions: RoomOptions(
         adaptiveStream: true,
         dynacast: true,
-        defaultVideoPublishOptions: VideoPublishOptions(
+        defaultVideoPublishOptions: const VideoPublishOptions(
           simulcast: true,
         ),
-        defaultScreenShareCaptureOptions: ScreenShareCaptureOptions(
+        defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(
             useiOSBroadcastExtension: true,
             params: VideoParameters(
                 dimensions: VideoDimensionsPresets.h1080_169,
@@ -71,8 +82,10 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
                   maxFramerate: 15,
                 ))),
         defaultCameraCaptureOptions: CameraCaptureOptions(
+          cameraPosition:
+              _isSwitchCameraFront ? CameraPosition.front : CameraPosition.back,
           maxFrameRate: 30,
-          params: VideoParameters(
+          params: const VideoParameters(
             dimensions: VideoDimensionsPresets.h720_169,
             encoding: VideoEncoding(
               maxBitrate: 2 * 1000 * 1000,
@@ -82,10 +95,10 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
         ),
       ),
     );
-    _room.localParticipant?.setCameraEnabled(true);
+    _room.localParticipant?.setCameraEnabled(_isOpenCamera);
 
 // Turns microphone track on
-    _room.localParticipant?.setMicrophoneEnabled(true);
+    _room.localParticipant?.setMicrophoneEnabled(_isOpenMic);
     emit(CallGroupConnectedSuccess(room: _room));
   }
 

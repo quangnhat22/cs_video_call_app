@@ -70,7 +70,16 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
   }
 
   void _setVideoTrack(BuildContext ctx) async {
-    videoTrack?.mediaStreamTrack.enabled = !isCameraOn;
+    if (isCameraOn) {
+      videoTrack?.mediaStreamTrack.stop();
+    } else {
+      videoTrack =
+          await LocalVideoTrack.createCameraTrack(const CameraCaptureOptions(
+        cameraPosition: CameraPosition.front,
+        params: VideoParametersPresets.h720_169,
+      ));
+    }
+
     setState(() {
       isCameraOn = !isCameraOn;
     });
@@ -80,12 +89,15 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
     }
   }
 
-  void _switchCamera() async {
+  void _switchCamera(BuildContext ctx) async {
     if (videoTrack?.mediaStreamTrack == null) return;
     Helper.switchCamera(videoTrack!.mediaStreamTrack);
     setState(() {
       isCameraFront = !isCameraFront;
     });
+    if (context.mounted) {
+      ctx.read<CallGroupStatusCubit>().changedCameraPosition(isCameraFront);
+    }
   }
 
   void _handleOnVolumeBtn(BuildContext ctx) {
@@ -110,12 +122,12 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
               : Icons.videocam_off_outlined,
           onPress: () async => _setVideoTrack(context),
         ),
-        // FloatActionButtonVideo(
-        //   icon: isCameraFront
-        //       ? Icons.flip_camera_ios_outlined
-        //       : Icons.flip_camera_ios,
-        //   onPress: () => _switchCamera(),
-        // ),
+        FloatActionButtonVideo(
+          icon: isCameraFront
+              ? Icons.flip_camera_ios_outlined
+              : Icons.flip_camera_ios,
+          onPress: () => _switchCamera(context),
+        ),
         FloatActionButtonVideo(
           icon: Icons.call_end,
           onPress: () => _handleOnCallEndBtn(),
@@ -153,7 +165,7 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: !videoTrack!.muted
+                      child: isCameraOn
                           ? VideoTrackRenderer(videoTrack as VideoTrack)
                           : Container(),
                     ),
