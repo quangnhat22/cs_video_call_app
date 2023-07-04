@@ -18,4 +18,16 @@ class MessageService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> unpinMessage(
+      String groupId, String meetingId, String messageId) async {
+    try {
+      return await _service.dio
+          .delete('${BaseService.messagePath}/$groupId/$meetingId/$messageId');
+    } on DioError catch (e) {
+      throw Exception(e.message);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

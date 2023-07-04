@@ -7,7 +7,14 @@ class MeetingPinnedMessageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MessagesBloc, MessagesState>(
+    return BlocConsumer<MessagesBloc, MessagesState>(
+      listener: (context, state) {
+        if (state is MessagesUnpinSuccess) {
+          context
+              .read<MessagesBloc>()
+              .add(const MessagesEvent.started(groupId: '123'));
+        }
+      },
       builder: (context, state) {
         return state.maybeWhen(
           failure: (message) {
@@ -28,12 +35,15 @@ class MeetingPinnedMessageList extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      messages[index].meeting?.title ??
-                          AppLocalizations.of(context)!.unknown_meeting_title,
-                      style: AppTextStyles.headlineTextStyle,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        messages[index].meeting?.title ??
+                            AppLocalizations.of(context)!.unknown_meeting_title,
+                        style: AppTextStyles.headlineTextStyle,
+                      ),
                     ),
                     const SizedBox(
                       height: 12,

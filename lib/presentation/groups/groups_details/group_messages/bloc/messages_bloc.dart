@@ -16,6 +16,7 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
     on<MessagesEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
+        unpin: (event) => _unpinMessage(event, emit),
       );
     });
   }
@@ -25,9 +26,21 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   Future<void> _started(_Started event, Emitter<MessagesState> emit) async {
     try {
       emit(const MessagesLoading());
-      // final pinnedMessages =
-      //     await _messageUseCase.getPinnedMessages(event.groupId);
-      emit(MessagesSuccess(messages: []));
+      final pinnedMessages =
+          await _messageUseCase.getPinnedMessages(event.groupId);
+      emit(MessagesSuccess(messages: pinnedMessages));
+    } catch (e) {
+      emit(MessagesFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> _unpinMessage(
+      MessagesUnpin event, Emitter<MessagesState> emit) async {
+    try {
+      emit(const MessagesLoading());
+      await _messageUseCase.unpinMessage(
+          event.groupId, event.meetingId, event.messageId);
+      emit(const MessagesUnpinSuccess());
     } catch (e) {
       emit(MessagesFailure(message: e.toString()));
     }

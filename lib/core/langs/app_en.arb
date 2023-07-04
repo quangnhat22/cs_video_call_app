@@ -175,5 +175,15 @@
   "empty_call_list_message": "Your group has no calls",
   "no_members_found": "No members found",
   "no_messages_found": "No messages found",
-  "unknown_meeting_title": "Unknown meeting title"
+  "unknown_meeting_title": "Unknown meeting title",
+  "was_pinned_by": "The message was pinned at {pinnedAt}",
+  "@was_pinned_by": {
+    "placeholders": {
+      "pinnedAt": {
+        "type": "String",
+        "example": "2023-06-28T10:08:56.284Z"
+      }
+    }
+  },
+  "unpin": "Unpin"
 }

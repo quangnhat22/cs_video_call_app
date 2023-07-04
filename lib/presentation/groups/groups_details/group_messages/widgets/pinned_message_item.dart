@@ -1,11 +1,13 @@
 part of group_messages;
 
+enum Menu { unpin }
+
 class PinnedMessageItem extends StatelessWidget {
   const PinnedMessageItem(
       {super.key, this.isMyselfMessage = false, required this.message});
 
   final bool isMyselfMessage;
-  final MessageModel? message;
+  final MessageModel message;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,9 @@ class PinnedMessageItem extends StatelessWidget {
                 child: Icon(Icons.push_pin, size: 14),
               ),
               TextSpan(
-                text: isMyselfMessage ? "Your" : message?.sender?.name,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-              ),
-              TextSpan(
-                text:
-                    "'s message was pinned at ${intl.DateFormat('dd-MM-yyyy').format(DateTime.parse(message!.pinnedAt!))}",
+                text: AppLocalizations.of(context)!.was_pinned_by(
+                    intl.DateFormat('dd-MM-yyyy')
+                        .format(DateTime.parse(message.pinnedAt!))),
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground),
               ),
@@ -46,8 +42,8 @@ class PinnedMessageItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (!isMyselfMessage)
-              CustomAvatarImage(
-                urlImage: message?.sender?.avatar,
+              const CustomAvatarImage(
+                urlImage: '',
                 maxRadiusEmptyImg: 20,
                 widthImage: 48,
                 heightImage: 48,
@@ -68,17 +64,33 @@ class PinnedMessageItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Text(
-                        message?.sender?.name ??
+                        message.sender?.name ??
                             AppLocalizations.of(context)!.unknown_name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   Text(
-                    message?.content ?? '',
+                    message.content ?? '',
                   ),
                 ],
               ),
             ),
+            PopupMenuButton<Menu>(
+              icon: const Icon(
+                Icons.more_vert,
+              ),
+              onSelected: (Menu item) {
+                debugPrint(item.name);
+                context.read<MessagesBloc>().add(MessagesEvent.unpin(
+                    groupId: '123', meetingId: '123', messageId: message.id));
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                PopupMenuItem<Menu>(
+                  value: Menu.unpin,
+                  child: Text(AppLocalizations.of(context)!.unpin),
+                ),
+              ],
+            )
           ],
         ),
       ],

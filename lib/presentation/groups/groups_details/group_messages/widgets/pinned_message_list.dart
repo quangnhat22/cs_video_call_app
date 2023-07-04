@@ -21,8 +21,8 @@ class PinnedMessagesList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return PinnedMessageItem(
-              isMyselfMessage: index < 4 ? true : false,
-              message: messages![index],
+              isMyselfMessage: index < 2 ? true : false,
+              message: messages![index]!,
             );
           },
           itemCount: messages!.length,

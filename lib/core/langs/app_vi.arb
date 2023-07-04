@@ -175,5 +175,15 @@
   "empty_call_list_message": "Nhóm của bạn chưa có cuộc gọi nào",
   "no_members_found": "Chưa có thành viên nào",
   "no_messages_found": "Chưa có tin nhắn nào",
-  "unknown_meeting_title": "Tên cuộc hợp không xác định"
+  "unknown_meeting_title": "Tên cuộc hợp không xác định",
+  "was_pinned_by": "Tin nhắn đã được ghim vào {pinnedAt}",
+  "@was_pinned_by": {
+    "placeholders": {
+      "pinnedAt": {
+        "type": "String",
+        "example": "2023-06-28T10:08:56.284Z"
+      }
+    }
+  },
+  "unpin": "Unpin"
 }

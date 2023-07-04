@@ -38,4 +38,20 @@ class MessageRepositoryImpl extends MessageRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<bool> unpinMessage(
+      String groupId, String meetingId, String messageId) async {
+    try {
+      final res =
+          await _messageService.unpinMessage(groupId, meetingId, messageId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

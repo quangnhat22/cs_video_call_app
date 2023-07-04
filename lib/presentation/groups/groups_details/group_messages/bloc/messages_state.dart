@@ -9,4 +9,5 @@ class MessagesState with _$MessagesState {
   const factory MessagesState.failure({
     required String message,
   }) = MessagesFailure;
+  const factory MessagesState.unpinSuccess() = MessagesUnpinSuccess;
 }
