@@ -97,9 +97,9 @@ import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i93;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
     as _i76;
 import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
-    as _i89;
-import 'package:videocall/presentation/auth/forgot_password/cubit/send_email_cubit.dart'
     as _i88;
+import 'package:videocall/presentation/auth/forgot_password/cubit/send_email_cubit.dart'
+    as _i89;
 import 'package:videocall/presentation/auth/login/cubit/login_cubit.dart'
     as _i86;
 import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'

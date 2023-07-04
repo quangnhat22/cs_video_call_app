@@ -11,6 +11,7 @@ class UserEntity {
   final String? bio;
   final DateTime? birthday;
   final int? commonFriendCount;
+  final int? commonGroupCount;
   final DateTime? lastSeenAt;
   final String relation;
 
@@ -25,6 +26,7 @@ class UserEntity {
     this.bio,
     this.birthday,
     this.commonFriendCount = 0,
+    this.commonGroupCount = 0,
     this.lastSeenAt,
     this.relation = "non",
   });
@@ -46,6 +48,7 @@ class UserEntity {
       bio: userModel.bio,
       birthday: userModel.birthday,
       commonFriendCount: userModel.commonFriendCount,
+      commonGroupCount: userModel.commonGroupCount,
       lastSeenAt: userModel.lastSeenAt,
       relation: userModel.relation ?? "non",
     );
@@ -66,6 +69,7 @@ class UserEntity {
       bio: userEntity.bio,
       birthday: userEntity.birthday,
       commonFriendCount: userEntity.commonFriendCount,
+      commonGroupCount: userEntity.commonGroupCount,
       lastSeenAt: userEntity.lastSeenAt,
       relation: userEntity.relation,
     );

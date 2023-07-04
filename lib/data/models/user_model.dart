@@ -30,8 +30,11 @@ class UserModel extends HiveObject with _$UserModel {
         String? relation,
     @HiveField(9)
     // ignore: invalid_annotation_target
-    @JsonKey(name: "common_friend_count", ignore: true)
+    @JsonKey(name: "common_friend_count")
         int? commonFriendCount,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "common_group_count")
+        int? commonGroupCount,
     // ignore: invalid_annotation_target
     @JsonKey(name: "is_friend", ignore: true)
         bool? isFriend,

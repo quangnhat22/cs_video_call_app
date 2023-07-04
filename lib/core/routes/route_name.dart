@@ -30,6 +30,7 @@ class RouteName {
   static const String globalSearch = "/global-search";
   static const String devices = "/devices";
   static const String changePassword = "/change-password";
+  static const String aboutUs = "/about-us";
 
   //error
   static const String notFoundPage = '/not-found';
