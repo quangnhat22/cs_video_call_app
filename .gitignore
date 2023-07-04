@@ -51,3 +51,4 @@ app.*.map.json
 di/injector.config.dart
 .fvm
 .vscode
+lib/core/di/injector.config.dart

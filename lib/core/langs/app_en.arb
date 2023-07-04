@@ -22,6 +22,8 @@
   "sign_in_your_account_to_see_your_chating": "Sign in your account to see your chating",
   "email_text_field_label": "Email (*)",
   "password_text_field_label": "Password (*)",
+  "old_password_text_field_label": "Old Password (*)",
+  "new_password_text_field_label": "New Password (*)",
   "forgot_password": "Forgot Password?",
   "sign_in_text_button": "SIGN IN",
   "back_to_welcome": "BACK TO WELCOME",
@@ -185,5 +187,6 @@
       }
     }
   },
-  "unpin": "Unpin"
+  "unpin": "Unpin",
+  "change_password_successfully_message": "Change password successfully"
 }

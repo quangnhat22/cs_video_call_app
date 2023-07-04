@@ -23,6 +23,7 @@ import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/create_meeting/pages/create_meeting_page.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
+import 'package:videocall/presentation/setting/change_password/change_password.dart';
 import 'package:videocall/presentation/setting/devices/devices.dart';
 import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
@@ -127,6 +128,8 @@ class AppRoutes {
             ));
       case RouteName.devices:
         return _buildAnimationRoute(settings, const DevicesPage());
+      case RouteName.changePassword:
+        return _buildAnimationRoute(settings, const ChangePasswordPage());
       default:
         return _errorRoute();
     }

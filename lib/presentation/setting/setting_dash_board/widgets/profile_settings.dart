@@ -15,6 +15,10 @@ class ProfileSettings extends StatelessWidget {
     NavigationUtil.pushNamed(routeName: RouteName.emailVerify, args: email);
   }
 
+  void _onChangePassword() {
+    NavigationUtil.pushNamed(routeName: RouteName.changePassword);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingCubit, SettingState>(
@@ -43,7 +47,7 @@ class ProfileSettings extends StatelessWidget {
               InkWellDynamicBorder(
                 title: AppLocalizations.of(context)!.change_password,
                 leading: const Icon(Icons.password_outlined),
-                onTap: () {},
+                onTap: _onChangePassword,
                 hasTopBorderRadius: false,
                 hasBottomBorderRadius: isEmailVerify,
               ),

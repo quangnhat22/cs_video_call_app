@@ -22,6 +22,8 @@
   "sign_in_your_account_to_see_your_chating": "Đăng nhập để xem các cuộc trò chuyện của bạn",
   "email_text_field_label": "Email (*)",
   "password_text_field_label": "Mật khẩu (*)",
+  "old_password_text_field_label": "Mật khẩu cũ (*)",
+  "new_password_text_field_label": "Mật khẩu mới (*)",
   "forgot_password": "Quên Mật Khẩu?",
   "sign_in_text_button": "ĐĂNG NHẬP",
   "back_to_welcome": "QUAY LẠI",
@@ -185,5 +187,6 @@
       }
     }
   },
-  "unpin": "Unpin"
+  "unpin": "Unpin",
+  "change_password_successfully_message": "Thay đổi mật khẩu thành công"
 }
