@@ -13,7 +13,7 @@ class SendEmailForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      child: BlocBuilder<SendEmailCubit, SendEmailState>(
+      child: BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return Form(
@@ -24,7 +24,7 @@ class SendEmailForm extends StatelessWidget {
                 icon: const Icon(Icons.email_outlined),
                 label: AppLocalizations.of(context)!.email_text_field_label,
                 onChange: (email) {
-                  context.read<SendEmailCubit>().emailChanged(email);
+                  context.read<ForgotPasswordCubit>().emailChanged(email);
                 },
                 errorText: state.email.displayError != null
                     ? state.email.error?.message
@@ -38,17 +38,21 @@ class SendEmailForm extends StatelessWidget {
               else
                 Padding(
                   padding: const EdgeInsets.only(top: 60),
-                  child: CustomElevatedButton(
-                    buttonText: AppLocalizations.of(context)!.send_email,
-                    onPressed: state.isValid
-                        ? () {
-                            handleSendEmail(context);
-                          }
-                        : null,
-                    backgroundColor: state.isValid
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.grey[400],
-                  ),
+                  child: state.isSentEmail
+                      ? CountdownButton(onPressed: () {
+                          handleSendEmail(context);
+                        })
+                      : CustomElevatedButton(
+                          buttonText: AppLocalizations.of(context)!.send_email,
+                          onPressed: state.isValid
+                              ? () {
+                                  handleSendEmail(context);
+                                }
+                              : null,
+                          backgroundColor: state.isValid
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey[400],
+                        ),
                 )
             ],
           ));

@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import '../utils/global_keys.dart';
 
 class NavigationUtil {
-  static NavigatorState? get _navigatorKey =>
+  static NavigatorState? get navigatorKey =>
       AppGlobalKeys.authorNavigatorKey.currentState;
 
   static Future push({required Widget page}) async {
-    return await _navigatorKey?.push(MaterialPageRoute(builder: (_) => page));
+    return await navigatorKey?.push(MaterialPageRoute(builder: (_) => page));
   }
 
   static Future pushNamed({required String routeName, Object? args}) async {
-    return await _navigatorKey?.pushNamed(
+    return await navigatorKey?.pushNamed(
       routeName,
       arguments: args,
     );
@@ -20,14 +20,14 @@ class NavigationUtil {
 
   static Future pushReplacementNamed(
       {required String routeName, Object? args}) async {
-    return await _navigatorKey?.pushReplacementNamed(
+    return await navigatorKey?.pushReplacementNamed(
       routeName,
       arguments: args,
     );
   }
 
   static Future pushAndRemoveUntil({required Widget page}) async {
-    return await _navigatorKey?.pushAndRemoveUntil(
+    return await navigatorKey?.pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => page,
       ),
@@ -37,7 +37,7 @@ class NavigationUtil {
 
   static Future pushNamedAndRemoveUntil(
       {required String route, Object? args}) async {
-    return await _navigatorKey?.pushNamedAndRemoveUntil(
+    return await navigatorKey?.pushNamedAndRemoveUntil(
       route,
       (r) => false,
       arguments: args,
@@ -45,14 +45,14 @@ class NavigationUtil {
   }
 
   static pop({Object? result}) {
-    return _navigatorKey?.pop(result);
+    return navigatorKey?.pop(result);
   }
 
   static loadSingletonPage(
       {required String targetPage, required ReceivedAction receivedAction}) {
     // Avoid to open the notification details page over another details page already opened
     // Navigate into pages, avoiding to open the notification details page over another details page already opened
-    _navigatorKey?.pushNamedAndRemoveUntil(targetPage, (route) {
+    navigatorKey?.pushNamedAndRemoveUntil(targetPage, (route) {
       return (route.settings.name != targetPage) || route.isFirst;
     }, arguments: {"received-action": receivedAction});
   }

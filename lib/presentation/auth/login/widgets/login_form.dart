@@ -48,9 +48,11 @@ class _LoginFormState extends State<LoginForm> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   child: CustomTextButton(
-                      AppLocalizations.of(context)!.back_to_welcome, () {
-                    Navigator.pop(context);
-                  }, AppColors.lightColorScheme.primary),
+                      buttonText: AppLocalizations.of(context)!.back_to_welcome,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      foregroundColor: AppColors.lightColorScheme.primary),
                 )
             ]),
           ),

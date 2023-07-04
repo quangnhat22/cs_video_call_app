@@ -118,7 +118,7 @@
   "add_notifications": "Thêm thông báo",
   "add_participants": "Thêm thành viên",
   "add_photo": "Thêm hình ảnh",
-  "add_photo_so_your_friend_know" :"Thêm avatar để bạn bè có thể biết rõ bạn hơn!",
+  "add_photo_so_your_friend_know": "Thêm avatar để bạn bè có thể biết rõ bạn hơn!",
   "before": "Trước",
   "minutes": "phút",
   "action_success": "Yêu cầu của bạn đã gửi thành công!",
@@ -179,5 +179,16 @@
   "empty_call_list_message": "Nhóm của bạn chưa có cuộc gọi nào",
   "no_members_found": "Chưa có thành viên nào",
   "update_avatar_success": "Cập nhật avatar thành công!",
-  "update_avatar_fail": "Cập nhật avatar thất bại! Vui lòng thử lại."
+  "update_avatar_fail": "Cập nhật avatar thất bại! Vui lòng thử lại.",
+  "resend_email_after": "Gửi lại email sau",
+  "check_email_forgot_password": "Chúng tôi đã gửi một email đến địa chỉ {email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
+  "@check_email_forgot_password": {
+    "placeholders": {
+      "email_user": {
+        "type": "String",
+        "example": "Bob"
+      }
+    }
+  },
+  "open_gmail_app": "Mở ứng dụng Gmail"
 }

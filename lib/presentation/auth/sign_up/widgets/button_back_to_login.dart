@@ -10,11 +10,11 @@ class ButtonBackToLogin extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 14),
       child: CustomTextButton(
-        AppLocalizations.of(context)!.back_to_welcome,
-        () {
+        buttonText: AppLocalizations.of(context)!.back_to_welcome,
+        onPressed: () {
           Navigator.pop(context);
         },
-        Theme.of(context).colorScheme.secondary,
+        foregroundColor: Theme.of(context).colorScheme.secondary,
       ),
     );
   }
