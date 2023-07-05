@@ -45,4 +45,27 @@ class AppAssets {
   static final successImage = Image.asset(
     'assets/images/success.png',
   );
+
+  static final successIcon = SvgPicture.asset(
+    'assets/icons/success.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final warningIcon = SvgPicture.asset(
+    'assets/icons/warning.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final errorIcon = SvgPicture.asset(
+    'assets/icons/error.svg',
+    width: 120,
+    height: 120,
+  );
+
+  static final noDataImg = Image.asset(
+    'assets/images/no_data.jpg',
+    fit: BoxFit.cover,
+  );
 }

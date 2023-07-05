@@ -5,16 +5,15 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/core/utils/formz/email.dart';
 import 'package:videocall/domain/modules/auth/auth_usecase.dart';
 
-part 'send_email_state.dart';
-part 'send_email_cubit.freezed.dart';
+part 'forgot_password_state.dart';
+part 'forgot_password_cubit.freezed.dart';
 
 @Injectable()
-class SendEmailCubit extends Cubit<SendEmailState> {
-  SendEmailCubit({required AuthUseCase authUseCase})
-      : _authUseCase = authUseCase,
-        super(const SendEmailState.initial());
-
+class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   final AuthUseCase _authUseCase;
+
+  ForgotPasswordCubit(this._authUseCase)
+      : super(const ForgotPasswordState.initial());
 
   void emailChanged(String value) {
     final email = Email.dirty(value.trim());
@@ -27,7 +26,8 @@ class SendEmailCubit extends Cubit<SendEmailState> {
 
     try {
       await _authUseCase.sendResetPasswordCode();
-      emit(state.copyWith(statusSubmit: FormzSubmissionStatus.success));
+      emit(state.copyWith(
+          statusSubmit: FormzSubmissionStatus.success, isSentEmail: true));
     } catch (e) {
       emit(
         state.copyWith(

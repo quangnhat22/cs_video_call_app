@@ -345,6 +345,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.5"
+  external_app_launcher:
+    dependency: "direct main"
+    description:
+      name: external_app_launcher
+      sha256: fb55cddd706c62ede11056750d5e018ef379820e09739e967873211dd537d833
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -486,6 +494,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_countdown_timer:
+    dependency: "direct main"
+    description:
+      name: flutter_countdown_timer
+      sha256: dfcbd7d6f76a5589f78f3f3ba2f9ea2e199368eccc1adce4153ce985b9587bc5
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   flutter_keyboard_visibility:
     dependency: transitive
     description:

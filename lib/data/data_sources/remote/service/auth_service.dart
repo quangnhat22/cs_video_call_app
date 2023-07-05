@@ -120,10 +120,8 @@ class AuthService {
   }
 
   Future<Response> sendEmailResetPasswordCode() async {
-    // TODO: Replace the path below to an actual path
     try {
-      return await _service.dio
-          .post("${BaseService.authPath}/send-reset-password-code");
+      return await _service.dio.post("${BaseService.authPath}/forget-password");
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {

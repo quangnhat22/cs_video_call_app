@@ -4,10 +4,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/domain/modules/auth/auth_usecase.dart';
-
-import '../../../core/services/notification_controller.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -41,7 +38,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onAppStarted(AppStarted event, Emitter<AppState> emit) {
-    getIt<NotificationController>().initializeNotificationsEventListeners();
+    ///TODO: HANDLE NOTIFICATION AGAIN
+    // getIt<NotificationController>().initializeNotificationsEventListeners();
   }
 
   Future<void> _onAppUserChanged(

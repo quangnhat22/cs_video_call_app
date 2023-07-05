@@ -11,6 +11,8 @@ class CallGroupStatusState with _$CallGroupStatusState {
   }) = CallGroupPreparing;
 
   const factory CallGroupStatusState.connectedSuccess({
+    UserEntity? user,
+    List<MessageCallEntity>? listMessage,
     required Room room,
   }) = CallGroupConnectedSuccess;
 
