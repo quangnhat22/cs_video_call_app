@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/data/models/device_model.dart';
 import 'package:videocall/domain/entities/device_entity.dart';
 import 'package:videocall/domain/modules/device/device_repository.dart';
+import 'package:videocall/services/notification_service.dart';
 
 import '../data_sources/remote/service/device_service.dart';
 

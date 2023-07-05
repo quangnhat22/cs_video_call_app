@@ -1,11 +1,11 @@
 import 'package:injectable/injectable.dart';
-import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/remote/service/device_service.dart';
 import 'package:videocall/data/data_sources/remote/service/notification_service.dart';
 import 'package:videocall/data/models/notification_model.dart';
 import 'package:videocall/domain/entities/notification_entity.dart';
 import 'package:videocall/domain/modules/notification/notfication_repository.dart';
+import 'package:videocall/services/notification_service.dart';
 
 @Injectable(as: NotificationRepository)
 class NotificationRepositoryImpl extends NotificationRepository {

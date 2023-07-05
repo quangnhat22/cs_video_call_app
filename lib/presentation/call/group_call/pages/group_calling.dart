@@ -97,21 +97,24 @@ class _GroupCallingState extends State<GroupCalling> {
             b.participant.joinedAt.millisecondsSinceEpoch;
       });
 
-      final localParticipantTracks = widget.room.localParticipant?.videoTracks;
-      if (mounted && localParticipantTracks != null) {
-        for (var t in localParticipantTracks) {
-          if (t.isScreenShare) {
-            screenTracks.add(ParticipantTrack(
-              participant: widget.room.localParticipant!,
-              videoTrack: t.track,
-              isScreenShare: true,
-            ));
-          } else {
-            userMediaTracks.add(ParticipantTrack(
-              participant: widget.room.localParticipant!,
-              videoTrack: t.track,
-              isScreenShare: false,
-            ));
+      if (mounted) {
+        final localParticipantTracks =
+            widget.room.localParticipant?.videoTracks;
+        if (localParticipantTracks != null) {
+          for (var t in localParticipantTracks) {
+            if (t.isScreenShare) {
+              screenTracks.add(ParticipantTrack(
+                participant: widget.room.localParticipant!,
+                videoTrack: t.track,
+                isScreenShare: true,
+              ));
+            } else {
+              userMediaTracks.add(ParticipantTrack(
+                participant: widget.room.localParticipant!,
+                videoTrack: t.track,
+                isScreenShare: false,
+              ));
+            }
           }
         }
       }

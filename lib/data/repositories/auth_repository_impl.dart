@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:videocall/core/services/notification_service.dart';
 import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/firebase/auth_firebase.dart';
 import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
@@ -7,6 +6,7 @@ import 'package:videocall/data/data_sources/local/local_data_src.dart';
 import 'package:videocall/data/data_sources/remote/service/auth_service.dart';
 import 'package:videocall/domain/modules/auth/auth_repostiory.dart';
 import 'package:videocall/domain/modules/user/user_repository.dart';
+import 'package:videocall/services/notification_service.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {

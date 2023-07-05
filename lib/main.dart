@@ -14,7 +14,7 @@ import 'package:videocall/presentation/app/app.dart';
 
 import 'app_bloc_observer.dart';
 import 'core/config/firebase_options.dart';
-import 'core/services/notification_service.dart';
+import 'services/notification_service.dart';
 
 const _useEmulator = false;
 
