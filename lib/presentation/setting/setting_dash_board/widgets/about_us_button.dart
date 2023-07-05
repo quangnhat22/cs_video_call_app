@@ -10,7 +10,7 @@ class AboutUsButton extends StatelessWidget {
         title: AppLocalizations.of(context)!.about_us,
         leading: const Icon(Icons.help_outline),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () => {},
+        onTap: () => {NavigationUtil.pushNamed(routeName: RouteName.aboutUs)},
         hasTopBorderRadius: true,
         hasBottomBorderRadius: true,
       ),

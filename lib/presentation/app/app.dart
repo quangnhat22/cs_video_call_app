@@ -5,6 +5,7 @@ import 'package:videocall/core/utils/global_keys.dart';
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart';
 import 'package:videocall/presentation/app/notification_cubit/app_notification_cubit.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
+import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
@@ -33,6 +34,9 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AppNotificationCubit>(),
         ),
+        BlocProvider(
+          create: (_) => getIt<GlobalSearchBloc>(),
+        )
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, AppState appState) {

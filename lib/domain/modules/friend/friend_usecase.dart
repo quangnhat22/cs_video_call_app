@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:videocall/domain/entities/call_entity.dart';
 import 'package:videocall/domain/modules/friend/friend_repository.dart';
 
 import '../../entities/friend_request_entity.dart';
@@ -24,6 +25,8 @@ abstract class FriendUseCase {
   Future<bool> acceptReceiveRequest(String userId);
 
   Future<bool> rejectReceiveRequest(String userId);
+
+  Future<List<CallEntity>> getCallList(String? status, String? callee);
 }
 
 @Injectable(as: FriendUseCase)
@@ -81,5 +84,10 @@ class FriendUseCaseImpl extends FriendUseCase {
   @override
   Future<bool> unBlockFriend(String id) {
     return _repo.unBlockFriend(id);
+  }
+
+  @override
+  Future<List<CallEntity>> getCallList(String? status, String? callee) {
+    return _repo.getCallList(status, callee);
   }
 }

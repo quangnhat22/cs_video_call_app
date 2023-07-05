@@ -83,10 +83,11 @@ class FriendMutualInfo extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            const Text(
-                              //TODO: change mutual groups
-                              "0",
-                              style: TextStyle(fontSize: 30),
+                            Text(
+                              state.user.commonGroupCount != null
+                                  ? state.user.commonGroupCount.toString()
+                                  : "0",
+                              style: const TextStyle(fontSize: 30),
                             ),
                             const SizedBox(
                               height: 12,

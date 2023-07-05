@@ -1,6 +1,11 @@
 part of friends_call;
 
-const List<String> listItem = <String>['Outgoing', 'Incoming', 'Missed'];
+const List<AppCallStatus> listItem = <AppCallStatus>[
+  AppCallStatus.ended,
+  AppCallStatus.missed,
+  AppCallStatus.onGoing,
+  AppCallStatus.reject
+];
 
 class DropdownFilterButton extends StatefulWidget {
   final Function onChange;
@@ -12,7 +17,7 @@ class DropdownFilterButton extends StatefulWidget {
 }
 
 class _DropdownFilterButtonState extends State<DropdownFilterButton> {
-  String dropdownValue = listItem.first;
+  AppCallStatus dropdownValue = AppCallStatus.onGoing;
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +30,24 @@ class _DropdownFilterButtonState extends State<DropdownFilterButton> {
           border: Border.all(color: Theme.of(context).colorScheme.onSurface),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: DropdownButton<String>(
+        child: DropdownButton<AppCallStatus>(
           value: dropdownValue,
           icon: const Icon(Icons.arrow_drop_down),
           elevation: 8,
           style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           borderRadius: BorderRadius.circular(8),
-          onChanged: (String? value) {
+          onChanged: (AppCallStatus? value) {
             setState(() {
               dropdownValue = value!;
             });
 
-            widget.onChange(value);
+            widget.onChange(context, value);
           },
-          items: listItem.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+          items: listItem
+              .map<DropdownMenuItem<AppCallStatus>>((AppCallStatus status) {
+            return DropdownMenuItem<AppCallStatus>(
+              value: status,
+              child: Text(status.value),
             );
           }).toList(),
         ),

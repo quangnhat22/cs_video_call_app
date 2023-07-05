@@ -3,51 +3,73 @@ part of friends_call;
 class ListFriendCall extends StatelessWidget {
   const ListFriendCall({Key? key}) : super(key: key);
 
-  void _onCallFriendBtn() {
-    NavigationUtil.pushNamed(routeName: RouteName.personalCall);
+  void handleDropdownChange(BuildContext ctx, AppCallStatus status) {
+    ctx
+        .read<HistoryCallBloc>()
+        .add(HistoryCallEvent.filterStatusCall(status: status));
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          //final int itemIndex = index ~/ 2;
-          if (index.isEven) {
-            return ListTile(
-                title: const Text('Trần Đình Khôi'),
-                subtitle: Wrap(
-                  spacing: 6,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.arrow_outward,
-                      color: Theme.of(context).colorScheme.tertiary,
+    return BlocBuilder<HistoryCallBloc, HistoryCallState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          success: (calls) {
+            if (calls.isEmpty) {
+              return Center(
+                  child: Text(AppLocalizations.of(context)!.no_calls_found));
+            }
+
+            return CustomScrollView(
+              slivers: <Widget>[
+                SliverStickyHeader(
+                  header: Container(
+                    color: Theme.of(context).colorScheme.background,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DropdownFilterButton(handleDropdownChange),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                                padding: const MaterialStatePropertyAll(
+                                    EdgeInsets.symmetric(horizontal: 26)),
+                                backgroundColor:
+                                    const MaterialStatePropertyAll(Colors.red),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8)))),
+                            child: Text(AppLocalizations.of(context)!
+                                .friends_clear_text_button),
+                          )
+                        ],
+                      ),
                     ),
-                    const Text('(2) September 9 at 12:03 PM')
-                  ],
-                ),
-                leading: const CircleAvatar(
-                  child: Text('K'),
-                ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    color: Theme.of(context).colorScheme.onSurface,
                   ),
-                  onPressed: _onCallFriendBtn,
-                ));
-          }
-          return const DividerSpaceLeft();
-        },
-        semanticIndexCallback: (Widget widget, int localIndex) {
-          if (localIndex.isEven) {
-            return localIndex ~/ 2;
-          }
-          return null;
-        },
-        childCount: math.max(0, 2 * 2 - 1),
-      ),
+                  sliver: FriendCallSliverList(
+                    calls: calls,
+                  ),
+                ),
+              ],
+            );
+          },
+          failure: (message) {
+            return Center(
+              child: Text(AppLocalizations.of(context)!.error_message),
+            );
+          },
+        );
+      },
     );
   }
 }

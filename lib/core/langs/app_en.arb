@@ -15,13 +15,15 @@
   "about_us": "About us",
   "devices": "Devices",
   "theme": "Theme",
-  "change_password": "Change Password",
-  "edit_profile": "Edit Profile",
-  "change_profile_photo": "Change Profile Photo",
+  "change_password": "Change password",
+  "edit_profile": "Edit profile",
+  "change_profile_photo": "Change profile photo",
   "welcome_back": "Welcome back",
   "sign_in_your_account_to_see_your_chating": "Sign in your account to see your chating",
   "email_text_field_label": "Email (*)",
   "password_text_field_label": "Password (*)",
+  "old_password_text_field_label": "Old Password (*)",
+  "new_password_text_field_label": "New Password (*)",
   "forgot_password": "Forgot Password?",
   "sign_in_text_button": "SIGN IN",
   "back_to_welcome": "BACK TO WELCOME",
@@ -69,7 +71,7 @@
   "groups_tab_your_groups_title": "Your groups",
   "groups_tab_requests_title": "Requests",
   "group_details_tab_calls_title": "Calls",
-  "group_details_tab_discuss_title": "Discuss",
+  "group_details_tab_messages_title": "Messages",
   "group_details_tab_members_title": "Members",
   "group_call_details_tab_chat_title": "Chat",
   "group_call_details_tab_details_title": "Details",
@@ -190,5 +192,23 @@
       }
     }
   },
-  "open_gmail_app": "Open Gmail App"
+  "open_gmail_app": "Open Gmail App",
+  "no_members_found": "No members found",
+  "no_messages_found": "No messages found",
+  "unknown_meeting_title": "Unknown meeting title",
+  "was_pinned_by": "The message was pinned at {pinnedAt}",
+  "@was_pinned_by": {
+    "placeholders": {
+      "pinnedAt": {
+        "type": "String",
+        "example": "2023-06-28T10:08:56.284Z"
+      }
+    }
+  },
+  "unpin": "Unpin",
+  "change_password_successfully_message": "Change password successfully",
+  "our_app": "Our app",
+  "app_introduction": "This is CS Video Call App, the revolutionary software designed to redefine the way we connect through video calling. Whether you're working remotely, catching up with loved ones, or collaborating with colleagues across the globe, CS Video Call is your ultimate solution for seamless and immersive communication. With its cutting-edge features and user-friendly interface, this software offers crystal-clear audio and high-definition video, ensuring every conversation feels as if you're in the same room. Experience the power of real-time interaction as CS Video Call effortlessly brings people together, fostering collaboration, strengthening relationships, and bridging distances. Say goodbye to technical glitches and hello to a streamlined video calling experience with CS Video Call.",
+  "developers": "Developers",
+  "no_calls_found": "No calls found"
 }

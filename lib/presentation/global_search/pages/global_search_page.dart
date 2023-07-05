@@ -2,10 +2,6 @@ part of global_search;
 
 @Injectable()
 class GlobalSearch extends SearchDelegate<String> {
-  final Bloc<GlobalSearchEvent, GlobalSearchState> globalSearchBloc;
-
-  GlobalSearch(this.globalSearchBloc);
-
   @override
   List<Widget>? buildActions(BuildContext context) {
     return <Widget>[
@@ -33,7 +29,9 @@ class GlobalSearch extends SearchDelegate<String> {
     final List<UserEntity> filteredFriends = [];
 
     if (query.isNotEmpty) {
-      globalSearchBloc.add(GlobalSearchChanging(query: query.trim()));
+      context
+          .read<GlobalSearchBloc>()
+          .add(GlobalSearchChanging(query: query.trim()));
     }
 
     return SearchResult(
@@ -47,7 +45,9 @@ class GlobalSearch extends SearchDelegate<String> {
     final List<UserEntity> filteredFriends = [];
 
     if (query.isNotEmpty) {
-      globalSearchBloc.add(GlobalSearchChanging(query: query.trim()));
+      context
+          .read<GlobalSearchBloc>()
+          .add(GlobalSearchChanging(query: query.trim()));
     }
 
     return SearchResult(

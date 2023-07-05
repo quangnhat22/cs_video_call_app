@@ -73,3 +73,14 @@ enum AppMeetingStatus {
 
   final String value;
 }
+
+enum AppCallStatus {
+  ended("Ended"),
+  onGoing("On-going"),
+  missed("Missed"),
+  reject("Reject");
+
+  const AppCallStatus(this.value);
+
+  final String value;
+}

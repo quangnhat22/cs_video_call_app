@@ -3,6 +3,7 @@ import '../../data/models/user_model.dart';
 class UserEntity {
   final String id;
   final String? name;
+  final String? address;
   final String? avatar;
   final String? email;
   final String? phone;
@@ -11,6 +12,7 @@ class UserEntity {
   final DateTime? birthday;
   final int? commonFriendCount;
   final int? commonGroupCount;
+  final DateTime? lastSeenAt;
   final String relation;
   final bool isEmailVerified;
   final bool isProfileUpdated;
@@ -18,6 +20,7 @@ class UserEntity {
   UserEntity({
     required this.id,
     this.name,
+    this.address,
     this.avatar,
     this.email,
     this.phone,
@@ -25,6 +28,7 @@ class UserEntity {
     this.bio,
     this.birthday,
     this.commonFriendCount = 0,
+    this.lastSeenAt,
     this.relation = "non",
     this.commonGroupCount = 0,
     this.isEmailVerified = false,
@@ -46,6 +50,7 @@ class UserEntity {
       gender: userModel.gender,
       bio: userModel.bio,
       birthday: userModel.birthday,
+      lastSeenAt: userModel.lastSeenAt,
       relation: userModel.relation ?? "non",
       commonFriendCount: userModel.commonFriendCount,
       commonGroupCount: userModel.commonGroupCount,
@@ -54,23 +59,23 @@ class UserEntity {
     );
   }
 
-// static UserModel convertToUserModel({
-//   UserEntity? userEntity,
-// }) {
-//   if (userEntity == null) return UserModel(id: '-1');
-//   return UserModel(
-//     id: userEntity.id,
-//     name: userEntity.name,
-//     avatar: userEntity.avatar,
-//     email: userEntity.email,
-//     phone: userEntity.phone,
-//     gender: userEntity.gender,
-//     bio: userEntity.bio,
-//     birthday: userEntity.birthday,
-//     commonFriendCount: userEntity.commonFriendCount,
-//     commonGroupCount: userEntity.commonGroupCount,
-//     emailVerified: userEntity.is,
-//     relation: userEntity.relation,
-//   );
-// }
+  static UserModel convertToUserModel({
+    UserEntity? userEntity,
+  }) {
+    if (userEntity == null) return UserModel(id: '-1');
+    return UserModel(
+      id: userEntity.id,
+      name: userEntity.name,
+      address: userEntity.address,
+      avatar: userEntity.avatar,
+      email: userEntity.email,
+      phone: userEntity.phone,
+      gender: userEntity.gender,
+      bio: userEntity.bio,
+      birthday: userEntity.birthday,
+      commonFriendCount: userEntity.commonFriendCount,
+      lastSeenAt: userEntity.lastSeenAt,
+      relation: userEntity.relation,
+    );
+  }
 }

@@ -163,4 +163,18 @@ class AuthRepositoryImpl extends AuthRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<bool> updatePassword(String newPassword, String oldPassword) async {
+    try {
+      final res = await _authService.updatePassword(newPassword, oldPassword);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
