@@ -4,7 +4,6 @@ class ListFriendCall extends StatelessWidget {
   const ListFriendCall({Key? key}) : super(key: key);
 
   void handleDropdownChange(BuildContext ctx, AppCallStatus status) {
-    debugPrint(status.value.toLowerCase());
     ctx
         .read<HistoryCallBloc>()
         .add(HistoryCallEvent.filterStatusCall(status: status));
