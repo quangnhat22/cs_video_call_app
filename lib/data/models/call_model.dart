@@ -9,6 +9,7 @@ class CallModel with _$CallModel {
   const factory CallModel(
       {required String id,
       UserModel? callee,
+      UserModel? caller,
       String? calledAt,
       String? status}) = _CallModel;
 

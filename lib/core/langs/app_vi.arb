@@ -191,5 +191,6 @@
   "change_password_successfully_message": "Thay đổi mật khẩu thành công",
   "our_app": "Ứng dụng của chúng tôi",
   "app_introduction": "Đây là Ứng dụng CS Video Call, phần mềm mang tính cách mạng được thiết kế để giúp chúng ta kết nối với nhau thông qua cuộc gọi video. Cho dù bạn đang làm việc từ xa, liên lạc với những người thân yêu hay cộng tác với đồng nghiệp trên toàn cầu, CS Video Call là giải pháp tối ưu của bạn để liên lạc được thuận tiện. Với các tính năng tiên tiến và giao diện thân thiện với người dùng, phần mềm này cung cấp âm thanh trong trẻo và video độ phân giải cao, đảm bảo mọi cuộc trò chuyện đều có cảm giác như bạn đang ở trong cùng một căn phòng. Trải nghiệm sức mạnh của sự tương tác trong thời gian thực khi CS Video Call dễ dàng kết nối mọi người lại với nhau, thúc đẩy sự hợp tác, củng cố các mối quan hệ và thu hẹp khoảng cách. Hãy quên đi các trục trặc kỹ thuật và hãy cùng nhau trải nghiệm gọi điện video thoải mái với CS Video Call.",
-  "developers": "Nhà phát triển"
+  "developers": "Nhà phát triển",
+  "no_calls_found": "Chưa có cuộc gọi nào"
 }

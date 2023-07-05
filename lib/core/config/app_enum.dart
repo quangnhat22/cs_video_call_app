@@ -76,7 +76,7 @@ enum AppMeetingStatus {
 
 enum AppCallStatus {
   ended("Ended"),
-  onGoing("Ongoing"),
+  onGoing("On-going"),
   missed("Missed"),
   reject("Reject");
 

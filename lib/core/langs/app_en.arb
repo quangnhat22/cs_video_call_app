@@ -191,5 +191,6 @@
   "change_password_successfully_message": "Change password successfully",
   "our_app": "Our app",
   "app_introduction": "This is CS Video Call App, the revolutionary software designed to redefine the way we connect through video calling. Whether you're working remotely, catching up with loved ones, or collaborating with colleagues across the globe, CS Video Call is your ultimate solution for seamless and immersive communication. With its cutting-edge features and user-friendly interface, this software offers crystal-clear audio and high-definition video, ensuring every conversation feels as if you're in the same room. Experience the power of real-time interaction as CS Video Call effortlessly brings people together, fostering collaboration, strengthening relationships, and bridging distances. Say goodbye to technical glitches and hello to a streamlined video calling experience with CS Video Call.",
-  "developers": "Developers"
+  "developers": "Developers",
+  "no_calls_found": "No calls found"
 }

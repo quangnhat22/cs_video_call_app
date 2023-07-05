@@ -50,7 +50,7 @@ import 'package:videocall/data/data_sources/remote/service/user_service.dart'
     as _i37;
 import 'package:videocall/data/repositories/app_settings_repository_impl.dart'
     as _i22;
-import 'package:videocall/data/repositories/auth_repository_impl.dart' as _i72;
+import 'package:videocall/data/repositories/auth_repository_impl.dart' as _i73;
 import 'package:videocall/data/repositories/call_group_repository_impl.dart'
     as _i33;
 import 'package:videocall/data/repositories/device_repository_impl.dart'
@@ -59,18 +59,18 @@ import 'package:videocall/data/repositories/friend_repository_impl.dart'
     as _i49;
 import 'package:videocall/data/repositories/group_repository_impl.dart' as _i55;
 import 'package:videocall/data/repositories/message_repository_impl.dart'
-    as _i60;
+    as _i61;
 import 'package:videocall/data/repositories/search_repository_impl.dart'
-    as _i66;
-import 'package:videocall/data/repositories/user_repository_impl.dart' as _i69;
+    as _i67;
+import 'package:videocall/data/repositories/user_repository_impl.dart' as _i70;
 import 'package:videocall/data/repositories/webrtc_repository_impl.dart'
     as _i41;
 import 'package:videocall/domain/modules/app_settings/app_settings_repository.dart'
     as _i21;
 import 'package:videocall/domain/modules/app_settings/app_settings_usecase.dart'
     as _i23;
-import 'package:videocall/domain/modules/auth/auth_repostiory.dart' as _i71;
-import 'package:videocall/domain/modules/auth/auth_usecase.dart' as _i73;
+import 'package:videocall/domain/modules/auth/auth_repostiory.dart' as _i72;
+import 'package:videocall/domain/modules/auth/auth_usecase.dart' as _i74;
 import 'package:videocall/domain/modules/call/call_repository.dart' as _i40;
 import 'package:videocall/domain/modules/call/call_usecase.dart' as _i42;
 import 'package:videocall/domain/modules/call/livekit_call_repository.dart'
@@ -84,87 +84,89 @@ import 'package:videocall/domain/modules/friend/friend_usecase.dart' as _i50;
 import 'package:videocall/domain/modules/group/group_repository.dart' as _i54;
 import 'package:videocall/domain/modules/group/group_usecase.dart' as _i56;
 import 'package:videocall/domain/modules/message/message_repository.dart'
-    as _i59;
-import 'package:videocall/domain/modules/message/message_usecase.dart' as _i61;
-import 'package:videocall/domain/modules/search/search_repository.dart' as _i65;
-import 'package:videocall/domain/modules/search/search_usecase.dart' as _i67;
-import 'package:videocall/domain/modules/user/user_repository.dart' as _i68;
-import 'package:videocall/domain/modules/user/user_usecase.dart' as _i70;
+    as _i60;
+import 'package:videocall/domain/modules/message/message_usecase.dart' as _i62;
+import 'package:videocall/domain/modules/search/search_repository.dart' as _i66;
+import 'package:videocall/domain/modules/search/search_usecase.dart' as _i68;
+import 'package:videocall/domain/modules/user/user_repository.dart' as _i69;
+import 'package:videocall/domain/modules/user/user_usecase.dart' as _i71;
 import 'package:videocall/presentation/app/app_setting_cubit/app_setting_cubit.dart'
     as _i38;
-import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i92;
+import 'package:videocall/presentation/app/bloc/app_bloc.dart' as _i93;
 import 'package:videocall/presentation/auth/avatar/cubit_avatar/avatar_cubit.dart'
-    as _i74;
+    as _i75;
 import 'package:videocall/presentation/auth/email_verify/cubit_send_email/send_email_cubit.dart'
-    as _i88;
+    as _i89;
 import 'package:videocall/presentation/auth/forgot_password/cubit/send_email_cubit.dart'
-    as _i87;
+    as _i88;
 import 'package:videocall/presentation/auth/login/cubit/login_cubit.dart'
-    as _i85;
-import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
     as _i86;
+import 'package:videocall/presentation/auth/profile/cubit_profile_form/profile_form_cubit.dart'
+    as _i87;
 import 'package:videocall/presentation/auth/sign_up/cubit_sign_up/sign_up_form_cubit.dart'
-    as _i90;
+    as _i91;
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart'
     as _i6;
 import 'package:videocall/presentation/call/personal_call/cubit_personal_call/personal_call_cubit.dart'
-    as _i64;
+    as _i65;
 import 'package:videocall/presentation/call/personal_call/page/personal_call_page.dart'
     as _i16;
 import 'package:videocall/presentation/friends/find_new_friend/bloc/find_friend_bloc.dart'
-    as _i78;
+    as _i79;
 import 'package:videocall/presentation/friends/find_new_friend/cubit/find_friend_form_cubit.dart'
     as _i9;
+import 'package:videocall/presentation/friends/friends_call/bloc/history_call_bloc.dart'
+    as _i57;
 import 'package:videocall/presentation/friends/friends_contact/bloc/friends_contact_bloc.dart'
-    as _i80;
+    as _i81;
 import 'package:videocall/presentation/friends/friends_infor/friend_action_cubit/friends_action_cubit.dart'
     as _i51;
 import 'package:videocall/presentation/friends/friends_infor/friend_info_cubit/friend_info_cubit.dart'
     as _i10;
 import 'package:videocall/presentation/friends/friends_request/friend_request_action_cubit/friend_request_action_cubit.dart'
-    as _i79;
+    as _i80;
 import 'package:videocall/presentation/friends/friends_request/list_friend_request_bloc/list_friend_request_bloc.dart'
-    as _i57;
+    as _i58;
 import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart'
-    as _i81;
+    as _i82;
 import 'package:videocall/presentation/global_search/global_search.dart'
     as _i11;
 import 'package:videocall/presentation/groups/create_group/cubit/create_group_cubit.dart'
-    as _i76;
+    as _i77;
 import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart'
-    as _i83;
-import 'package:videocall/presentation/groups/group_requests/group_request_action_cubit/group_request_action_cubit.dart'
     as _i84;
+import 'package:videocall/presentation/groups/group_requests/group_request_action_cubit/group_request_action_cubit.dart'
+    as _i85;
 import 'package:videocall/presentation/groups/group_requests/list_group_request_bloc/list_group_request_bloc.dart'
-    as _i58;
+    as _i59;
 import 'package:videocall/presentation/groups/groups_details/bloc/group_detail_bloc.dart'
-    as _i82;
+    as _i83;
 import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart'
     as _i53;
 import 'package:videocall/presentation/groups/groups_details/cubit_inivite_new_member/new_member_cubit.dart'
-    as _i63;
+    as _i64;
 import 'package:videocall/presentation/groups/groups_details/group_meeting/bloc/group_list_meeting_bloc.dart'
     as _i52;
 import 'package:videocall/presentation/groups/groups_details/group_messages/bloc/messages_bloc.dart'
-    as _i62;
+    as _i63;
 import 'package:videocall/presentation/schedules/create_meeting/bloc/create_meeting_bloc.dart'
     as _i43;
 import 'package:videocall/presentation/schedules/create_meeting/cubit/create_schedule_form_cubit.dart'
     as _i7;
 import 'package:videocall/presentation/setting/change_password/cubit/change_password_cubit.dart'
-    as _i75;
+    as _i76;
 import 'package:videocall/presentation/setting/devices/bloc/devices_bloc.dart'
     as _i47;
 import 'package:videocall/presentation/setting/edit_language/cubit/edit_language_cubit.dart'
     as _i28;
 import 'package:videocall/presentation/setting/edit_profile/cubit/edit_profile_cubit.dart'
-    as _i77;
+    as _i78;
 import 'package:videocall/presentation/setting/edit_theme/cubit/edit_theme_cubit.dart'
     as _i29;
 import 'package:videocall/presentation/setting/setting_dash_board/cubit/setting_cubit.dart'
-    as _i89;
+    as _i90;
 import 'package:videocall/presentation/welcome/cubit/welcome_cubit.dart'
-    as _i91;
+    as _i92;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -275,85 +277,87 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i56.GroupUseCase>(
         () => _i56.GroupUseCaseImpl(groupRepo: gh<_i54.GroupRepository>()));
-    gh.factory<_i57.ListFriendRequestBloc>(() =>
-        _i57.ListFriendRequestBloc(friendUseCase: gh<_i50.FriendUseCase>()));
-    gh.factory<_i58.ListGroupRequestBloc>(
-        () => _i58.ListGroupRequestBloc(groupUseCase: gh<_i56.GroupUseCase>()));
-    gh.factory<_i59.MessageRepository>(() =>
-        _i60.MessageRepositoryImpl(messageService: gh<_i35.MessageService>()));
-    gh.factory<_i61.MessageUseCase>(() => _i61.MessageUseCaseImpl(
-        messageRepository: gh<_i59.MessageRepository>()));
-    gh.factory<_i62.MessagesBloc>(
-        () => _i62.MessagesBloc(messageUseCase: gh<_i61.MessageUseCase>()));
-    gh.factory<_i63.NewMemberCubit>(() => _i63.NewMemberCubit(
+    gh.factory<_i57.HistoryCallBloc>(
+        () => _i57.HistoryCallBloc(friendUseCase: gh<_i50.FriendUseCase>()));
+    gh.factory<_i58.ListFriendRequestBloc>(() =>
+        _i58.ListFriendRequestBloc(friendUseCase: gh<_i50.FriendUseCase>()));
+    gh.factory<_i59.ListGroupRequestBloc>(
+        () => _i59.ListGroupRequestBloc(groupUseCase: gh<_i56.GroupUseCase>()));
+    gh.factory<_i60.MessageRepository>(() =>
+        _i61.MessageRepositoryImpl(messageService: gh<_i35.MessageService>()));
+    gh.factory<_i62.MessageUseCase>(() => _i62.MessageUseCaseImpl(
+        messageRepository: gh<_i60.MessageRepository>()));
+    gh.factory<_i63.MessagesBloc>(
+        () => _i63.MessagesBloc(messageUseCase: gh<_i62.MessageUseCase>()));
+    gh.factory<_i64.NewMemberCubit>(() => _i64.NewMemberCubit(
           friendUC: gh<_i50.FriendUseCase>(),
           groupUC: gh<_i56.GroupUseCase>(),
         ));
-    gh.factory<_i64.PersonalCallCubit>(
-        () => _i64.PersonalCallCubit(callUC: gh<_i42.CallUseCase>()));
-    gh.factory<_i65.SearchRepository>(
-        () => _i66.SearchRepositoryImpl(service: gh<_i36.SearchService>()));
-    gh.factory<_i67.SearchUseCase>(
-        () => _i67.SearchUseCaseImpl(repo: gh<_i65.SearchRepository>()));
-    gh.factory<_i68.UserRepository>(() => _i69.UserRepositoryImpl(
+    gh.factory<_i65.PersonalCallCubit>(
+        () => _i65.PersonalCallCubit(callUC: gh<_i42.CallUseCase>()));
+    gh.factory<_i66.SearchRepository>(
+        () => _i67.SearchRepositoryImpl(service: gh<_i36.SearchService>()));
+    gh.factory<_i68.SearchUseCase>(
+        () => _i68.SearchUseCaseImpl(repo: gh<_i66.SearchRepository>()));
+    gh.factory<_i69.UserRepository>(() => _i70.UserRepositoryImpl(
           userService: gh<_i37.UserService>(),
           userLocal: gh<_i20.UserLocalDataSrc>(),
           assetFirebase: gh<_i3.AssetFirebase>(),
         ));
-    gh.factory<_i70.UserUseCase>(
-        () => _i70.UserUseCaseImpl(repo: gh<_i68.UserRepository>()));
-    gh.lazySingleton<_i71.AuthRepository>(() => _i72.AuthRepositoryImpl(
+    gh.factory<_i71.UserUseCase>(
+        () => _i71.UserUseCaseImpl(repo: gh<_i69.UserRepository>()));
+    gh.lazySingleton<_i72.AuthRepository>(() => _i73.AuthRepositoryImpl(
           authFirebase: gh<_i4.AuthFirebase>(),
           authService: gh<_i39.AuthService>(),
           authLocalDataSrc: gh<_i5.AuthLocalDataSrc>(),
           notificationService: gh<_i15.NotificationService>(),
-          userRepo: gh<_i68.UserRepository>(),
+          userRepo: gh<_i69.UserRepository>(),
         ));
-    gh.factory<_i73.AuthUseCase>(
-        () => _i73.AuthUseCaeImpl(repo: gh<_i71.AuthRepository>()));
-    gh.factory<_i74.AvatarCubit>(
-        () => _i74.AvatarCubit(userUc: gh<_i70.UserUseCase>()));
-    gh.factory<_i75.ChangePasswordCubit>(
-        () => _i75.ChangePasswordCubit(authUseCase: gh<_i73.AuthUseCase>()));
-    gh.factory<_i76.CreateGroupCubit>(
-        () => _i76.CreateGroupCubit(groupUseCase: gh<_i56.GroupUseCase>()));
-    gh.factory<_i77.EditProfileCubit>(
-        () => _i77.EditProfileCubit(userUseCase: gh<_i70.UserUseCase>()));
-    gh.factory<_i78.FindFriendBloc>(
-        () => _i78.FindFriendBloc(userRepo: gh<_i68.UserRepository>()));
-    gh.factory<_i79.FriendRequestActionCubit>(() =>
-        _i79.FriendRequestActionCubit(friendUseCase: gh<_i50.FriendUseCase>()));
-    gh.factory<_i80.FriendsContactBloc>(() => _i80.FriendsContactBloc(
+    gh.factory<_i74.AuthUseCase>(
+        () => _i74.AuthUseCaeImpl(repo: gh<_i72.AuthRepository>()));
+    gh.factory<_i75.AvatarCubit>(
+        () => _i75.AvatarCubit(userUc: gh<_i71.UserUseCase>()));
+    gh.factory<_i76.ChangePasswordCubit>(
+        () => _i76.ChangePasswordCubit(authUseCase: gh<_i74.AuthUseCase>()));
+    gh.factory<_i77.CreateGroupCubit>(
+        () => _i77.CreateGroupCubit(groupUseCase: gh<_i56.GroupUseCase>()));
+    gh.factory<_i78.EditProfileCubit>(
+        () => _i78.EditProfileCubit(userUseCase: gh<_i71.UserUseCase>()));
+    gh.factory<_i79.FindFriendBloc>(
+        () => _i79.FindFriendBloc(userRepo: gh<_i69.UserRepository>()));
+    gh.factory<_i80.FriendRequestActionCubit>(() =>
+        _i80.FriendRequestActionCubit(friendUseCase: gh<_i50.FriendUseCase>()));
+    gh.factory<_i81.FriendsContactBloc>(() => _i81.FriendsContactBloc(
           useCase: gh<_i50.FriendUseCase>(),
-          userUseCase: gh<_i70.UserUseCase>(),
+          userUseCase: gh<_i71.UserUseCase>(),
         ));
-    gh.factory<_i81.GlobalSearchBloc>(
-        () => _i81.GlobalSearchBloc(searchUseCase: gh<_i67.SearchUseCase>()));
-    gh.factory<_i82.GroupDetailBloc>(
-        () => _i82.GroupDetailBloc(groupUC: gh<_i56.GroupUseCase>()));
-    gh.factory<_i83.GroupListBloc>(
-        () => _i83.GroupListBloc(useCase: gh<_i56.GroupUseCase>()));
-    gh.factory<_i84.GroupRequestActionCubit>(() =>
-        _i84.GroupRequestActionCubit(groupUseCase: gh<_i56.GroupUseCase>()));
-    gh.factory<_i85.LoginCubit>(
-        () => _i85.LoginCubit(authUseCase: gh<_i73.AuthUseCase>()));
-    gh.factory<_i86.ProfileFormCubit>(
-        () => _i86.ProfileFormCubit(userUC: gh<_i70.UserUseCase>()));
-    gh.factory<_i87.SendEmailCubit>(
-        () => _i87.SendEmailCubit(authUseCase: gh<_i73.AuthUseCase>()));
+    gh.factory<_i82.GlobalSearchBloc>(
+        () => _i82.GlobalSearchBloc(searchUseCase: gh<_i68.SearchUseCase>()));
+    gh.factory<_i83.GroupDetailBloc>(
+        () => _i83.GroupDetailBloc(groupUC: gh<_i56.GroupUseCase>()));
+    gh.factory<_i84.GroupListBloc>(
+        () => _i84.GroupListBloc(useCase: gh<_i56.GroupUseCase>()));
+    gh.factory<_i85.GroupRequestActionCubit>(() =>
+        _i85.GroupRequestActionCubit(groupUseCase: gh<_i56.GroupUseCase>()));
+    gh.factory<_i86.LoginCubit>(
+        () => _i86.LoginCubit(authUseCase: gh<_i74.AuthUseCase>()));
+    gh.factory<_i87.ProfileFormCubit>(
+        () => _i87.ProfileFormCubit(userUC: gh<_i71.UserUseCase>()));
     gh.factory<_i88.SendEmailCubit>(
-        () => _i88.SendEmailCubit(authUseCase: gh<_i73.AuthUseCase>()));
-    gh.factory<_i89.SettingCubit>(() => _i89.SettingCubit(
-          authUseCase: gh<_i73.AuthUseCase>(),
-          userUseCase: gh<_i70.UserUseCase>(),
+        () => _i88.SendEmailCubit(authUseCase: gh<_i74.AuthUseCase>()));
+    gh.factory<_i89.SendEmailCubit>(
+        () => _i89.SendEmailCubit(authUseCase: gh<_i74.AuthUseCase>()));
+    gh.factory<_i90.SettingCubit>(() => _i90.SettingCubit(
+          authUseCase: gh<_i74.AuthUseCase>(),
+          userUseCase: gh<_i71.UserUseCase>(),
           appSettingsUseCase: gh<_i23.AppSettingsUseCase>(),
         ));
-    gh.factory<_i90.SignUpFormCubit>(
-        () => _i90.SignUpFormCubit(authRepo: gh<_i71.AuthRepository>()));
-    gh.factory<_i91.WelcomeCubit>(
-        () => _i91.WelcomeCubit(authRepo: gh<_i71.AuthRepository>()));
-    gh.lazySingleton<_i92.AppBloc>(
-        () => _i92.AppBloc(authUC: gh<_i73.AuthUseCase>()));
+    gh.factory<_i91.SignUpFormCubit>(
+        () => _i91.SignUpFormCubit(authRepo: gh<_i72.AuthRepository>()));
+    gh.factory<_i92.WelcomeCubit>(
+        () => _i92.WelcomeCubit(authRepo: gh<_i72.AuthRepository>()));
+    gh.lazySingleton<_i93.AppBloc>(
+        () => _i93.AppBloc(authUC: gh<_i74.AuthUseCase>()));
     return this;
   }
 }
