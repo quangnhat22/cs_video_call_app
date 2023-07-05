@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,17 +6,25 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/core/config/app_config.dart';
+import 'package:videocall/domain/entities/message_call_entity.dart';
+import 'package:videocall/domain/entities/user_entity.dart';
+import 'package:videocall/domain/modules/user/user_usecase.dart';
 
 part 'call_group_status_cubit.freezed.dart';
 part 'call_group_status_state.dart';
 
 @Injectable()
 class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
-  CallGroupStatusCubit() : super(const CallGroupStatusState.initial());
+  final UserUseCase _userUseCase;
+
+  CallGroupStatusCubit(this._userUseCase)
+      : super(const CallGroupStatusState.initial());
 
   late final Room _room;
 
   late String _token;
+
+  late final EventsListener<RoomEvent> _listenNewMessage;
 
   final isOwnerRoom = false;
 
@@ -95,15 +104,61 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
         ),
       ),
     );
-    _room.localParticipant?.setCameraEnabled(_isOpenCamera);
 
-// Turns microphone track on
+    _room.localParticipant?.setCameraEnabled(_isOpenCamera);
+    // Turns microphone track on
     _room.localParticipant?.setMicrophoneEnabled(_isOpenMic);
-    emit(CallGroupConnectedSuccess(room: _room));
+
+    _listenNewMessage = _room.createListener()
+      ..on<DataReceivedEvent>((event) async {
+        receiveNewMessage(event);
+      });
+
+    //get user info from local for sending message with userInfo in the future
+    final userInfo = await _userUseCase.getSelfFromLocal();
+    emit(CallGroupConnectedSuccess(room: _room, user: userInfo));
+  }
+
+  Future<void> sendMessageData(String message) async {
+    if (state is CallGroupConnectedSuccess) {
+      final userInfo = (state as CallGroupConnectedSuccess).user;
+      if (_room.localParticipant != null) {
+        final newMessage = MessageCallEntity(
+          name: userInfo?.name,
+          avatar: userInfo?.avatar,
+          message: message,
+          senderTime: DateTime.now(),
+        );
+        final messageJson = jsonEncode(newMessage);
+        final dataUtf8 = utf8.encode(messageJson);
+
+        await _room.localParticipant!.publishData(dataUtf8, topic: 'hello');
+      }
+    }
+  }
+
+  Future<void> receiveNewMessage(DataReceivedEvent event) async {
+    try {
+      if (state is CallGroupConnectedSuccess) {
+        final listMessage =
+            (state as CallGroupConnectedSuccess).listMessage ?? [];
+
+        final dataDecoded = utf8.decode(event.data);
+        final messageJson = jsonDecode(dataDecoded);
+        final newMessage = MessageCallEntity.fromJson(messageJson);
+
+        final listMessageUpdated = [...listMessage, newMessage];
+        emit((state as CallGroupConnectedSuccess)
+            .copyWith(listMessage: listMessageUpdated));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override
   Future<void> close() async {
+    await _listenNewMessage.dispose();
     await _room.dispose();
     return super.close();
   }

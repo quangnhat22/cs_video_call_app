@@ -6,9 +6,11 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/core/utils/live_kit_until.dart';
+import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 
 class Controls extends StatefulWidget {
   const Controls({
@@ -240,14 +242,8 @@ class _ControlsState extends State<Controls> {
     }
   }
 
-  void _onTapSendData() async {
-    final result = await context.showSendDataDialog();
-    if (result == true) {
-      await widget.participant.publishData(
-        utf8.encode('This is a sample data message'),
-        topic: "hello",
-      );
-    }
+  void _onTapSendData(BuildContext ctx) async {
+    await context.read<CallGroupStatusCubit>().sendMessageData('hello');
   }
 
   @override
@@ -417,7 +413,7 @@ class _ControlsState extends State<Controls> {
             tooltip: 'disconnect',
           ),
           IconButton(
-            onPressed: _onTapSendData,
+            onPressed: () => _onTapSendData(context),
             icon: const Icon(Icons.send),
             tooltip: 'send demo data',
           ),
