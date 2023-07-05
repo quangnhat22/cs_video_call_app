@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/config/app_config.dart';
+import 'package:videocall/data/data_sources/local/auth_local_data_src.dart';
+import 'package:videocall/data/data_sources/local/local_data_src.dart';
 
 import 'dio_interceptor.dart';
 
@@ -19,7 +21,7 @@ class BaseService {
   static const String groupCallPath = "/meeting";
   static const String searchPath = "/search";
   static const String devicePath = "/device";
-  static const String notficationPath = "/notification";
+  static const String notificationPath = "/notification";
   static const String messagePath = "/message";
 
   BaseService(this._authLocalDataSrc, this._localDataSource) {

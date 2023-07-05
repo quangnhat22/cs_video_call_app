@@ -50,7 +50,6 @@ class UserEntity {
       gender: userModel.gender,
       bio: userModel.bio,
       birthday: userModel.birthday,
-      lastSeenAt: userModel.lastSeenAt,
       relation: userModel.relation ?? "non",
       commonFriendCount: userModel.commonFriendCount,
       commonGroupCount: userModel.commonGroupCount,
@@ -66,16 +65,17 @@ class UserEntity {
     return UserModel(
       id: userEntity.id,
       name: userEntity.name,
-      address: userEntity.address,
       avatar: userEntity.avatar,
       email: userEntity.email,
       phone: userEntity.phone,
       gender: userEntity.gender,
       bio: userEntity.bio,
       birthday: userEntity.birthday,
-      commonFriendCount: userEntity.commonFriendCount,
-      lastSeenAt: userEntity.lastSeenAt,
       relation: userEntity.relation,
+      commonFriendCount: userEntity.commonFriendCount,
+      commonGroupCount: userEntity.commonGroupCount,
+      emailVerified: userEntity.isEmailVerified,
+      profileUpdated: userEntity.isProfileUpdated,
     );
   }
 }

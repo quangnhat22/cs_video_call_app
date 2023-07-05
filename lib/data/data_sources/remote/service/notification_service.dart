@@ -10,7 +10,7 @@ class NotificationsService {
 
   Future<Response> getListNotification() async {
     try {
-      return await _service.dio.get(BaseService.notficationPath);
+      return await _service.dio.get(BaseService.notificationPath);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -20,7 +20,7 @@ class NotificationsService {
 
   Future<Response> deleteAllNotification() async {
     try {
-      return await _service.dio.delete(BaseService.notficationPath);
+      return await _service.dio.delete(BaseService.notificationPath);
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -30,7 +30,7 @@ class NotificationsService {
 
   Future<Response> deleteNotificationById(String id) async {
     try {
-      return await _service.dio.delete("${BaseService.notficationPath}/$id");
+      return await _service.dio.delete("${BaseService.notificationPath}/$id");
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
