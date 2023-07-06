@@ -33,7 +33,7 @@ class NewMemberCubit extends Cubit<NewMemberState> {
   Future<void> inviteNewMember(List<String> memberId) async {
     try {
       //final listFriend = await _groupUC.();
-      emit(NewMemberState.getListFriendSuccess(listFriend: listFriend));
+      //emit(NewMemberState.getListFriendSuccess(listFriend: listFriend));
     } catch (e) {
       emit(const NewMemberState.getListFriendFail());
     }

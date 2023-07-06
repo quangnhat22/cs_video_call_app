@@ -19,7 +19,7 @@ abstract class AuthRepository {
 
   Stream<String?> checkRefreshTokenStream();
 
-  Future<String?> sendResetPasswordCode();
+  Future<bool> forgotPassword(String email);
 
   Future<bool> updatePassword(String newPassword, String oldPassword);
 }
