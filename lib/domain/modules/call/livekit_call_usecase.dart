@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/domain/modules/call/livekit_call_repository.dart';
 

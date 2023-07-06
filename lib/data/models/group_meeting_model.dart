@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:videocall/data/models/user_model.dart';
 
 part 'group_meeting_model.freezed.dart';
 part 'group_meeting_model.g.dart';
@@ -13,6 +14,7 @@ class GroupMeetingModel with _$GroupMeetingModel {
     @JsonKey(name: "time_start") DateTime? timeStart,
     String? groupId,
     String? status,
+    List<UserModel?>? participants,
   }) = _GroupMeetingModel;
 
   factory GroupMeetingModel.fromJson(Map<String, dynamic> json) =>

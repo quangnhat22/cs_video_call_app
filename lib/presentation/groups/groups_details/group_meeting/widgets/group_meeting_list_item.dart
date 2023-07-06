@@ -3,6 +3,7 @@ import 'package:avatar_stack/positions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
@@ -58,14 +59,22 @@ class GroupMeetingListItem extends StatelessWidget {
                       const EdgeInsets.only(right: 12, bottom: 12, left: 12),
                   child: AvatarStack(
                     settings: RestrictedAmountPositions(
-                        maxAmountItems: 10,
+                        maxAmountItems: meetingEntity.participants!.length <= 10
+                            ? meetingEntity.participants!.length
+                            : 10,
                         maxCoverage: 0.3,
                         minCoverage: 0.2,
                         align: StackAlign.left),
                     height: 40,
                     avatars: [
-                      for (var n = 0; n < 50; n++)
-                        NetworkImage('https://i.pravatar.cc/150?img=$n'),
+                      for (var n = 0;
+                          n < meetingEntity.participants!.length;
+                          n++)
+                        if (meetingEntity.participants![n]!.avatar!.isNotEmpty)
+                          NetworkImage(
+                              meetingEntity.participants![n]!.avatar ?? '')
+                        else
+                          AppAssets.emptyAvatar,
                     ],
                   ),
                 )
