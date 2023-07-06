@@ -83,7 +83,9 @@ class _GroupDetailViewState extends State<GroupDetailView>
       return const FabCreateNewMeeting();
     }
     if (_tabController.index == 2) {
-      return const FabInviteNewFriend();
+      return FabInviteNewFriend(
+        groupId: widget.groupId,
+      );
     }
     return null;
   }

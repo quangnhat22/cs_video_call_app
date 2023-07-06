@@ -97,4 +97,16 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> inviteNewMember(
+      String groupId, List<String> friendIds) async {
+    try {
+      return await _service.dio
+          .post('${BaseService.groupPath}/request/$groupId/${friendIds[0]}');
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

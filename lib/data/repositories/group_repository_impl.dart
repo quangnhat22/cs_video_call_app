@@ -194,4 +194,18 @@ class GroupRepositoryImpl extends GroupRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<bool> inviteNewMember(String groupId, List<String> friendIds) async {
+    try {
+      final res = await _service.inviteNewMember(groupId, friendIds);
+      if (res.statusCode == 201) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

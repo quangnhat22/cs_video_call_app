@@ -22,6 +22,8 @@ abstract class GroupUseCase {
   Future<bool> rejectReceivedRequest(String groupId);
 
   Future<bool> acceptReceivedGroup(String groupId);
+
+  Future<bool> inviteNewMember(String groupId, List<String> friendIds);
 }
 
 @Injectable(as: GroupUseCase)
@@ -69,5 +71,10 @@ class GroupUseCaseImpl extends GroupUseCase {
   @override
   Future<GroupDetailEntity?> getGroupDetail(String id) async {
     return await _repo.getGroupDetail(id);
+  }
+
+  @override
+  Future<bool> inviteNewMember(String groupId, List<String> friendIds) async {
+    return await _repo.inviteNewMember(groupId, friendIds);
   }
 }

@@ -20,4 +20,6 @@ abstract class GroupRepository {
   Future<bool> rejectReceivedRequest(String groupId);
 
   Future<bool> acceptReceivedRequest(String groupId);
+
+  Future<bool> inviteNewMember(String groupId, List<String> friendIds);
 }
