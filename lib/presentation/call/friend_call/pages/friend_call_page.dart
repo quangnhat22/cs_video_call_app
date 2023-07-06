@@ -27,7 +27,16 @@ class FriendCallView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FriendCallCubit, FriendCallState>(
+    return BlocConsumer<FriendCallCubit, FriendCallState>(
+      listenWhen: (previous, current) => previous != current,
+      buildWhen: (previous, current) => previous != current,
+      listener: (context, state) {
+        state.whenOrNull(
+          connectedFail: (_) {
+            Navigator.of(context).pop();
+          },
+        );
+      },
       builder: (context, state) {
         return state.maybeWhen(
           connecting: () => const ConnectingCallView(),

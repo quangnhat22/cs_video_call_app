@@ -31,15 +31,12 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
     _initializeNotificationsEventListeners();
 
     FlutterCallkitIncoming.onEvent.listen((CallEvent? event) async {
-      print('event $event');
       switch (event!.event) {
         case Event.actionCallIncoming:
-          // TODO: received an incoming call
+          await AwesomeNotifications()
+              .dismissNotificationsByChannelKey("call_channel");
           break;
-        case Event.actionCallStart:
-          // TODO: started an outgoing call
-          // TODO: show screen calling in Flutter
-          break;
+
         case Event.actionCallAccept:
           NavigationUtil.pushNamed(routeName: RouteName.personalCall, args: {
             'friendId': event.body["extra"]["friendId"],
@@ -50,6 +47,7 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
           await _friendCallUseCase
               .rejectCall(event.body["extra"]["chatRoomId"]);
           break;
+        case Event.actionCallStart:
         case Event.actionCallEnded:
         case Event.actionCallTimeout:
         case Event.actionCallCallback:
@@ -175,12 +173,17 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
     final notiJson = jsonDecode(receivedNotification.payload!["notification"]!);
     final payload = NotificationsModel.fromJson(notiJson);
     if (payload.action == "incoming-call") {
+      _showInComingCall(payload);
+    }
+  }
+
+  Future<void> _showInComingCall(NotificationsModel notificationModel) async {
+    try {
       CallKitParams callKitParams = CallKitParams(
-        id: payload.id,
-        nameCaller: payload.subject?.name ?? 'Unknow name',
+        id: notificationModel.id,
+        nameCaller: notificationModel.subject?.name ?? 'Unknow name',
         appName: 'CS VideoCall App',
-        avatar: payload.subject?.image,
-        handle: '0123456789',
+        avatar: notificationModel.subject?.image,
         type: 0,
         textAccept: 'Accept',
         textDecline: 'Decline',
@@ -192,21 +195,23 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
         ),
         duration: 30000,
         extra: <String, dynamic>{
-          'friendId': payload.subject?.id,
-          'chatRoomId': payload.prep?.id
+          'friendId': notificationModel.subject?.id,
+          'chatRoomId': notificationModel.prep?.id
         },
-        android: const AndroidParams(
+        android: AndroidParams(
             isCustomNotification: true,
             isCustomSmallExNotification: true,
             isShowLogo: false,
             ringtonePath: 'system_ringtone_default',
             backgroundColor: '#0955fa',
-            backgroundUrl: 'https://i.pravatar.cc/500',
+            backgroundUrl: notificationModel.subject?.image,
             actionColor: '#4CAF50',
             incomingCallNotificationChannelName: "Incoming Call",
             missedCallNotificationChannelName: "Missed Call"),
       );
       await FlutterCallkitIncoming.showCallkitIncoming(callKitParams);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }
