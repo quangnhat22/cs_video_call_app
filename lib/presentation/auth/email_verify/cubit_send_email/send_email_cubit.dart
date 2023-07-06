@@ -46,4 +46,8 @@ class SendEmailCubit extends Cubit<SendEmailState> {
       emit(SendEmailNotVerified(email: state.email));
     }
   }
+
+  Future<void> logOut() async {
+    await _useCase.logOut();
+  }
 }

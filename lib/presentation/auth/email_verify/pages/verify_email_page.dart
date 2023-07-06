@@ -42,62 +42,58 @@ class VerifiedView extends StatelessWidget {
             );
           },
           verified: (_) {
-            NavigationUtil.pop(result: true);
+            // NavigationUtil.pop(result: true);
           },
         );
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: CustomScrollView(
-              physics: const PageScrollPhysics(),
-              slivers: [
-                SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Column(
-                    children: [
-                      const ButtonFloatBackToLogin(),
-                      SizedBox(
-                        width: AppScreenUtils.isLandscape() ? 200.w : 250.w,
-                        height: AppScreenUtils.isLandscape() ? 320.h : 250.h,
-                        child: AppAssets.iconApp,
-                      ),
-                      const TextNoticeSentEmail(),
-                      SizedBox(height: 80.h),
-                      const ButtonResendEmail(),
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      const ButttonVerifyReceiveEmail(),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                    ],
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: CustomScrollView(
+                physics: const PageScrollPhysics(),
+                slivers: [
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Column(
+                      children: [
+                        //const ButtonFloatBackToLogin(),
+                        SizedBox(
+                          width: AppScreenUtils.isLandscape() ? 200.w : 250.w,
+                          height: AppScreenUtils.isLandscape() ? 320.h : 250.h,
+                          child: AppAssets.iconApp,
+                        ),
+                        const TextNoticeSentEmail(),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              ButttonVerifyReceiveEmail(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              ButtonResendEmail(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              VerifyEmailLogoutButton(),
+                              SizedBox(
+                                height: 4,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class ButtonResendEmail extends StatelessWidget {
-  const ButtonResendEmail({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomOutlinedButton(
-      buttonText: AppLocalizations.of(context)!.i_dont_get_it,
-      onPressed: () {
-        context.read<SendEmailCubit>().sendEmail();
-      },
-      foregroundColor: Theme.of(context).colorScheme.secondary,
     );
   }
 }

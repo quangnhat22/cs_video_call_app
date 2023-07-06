@@ -227,5 +227,6 @@
   "do_you_want_reject_friend": "Bạn có muốn từ chối lời mời kết bạn?",
   "do_you_want_revoke_group": "Bạn có muốn thu hồi lời mời tham gia nhóm?",
   "do_you_want_reject_group": "Bạn có muốn từ chối lời mời tham gia nhóm?",
-  "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?"
+  "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?",
+  "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn"
 }

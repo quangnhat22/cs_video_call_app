@@ -36,6 +36,7 @@ class AppTextStyles {
   static const TextStyle subTitleGreyText = TextStyle(
     fontSize: AppFontSize.normalFontSize,
     fontWeight: FontWeight.w400,
+    height: 1.4,
   );
 
   static const TextStyle authHeadTitleTextStyle = TextStyle(

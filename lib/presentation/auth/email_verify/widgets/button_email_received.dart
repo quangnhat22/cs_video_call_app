@@ -18,11 +18,23 @@ class ButttonVerifyReceiveEmail extends StatelessWidget {
           inProgress: (_) {
             return const LinearProgressIndicator();
           },
+          verified: (_) {
+            return CustomElevatedButton(
+              buttonText: AppLocalizations.of(context)!.edit_profile,
+              onPressed: () {
+                NavigationUtil.pushReplacementNamed(
+                    routeName: RouteName.editProfile);
+              },
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              width: 0.8.sw,
+            );
+          },
           orElse: () {
             return CustomElevatedButton(
               buttonText: AppLocalizations.of(context)!.i_verified,
               onPressed: () => _onVerifiedEmailBtn(context),
-              backgroundColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              width: 0.8.sw,
             );
           },
         );

@@ -227,5 +227,7 @@
   "do_you_want_reject_friend": "Do you want to reject a friend request?",
   "do_you_want_revoke_group": "Do you want to undo a group request?",
   "do_you_want_reject_group": "Do you want to reject a group request?",
-  "do_you_want_reject_call": "Do you want to reject a friend call?"
+  "do_you_want_reject_call": "Do you want to reject a friend call?",
+  "oops": "Ooops",
+  "no_internet": "No Internet Connection found. Check your connecttion"
 }
