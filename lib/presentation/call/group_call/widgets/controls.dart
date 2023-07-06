@@ -12,6 +12,7 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/core/utils/live_kit_until.dart';
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
+import 'icon_wrapper.dart';
 
 class Controls extends StatefulWidget {
   const Controls({
@@ -229,7 +230,9 @@ class _ControlsState extends State<Controls> {
   Widget _buildIconWhenMicrophoneIsEnabled() {
     if (participant.isMicrophoneEnabled()) {
       return PopupMenuButton<MediaDevice>(
-        icon: const Icon(Icons.settings_voice),
+        icon: const IconWrapper(
+          iconButton: Icon(Icons.settings_voice),
+        ),
         itemBuilder: (BuildContext context) {
           return [
             PopupMenuItem<MediaDevice>(
@@ -265,16 +268,20 @@ class _ControlsState extends State<Controls> {
       );
     }
 
-    return IconButton(
-      onPressed: _enableAudio,
-      icon: const Icon(Icons.mic_off_outlined),
-      tooltip: 'un-mute audio',
+    return IconWrapper(
+      iconButton: IconButton(
+        onPressed: _enableAudio,
+        icon: const Icon(Icons.mic_off_outlined),
+        tooltip: 'un-mute audio',
+      ),
     );
   }
 
   Widget _buildVolumnIcon() {
     return PopupMenuButton<MediaDevice>(
-      icon: const Icon(Icons.volume_up),
+      icon: const IconWrapper(
+        iconButton: Icon(Icons.volume_up),
+      ),
       itemBuilder: (BuildContext context) {
         return [
           const PopupMenuItem<MediaDevice>(
@@ -315,7 +322,9 @@ class _ControlsState extends State<Controls> {
   Widget _buildIconWhenCameraIsEnabled() {
     if (participant.isCameraEnabled()) {
       return PopupMenuButton<MediaDevice>(
-        icon: const Icon(Icons.videocam),
+        icon: const IconWrapper(
+          iconButton: Icon(Icons.videocam),
+        ),
         itemBuilder: (BuildContext context) {
           return [
             PopupMenuItem<MediaDevice>(
@@ -354,26 +363,32 @@ class _ControlsState extends State<Controls> {
       );
     }
 
-    return IconButton(
-      onPressed: _enableVideo,
-      icon: const Icon(Icons.videocam_off),
-      tooltip: 'un-mute video',
+    return IconWrapper(
+      iconButton: IconButton(
+        onPressed: _enableVideo,
+        icon: const Icon(Icons.videocam_off),
+        tooltip: 'un-mute video',
+      ),
     );
   }
 
   Widget _buildShareScreenIcon() {
     if (participant.isScreenShareEnabled()) {
-      return IconButton(
-        icon: const Icon(Icons.mobile_screen_share),
-        onPressed: () => _disableScreenShare(),
-        tooltip: 'unshare screen (experimental)',
+      return IconWrapper(
+        iconButton: IconButton(
+          icon: const Icon(Icons.mobile_screen_share),
+          onPressed: () => _disableScreenShare(),
+          tooltip: 'unshare screen (experimental)',
+        ),
       );
     }
 
-    return IconButton(
-      icon: const Icon(Icons.mobile_screen_share_outlined),
-      onPressed: () => _enableScreenShare(),
-      tooltip: 'share screen (experimental)',
+    return IconWrapper(
+      iconButton: IconButton(
+        icon: const Icon(Icons.mobile_screen_share_outlined),
+        onPressed: () => _enableScreenShare(),
+        tooltip: 'share screen (experimental)',
+      ),
     );
   }
 
@@ -384,18 +399,31 @@ class _ControlsState extends State<Controls> {
         _buildIconWhenMicrophoneIsEnabled(),
         _buildVolumnIcon(),
         _buildIconWhenCameraIsEnabled(),
-        IconButton(
-          icon: const Icon(
-            Icons.switch_camera_outlined,
+        const SizedBox(
+          width: 10,
+        ),
+        IconWrapper(
+          iconButton: IconButton(
+            icon: const Icon(
+              Icons.switch_camera_outlined,
+            ),
+            onPressed: _toggleCamera,
+            tooltip: 'toggle camera',
           ),
-          onPressed: _toggleCamera,
-          tooltip: 'toggle camera',
+        ),
+        const SizedBox(
+          width: 10,
         ),
         _buildShareScreenIcon(),
-        IconButton(
-          onPressed: _unPublishAll,
-          icon: const Icon(Icons.block),
-          tooltip: 'UnPublish all',
+        const SizedBox(
+          width: 10,
+        ),
+        IconWrapper(
+          iconButton: IconButton(
+            onPressed: _unPublishAll,
+            icon: const Icon(Icons.block),
+            tooltip: 'UnPublish all',
+          ),
         ),
       ],
     );
@@ -407,15 +435,14 @@ class _ControlsState extends State<Controls> {
       alignment: WrapAlignment.center,
       spacing: 20,
       children: [
-        IconButton(
+        IconWrapper(
+            iconButton: IconButton(
           onPressed: _onTapUpdateSubscribePermission,
           icon: const Icon(Icons.security),
           tooltip: 'Subscribe permission',
-        ),
-        CircleAvatar(
-          backgroundColor: Colors.red,
-          radius: 26,
-          child: IconButton(
+        )),
+        IconWrapper(
+          iconButton: IconButton(
             onPressed: _onTapDisconnect,
             icon: const Icon(
               Icons.call_end,
@@ -423,12 +450,14 @@ class _ControlsState extends State<Controls> {
             ),
             tooltip: 'disconnect',
           ),
+          backgroundColor: Colors.red,
         ),
-        IconButton(
+        IconWrapper(
+            iconButton: IconButton(
           onPressed: () => _onTapSendData(context),
           icon: const Icon(Icons.send),
           tooltip: 'send demo data',
-        ),
+        )),
       ],
     );
   }
@@ -436,8 +465,8 @@ class _ControlsState extends State<Controls> {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      minHeight: 70.h,
-      maxHeight: 160.h,
+      minHeight: 80.h,
+      maxHeight: 200.h,
       panel: _buildPanelSliding(),
       collapsed: _buildCollapsedSliding(),
     );
