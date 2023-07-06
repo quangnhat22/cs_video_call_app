@@ -8,6 +8,7 @@ class FriendCallState with _$FriendCallState {
 
   const factory FriendCallState.preparing({
     required Room room,
+    required String token,
   }) = FriendCallPreparing;
 
   const factory FriendCallState.connectedSuccess({

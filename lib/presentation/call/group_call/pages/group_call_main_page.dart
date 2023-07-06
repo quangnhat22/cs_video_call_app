@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 import 'package:videocall/presentation/call/group_call/pages/group_call_waiting_page.dart';
-import 'package:videocall/presentation/call/group_call/pages/group_calling.dart';
-import 'package:videocall/presentation/call/group_call/views/list_message_view.dart';
 
 import 'group_calling_page.dart';
 
