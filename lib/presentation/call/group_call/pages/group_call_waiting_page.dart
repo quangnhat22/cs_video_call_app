@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 
 import '../../../../common/widgets/stateless/buttons/custom_elevated_button.dart';
@@ -89,17 +87,6 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
     }
   }
 
-  void _switchCamera(BuildContext ctx) async {
-    if (videoTrack?.mediaStreamTrack == null) return;
-    Helper.switchCamera(videoTrack!.mediaStreamTrack);
-    setState(() {
-      isCameraFront = !isCameraFront;
-    });
-    if (context.mounted) {
-      ctx.read<CallGroupStatusCubit>().changedCameraPosition(isCameraFront);
-    }
-  }
-
   void _handleOnVolumeBtn(BuildContext ctx) {
     setState(() {
       isMicOn = !isMicOn;
@@ -113,30 +100,29 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
   }
 
   Widget _buildRowBtnActions(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        FloatActionButtonVideo(
-          icon: isCameraOn
-              ? Icons.videocam_outlined
-              : Icons.videocam_off_outlined,
-          onPress: () async => _setVideoTrack(context),
-        ),
-        FloatActionButtonVideo(
-          icon: isCameraFront
-              ? Icons.flip_camera_ios_outlined
-              : Icons.flip_camera_ios,
-          onPress: () => _switchCamera(context),
-        ),
-        FloatActionButtonVideo(
-          icon: Icons.call_end,
-          onPress: () => _handleOnCallEndBtn(),
-        ),
-        FloatActionButtonVideo(
-          icon: isMicOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,
-          onPress: () => _handleOnVolumeBtn(context),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatActionButtonVideo(
+            icon: isCameraOn
+                ? Icons.videocam_outlined
+                : Icons.videocam_off_outlined,
+            onPress: () async => _setVideoTrack(context),
+          ),
+          FloatActionButtonVideo(
+            icon: Icons.call_end,
+            backgroundColor: Colors.redAccent,
+            onPress: () => _handleOnCallEndBtn(),
+          ),
+          FloatActionButtonVideo(
+            icon:
+                isMicOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,
+            onPress: () => _handleOnVolumeBtn(context),
+          )
+        ],
+      ),
     );
   }
 
@@ -184,28 +170,15 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
                 ),
               ],
             ),
-            SlidingUpPanel(
-              minHeight: 90.h,
-              maxHeight: 200.h,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0),
-              ),
-              panel: Container(
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
                 color: Colors.black87,
                 child: _buildRowBtnActions(context),
               ),
-              collapsed: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16.0),
-                    topRight: Radius.circular(16.0),
-                  ),
-                ),
-                child: _buildRowBtnActions(context),
-              ),
-            ),
+            )
           ],
         ),
       );

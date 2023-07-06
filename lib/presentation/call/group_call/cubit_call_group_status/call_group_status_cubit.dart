@@ -122,6 +122,9 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   Future<void> sendMessageData(String message) async {
     if (state is CallGroupConnectedSuccess) {
       final userInfo = (state as CallGroupConnectedSuccess).user;
+      final listMessage =
+          (state as CallGroupConnectedSuccess).listMessage ?? [];
+
       if (_room.localParticipant != null) {
         final newMessage = MessageCallEntity(
           name: userInfo?.name,
@@ -133,6 +136,8 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
         final dataUtf8 = utf8.encode(messageJson);
 
         await _room.localParticipant!.publishData(dataUtf8, topic: 'hello');
+        emit((state as CallGroupConnectedSuccess)
+            .copyWith(listMessage: [...listMessage, newMessage]));
       }
     }
   }

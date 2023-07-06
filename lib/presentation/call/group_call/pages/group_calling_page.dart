@@ -35,7 +35,7 @@ class _GroupCallingPageState extends State<GroupCallingPage> {
       controller: controller,
       children: [
         GroupCalling(room: widget.room),
-        const ListMessageView(),
+        ListMessageView(),
       ],
     );
   }
