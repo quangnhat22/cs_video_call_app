@@ -1,4 +1,3 @@
-import 'package:videocall/domain/entities/call_entity.dart';
 import '../../entities/friend_request_entity.dart';
 import '../../entities/user_entity.dart';
 
@@ -22,6 +21,4 @@ abstract class FriendRepository {
   Future<bool> acceptReceiveRequest(String userId);
 
   Future<bool> rejectReceiveRequest(String userId);
-
-  Future<List<CallEntity>> getCallList(String? status, String? callee);
 }
