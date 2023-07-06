@@ -18,8 +18,10 @@ class FabCreateNewMeeting extends StatelessWidget {
               args: groupDetailState.groupDetail.groupDetails!.id)
           .then((token) {
         if (token != null) {
-          NavigationUtil.pushNamed(
-              routeName: RouteName.createGroupCall, args: token);
+          NavigationUtil.pushNamed(routeName: RouteName.createGroupCall, args: {
+            "token": token,
+            "groupId": groupDetailState.groupDetail.groupDetails!.id,
+          });
         }
       });
     }

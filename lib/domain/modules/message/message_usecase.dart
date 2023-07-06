@@ -5,7 +5,10 @@ import 'package:videocall/domain/modules/message/message_repository.dart';
 abstract class MessageUseCase {
   Future<List<MeetingPinnedMessageEntity>> getPinnedMessages(String groupId);
 
-  Future<bool> unpinMessage(String groupId, String meetingId, String messageId);
+  Future<bool> unpinMessage(String messageId);
+
+  Future<String> pinMessage(
+      String groupId, String senderId, String content, DateTime sentAt);
 }
 
 @Injectable(as: MessageUseCase)
@@ -22,8 +25,14 @@ class MessageUseCaseImpl extends MessageUseCase {
   }
 
   @override
-  Future<bool> unpinMessage(
-      String groupId, String meetingId, String messageId) async {
-    return await _messageRepository.unpinMessage(groupId, meetingId, messageId);
+  Future<bool> unpinMessage(String messageId) async {
+    return await _messageRepository.unpinMessage(messageId);
+  }
+
+  @override
+  Future<String> pinMessage(
+      String groupId, String senderId, String content, DateTime sentAt) async {
+    return await _messageRepository.pinMessage(
+        groupId, senderId, content, sentAt);
   }
 }

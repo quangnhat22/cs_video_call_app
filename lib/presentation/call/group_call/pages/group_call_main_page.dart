@@ -9,15 +9,17 @@ class GroupCallPage extends StatelessWidget {
   const GroupCallPage({
     Key? key,
     required this.token,
+    required this.groupId,
   }) : super(key: key);
 
   final String token;
+  final String groupId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<CallGroupStatusCubit>()
-        ..pageInited(token)
+        ..pageInited(token, groupId)
         ..setUpRoom(),
       child: const GroupCallView(),
     );

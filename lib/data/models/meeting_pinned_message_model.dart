@@ -1,6 +1,7 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:videocall/data/models/group_meeting_model.dart';
-import 'package:videocall/data/models/message_model.dart';
+import 'package:videocall/data/models/user_model.dart';
 
 part 'meeting_pinned_message_model.freezed.dart';
 part 'meeting_pinned_message_model.g.dart';
@@ -9,8 +10,12 @@ part 'meeting_pinned_message_model.g.dart';
 class MeetingPinnedMessageModel with _$MeetingPinnedMessageModel {
   const factory MeetingPinnedMessageModel({
     required String id,
-    GroupMeetingModel? meeting,
-    List<MessageModel?>? pinnedMessages,
+    @JsonKey(name: "created_at") DateTime? createdAt,
+    @JsonKey(name: "group_id") String? groupId,
+    @JsonKey(name: "sender_id") String? senderId,
+    UserModel? sender,
+    String? content,
+    @JsonKey(name: "sent_at") String? sentAt,
   }) = _MeetingPinnedMessageModel;
 
   factory MeetingPinnedMessageModel.fromJson(Map<String, dynamic> json) =>

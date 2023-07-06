@@ -1,8 +1,10 @@
 part of group_messages;
 
 class MeetingPinnedMessageList extends StatelessWidget {
-  const MeetingPinnedMessageList({super.key, this.handleRefresh});
+  const MeetingPinnedMessageList(
+      {super.key, required this.groupId, this.handleRefresh});
 
+  final String groupId;
   final Function? handleRefresh;
 
   @override
@@ -12,9 +14,10 @@ class MeetingPinnedMessageList extends StatelessWidget {
         if (state is MessagesUnpinSuccess) {
           context
               .read<MessagesBloc>()
-              .add(const MessagesEvent.started(groupId: '123'));
+              .add(MessagesEvent.started(groupId: groupId));
         }
       },
+      buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         return state.maybeWhen(
           failure: (message) {
@@ -31,29 +34,7 @@ class MeetingPinnedMessageList extends StatelessWidget {
                   child: Text(AppLocalizations.of(context)!.no_messages_found));
             }
 
-            return ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        messages[index].meeting?.title ??
-                            AppLocalizations.of(context)!.unknown_meeting_title,
-                        style: AppTextStyles.headlineTextStyle,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    PinnedMessagesList(messages: messages[index].pinnedMessages)
-                  ],
-                );
-              },
-              itemCount: messages.length,
-            );
+            return PinnedMessagesList(messages: messages);
           },
           orElse: () {
             return const ListSkeleton();

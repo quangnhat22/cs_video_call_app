@@ -3,17 +3,14 @@ part of group_messages;
 enum Menu { unpin }
 
 class PinnedMessageItem extends StatelessWidget {
-  const PinnedMessageItem(
-      {super.key, this.isMyselfMessage = false, required this.message});
+  const PinnedMessageItem({super.key, required this.message});
 
-  final bool isMyselfMessage;
-  final MessageModel message;
+  final MeetingPinnedMessageEntity message;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          isMyselfMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RichText(
           maxLines: 2,
@@ -25,7 +22,7 @@ class PinnedMessageItem extends StatelessWidget {
               TextSpan(
                 text: AppLocalizations.of(context)!.was_pinned_by(
                     intl.DateFormat('dd-MM-yyyy')
-                        .format(DateTime.parse(message.pinnedAt!))),
+                        .format(DateTime.parse(message.sentAt!))),
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground),
               ),
@@ -36,18 +33,15 @@ class PinnedMessageItem extends StatelessWidget {
           height: 8,
         ),
         Row(
-          textDirection:
-              isMyselfMessage ? TextDirection.rtl : TextDirection.ltr,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            if (!isMyselfMessage)
-              const CustomAvatarImage(
-                urlImage: '',
-                maxRadiusEmptyImg: 20,
-                widthImage: 48,
-                heightImage: 48,
-              ),
+            CustomAvatarImage(
+              urlImage: message.sender!.avatar,
+              maxRadiusEmptyImg: 20,
+              widthImage: 48,
+              heightImage: 48,
+            ),
             const SizedBox(
               width: 8,
             ),
@@ -60,15 +54,14 @@ class PinnedMessageItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (!isMyselfMessage)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Text(
-                        message.sender?.name ??
-                            AppLocalizations.of(context)!.unknown_name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text(
+                      message.sender?.name ??
+                          AppLocalizations.of(context)!.unknown_name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
+                  ),
                   Text(
                     message.content ?? '',
                   ),
@@ -81,8 +74,9 @@ class PinnedMessageItem extends StatelessWidget {
               ),
               onSelected: (Menu item) {
                 debugPrint(item.name);
-                context.read<MessagesBloc>().add(MessagesEvent.unpin(
-                    groupId: '123', meetingId: '123', messageId: message.id));
+                context
+                    .read<MessagesBloc>()
+                    .add(MessagesEvent.unpin(messageId: message.id));
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
                 PopupMenuItem<Menu>(

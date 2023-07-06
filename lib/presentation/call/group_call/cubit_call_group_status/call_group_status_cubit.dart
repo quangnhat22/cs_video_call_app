@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:videocall/core/config/app_config.dart';
+import 'package:videocall/data/models/message_call_model.dart';
 import 'package:videocall/domain/entities/message_call_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 import 'package:videocall/domain/modules/user/user_usecase.dart';
@@ -19,10 +20,10 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
   CallGroupStatusCubit(this._userUseCase)
       : super(const CallGroupStatusState.initial());
-
   late final Room _room;
 
   late String _token;
+  late String _groupId;
 
   late final EventsListener<RoomEvent> _listenNewMessage;
 
@@ -33,8 +34,9 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   bool _isSwitchCameraFront = true;
   bool _isOpenMic = false;
 
-  void pageInited(String token) {
+  void pageInited(String token, String groupId) {
     _token = token;
+    _groupId = groupId;
   }
 
   Future<void> setUpRoom() async {
@@ -126,18 +128,23 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
           (state as CallGroupConnectedSuccess).listMessage ?? [];
 
       if (_room.localParticipant != null) {
-        final newMessage = MessageCallEntity(
+        final newMessageModel = MessageCallModel(
+          groupId: _groupId,
+          senderId: userInfo?.id,
           name: userInfo?.name,
           avatar: userInfo?.avatar,
           message: message,
           senderTime: DateTime.now(),
         );
-        final messageJson = jsonEncode(newMessage);
+        final messageJson = jsonEncode(newMessageModel);
         final dataUtf8 = utf8.encode(messageJson);
+
+        final newMessageEntity =
+            MessageCallEntity.convertToMessageEntity(model: newMessageModel);
 
         await _room.localParticipant!.publishData(dataUtf8, topic: 'hello');
         emit((state as CallGroupConnectedSuccess)
-            .copyWith(listMessage: [...listMessage, newMessage]));
+            .copyWith(listMessage: [...listMessage, newMessageEntity]));
       }
     }
   }
@@ -150,9 +157,11 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
         final dataDecoded = utf8.decode(event.data);
         final messageJson = jsonDecode(dataDecoded);
-        final newMessage = MessageCallEntity.fromJson(messageJson);
+        final newMessage = MessageCallModel.fromJson(messageJson);
+        final newMessageEntity =
+            MessageCallEntity.convertToMessageEntity(model: newMessage);
 
-        final listMessageUpdated = [...listMessage, newMessage];
+        final listMessageUpdated = [...listMessage, newMessageEntity];
         emit((state as CallGroupConnectedSuccess)
             .copyWith(listMessage: listMessageUpdated));
       }

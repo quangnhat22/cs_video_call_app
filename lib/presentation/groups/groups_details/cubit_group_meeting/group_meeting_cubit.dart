@@ -35,8 +35,10 @@ class GroupMeetingCubit extends Cubit<GroupMeetingState> {
       final token =
           await _liveKitUC.joinMeeting(groupId: _groupId, meetingId: meetingId);
       if (token != null) {
-        NavigationUtil.pushNamed(
-            routeName: RouteName.createGroupCall, args: token);
+        NavigationUtil.pushNamed(routeName: RouteName.createGroupCall, args: {
+          "token": token,
+          "groupId": _groupId,
+        });
       }
     } catch (e) {
       throw Exception(e.toString());

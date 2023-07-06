@@ -38,8 +38,7 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
       MessagesUnpin event, Emitter<MessagesState> emit) async {
     try {
       emit(const MessagesLoading());
-      await _messageUseCase.unpinMessage(
-          event.groupId, event.meetingId, event.messageId);
+      await _messageUseCase.unpinMessage(event.messageId);
       emit(const MessagesUnpinSuccess());
     } catch (e) {
       emit(MessagesFailure(message: e.toString()));
