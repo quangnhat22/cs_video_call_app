@@ -5,16 +5,18 @@ class FloatActionButtonVideo extends StatelessWidget {
     Key? key,
     this.icon,
     this.onPress,
+    this.backgroundColor,
   }) : super(key: key);
 
   final VoidCallback? onPress;
   final IconData? icon;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       heroTag: UniqueKey(),
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor ?? Colors.white,
       onPressed: onPress,
       child: Icon(
         icon,
