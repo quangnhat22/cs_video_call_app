@@ -115,10 +115,15 @@ class AppRoutes {
           );
         }
       case RouteName.createGroupCall:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final token = arguments['token'] as String;
+        final groupId = arguments["groupId"] as String;
+
         return _buildAnimationRoute(
             settings,
             GroupCallPage(
-              token: settings.arguments as String,
+              token: token,
+              groupId: groupId,
             ));
       case RouteName.devices:
         return _buildAnimationRoute(settings, const DevicesPage());

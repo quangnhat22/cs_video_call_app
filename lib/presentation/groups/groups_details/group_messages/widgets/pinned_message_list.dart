@@ -6,7 +6,7 @@ class PinnedMessagesList extends StatelessWidget {
 
   final Function? handleRefresh;
 
-  final List<MessageModel?>? messages;
+  final List<MeetingPinnedMessageEntity>? messages;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,7 @@ class PinnedMessagesList extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return PinnedMessageItem(
-              isMyselfMessage: index < 2 ? true : false,
-              message: messages![index]!,
+              message: messages![index],
             );
           },
           itemCount: messages!.length,

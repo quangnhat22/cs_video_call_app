@@ -8,7 +8,9 @@ import 'package:videocall/core/utils/snack_bar.dart';
 import '../../cubit_inivite_new_member/new_member_cubit.dart';
 
 class FabInviteNewFriend extends StatelessWidget {
-  const FabInviteNewFriend({super.key});
+  const FabInviteNewFriend({super.key, required this.groupId});
+
+  final String groupId;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,10 @@ class FabInviteNewFriend extends StatelessWidget {
         state.whenOrNull(
           getListFriendFail: (message) {
             SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+          },
+          inviteInSuccess: () {
+            SnackBarApp.showSnackBar(
+                context, 'Invite successfully', TypesSnackBar.success);
           },
         );
       },
@@ -33,8 +39,13 @@ class FabInviteNewFriend extends StatelessWidget {
 
               if (newMembers != null) {
                 final arrayNewMembers = jsonDecode(newMembers);
-                if (arrayNewMembers.length > 0) {
-                  debugPrint(arrayNewMembers[0]);
+                final memList = (arrayNewMembers as List)
+                    .map((mem) => mem as String)
+                    .toList();
+                if (memList.isNotEmpty) {
+                  context
+                      .read<NewMemberCubit>()
+                      .inviteNewMember(groupId, memList);
                 }
               }
             }

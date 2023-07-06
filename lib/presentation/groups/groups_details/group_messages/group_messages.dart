@@ -7,9 +7,8 @@ import 'package:intl/intl.dart' as intl;
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/common/widgets/stateless/empty_message/empty_message.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
-import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/data/models/message_model.dart';
+import 'package:videocall/domain/entities/meeting_pinned_message_entity.dart';
 import 'package:videocall/presentation/groups/groups_details/group_messages/bloc/messages_bloc.dart';
 
 part 'pages/group_messages_page.dart';
