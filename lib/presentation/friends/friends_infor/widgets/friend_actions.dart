@@ -10,7 +10,7 @@ class FriendActions extends StatelessWidget {
 
   void _handleRemoveFriend(BuildContext ctx) {
     final userId = ctx.read<FriendInfoCubit>().state.user.id;
-    ctx.read<FriendsActionCubit>().sentAddFriendRequest(userId);
+    ctx.read<FriendsActionCubit>().deleteFriend(userId);
   }
 
   @override

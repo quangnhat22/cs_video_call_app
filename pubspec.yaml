@@ -76,6 +76,7 @@ dependencies:
   flutter_overlay_window: ^0.4.3
   flutter_countdown_timer: ^4.1.0
   external_app_launcher: ^3.1.0
+  flutter_callkit_incoming: ^2.0.0+1
   flutter_slidable: ^3.0.0
 
 dev_dependencies:

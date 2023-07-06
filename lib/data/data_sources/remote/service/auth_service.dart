@@ -120,9 +120,10 @@ class AuthService {
     }
   }
 
-  Future<Response> sendEmailResetPasswordCode() async {
+  Future<Response> forgotPassword(String email) async {
     try {
-      return await _service.dio.post("${BaseService.authPath}/forget-password");
+      return await _service.dio.post("${BaseService.authPath}/forget-password",
+          data: {"email": email});
     } on DioError catch (e) {
       throw Exception(e.message);
     } catch (e) {

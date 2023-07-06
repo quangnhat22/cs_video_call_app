@@ -26,4 +26,3 @@ part 'widgets/friend_actions.dart';
 part 'widgets/friend_calls_history.dart';
 part 'widgets/friend_details_infor.dart';
 part 'widgets/friend_mutual_infor.dart';
-part 'widgets/friend_unfriend.dart';

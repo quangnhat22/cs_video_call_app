@@ -7,6 +7,7 @@ import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
+import 'package:videocall/presentation/call/friend_call/friend_call.dart';
 import 'package:videocall/presentation/call/group_call/pages/group_call_main_page.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
@@ -101,23 +102,18 @@ class AppRoutes {
             CreateMeetingPage(
               groupId: settings.arguments as String,
             ));
-      // case RouteName.personalCall:
-      //   {
-      //     final argument = settings.arguments as Map<String, dynamic>;
-      //     ReceivedAction? receivedAction = settings.arguments == null
-      //         ? NotificationController.initialCallAction
-      //         : argument["received-action"] as ReceivedAction?;
-      //
-      //     String? friendId = argument["friend-id"] as String?;
-      //
-      //     return _buildAnimationRoute(
-      //       settings,
-      //       PersonalCallPage(
-      //         receivedAction: receivedAction,
-      //         friendId: friendId,
-      //       ),
-      //     );
-      //   }
+      case RouteName.personalCall:
+        {
+          final argument = settings.arguments as Map<String, dynamic>;
+
+          final friendId = argument["friendId"] as String;
+          final chatRoomId = argument["chatRoomId"] as String?;
+
+          return _buildAnimationRoute(
+            settings,
+            FriendCallPage(friendId: friendId, chatRoomId: chatRoomId),
+          );
+        }
       case RouteName.createGroupCall:
         final arguments = settings.arguments as Map<String, dynamic>;
         final token = arguments['token'] as String;

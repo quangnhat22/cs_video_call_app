@@ -10,7 +10,8 @@ class CallModel with _$CallModel {
       {required String id,
       UserModel? callee,
       UserModel? caller,
-      String? calledAt,
+      // ignore: invalid_annotation_target
+      @JsonKey(name: "called_at") DateTime? calledAt,
       String? status}) = _CallModel;
 
   factory CallModel.fromJson(Map<String, dynamic> json) =>

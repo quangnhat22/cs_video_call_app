@@ -141,14 +141,15 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<String?> sendResetPasswordCode() async {
+  Future<bool> forgotPassword(String email) async {
     try {
-      final res = await _authService.sendEmailResetPasswordCode();
-      if (res.statusCode == 200) {
-        return res.data["data"];
-      }
+      final res = await _authService.forgotPassword(email);
 
-      return null;
+      if (res.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       throw Exception(e.toString());
     }

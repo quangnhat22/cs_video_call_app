@@ -29,7 +29,7 @@ class FriendsActionCubit extends Cubit<FriendsActionState> {
     }
   }
 
-  Future<void> deleteFriendRequest(String id) async {
+  Future<void> deleteFriend(String id) async {
     try {
       final isSentSuccess = await _friendUseCase.deleteFriend(id);
       if (isSentSuccess) {

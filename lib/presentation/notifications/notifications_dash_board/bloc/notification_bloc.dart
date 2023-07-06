@@ -1,8 +1,12 @@
-import 'package:bloc/bloc.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/routes/app_navigation.dart';
+import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/domain/entities/notification_entity.dart';
+import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
 import 'package:videocall/domain/modules/friend/friend_usecase.dart';
 import 'package:videocall/domain/modules/group/group_usecase.dart';
 import 'package:videocall/domain/modules/notification/notification_use_case.dart';
@@ -16,8 +20,10 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final NotificationUseCase _notificationUC;
   final FriendUseCase _friendUC;
   final GroupUseCase _groupUC;
+  final FriendCallUseCase _friendCallUseCase;
 
-  NotificationBloc(this._notificationUC, this._friendUC, this._groupUC)
+  NotificationBloc(this._notificationUC, this._friendUC, this._groupUC,
+      this._friendCallUseCase)
       : super(const NotificationState.initial()) {
     on<NotificationEvent>((event, emit) async {
       await event.map(
@@ -98,10 +104,23 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
         isSuccess = event.isAccept
             ? await _friendUC.acceptReceiveRequest(event.id)
             : await _friendUC.rejectReceiveRequest(event.id);
+        await AwesomeNotifications().dismiss(2);
       } else if (event.actionType == 'receive-group-request') {
         isSuccess = event.isAccept
             ? await _groupUC.acceptReceivedGroup(event.id)
             : await _groupUC.rejectReceivedRequest(event.id);
+        await AwesomeNotifications().dismiss(3);
+      } else if (event.actionType == 'incoming-call') {
+        if (event.isAccept) {
+          isSuccess = true;
+          NavigationUtil.pushNamed(routeName: RouteName.personalCall, args: {
+            'friendId': event.friendId,
+            'chatRoomId': event.id,
+          });
+        } else {
+          isSuccess = await _friendCallUseCase.rejectCall(event.id);
+        }
+        AwesomeNotifications().dismiss(4);
       }
       if (isSuccess) {
         SnackBarApp.showSnackBar(

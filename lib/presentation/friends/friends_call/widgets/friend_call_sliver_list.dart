@@ -37,7 +37,7 @@ class FriendCallSliverList extends StatelessWidget {
                   children: <Widget>[
                     _buildStatus(calls[index ~/ 2].status!),
                     Text(DateFormat("dd-MM-yyyy hh:mm aaa")
-                        .format(DateTime.parse(calls[index ~/ 2].calledAt!)))
+                        .format(calls[index ~/ 2].calledAt!))
                   ],
                 ),
                 leading: CustomAvatarImage(

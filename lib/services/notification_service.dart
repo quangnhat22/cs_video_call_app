@@ -16,13 +16,24 @@ class NotificationService {
         [
           NotificationChannel(
               channelKey: 'basic_channel',
-              channelName: 'Alerts',
-              channelDescription: 'Notification tests as alerts',
+              channelName: 'BasicChannel',
+              channelDescription:
+                  'Notification using for request friend or gr in CS Chat App',
               playSound: true,
               importance: NotificationImportance.High,
               defaultPrivacy: NotificationPrivacy.Private,
               defaultColor: Colors.deepPurple,
-              ledColor: Colors.deepPurple)
+              ledColor: Colors.deepPurple),
+          NotificationChannel(
+            channelKey: 'call_channel',
+            channelName: 'CallChannel',
+            channelDescription:
+                'Notification using for Call notification in CS Chat App',
+            importance: NotificationImportance.High,
+            defaultPrivacy: NotificationPrivacy.Public,
+            defaultColor: Colors.blue,
+            ledColor: Colors.blue,
+          )
         ],
         debug: debug);
 

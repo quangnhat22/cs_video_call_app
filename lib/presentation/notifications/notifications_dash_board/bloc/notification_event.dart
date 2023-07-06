@@ -16,5 +16,6 @@ class NotificationEvent with _$NotificationEvent {
       {required String type,
       required String actionType,
       required String id,
+      String? friendId,
       @Default(true) isAccept}) = NotifcationTapped;
 }

@@ -16,11 +16,7 @@ class ListFriendItem extends StatelessWidget {
 
   void _handleOnTapCallBtn() {
     NavigationUtil.pushNamed(
-      routeName: RouteName.personalCall,
-      args: {
-        "friend-id": id,
-      },
-    );
+        routeName: RouteName.personalCall, args: {"friendId": id});
   }
 
   @override
