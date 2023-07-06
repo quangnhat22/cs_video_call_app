@@ -179,7 +179,6 @@
   "no_devices_found": "No devices found",
   "last_accessed_at": "Last accessed at",
   "empty_call_list_message": "Your group has no calls",
-  "no_members_found": "No members found",
   "update_avatar_success": "Update avatar success",
   "update_avatar_fail": "Update avatar fail! Try again",
   "resend_email_after": "Resend email after",
@@ -210,5 +209,23 @@
   "our_app": "Our app",
   "app_introduction": "This is CS Video Call App, the revolutionary software designed to redefine the way we connect through video calling. Whether you're working remotely, catching up with loved ones, or collaborating with colleagues across the globe, CS Video Call is your ultimate solution for seamless and immersive communication. With its cutting-edge features and user-friendly interface, this software offers crystal-clear audio and high-definition video, ensuring every conversation feels as if you're in the same room. Experience the power of real-time interaction as CS Video Call effortlessly brings people together, fostering collaboration, strengthening relationships, and bridging distances. Say goodbye to technical glitches and hello to a streamlined video calling experience with CS Video Call.",
   "developers": "Developers",
-  "no_calls_found": "No calls found"
+  "no_calls_found": "No calls found",
+  "delete_noti": "Delete notification",
+  "invited_you_to_join_group": " invited you to join group ",
+  "is_calling": "is calling to you",
+  "accepted_requets": "accepted request",
+  "reject_call_message": "rejected call",
+  "abandon_call_message": "abandon call before @{user_name} join",
+  "@abandon_call_message": {
+    "placeholders": {
+      "user_name": {
+        "type": "String"
+      }
+    }
+  },
+  "do_you_want_revoke_friend": "Do you want to undo a friend request?",
+  "do_you_want_reject_friend": "Do you want to reject a friend request?",
+  "do_you_want_revoke_group": "Do you want to undo a group request?",
+  "do_you_want_reject_group": "Do you want to reject a group request?",
+  "do_you_want_reject_call": "Do you want to reject a friend call?"
 }

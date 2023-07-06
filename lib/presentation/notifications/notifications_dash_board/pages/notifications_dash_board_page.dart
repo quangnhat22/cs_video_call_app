@@ -27,14 +27,39 @@ class NotificationsDashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MHomeAppBar(
-        title: AppLocalizations.of(context)!.notifications,
-        actionButton: IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: () {},
+          title: '',
+          actionButton: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.refresh_outlined),
+                onPressed: () {
+                  context
+                      .read<NotificationBloc>()
+                      .add(const NotificationEvent.refreshed());
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.delete_outline,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                onPressed: () {
+                  context
+                      .read<NotificationBloc>()
+                      .add(const ListNotificationDeleted());
+                },
+              ),
+            ],
+          )),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context
+              .read<NotificationBloc>()
+              .add(const NotificationEvent.refreshed());
+        },
+        child: const SingleChildScrollView(
+          child: NotificationList(),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: NotificationList(),
       ),
     );
   }

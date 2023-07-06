@@ -8,6 +8,7 @@ class NotificationEntity {
   final NotificationSubjectEntity? subject;
   final NotificationSubjectEntity? prep;
   final NotificationSubjectEntity? indirect;
+  final NotificationSubjectEntity? direct;
   final String? action;
 
   NotificationEntity({
@@ -16,6 +17,7 @@ class NotificationEntity {
     this.subject,
     this.prep,
     this.indirect,
+    this.direct,
     this.action,
   });
 
@@ -33,6 +35,8 @@ class NotificationEntity {
           model: model.prep),
       indirect: NotificationSubjectEntity.convertToFriendRequestEntity(
           model: model.indirect),
+      direct: NotificationSubjectEntity.convertToFriendRequestEntity(
+          model: model.direct),
       action: model.action,
     );
   }
