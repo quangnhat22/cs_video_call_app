@@ -40,14 +40,40 @@ class _DashBoardViewState extends State<DashBoardView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentTabIndex,
-        children: _pages,
-      ),
-      bottomNavigationBar: ListBottomNavigation(
-        handleOnTab: _onTap,
-        currentIndex: _currentTabIndex,
+    return BlocListener<NetworkBloc, NetworkState>(
+      listener: (context, state) {
+        if (state is NetworkFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentMaterialBanner()
+            ..showMaterialBanner(
+              MaterialBanner(
+                padding: const EdgeInsets.all(8),
+                content: Text(AppLocalizations.of(context)!.no_internet),
+                leading: const Icon(Icons.wifi),
+                backgroundColor: Theme.of(context).colorScheme.errorContainer,
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(
+                      AppLocalizations.of(context)!.confirm,
+                    ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                    },
+                  ),
+                ],
+              ),
+            );
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: _currentTabIndex,
+          children: _pages,
+        ),
+        bottomNavigationBar: ListBottomNavigation(
+          handleOnTab: _onTap,
+          currentIndex: _currentTabIndex,
+        ),
       ),
     );
   }

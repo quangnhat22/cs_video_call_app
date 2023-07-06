@@ -45,73 +45,45 @@ class App extends StatelessWidget {
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, AppState appState) {
-          return BlocListener<NetworkBloc, NetworkState>(
-            listener: (context, state) {
-              // if (state is NetworkFailure) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentMaterialBanner()
-                ..showMaterialBanner(
-                  MaterialBanner(
-                    padding: EdgeInsets.all(20),
-                    content: Text('Recover password email was sended.'),
-                    leading: Icon(Icons.info),
-                    backgroundColor: Colors.green,
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text(
-                          'Close',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          ScaffoldMessenger.of(context)
-                              .hideCurrentMaterialBanner();
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              //}
+          return BlocBuilder<AppSettingCubit, AppSettingState>(
+            builder: (context, AppSettingState appSettingState) {
+              switch (appState.runtimeType) {
+                case AppUnAuthorized:
+                  {
+                    return MMaterialApp(
+                      keyMaterialApp: "App_UnAuthorized",
+                      initialRoute: RouteName.welcomePage,
+                      onGenerateRoute: AppRoutes.unAuthorizedRoute,
+                      homeWidget: const WelcomePage(),
+                      locale: appSettingState.locale,
+                      themeMode: appSettingState.theme,
+                    );
+                  }
+                case AppAuthorized:
+                  {
+                    return MMaterialApp(
+                      keyMaterialApp: "App_Authorized",
+                      initialRoute: RouteName.dashboard,
+                      onGenerateRoute: AppRoutes.authorizedRoute,
+                      navigatorKey: AppGlobalKeys.authorNavigatorKey,
+                      homeWidget: const DashboardPage(),
+                      locale: appSettingState.locale,
+                      themeMode: appSettingState.theme,
+                    );
+                  }
+                default:
+                  {
+                    return MMaterialApp(
+                      keyMaterialApp: "App_Loading",
+                      initialRoute: "/",
+                      onGenerateRoute: AppRoutes.loadingRoute,
+                      homeWidget: const LoadingPage(),
+                      locale: appSettingState.locale,
+                      themeMode: appSettingState.theme,
+                    );
+                  }
+              }
             },
-            child: BlocBuilder<AppSettingCubit, AppSettingState>(
-              builder: (context, AppSettingState appSettingState) {
-                switch (appState.runtimeType) {
-                  case AppUnAuthorized:
-                    {
-                      return MMaterialApp(
-                        keyMaterialApp: "App_UnAuthorized",
-                        initialRoute: RouteName.welcomePage,
-                        onGenerateRoute: AppRoutes.unAuthorizedRoute,
-                        homeWidget: const WelcomePage(),
-                        locale: appSettingState.locale,
-                        themeMode: appSettingState.theme,
-                      );
-                    }
-                  case AppAuthorized:
-                    {
-                      return MMaterialApp(
-                        keyMaterialApp: "App_Authorized",
-                        initialRoute: RouteName.dashboard,
-                        onGenerateRoute: AppRoutes.authorizedRoute,
-                        navigatorKey: AppGlobalKeys.authorNavigatorKey,
-                        homeWidget: const DashboardPage(),
-                        locale: appSettingState.locale,
-                        themeMode: appSettingState.theme,
-                      );
-                    }
-                  default:
-                    {
-                      return MMaterialApp(
-                        keyMaterialApp: "App_Loading",
-                        initialRoute: "/",
-                        onGenerateRoute: AppRoutes.loadingRoute,
-                        homeWidget: const LoadingPage(),
-                        locale: appSettingState.locale,
-                        themeMode: appSettingState.theme,
-                      );
-                    }
-                }
-              },
-            ),
           );
         },
       ),

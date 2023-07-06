@@ -1,7 +1,9 @@
 library dash_board;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/presentation/app/network_bloc/network_bloc.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
