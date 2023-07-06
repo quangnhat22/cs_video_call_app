@@ -31,8 +31,17 @@ class CallFriendService {
 
   Future<Response> getCallList(String? status, String? calleeId) async {
     try {
-      return await _service.dio.get(BaseService.callPath,
-          queryParameters: {"status": status, "callee": calleeId});
+      String endPoint = '';
+      if (status != null && calleeId != null) {
+        endPoint += '?status=$status&callee=$calleeId';
+      } else if (status != null) {
+        endPoint += '?status=$status';
+      } else if (calleeId != null) {
+        endPoint += '?callee=$calleeId';
+      }
+      return await _service.dio.get('${BaseService.callPath}$endPoint'
+          // queryParameters: {"status": status, "callee": calleeId},
+          );
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

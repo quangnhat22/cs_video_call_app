@@ -5,7 +5,7 @@ class CallEntity {
   String id;
   UserModel? callee;
   UserModel? caller;
-  String? calledAt;
+  DateTime? calledAt;
   String? status;
 
   CallEntity(

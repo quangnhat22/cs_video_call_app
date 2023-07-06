@@ -33,8 +33,7 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
     FlutterCallkitIncoming.onEvent.listen((CallEvent? event) async {
       switch (event!.event) {
         case Event.actionCallIncoming:
-          await AwesomeNotifications()
-              .dismissNotificationsByChannelKey("call_channel");
+          await AwesomeNotifications().dismiss(4);
           break;
 
         case Event.actionCallAccept:
@@ -64,7 +63,6 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
   }
 
   void _initializeNotificationsEventListeners() async {
-    // Only after at least the action method is set, the notification events are delivered
     await AwesomeNotifications().setListeners(
       onNotificationCreatedMethod: _onNotificationCreatedMethod,
       onNotificationDisplayedMethod: _onNotificationDisplayedMethod,
