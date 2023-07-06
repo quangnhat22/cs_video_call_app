@@ -21,7 +21,7 @@ class CallFriendService {
 
   Future<Response> joinFriendCall(String callRoomId) async {
     try {
-      return await _service.dio.get("${BaseService.groupCallPath}/$callRoomId");
+      return await _service.dio.get("${BaseService.callPath}/$callRoomId");
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {
@@ -29,11 +29,32 @@ class CallFriendService {
     }
   }
 
-  Future<Response> getListGroupMeeting(
-    String groupId,
-  ) async {
+  Future<Response> getCallList(String? status, String? calleeId) async {
     try {
-      return await _service.dio.get("${BaseService.groupCallPath}/$groupId");
+      return await _service.dio.get(BaseService.callPath,
+          queryParameters: {"status": status, "callee": calleeId});
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> abandonCall(String chatRoomId) async {
+    try {
+      return await _service.dio
+          .delete("${BaseService.callPath}/$chatRoomId/abandon");
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> rejectCall(String chatRoomId) async {
+    try {
+      return await _service.dio
+          .delete("${BaseService.callPath}/$chatRoomId/reject");
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

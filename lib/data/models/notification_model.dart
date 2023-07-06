@@ -13,9 +13,11 @@ class NotificationsModel with _$NotificationsModel {
     required String id,
     // ignore: invalid_annotation_target
     @JsonKey(name: "created_at") DateTime? createdAt,
+    String? owner,
     NotificationSubjectModel? subject,
     NotificationSubjectModel? prep,
     NotificationSubjectModel? indirect,
+    NotificationSubjectModel? direct,
     String? action,
   }) = _NotificationsModel;
 

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/data/models/call_model.dart';
-import 'package:videocall/domain/entities/call_entity.dart';
+import 'package:videocall/data/data_sources/remote/service/call_friend_service.dart';
 import 'package:videocall/domain/entities/friend_request_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 import 'package:videocall/domain/modules/friend/friend_repository.dart';
@@ -12,9 +11,13 @@ import '../models/user_model.dart';
 
 @Injectable(as: FriendRepository)
 class FriendRepositoryImpl extends FriendRepository {
-  FriendRepositoryImpl({required FriendService service}) : _service = service;
+  FriendRepositoryImpl(
+    this._callFriendService,
+    this._service,
+  );
 
   final FriendService _service;
+  final CallFriendService _callFriendService;
 
   @override
   Future<bool> acceptReceiveRequest(String userId) async {
@@ -182,33 +185,6 @@ class FriendRepositoryImpl extends FriendRepository {
         return true;
       }
       return false;
-    } catch (e) {
-      throw Exception(e..toString());
-    }
-  }
-
-  @override
-  Future<List<CallEntity>> getCallList(String? status, String? callee) async {
-    try {
-      final res = await _service.getCallList(status, callee);
-      if (res.statusCode == 200) {
-        final listCallJson = res.data["data"] as List<dynamic>?;
-
-        if (listCallJson != null) {
-          final callModels = listCallJson
-              .map((callJson) => CallModel.fromJson(callJson))
-              .toList();
-
-          final callEntities = callModels
-              .map((callModel) =>
-                  CallEntity.convertToCallEntity(model: callModel))
-              .toList();
-
-          return callEntities;
-        }
-      }
-
-      return List<CallEntity>.empty();
     } catch (e) {
       throw Exception(e..toString());
     }

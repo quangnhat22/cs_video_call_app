@@ -151,15 +151,4 @@ class FriendService {
       throw Exception(e.toString());
     }
   }
-
-  Future<Response> getCallList(String? status, String? calleeId) async {
-    try {
-      return await _service.dio.get(BaseService.callPath,
-          queryParameters: {"status": status, "callee": calleeId});
-    } on DioError catch (e) {
-      throw Exception(e.message.toString());
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
 }
