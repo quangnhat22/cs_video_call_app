@@ -24,6 +24,8 @@ abstract class GroupUseCase {
   Future<bool> acceptReceivedGroup(String groupId);
 
   Future<bool> inviteNewMember(String groupId, List<String> friendIds);
+
+  Future<bool> leaveGroup(String groupId);
 }
 
 @Injectable(as: GroupUseCase)
@@ -76,5 +78,10 @@ class GroupUseCaseImpl extends GroupUseCase {
   @override
   Future<bool> inviteNewMember(String groupId, List<String> friendIds) async {
     return await _repo.inviteNewMember(groupId, friendIds);
+  }
+
+  @override
+  Future<bool> leaveGroup(String groupId) async {
+    return await _repo.leaveGroup(groupId);
   }
 }

@@ -109,4 +109,13 @@ class GroupService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> leaveGroup(String groupId) async {
+    try {
+      return await _service.dio
+          .delete('${BaseService.groupPath}/$groupId/leave');
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

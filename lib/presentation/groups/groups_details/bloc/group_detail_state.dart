@@ -11,4 +11,10 @@ class GroupDetailState with _$GroupDetailState {
   const factory GroupDetailState.getDetailFail({
     String? message,
   }) = GroupGetDetailFail;
+  const factory GroupDetailState.leaveGroupInProgress() =
+      GroupDetailLeaveInProgress;
+  const factory GroupDetailState.leaveGroupSuccess() = GroupDetailLeaveSuccess;
+  const factory GroupDetailState.leaveGroupFailure({
+    required String message,
+  }) = GroupDetailLeaveFailure;
 }

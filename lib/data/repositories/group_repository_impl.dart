@@ -208,4 +208,18 @@ class GroupRepositoryImpl extends GroupRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<bool> leaveGroup(String groupId) async {
+    try {
+      final res = await _service.leaveGroup(groupId);
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
