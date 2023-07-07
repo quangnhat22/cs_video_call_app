@@ -84,7 +84,8 @@ class _FriendPrepareCallViewState extends State<FriendPrepareCallView> {
     ctx.read<FriendCallCubit>().changedAudioPreviewStatus(isMicOn);
   }
 
-  void _handleOnCallEndBtn() async {
+  void _handleOnCallEndBtn(BuildContext ctx) async {
+    await ctx.read<FriendCallCubit>().abandonCall();
     await _removeMediaStream();
     NavigationUtil.pop();
   }
@@ -101,7 +102,7 @@ class _FriendPrepareCallViewState extends State<FriendPrepareCallView> {
         ),
         FloatActionButtonVideo(
           icon: Icons.call_end,
-          onPress: () => _handleOnCallEndBtn(),
+          onPress: () => _handleOnCallEndBtn(context),
         ),
         FloatActionButtonVideo(
           icon: isMicOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,

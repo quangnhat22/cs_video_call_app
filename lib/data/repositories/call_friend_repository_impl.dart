@@ -3,7 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/remote/service/call_friend_service.dart';
 
 import 'package:videocall/data/models/call_model.dart';
+import 'package:videocall/data/models/token_livekit_model.dart';
 import 'package:videocall/domain/entities/call_entity.dart';
+import 'package:videocall/domain/entities/token_livekit_entity.dart';
 import 'package:videocall/domain/modules/call/friend_call_repository.dart';
 import 'package:videocall/domain/modules/user/user_repository.dart';
 
@@ -15,12 +17,12 @@ class FriendCallRepositoryImpl extends FriendCallRepository {
   FriendCallRepositoryImpl(this._service, this._userRepo);
 
   @override
-  Future<String?> createFriendCall(String friendId) async {
+  Future<TokenLiveKitEntity?> createFriendCall(String friendId) async {
     try {
       final res = await _service.createNewFriendCall(friendId);
       if (res.statusCode == 200) {
-        final token = res.data["data"] as String;
-        return token;
+        final tokenJson = TokenLiveKitModel.fromJson(res.data["data"]);
+        return TokenLiveKitEntity.convertToTokenLiveKitEntity(model: tokenJson);
       }
       return null;
     } on DioError catch (e) {

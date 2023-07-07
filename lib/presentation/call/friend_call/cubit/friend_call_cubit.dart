@@ -2,7 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:videocall/domain/entities/token_livekit_entity.dart';
 import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
+import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 
 import '../../../../core/config/app_config.dart';
 
@@ -17,6 +19,7 @@ class FriendCallCubit extends Cubit<FriendCallState> {
       : super(const FriendCallState.initial());
 
   late final Room _room;
+  late final String _callRoomId;
 
   //for room
   bool _isOpenCamera = true;
@@ -27,8 +30,11 @@ class FriendCallCubit extends Cubit<FriendCallState> {
     try {
       emit(const FriendCallConnecting());
       final tokenLiveKit = await _friendCallUseCase.createFriendCall(friendId);
-      if (tokenLiveKit != null) {
-        await _setUpRoom(tokenLiveKit);
+      if (tokenLiveKit != null &&
+          tokenLiveKit.token != null &&
+          tokenLiveKit.roomId != null) {
+        _callRoomId = tokenLiveKit.roomId!;
+        await _setUpRoom(tokenLiveKit.token!);
       } else {
         emit(const FriendCallConnectedFail());
       }
@@ -128,16 +134,20 @@ class FriendCallCubit extends Cubit<FriendCallState> {
     _room.localParticipant?.setMicrophoneEnabled(value);
   }
 
-//   Future<void> abandonCall() async {
-//     try {
-//       if (state is FriendCallPreparing) {
-//  final res = _friendCallUseCase.abandonCall((state as FriendCallPreparing).)
-//       }
-
-//     } catch (e) {
-
-//     }
-//   }
+  Future<void> abandonCall() async {
+    try {
+      if (state is FriendCallPreparing) {
+        final res = await _friendCallUseCase.abandonCall(_callRoomId);
+        if (res) {
+          emit(const FriendCallEnded());
+        } else {
+          emit(const FriendCallConnectedFail());
+        }
+      }
+    } catch (e) {
+      emit(const FriendCallConnectedFail());
+    }
+  }
 
   @override
   Future<void> close() async {
