@@ -25,45 +25,48 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
-    // Go Next when call api login || refreshToken
-    if (err.requestOptions.path.contains('register') ||
-        err.requestOptions.path.contains('login-with-firebase') ||
-        err.requestOptions.path.contains('login') ||
-        err.requestOptions.path.contains('access-token')) {
-      return handler.next(err);
-    }
-    // Do something with response error
-    if (err.response?.statusCode == 401) {
-      final isHasToken = await _refreshToken();
-      if (!isHasToken) {
+    try {
+// Go Next when call api login || refreshToken
+      if (err.requestOptions.path.contains('register') ||
+          err.requestOptions.path.contains('login-with-firebase') ||
+          err.requestOptions.path.contains('login') ||
+          err.requestOptions.path.contains('access-token')) {
         return handler.next(err);
       }
+      // Do something with response error
+      if (err.response?.statusCode == 401) {
+        final isHasToken = await _refreshToken();
+        if (!isHasToken) {
+          return handler.next(err);
+        }
 
-      err.requestOptions.headers.remove('Authorization');
-      err.requestOptions.headers.addAll(await _accessToken());
+        // err.requestOptions.headers.remove('Authorization');
+        // err.requestOptions.headers.addAll(await _accessToken());
 
-      final opts = Options(
-        headers: err.requestOptions.headers,
-        method: err.requestOptions.method,
-      );
+        final accessToken = await _authLocalDataSrc.getAccessToken();
 
-      final cloneReq = await _dio.request(
-        err.requestOptions.path,
-        options: opts,
-        data: err.requestOptions.data,
-        queryParameters: err.requestOptions.queryParameters,
-        onSendProgress: err.requestOptions.onSendProgress,
-        onReceiveProgress: err.requestOptions.onReceiveProgress,
-        cancelToken: err.requestOptions.cancelToken,
-      );
-      if (cloneReq.statusCode! >= 200 && cloneReq.statusCode! <= 299) {
-        return handler.resolve(cloneReq);
-      } else {
-        return handler
-            .reject(DioError(requestOptions: err.response!.requestOptions));
+        err.requestOptions.headers["Authorization"] = "Bearer $accessToken";
+
+        final opts = Options(
+          headers: err.requestOptions.headers,
+          method: err.requestOptions.method,
+        );
+
+        final cloneReq = await _dio.request(err.requestOptions.path,
+            options: opts,
+            data: err.requestOptions.data,
+            queryParameters: err.requestOptions.queryParameters);
+        if (cloneReq.statusCode! >= 200 && cloneReq.statusCode! <= 299) {
+          return handler.resolve(cloneReq);
+        } else {
+          return handler
+              .reject(DioError(requestOptions: err.response!.requestOptions));
+        }
       }
+      return handler.next(err);
+    } catch (e) {
+      throw Exception(e.toString());
     }
-    return handler.next(err);
   }
 
   Future<bool> _refreshToken() async {
@@ -78,7 +81,7 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
         final newAccessToken = res.data["data"]["token"];
         await _authLocalDataSrc.saveAuth(newAccessToken, refreshToken);
       } else {
-        _localDataSource.deleteAllLocal();
+        await _localDataSource.deleteAllLocal();
       }
 
       newDio.close(force: true);
