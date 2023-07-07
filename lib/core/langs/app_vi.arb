@@ -231,5 +231,8 @@
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
   "cannot_call_now": "Không thể thực hiện cuộc gọi ngay lúc này. Vui lòng thử lại sau!",
   "leave_group": "Rời nhóm",
-  "no_notifications_found": "Không có thông báo nào"
+  "no_notifications_found": "Không có thông báo nào",
+  "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",
+  "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
+  "leave_group_success": "Rời nhóm thành công"
 }

@@ -28,35 +28,35 @@ class FriendCallSliverList extends StatelessWidget {
           //final int itemIndex = index ~/ 2;
 
           if (index.isEven) {
-            debugPrint(index.toString());
             return ListTile(
-                title: Text(calls[index ~/ 2].callee?.name ?? ''),
-                subtitle: Wrap(
-                  spacing: 6,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: <Widget>[
-                    _buildStatus(calls[index ~/ 2].status!),
-                    Text(DateFormat("dd-MM-yyyy hh:mm aaa")
-                        .format(calls[index ~/ 2].calledAt!))
-                  ],
+              title: Text(calls[index ~/ 2].callee?.name ?? ''),
+              subtitle: Wrap(
+                spacing: 6,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  _buildStatus(calls[index ~/ 2].status!),
+                  Text(DateFormat("dd-MM-yyyy hh:mm aaa")
+                      .format(calls[index ~/ 2].calledAt!))
+                ],
+              ),
+              leading: CustomAvatarImage(
+                urlImage: calls[index ~/ 2].callee!.avatar,
+              ),
+              trailing: IconButton(
+                icon: Icon(
+                  Icons.call,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
-                leading: CustomAvatarImage(
-                  urlImage: calls[index ~/ 2].callee!.avatar,
-                ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                  onPressed: () {
-                    NavigationUtil.pushNamed(
-                      routeName: RouteName.personalCall,
-                      args: {
-                        "friend-id": calls[index ~/ 2].callee?.id,
-                      },
-                    );
-                  },
-                ));
+                onPressed: () {
+                  NavigationUtil.pushNamed(
+                    routeName: RouteName.personalCall,
+                    args: {
+                      "friend-id": calls[index ~/ 2].callee?.id,
+                    },
+                  );
+                },
+              ),
+            );
           }
           return const DividerSpaceLeft();
         },

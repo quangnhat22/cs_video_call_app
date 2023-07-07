@@ -5,9 +5,9 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/entities/group_request_entity.dart';
 import 'package:videocall/domain/modules/group/group_usecase.dart';
 
+part 'list_group_request_bloc.freezed.dart';
 part 'list_group_request_event.dart';
 part 'list_group_request_state.dart';
-part 'list_group_request_bloc.freezed.dart';
 
 @Injectable()
 class ListGroupRequestBloc
@@ -17,8 +17,14 @@ class ListGroupRequestBloc
         super(const _Initial()) {
     on<ListGroupRequestEvent>((event, emit) async {
       await event.map(
-          started: (event) => _started(event, emit),
-          listRequestRefreshed: (event) => _listRequestRefreshed(event, emit));
+        started: (event) async => await _started(event, emit),
+        listRequestRefreshed: (event) async =>
+            await _listRequestRefreshed(event, emit),
+        listSentRequestRefreshed: (event) async =>
+            await _listSentRequestRefreshed(event, emit),
+        listReceiveRequestRefreshed: (event) async =>
+            await _listReceiveRequestRefreshed(event, emit),
+      );
     });
   }
 
@@ -43,12 +49,53 @@ class ListGroupRequestBloc
     }
   }
 
-  Future<void> _listRequestRefreshed(ListSentGroupRequestRefreshed event,
+  Future<void> _listRequestRefreshed(ListGroupRequestRefreshed event,
       Emitter<ListGroupRequestState> emit) async {
-    if (state is GetListGroupRequestSuccess) {
-      add(const ListGroupRequestEvent.started());
-    } else {
-      return;
+    try {
+      if (state is GetListGroupRequestSuccess) {
+        final currentState = (state as GetListGroupRequestSuccess);
+        final sentRequestList = await _groupUseCase.getSentRequest();
+        final receivedRequestList = await _groupUseCase.getReceivedRequest();
+        sentRequestList.sortBy((request) => request.createdAt!);
+        receivedRequestList.sortBy((request) => request.createdAt!);
+        emit(currentState.copyWith(
+            groupRequestSent: sentRequestList,
+            groupRequestReceived: receivedRequestList));
+      }
+    } catch (e) {
+      emit(GetListGroupRequestFail(message: e.toString()));
+    }
+  }
+
+  Future<void> _listSentRequestRefreshed(ListSentGroupRequestRefreshed event,
+      Emitter<ListGroupRequestState> emit) async {
+    try {
+      if (state is GetListGroupRequestSuccess) {
+        final currentState = (state as GetListGroupRequestSuccess);
+        final sentRequestList = await _groupUseCase.getSentRequest();
+
+        sentRequestList.sortBy((request) => request.createdAt!);
+
+        emit(currentState.copyWith(groupRequestSent: sentRequestList));
+      }
+    } catch (e) {
+      emit(GetListGroupRequestFail(message: e.toString()));
+    }
+  }
+
+  Future<void> _listReceiveRequestRefreshed(
+      event, Emitter<ListGroupRequestState> emit) async {
+    try {
+      if (state is GetListGroupRequestSuccess) {
+        final currentState = (state as GetListGroupRequestSuccess);
+
+        final receivedRequestList = await _groupUseCase.getReceivedRequest();
+
+        receivedRequestList.sortBy((request) => request.createdAt!);
+        emit(currentState.copyWith(groupRequestReceived: receivedRequestList));
+      }
+    } catch (e) {
+      emit(GetListGroupRequestFail(message: e.toString()));
     }
   }
 }

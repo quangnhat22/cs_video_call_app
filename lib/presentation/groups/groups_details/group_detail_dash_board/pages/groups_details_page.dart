@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/core/routes/app_navigation.dart';
-import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
-import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
 import 'package:videocall/presentation/groups/groups_details/group_messages/group_messages.dart';
 
 import '../../bloc/group_detail_bloc.dart';
-import '../../cubit_group_meeting/group_meeting_cubit.dart';
 import '../../cubit_inivite_new_member/new_member_cubit.dart';
-import '../widgets/fab_create_new_meeting.dart';
 import '../../group_member/widget/fab_invite_new_member.dart';
+import '../widgets/fab_create_new_meeting.dart';
 
 enum GroupOptions { leaveGroup }
 
@@ -37,10 +33,6 @@ class GroupDetailPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => getIt<NewMemberCubit>()..getListFriend(),
-        ),
-        BlocProvider(
-          create: (_) => getIt<GroupMeetingCubit>()
-            ..getListGroupMeeting(groupId: groupArgs.groupId),
         ),
       ],
       child: GroupDetailView(
@@ -113,9 +105,11 @@ class _GroupDetailViewState extends State<GroupDetailView>
           listener: (context, state) {
             if (state is GroupDetailLeaveSuccess) {
               // TODO: Quang fixes refreshing group list after leaved group
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
               SnackBarApp.showSnackBar(
-                  context, 'Leaved group successfully', TypesSnackBar.success);
+                  null,
+                  AppLocalizations.of(context)!.leave_group_success,
+                  TypesSnackBar.success);
             }
           },
           child: Scaffold(

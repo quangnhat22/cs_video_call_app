@@ -7,7 +7,7 @@ import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
-import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart';
+import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit_group_meeting/group_meeting_cubit.dart';
 
 class GroupMeetingListItem extends StatelessWidget {
   const GroupMeetingListItem({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart';
+import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit_group_meeting/group_meeting_cubit.dart';
 
 import '../widgets/group_meeting_list.dart';
 
@@ -27,14 +27,12 @@ class GroupsCallView extends StatelessWidget {
 
   final String groupId;
 
-  void handleRefreshList(BuildContext ctx) {
-    ctx.read<GroupMeetingCubit>().getListGroupMeeting(groupId: groupId);
-  }
+  // void handleRefreshList(BuildContext ctx) {
+  //   ctx.read<GroupMeetingCubit>().getListGroupMeeting(groupId: groupId);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return GroupMeetingList(
-      handleRefresh: handleRefreshList,
-    );
+    return const GroupMeetingList();
   }
 }

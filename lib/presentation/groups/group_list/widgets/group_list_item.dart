@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 
 import '../../../../core/routes/app_navigation.dart';
@@ -39,10 +38,10 @@ class GroupListItem extends StatelessWidget {
           groupName,
           style: const TextStyle(fontWeight: FontWeight.w500),
         ),
-        subtitle: Text(
-          AppLocalizations.of(context)!.group_on_going,
-          style: const TextStyle(color: Colors.green),
-        ),
+        // subtitle: Text(
+        //   AppLocalizations.of(context)!.group_on_going,
+        //   style: const TextStyle(color: Colors.green),
+        // ),
         leading: CustomAvatarImage(
           urlImage: groupAvatar,
           widthImage: 50,

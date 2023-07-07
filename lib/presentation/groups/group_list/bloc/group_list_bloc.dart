@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/entities/group_entity.dart';
 import 'package:videocall/domain/modules/group/group_usecase.dart';
 
+part 'group_list_bloc.freezed.dart';
 part 'group_list_event.dart';
 part 'group_list_state.dart';
-part 'group_list_bloc.freezed.dart';
 
 @Injectable()
 class GroupListBloc extends Bloc<GroupListEvent, GroupListState> {
@@ -16,7 +16,8 @@ class GroupListBloc extends Bloc<GroupListEvent, GroupListState> {
         super(const _Initial()) {
     on<GroupListEvent>((event, emit) async {
       await event.map(
-        started: (event) => _started(event, emit),
+        started: (event) async => await _started(event, emit),
+        refreshed: (event) async => await _refreshed(event, emit),
       );
     });
   }
@@ -29,6 +30,19 @@ class GroupListBloc extends Bloc<GroupListEvent, GroupListState> {
 
       final groups = await _useCase.getGroupList();
       emit(GroupListState.success(groups: groups));
+    } catch (e) {
+      emit(GroupListFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> _refreshed(
+      GroupListRefreshed event, Emitter<GroupListState> emit) async {
+    try {
+      if (state is GroupListSuccess) {
+        final currentState = (state as GroupListSuccess);
+        final groups = await _useCase.getGroupList();
+        emit(currentState.copyWith(groups: groups));
+      }
     } catch (e) {
       emit(GroupListFailure(message: e.toString()));
     }

@@ -232,5 +232,8 @@
   "no_internet": "No Internet Connection found. Check your connecttion",
   "cannot_call_now": "Cannot make a call right now. Please try again later!",
   "leave_group": "Leave group",
-  "no_notifications_found": "No notifications found"
+  "no_notifications_found": "No notifications found",
+  "you_did_sent_any_request": "You didn't sent any request",
+  "something_wrong_try_again": "Something wrong! Try again.",
+  "leave_group_success": "Leave group success"
 }

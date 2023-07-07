@@ -18,8 +18,13 @@ class ListFriendRequestBloc
         super(const _Initial()) {
     on<ListFriendRequestEvent>((event, emit) async {
       await event.map(
-        started: (event) => _started(event, emit),
-        listRequestRefreshed: (event) => _listRequestRefreshed(event, emit),
+        started: (event) async => await _started(event, emit),
+        listRequestSentRefreshed: (event) async =>
+            await _listRequestSentRefreshed(event, emit),
+        listRequestReceiveRefreshed: (event) async =>
+            await _listRequestReceiveRefreshed(event, emit),
+        listRequestRefreshed: (event) async =>
+            await _listRequestRefreshed(event, emit),
       );
     });
   }
@@ -43,12 +48,60 @@ class ListFriendRequestBloc
     }
   }
 
-  Future<void> _listRequestRefreshed(ListSentFriendRequestRefreshed event,
+  Future<void> _listRequestSentRefreshed(ListSentFriendRequestRefreshed event,
       Emitter<ListFriendRequestState> emit) async {
-    if (state is GetListFriendRequestSuccess) {
-      add(const ListFriendRequestEvent.started());
-    } else {
-      return;
+    try {
+      if (state is GetListFriendRequestSuccess) {
+        final currentState = (state as GetListFriendRequestSuccess);
+        final listSentRequest = await _friendUC.getSendRequest();
+        listSentRequest.sortBy((sent) => sent.createdAt!);
+        emit(
+          currentState.copyWith(
+            friendRequestSent: listSentRequest,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(GetListFriendRequestFail(message: e.toString()));
+    }
+  }
+
+  Future<void> _listRequestReceiveRefreshed(
+      ListReceiveFriendRequestRefreshed event,
+      Emitter<ListFriendRequestState> emit) async {
+    try {
+      if (state is GetListFriendRequestSuccess) {
+        final currentState = (state as GetListFriendRequestSuccess);
+        final listReceiveRequest = await _friendUC.getReceiveRequest();
+        listReceiveRequest.sortBy((sent) => sent.createdAt!);
+        emit(
+          currentState.copyWith(
+            friendRequestReceive: listReceiveRequest,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(GetListFriendRequestFail(message: e.toString()));
+    }
+  }
+
+  Future<void> _listRequestRefreshed(ListFriendRequestEvent event,
+      Emitter<ListFriendRequestState> emit) async {
+    try {
+      if (state is GetListFriendRequestSuccess) {
+        final currentState = (state as GetListFriendRequestSuccess);
+        final listReceiveRequest = await _friendUC.getReceiveRequest();
+        final listSentRequest = await _friendUC.getSendRequest();
+        listSentRequest.sortBy((sent) => sent.createdAt!);
+        listReceiveRequest.sortBy((sent) => sent.createdAt!);
+        emit(
+          currentState.copyWith(
+              friendRequestReceive: listReceiveRequest,
+              friendRequestSent: listSentRequest),
+        );
+      }
+    } catch (e) {
+      emit(GetListFriendRequestFail(message: e.toString()));
     }
   }
 }

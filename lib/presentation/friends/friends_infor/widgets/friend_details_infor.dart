@@ -62,7 +62,7 @@ class FriendDetailsInfo extends StatelessWidget {
                     title: AppLocalizations.of(context)!.friend_birthday,
                     subtitle:
                         AppDateTimeFormat.formatDDMMYYYY(state.user.birthday),
-                    leading: Icons.people,
+                    leading: Icons.transgender_outlined,
                     ctx: context),
               ],
             ),

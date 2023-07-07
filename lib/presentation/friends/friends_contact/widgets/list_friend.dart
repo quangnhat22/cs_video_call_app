@@ -14,21 +14,35 @@ class ListFriend extends StatelessWidget {
           success: (friends) {
             return friends.isEmpty
                 ? Center(
-                    child: Text(AppLocalizations.of(context)!.no_friends_found),
+                    child: RefreshView(
+                      label: AppLocalizations.of(context)!.no_calls_found,
+                      onRefresh: () {
+                        context
+                            .read<FriendsContactBloc>()
+                            .add(const FriendsContactRefreshed());
+                      },
+                    ),
                   )
-                : ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) =>
-                        const DividerSpaceLeft(),
-                    itemBuilder: (context, index) {
-                      return ListFriendItem(
-                        id: friends[index].id,
-                        name: friends[index].name,
-                        avatar: friends[index].avatar,
-                        email: friends[index].email,
-                      );
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      context
+                          .read<FriendsContactBloc>()
+                          .add(const FriendsContactRefreshed());
                     },
-                    itemCount: friends.length,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) =>
+                          const DividerSpaceLeft(),
+                      itemBuilder: (context, index) {
+                        return ListFriendItem(
+                          id: friends[index].id,
+                          name: friends[index].name,
+                          avatar: friends[index].avatar,
+                          email: friends[index].email,
+                        );
+                      },
+                      itemCount: friends.length,
+                    ),
                   );
           },
           failure: (message) {

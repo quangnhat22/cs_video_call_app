@@ -30,6 +30,18 @@ class GroupMeetingCubit extends Cubit<GroupMeetingState> {
     }
   }
 
+  Future<void> refreshGroupMeeting({String? groupId}) async {
+    try {
+      if (state is GroupMeetingGetListSuccess) {
+        final currentState = (state as GroupMeetingGetListSuccess);
+        final listMeeting = await _liveKitUC.getListMeeting(_groupId);
+        emit(currentState.copyWith(listMeeting: listMeeting));
+      }
+    } catch (e) {
+      emit(GroupMeetingGetListFail(message: e.toString()));
+    }
+  }
+
   Future<void> joinMeeting({required String meetingId}) async {
     try {
       final token =

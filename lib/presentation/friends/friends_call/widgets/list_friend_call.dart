@@ -22,8 +22,18 @@ class ListFriendCall extends StatelessWidget {
           },
           success: (calls) {
             if (calls.isEmpty) {
+              // return Center(
+              //     child: Text(AppLocalizations.of(context)!.no_calls_found));
               return Center(
-                  child: Text(AppLocalizations.of(context)!.no_calls_found));
+                child: RefreshView(
+                  label: AppLocalizations.of(context)!.no_calls_found,
+                  onRefresh: () {
+                    context
+                        .read<HistoryCallBloc>()
+                        .add(const HistoryCallRefresh());
+                  },
+                ),
+              );
             }
 
             return RefreshIndicator(
