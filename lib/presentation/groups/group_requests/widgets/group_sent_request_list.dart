@@ -73,7 +73,11 @@ class GroupSentRequestList extends StatelessWidget {
                             text:
                                 ' ${AppLocalizations.of(context)!.at} ${DateFormat.yMMMMd().format(sentRequestList[index].createdAt!)}'),
                       ])),
-                  leading: const CircleAvatar(child: Text('A')),
+                  leading: CustomAvatarImage(
+                    urlImage: sentRequestList[index].receiver!.name,
+                    widthImage: 46,
+                    heightImage: 46,
+                  ),
                   trailing: SizedBox(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
