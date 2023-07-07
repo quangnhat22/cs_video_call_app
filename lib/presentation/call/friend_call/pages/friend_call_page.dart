@@ -17,7 +17,8 @@ class FriendCallPage extends StatelessWidget {
           ? (getIt<FriendCallCubit>()..pageSenderInited(friendId: friendId))
           : (getIt<FriendCallCubit>()
             ..pageReceiverInited(chatRoomId: chatRoomId!)),
-      child: const FriendCallView(),
+      child: WillPopScope(
+          onWillPop: () async => false, child: const FriendCallView()),
     );
   }
 }

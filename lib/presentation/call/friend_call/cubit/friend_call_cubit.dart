@@ -39,7 +39,6 @@ class FriendCallCubit extends Cubit<FriendCallState> {
 
   void pageReceiverInited({required String chatRoomId}) async {
     try {
-      emit(const FriendCallConnecting());
       final tokenLiveKit = await _friendCallUseCase.joinFriendCall(chatRoomId);
       if (tokenLiveKit != null) {
         await _setUpRoom(tokenLiveKit);
@@ -128,6 +127,17 @@ class FriendCallCubit extends Cubit<FriendCallState> {
     _isOpenMic = value;
     _room.localParticipant?.setMicrophoneEnabled(value);
   }
+
+//   Future<void> abandonCall() async {
+//     try {
+//       if (state is FriendCallPreparing) {
+//  final res = _friendCallUseCase.abandonCall((state as FriendCallPreparing).)
+//       }
+
+//     } catch (e) {
+
+//     }
+//   }
 
   @override
   Future<void> close() async {

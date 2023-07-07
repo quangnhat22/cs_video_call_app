@@ -98,9 +98,7 @@ class _GroupRequestsViewState extends State<GroupRequestsView> {
                   });
             },
             orElse: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const ListSkeleton();
             },
           );
         },

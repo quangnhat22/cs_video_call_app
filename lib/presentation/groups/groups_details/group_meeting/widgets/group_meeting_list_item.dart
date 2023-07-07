@@ -41,17 +41,20 @@ class GroupMeetingListItem extends StatelessWidget {
                 leading: const CircleAvatar(
                   child: Icon(Icons.videocam_outlined),
                 ),
-                trailing:
-                    (meetingEntity.meetingStatus == AppMeetingStatus.onGoing)
-                        ? TextButton(
-                            onPressed: () =>
-                                _handleOnTapJoin(context, meetingEntity.id),
-                            child: Text(
-                              AppLocalizations.of(context)!.join,
-                            ),
-                          )
-                        //TODO: show duration when meeting ending
-                        : const Text("00:14:50"),
+                trailing: (meetingEntity.meetingStatus ==
+                        AppMeetingStatus.onGoing)
+                    ? TextButton(
+                        onPressed: () =>
+                            _handleOnTapJoin(context, meetingEntity.id),
+                        child: Text(
+                          AppLocalizations.of(context)!.join,
+                        ),
+                      )
+                    : (meetingEntity.timeStart != null &&
+                            meetingEntity.timeEnd != null)
+                        ? Text(AppDateTimeFormat.differentTime(
+                            meetingEntity.timeStart!, meetingEntity.timeEnd!))
+                        : Container(),
               ),
               if (true)
                 Padding(

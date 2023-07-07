@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
+import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart';
 
 import '../../../../core/routes/app_navigation.dart';
 import '../../../../core/routes/route_name.dart';
@@ -23,16 +25,21 @@ class GroupListItem extends StatelessWidget {
   final String groupName;
   final String? groupAvatar;
 
-  void _onTapItem() {
+  void _onTapItem(BuildContext ctx) {
     NavigationUtil.pushNamed(
-        routeName: RouteName.teamDetails,
-        args: GroupArguments(groupName, groupId));
+            routeName: RouteName.teamDetails,
+            args: GroupArguments(groupName, groupId))
+        .then((result) {
+      if (result != null && result == true) {
+        ctx.read<GroupListBloc>().add(const GroupListRefreshed());
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _onTapItem,
+      onTap: () => _onTapItem(context),
       child: ListTile(
         title: Text(
           groupName,

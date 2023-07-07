@@ -16,9 +16,7 @@ class ListFriendCall extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           orElse: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const ListSkeleton();
           },
           success: (calls) {
             if (calls.isEmpty) {
@@ -40,31 +38,35 @@ class ListFriendCall extends StatelessWidget {
               },
               child: CustomScrollView(
                 slivers: <Widget>[
-                  SliverStickyHeader(
-                    header: Container(
-                      color: Theme.of(context).colorScheme.background,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            DropdownFilterButton(handleDropdownChange),
-                          ],
-                        ),
-                      ),
-                    ),
-                    sliver: FriendCallSliverList(
-                      calls: calls,
-                    ),
+                  FriendCallSliverList(
+                    calls: calls,
                   ),
+                  // SliverStickyHeader(
+                  //   // header: Container(
+                  //   //   color: Theme.of(context).colorScheme.background,
+                  //   //   child: Padding(
+                  //   //     padding:
+                  //   //         const EdgeInsets.only(left: 20, right: 20, top: 16),
+                  //   //     child: Row(
+                  //   //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   //       children: [
+                  //   //         DropdownFilterButton(handleDropdownChange),
+                  //   //       ],
+                  //   //     ),
+                  //   //   ),
+                  //   // ),
+                  //   sliver:
+                  // ),
                 ],
               ),
             );
           },
           failure: (message) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.error_message),
+            return RefreshView(
+              label: AppLocalizations.of(context)!.something_wrong_try_again,
+              onRefresh: () {
+                context.read<HistoryCallBloc>().add(const HistoryCallRefresh());
+              },
             );
           },
         );

@@ -7,6 +7,7 @@ class GroupMeetingEntity {
   final String? title;
   final String? description;
   final DateTime? timeStart;
+  final DateTime? timeEnd;
   final String? groupId;
   final AppMeetingStatus? meetingStatus;
   final List<UserModel?>? participants;
@@ -16,6 +17,7 @@ class GroupMeetingEntity {
     this.title,
     this.description,
     this.timeStart,
+    this.timeEnd,
     this.groupId,
     this.meetingStatus,
     this.participants,
@@ -32,6 +34,7 @@ class GroupMeetingEntity {
       title: model.title,
       description: model.description,
       timeStart: model.timeStart,
+      timeEnd: model.timeEnd,
       groupId: model.groupId,
       meetingStatus: (model.status == "on-going")
           ? AppMeetingStatus.onGoing

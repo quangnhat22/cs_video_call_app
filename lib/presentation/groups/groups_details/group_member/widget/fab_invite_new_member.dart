@@ -42,7 +42,7 @@ class FabInviteNewFriend extends StatelessWidget {
                 final memList = (arrayNewMembers as List)
                     .map((mem) => mem as String)
                     .toList();
-                if (memList.isNotEmpty) {
+                if (memList.isNotEmpty && context.mounted) {
                   context
                       .read<NewMemberCubit>()
                       .inviteNewMember(groupId, memList);

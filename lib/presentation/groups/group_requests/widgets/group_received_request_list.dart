@@ -34,13 +34,13 @@ class GroupReceivedRequestList extends StatelessWidget {
             onRefresh: () {
               context
                   .read<ListGroupRequestBloc>()
-                  .add(const ListGroupRequestEvent.started());
+                  .add(const ListReceiveGroupRequestRefreshed());
             })
         : RefreshIndicator(
             onRefresh: () async {
               context
                   .read<ListGroupRequestBloc>()
-                  .add(const ListGroupRequestEvent.started());
+                  .add(const ListReceiveGroupRequestRefreshed());
             },
             child: ListView.builder(
               shrinkWrap: true,

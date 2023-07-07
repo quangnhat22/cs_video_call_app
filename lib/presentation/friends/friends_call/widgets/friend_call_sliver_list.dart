@@ -27,20 +27,20 @@ class FriendCallSliverList extends StatelessWidget {
         (BuildContext context, int index) {
           if (index.isEven) {
             return ListTile(
-              title: Text(calls[index ~/ 2].callee?.name ?? ''),
+              title: Text(calls[index ~/ 2].subjectCall?.name ?? ''),
               subtitle: Wrap(
                 spacing: 6,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
                   _buildStatus(calls[index ~/ 2].status!),
                   Text(DateFormat("dd-MM-yyyy hh:mm aaa")
-                      .format(calls[index ~/ 2].calledAt!))
+                      .format(calls[index ~/ 2].calledAt!.toLocal()))
                 ],
               ),
               leading: SizedBox(
                 width: 48,
                 child: CustomAvatarImage(
-                  urlImage: calls[index ~/ 2].callee!.avatar,
+                  urlImage: calls[index ~/ 2].subjectCall!.avatar,
                 ),
               ),
               trailing: IconButton(
@@ -49,12 +49,23 @@ class FriendCallSliverList extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 onPressed: () {
-                  NavigationUtil.pushNamed(
-                    routeName: RouteName.personalCall,
-                    args: {
-                      "friend-id": calls[index ~/ 2].callee?.id,
-                    },
-                  );
+                  if (calls[index ~/ 2].status?.toLowerCase() ==
+                      AppCallStatus.onGoing.value.toLowerCase()) {
+                    NavigationUtil.pushNamed(
+                      routeName: RouteName.personalCall,
+                      args: {
+                        "chatRoomId": calls[index ~/ 2].id,
+                        "friendId": calls[index ~/ 2].subjectCall?.id,
+                      },
+                    );
+                  } else {
+                    NavigationUtil.pushNamed(
+                      routeName: RouteName.personalCall,
+                      args: {
+                        "friendId": calls[index ~/ 2].subjectCall?.id,
+                      },
+                    );
+                  }
                 },
               ),
             );

@@ -38,11 +38,41 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
           break;
 
         case Event.actionCallAccept:
-          NavigationUtil.pushNamed(routeName: RouteName.personalCall, args: {
-            'friendId': event.body["extra"]["friendId"],
-            'chatRoomId': event.body["extra"]["chatRoomId"]
-          });
-          break;
+          {
+            String? currentPath;
+            NavigationUtil.navigatorKey?.popUntil((route) {
+              currentPath = route.settings.name;
+              return true;
+            });
+
+            if (currentPath == '/') {
+              NavigationUtil.pushNamed(
+                  routeName: RouteName.personalCall,
+                  args: {
+                    'friendId': event.body["extra"]["friendId"],
+                    'chatRoomId': event.body["extra"]["chatRoomId"]
+                  });
+            } else {
+              NavigationUtil.pop();
+              NavigationUtil.pushNamed(
+                  routeName: RouteName.personalCall,
+                  args: {
+                    'friendId': event.body["extra"]["friendId"],
+                    'chatRoomId': event.body["extra"]["chatRoomId"]
+                  });
+            }
+
+            break;
+          }
+        // else {
+        //   NavigationUtil.pushNamed(
+        //       routeName: RouteName.personalCall,
+        //       args: {
+        //         'friendId': event.body["extra"]["friendId"],
+        //         'chatRoomId': event.body["extra"]["chatRoomId"]
+        //       });
+        // }
+
         case Event.actionCallDecline:
           await _friendCallUseCase
               .rejectCall(event.body["extra"]["chatRoomId"]);

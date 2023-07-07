@@ -34,7 +34,7 @@ class GroupMeetingCubit extends Cubit<GroupMeetingState> {
     try {
       groupId ??= _groupId;
       _groupId = groupId;
-      emit(const GroupMeetingGetListInProgress());
+
       final listMeeting = await _liveKitUC.getListMeeting(_groupId);
       emit(GroupMeetingGetListSuccess(listMeeting: listMeeting));
     } catch (e) {

@@ -10,7 +10,17 @@ class FriendActions extends StatelessWidget {
 
   void _handleRemoveFriend(BuildContext ctx) {
     final userId = ctx.read<FriendInfoCubit>().state.user.id;
-    ctx.read<FriendsActionCubit>().deleteFriend(userId);
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_reject_friend)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          ctx.read<FriendsActionCubit>().deleteFriend(userId);
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   @override

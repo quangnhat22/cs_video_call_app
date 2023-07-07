@@ -212,9 +212,9 @@
   "no_calls_found": "Chưa có cuộc gọi nào",
   "delete_noti": "Xoá notification",
   "invited_you_to_join_group": " mời bạn tham gia vào nhóm ",
-  "is_calling": "đang gọi cho bạn",
-  "accepted_requets": "đã chấp nhận lời mời",
-  "reject_call_message": "từ chối cuộc gọi",
+  "is_calling": " đang gọi cho bạn",
+  "accepted_requets": " đã chấp nhận lời mời",
+  "reject_call_message": " từ chối cuộc gọi",
   "abandon_call_message": "đã kết thúc cuộc gọi trước khi @{user_name} tham gia",
   "@abandon_call_message": {
     "placeholders": {

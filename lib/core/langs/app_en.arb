@@ -212,9 +212,9 @@
   "no_calls_found": "No calls found",
   "delete_noti": "Delete notification",
   "invited_you_to_join_group": " invited you to join group ",
-  "is_calling": "is calling to you",
-  "accepted_requets": "accepted request",
-  "reject_call_message": "rejected call",
+  "is_calling": " is calling to you",
+  "accepted_requets": " accepted request",
+  "reject_call_message": " rejected call",
   "abandon_call_message": "abandon call before @{user_name} join",
   "@abandon_call_message": {
     "placeholders": {

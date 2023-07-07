@@ -46,14 +46,17 @@ class ListFriend extends StatelessWidget {
                   );
           },
           failure: (message) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.error_message),
+            return RefreshView(
+              label: AppLocalizations.of(context)!.something_wrong_try_again,
+              onRefresh: () {
+                context
+                    .read<FriendsContactBloc>()
+                    .add(const FriendsContactRefreshed());
+              },
             );
           },
           orElse: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const ListSkeleton();
           },
         );
       },
