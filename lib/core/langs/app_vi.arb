@@ -230,5 +230,6 @@
   "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?",
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
   "cannot_call_now": "Không thể thực hiện cuộc gọi ngay lúc này. Vui lòng thử lại sau!",
-  "leave_group": "Rời nhóm"
+  "leave_group": "Rời nhóm",
+  "no_notifications_found": "Không có thông báo nào"
 }

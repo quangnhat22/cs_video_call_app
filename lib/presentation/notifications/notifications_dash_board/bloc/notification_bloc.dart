@@ -50,6 +50,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   Future<void> _refreshed(
       NotificationRefreshed event, Emitter<NotificationState> emit) async {
     try {
+      emit(const GetListNotificationInProgress());
       final listNoti = await _notificationUC.getListNotification();
       emit(GetListNotificationInSuccess(listNotification: listNoti));
     } catch (e) {

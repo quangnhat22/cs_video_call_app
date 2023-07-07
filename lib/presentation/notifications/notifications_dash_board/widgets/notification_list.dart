@@ -9,8 +9,14 @@ class NotificationList extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           getListInSuccess: (listNotification) {
+            if (listNotification.isEmpty) {
+              return Center(
+                child:
+                    Text(AppLocalizations.of(context)!.no_notifications_found),
+              );
+            }
+
             return ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return AppNotificationItem(noti: listNotification[index]);

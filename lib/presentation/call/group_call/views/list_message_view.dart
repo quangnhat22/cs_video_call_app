@@ -107,7 +107,8 @@ class ListMessageView extends StatelessWidget {
                               controller: _controller,
                               decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor:
+                                      Theme.of(context).colorScheme.onPrimary,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(24),
                                   )),

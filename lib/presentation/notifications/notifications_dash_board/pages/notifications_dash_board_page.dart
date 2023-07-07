@@ -57,9 +57,7 @@ class NotificationsDashboardView extends StatelessWidget {
               .read<NotificationBloc>()
               .add(const NotificationEvent.refreshed());
         },
-        child: const SingleChildScrollView(
-          child: NotificationList(),
-        ),
+        child: const NotificationList(),
       ),
     );
   }
