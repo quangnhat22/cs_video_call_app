@@ -22,8 +22,6 @@ class ListFriendCall extends StatelessWidget {
           },
           success: (calls) {
             if (calls.isEmpty) {
-              // return Center(
-              //     child: Text(AppLocalizations.of(context)!.no_calls_found));
               return Center(
                 child: RefreshView(
                   label: AppLocalizations.of(context)!.no_calls_found,
@@ -52,21 +50,6 @@ class ListFriendCall extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             DropdownFilterButton(handleDropdownChange),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ButtonStyle(
-                                  padding: const MaterialStatePropertyAll(
-                                      EdgeInsets.symmetric(horizontal: 26)),
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.red),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8)))),
-                              child: Text(AppLocalizations.of(context)!
-                                  .friends_clear_text_button),
-                            )
                           ],
                         ),
                       ),

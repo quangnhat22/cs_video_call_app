@@ -47,17 +47,6 @@ class DeviceSettings extends StatelessWidget {
                     hasBottomBorderRadius: false,
                   ),
                   const DividerSpaceLeft(),
-                  InkWellDynamicBorder(
-                    title: AppLocalizations.of(context)!.notifications,
-                    leading: const Icon(Icons.notifications_outlined),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      NavigationUtil.pushNamed(
-                          routeName: RouteName.notificationSetting);
-                    },
-                    hasTopBorderRadius: false,
-                    hasBottomBorderRadius: false,
-                  ),
                   const DividerSpaceLeft(),
                   InkWellDynamicBorder(
                     title: AppLocalizations.of(context)!.devices,

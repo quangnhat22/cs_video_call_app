@@ -223,10 +223,6 @@ class _ControlsState extends State<Controls> {
     }
   }
 
-  void _onTapSendData(BuildContext ctx) async {
-    await context.read<CallGroupStatusCubit>().sendMessageData('hello');
-  }
-
   Widget _buildIconWhenMicrophoneIsEnabled() {
     if (participant.isMicrophoneEnabled()) {
       return PopupMenuButton<MediaDevice>(
@@ -481,14 +477,15 @@ class _ControlsState extends State<Controls> {
           backgroundColor: Colors.red,
         ),
         IconWrapper(
-            iconButton: IconButton(
-          onPressed: () => _onTapSendData(context),
-          icon: const Icon(
-            Icons.send,
-            color: Colors.black,
+          iconButton: IconButton(
+            icon: const Icon(
+              Icons.switch_camera_outlined,
+              color: Colors.black,
+            ),
+            onPressed: _toggleCamera,
+            tooltip: 'toggle camera',
           ),
-          tooltip: 'send demo data',
-        )),
+        ),
       ],
     );
   }

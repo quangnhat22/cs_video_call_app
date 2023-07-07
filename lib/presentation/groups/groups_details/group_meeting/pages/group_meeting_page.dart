@@ -27,10 +27,6 @@ class GroupsCallView extends StatelessWidget {
 
   final String groupId;
 
-  // void handleRefreshList(BuildContext ctx) {
-  //   ctx.read<GroupMeetingCubit>().getListGroupMeeting(groupId: groupId);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return const GroupMeetingList();

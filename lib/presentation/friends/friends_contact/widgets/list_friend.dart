@@ -15,7 +15,7 @@ class ListFriend extends StatelessWidget {
             return friends.isEmpty
                 ? Center(
                     child: RefreshView(
-                      label: AppLocalizations.of(context)!.no_calls_found,
+                      label: AppLocalizations.of(context)!.no_friends_found,
                       onRefresh: () {
                         context
                             .read<FriendsContactBloc>()

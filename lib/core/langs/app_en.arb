@@ -147,8 +147,8 @@
   "unknown_group": "Unknown group",
   "create_group_failed": "Create group failed!!",
   "create_group_successfully": "Create group successfully!!",
-  "no_received_requests_found": "No received requests found!",
-  "no_sent_requests_found": "No sent requests found!",
+  "no_received_requests_found": "No received requests found",
+  "no_sent_requests_found": "No sent requests found",
   "sent_by": "Sent by",
   "sent_to": "Sent to",
   "at": "at",
@@ -228,13 +228,15 @@
   "do_you_want_revoke_group": "Do you want to undo a group request?",
   "do_you_want_reject_group": "Do you want to reject a group request?",
   "do_you_want_reject_call": "Do you want to reject a friend call?",
+  "do_you_want_delete_device": "Do you want to delete device?",
   "oops": "Ooops",
   "no_internet": "No Internet Connection found. Check your connecttion",
   "cannot_call_now": "Cannot make a call right now. Please try again later!",
   "leave_group": "Leave group",
   "no_notifications_found": "No notifications found",
-  "you_did_sent_any_request": "You didn't sent any request",
+  "you_did_sent_any_request": "You didn't send any request",
   "something_wrong_try_again": "Something wrong! Try again.",
   "leave_group_success": "Leave group success",
-  "turn_on_off_notification": "Turn on/turn off notification"
+  "turn_on_off_notification": "Turn on/turn off notification",
+  "old_password_is_incorrect": "Old password is incorrect"
 }

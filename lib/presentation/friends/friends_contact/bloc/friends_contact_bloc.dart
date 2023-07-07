@@ -46,11 +46,9 @@ class FriendsContactBloc
   Future<void> _refreshed(
       FriendsContactRefreshed event, Emitter<FriendsContactState> emit) async {
     try {
-      if (state is FriendsContactSuccess) {
-        final currentState = (state as FriendsContactSuccess);
-        final friends = await _useCase.getListFriend();
-        emit(currentState.copyWith(friends: friends));
-      }
+      emit(const FriendsContactLoading());
+      final friends = await _useCase.getListFriend();
+      emit(FriendsContactSuccess(friends: friends));
     } catch (e) {
       emit(FriendsContactFailure(message: e.toString()));
     }

@@ -147,8 +147,8 @@
   "unknown_group": "Nhóm không xác định",
   "create_group_failed": "Tạo nhóm thất bại!!",
   "create_group_successfully": "Tạo nhóm thành công!!",
-  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào!",
-  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào!",
+  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào",
+  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào",
   "sent_by": "Gửi bởi",
   "sent_to": "Gửi đến",
   "at": "ngày",
@@ -228,6 +228,7 @@
   "do_you_want_revoke_group": "Bạn có muốn thu hồi lời mời tham gia nhóm?",
   "do_you_want_reject_group": "Bạn có muốn từ chối lời mời tham gia nhóm?",
   "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?",
+  "do_you_want_delete_device": "Bạn có muốn xóa thiết bị?",
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
   "cannot_call_now": "Không thể thực hiện cuộc gọi ngay lúc này. Vui lòng thử lại sau!",
   "leave_group": "Rời nhóm",
@@ -235,5 +236,6 @@
   "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",
   "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
   "leave_group_success": "Rời nhóm thành công",
-  "turn_on_off_notification": "Bật/ Tắt thông báo"
+  "turn_on_off_notification": "Bật/ Tắt thông báo",
+  "old_password_is_incorrect": "Mật khẩu cũ không đúng"
 }

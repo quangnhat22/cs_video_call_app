@@ -22,7 +22,6 @@ class _DashBoardViewState extends State<DashBoardView> {
   final List<Widget> _pages = <Widget>[
     const FriendsDashBoardPage(),
     const GroupsDashBoardPage(),
-    ScheduleDashBoardPage(),
     const NotificationsDashBoardPage(),
     const SettingDashBoardPage(),
   ];

@@ -7,9 +7,19 @@ class DeviceItem extends StatelessWidget {
 
   void _handleDeleteDevice(
       BuildContext ctx, String deviceId, String deviceName) {
-    ctx
-        .read<DevicesBloc>()
-        .add(ConfirmDeleteDevice(deviceId: deviceId, deviceName: deviceName));
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_delete_device)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+          ctx.read<DevicesBloc>().add(
+              ConfirmDeleteDevice(deviceId: deviceId, deviceName: deviceName));
+          Navigator.of(ctx).pop();
+        })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   @override

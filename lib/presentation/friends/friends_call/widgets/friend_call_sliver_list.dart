@@ -25,8 +25,6 @@ class FriendCallSliverList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          //final int itemIndex = index ~/ 2;
-
           if (index.isEven) {
             return ListTile(
               title: Text(calls[index ~/ 2].callee?.name ?? ''),
@@ -39,8 +37,11 @@ class FriendCallSliverList extends StatelessWidget {
                       .format(calls[index ~/ 2].calledAt!))
                 ],
               ),
-              leading: CustomAvatarImage(
-                urlImage: calls[index ~/ 2].callee!.avatar,
+              leading: SizedBox(
+                width: 48,
+                child: CustomAvatarImage(
+                  urlImage: calls[index ~/ 2].callee!.avatar,
+                ),
               ),
               trailing: IconButton(
                 icon: Icon(

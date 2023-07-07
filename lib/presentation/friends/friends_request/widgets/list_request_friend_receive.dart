@@ -7,7 +7,7 @@ class ListRequestFriendReceive extends StatelessWidget {
 
   void _onRejectRequest(BuildContext ctx, String? receiverId) {
     if (receiverId == null) return;
-   
+
     AppDefaultDialogWidget()
         .setAppDialogType(AppDialogType.confirm)
         .setTitle(AppLocalizations.of(ctx)!.confirm)
@@ -34,14 +34,14 @@ class ListRequestFriendReceive extends StatelessWidget {
             onRefresh: () {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListReceiveFriendRequestRefreshed());
+                  .add(const ListFriendRequestEvent.started());
             },
           )
         : RefreshIndicator(
             onRefresh: () async => {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListReceiveFriendRequestRefreshed())
+                  .add(const ListFriendRequestEvent.started())
             },
             child: ListView.builder(
               shrinkWrap: true,

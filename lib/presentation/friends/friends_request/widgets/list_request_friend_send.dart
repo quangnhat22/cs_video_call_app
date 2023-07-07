@@ -29,13 +29,13 @@ class ListRequestFriendSend extends StatelessWidget {
             onRefresh: () {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListSentFriendRequestRefreshed());
+                  .add(const ListFriendRequestEvent.started());
             })
         : RefreshIndicator(
             onRefresh: () async {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListSentFriendRequestRefreshed());
+                  .add(const ListFriendRequestEvent.started());
             },
             child: ListView.builder(
               shrinkWrap: true,

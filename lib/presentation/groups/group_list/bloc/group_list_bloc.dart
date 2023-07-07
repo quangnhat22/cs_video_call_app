@@ -38,11 +38,10 @@ class GroupListBloc extends Bloc<GroupListEvent, GroupListState> {
   Future<void> _refreshed(
       GroupListRefreshed event, Emitter<GroupListState> emit) async {
     try {
-      if (state is GroupListSuccess) {
-        final currentState = (state as GroupListSuccess);
-        final groups = await _useCase.getGroupList();
-        emit(currentState.copyWith(groups: groups));
-      }
+      emit(const GroupListLoading());
+
+      final groups = await _useCase.getGroupList();
+      emit(GroupListState.success(groups: groups));
     } catch (e) {
       emit(GroupListFailure(message: e.toString()));
     }

@@ -36,6 +36,7 @@ class HistoryCallBloc extends Bloc<HistoryCallEvent, HistoryCallState> {
   Future<void> _refreshed(
       HistoryCallRefresh event, Emitter<HistoryCallState> emit) async {
     try {
+      emit(const HistoryCallLoading());
       final calls = await _friendCallUseCase.getCallList(
           event.callStatus?.value, event.callee);
       emit(HistoryCallSuccess(calls: calls));
