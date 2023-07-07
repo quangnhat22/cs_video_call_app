@@ -231,7 +231,10 @@ class _ControlsState extends State<Controls> {
     if (participant.isMicrophoneEnabled()) {
       return PopupMenuButton<MediaDevice>(
         icon: const IconWrapper(
-          iconButton: Icon(Icons.settings_voice),
+          iconButton: Icon(
+            Icons.settings_voice,
+            color: Colors.black,
+          ),
         ),
         itemBuilder: (BuildContext context) {
           return [
@@ -271,7 +274,10 @@ class _ControlsState extends State<Controls> {
     return IconWrapper(
       iconButton: IconButton(
         onPressed: _enableAudio,
-        icon: const Icon(Icons.mic_off_outlined),
+        icon: const Icon(
+          Icons.mic_off_outlined,
+          color: Colors.black,
+        ),
         tooltip: 'un-mute audio',
       ),
     );
@@ -280,7 +286,10 @@ class _ControlsState extends State<Controls> {
   Widget _buildVolumnIcon() {
     return PopupMenuButton<MediaDevice>(
       icon: const IconWrapper(
-        iconButton: Icon(Icons.volume_up),
+        iconButton: Icon(
+          Icons.volume_up,
+          color: Colors.black,
+        ),
       ),
       itemBuilder: (BuildContext context) {
         return [
@@ -323,7 +332,10 @@ class _ControlsState extends State<Controls> {
     if (participant.isCameraEnabled()) {
       return PopupMenuButton<MediaDevice>(
         icon: const IconWrapper(
-          iconButton: Icon(Icons.videocam),
+          iconButton: Icon(
+            Icons.videocam,
+            color: Colors.black,
+          ),
         ),
         itemBuilder: (BuildContext context) {
           return [
@@ -366,7 +378,10 @@ class _ControlsState extends State<Controls> {
     return IconWrapper(
       iconButton: IconButton(
         onPressed: _enableVideo,
-        icon: const Icon(Icons.videocam_off),
+        icon: const Icon(
+          Icons.videocam_off,
+          color: Colors.black,
+        ),
         tooltip: 'un-mute video',
       ),
     );
@@ -376,7 +391,10 @@ class _ControlsState extends State<Controls> {
     if (participant.isScreenShareEnabled()) {
       return IconWrapper(
         iconButton: IconButton(
-          icon: const Icon(Icons.mobile_screen_share),
+          icon: const Icon(
+            Icons.mobile_screen_share,
+            color: Colors.black,
+          ),
           onPressed: () => _disableScreenShare(),
           tooltip: 'unshare screen (experimental)',
         ),
@@ -385,7 +403,10 @@ class _ControlsState extends State<Controls> {
 
     return IconWrapper(
       iconButton: IconButton(
-        icon: const Icon(Icons.mobile_screen_share_outlined),
+        icon: const Icon(
+          Icons.mobile_screen_share_outlined,
+          color: Colors.black,
+        ),
         onPressed: () => _enableScreenShare(),
         tooltip: 'share screen (experimental)',
       ),
@@ -406,6 +427,7 @@ class _ControlsState extends State<Controls> {
           iconButton: IconButton(
             icon: const Icon(
               Icons.switch_camera_outlined,
+              color: Colors.black,
             ),
             onPressed: _toggleCamera,
             tooltip: 'toggle camera',
@@ -421,7 +443,10 @@ class _ControlsState extends State<Controls> {
         IconWrapper(
           iconButton: IconButton(
             onPressed: _unPublishAll,
-            icon: const Icon(Icons.block),
+            icon: const Icon(
+              Icons.block,
+              color: Colors.black,
+            ),
             tooltip: 'UnPublish all',
           ),
         ),
@@ -438,7 +463,10 @@ class _ControlsState extends State<Controls> {
         IconWrapper(
             iconButton: IconButton(
           onPressed: _onTapUpdateSubscribePermission,
-          icon: const Icon(Icons.security),
+          icon: const Icon(
+            Icons.security,
+            color: Colors.black,
+          ),
           tooltip: 'Subscribe permission',
         )),
         IconWrapper(
@@ -455,7 +483,10 @@ class _ControlsState extends State<Controls> {
         IconWrapper(
             iconButton: IconButton(
           onPressed: () => _onTapSendData(context),
-          icon: const Icon(Icons.send),
+          icon: const Icon(
+            Icons.send,
+            color: Colors.black,
+          ),
           tooltip: 'send demo data',
         )),
       ],

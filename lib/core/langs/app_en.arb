@@ -231,5 +231,6 @@
   "oops": "Ooops",
   "no_internet": "No Internet Connection found. Check your connecttion",
   "cannot_call_now": "Cannot make a call right now. Please try again later!",
-  "leave_group": "Leave group"
+  "leave_group": "Leave group",
+  "no_notifications_found": "No notifications found"
 }
