@@ -30,10 +30,6 @@ class GroupListItem extends StatelessWidget {
         args: GroupArguments(groupName, groupId));
   }
 
-  // void _onTapTrailingButton() {
-  //   NavigationUtil.pushNamed(routeName: RouteName.createGroupCall);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -52,10 +48,6 @@ class GroupListItem extends StatelessWidget {
           widthImage: 50,
           heightImage: 50,
         ),
-        // trailing: TextButton(
-        //   onPressed: _onTapTrailingButton,
-        //   child: Text(AppLocalizations.of(context)!.group_join_text_button),
-        // ),
       ),
     );
   }

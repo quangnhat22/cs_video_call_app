@@ -73,7 +73,6 @@ class PinnedMessageItem extends StatelessWidget {
                 Icons.more_vert,
               ),
               onSelected: (Menu item) {
-                debugPrint(item.name);
                 context
                     .read<MessagesBloc>()
                     .add(MessagesEvent.unpin(messageId: message.id));

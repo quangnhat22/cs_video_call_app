@@ -12,6 +12,7 @@ import 'package:videocall/presentation/groups/group_list/widgets/group_list_item
 import '../../../common/widgets/stateless/buttons/floating_action_stadium_button.dart';
 import '../../../core/routes/app_navigation.dart';
 import '../../../core/routes/route_name.dart';
+import '../groups_details/bloc/group_detail_bloc.dart';
 
 part 'pages/group_list_page.dart';
 part 'widgets/dropdown_groups_filter_button.dart';
