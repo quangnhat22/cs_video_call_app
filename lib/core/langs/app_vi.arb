@@ -49,7 +49,7 @@
   "friends_tab_requests_title": "Yêu cầu",
   "friends_clear_text_button": "Xoá",
   "requests_recall_text_button": "Gọi lại",
-  "requests_sent_text_button_segment": "Đã gọi",
+  "requests_sent_text_button_segment": "Đã gửi",
   "requests_received_text_button_segment": "Đã nhận",
   "user_status_online": "Đang hoạt động",
   "reject_request": "Từ chối",

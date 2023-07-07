@@ -149,12 +149,12 @@ abstract class _ParticipantWidgetState<T extends ParticipantWidget>
                   : const NoVideoWidget(),
             ),
             // if (widget.showStatsLayer)
-            Positioned(
-                top: 30,
-                right: 30,
-                child: ParticipantStatsWidget(
-                  participant: widget.participant,
-                )),
+            // Positioned(
+            //     top: 30,
+            //     right: 30,
+            //     child: ParticipantStatsWidget(
+            //       participant: widget.participant,
+            //     )),
             // Bottom bar
             Align(
               alignment: Alignment.bottomCenter,
@@ -226,11 +226,11 @@ class _RemoteParticipantWidgetState
                 icon: Icons.volume_up,
               ),
             // Menu for RemoteTrackPublication<RemoteVideoTrack>
-            if (videoPublication != null)
-              RemoteTrackPublicationMenuWidget(
-                pub: videoPublication!,
-                icon: isScreenShare ? Icons.monitor : Icons.videocam,
-              ),
+            // if (videoPublication != null)
+            //   RemoteTrackPublicationMenuWidget(
+            //     pub: videoPublication!,
+            //     icon: isScreenShare ? Icons.monitor : Icons.videocam,
+            //   ),
             if (videoPublication != null)
               RemoteTrackFPSMenuWidget(
                 pub: videoPublication!,
@@ -299,15 +299,15 @@ class RemoteTrackFPSMenuWidget extends StatelessWidget {
           onSelected: (value) => value(),
           itemBuilder: (BuildContext context) => <PopupMenuEntry<Function>>[
             PopupMenuItem(
-              child: const Text('30'),
+              child: const Text('30 FPS'),
               value: () => pub.setVideoFPS(30),
             ),
             PopupMenuItem(
-              child: const Text('15'),
+              child: const Text('15 FPS'),
               value: () => pub.setVideoFPS(15),
             ),
             PopupMenuItem(
-              child: const Text('8'),
+              child: const Text('8 FPS'),
               value: () => pub.setVideoFPS(8),
             ),
           ],

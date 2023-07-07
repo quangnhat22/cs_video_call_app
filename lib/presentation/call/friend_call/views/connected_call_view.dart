@@ -160,8 +160,7 @@ class _FriendCallConnectViewState extends State<FriendCallConnectView> {
             children: [
               Expanded(
                   child: participantTracks.isNotEmpty
-                      ? ParticipantWidget.widgetFor(participantTracks.first,
-                          showStatsLayer: true)
+                      ? ParticipantWidget.widgetFor(participantTracks.first)
                       : Container()),
               if (widget.room.localParticipant != null)
                 SafeArea(

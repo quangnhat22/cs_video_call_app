@@ -56,6 +56,7 @@ class CTextFormField extends StatelessWidget {
           suffixIcon: suffixIcon,
           label: Text(label),
           errorText: errorText,
+          errorMaxLines: 2,
           border: const OutlineInputBorder(
             borderSide: BorderSide(width: 1),
             borderRadius: BorderRadius.all(
