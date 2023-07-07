@@ -1,6 +1,13 @@
 import 'package:formz/formz.dart';
 
-enum PasswordValidationError { invalid }
+enum PasswordValidationError {
+  invalid(
+      "Password needs at least 8 characters, at least one uppercase letter and at least one number");
+
+  const PasswordValidationError(this.message);
+
+  final String message;
+}
 
 class Password extends FormzInput<String, PasswordValidationError> {
   const Password.pure() : super.pure('');

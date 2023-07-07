@@ -46,7 +46,6 @@ class FriendsContactBloc
   Future<void> _refreshed(
       FriendsContactRefreshed event, Emitter<FriendsContactState> emit) async {
     try {
-      emit(const FriendsContactLoading());
       final friends = await _useCase.getListFriend();
       emit(FriendsContactSuccess(friends: friends));
     } catch (e) {

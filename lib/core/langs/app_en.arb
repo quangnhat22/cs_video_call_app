@@ -179,6 +179,7 @@
   "no_devices_found": "No devices found",
   "last_accessed_at": "Last accessed at",
   "empty_call_list_message": "Your group has no calls",
+  "no_members_found": "No members found",
   "update_avatar_success": "Update avatar success",
   "update_avatar_fail": "Update avatar fail! Try again",
   "resend_email_after": "Resend email after",
@@ -192,7 +193,6 @@
     }
   },
   "open_gmail_app": "Open Gmail App",
-  "no_members_found": "No members found",
   "no_messages_found": "No messages found",
   "unknown_meeting_title": "Unknown meeting title",
   "was_pinned_by": "The message was pinned at {pinnedAt}",

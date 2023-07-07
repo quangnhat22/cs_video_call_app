@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/notification/notification_use_case.dart';
@@ -15,6 +15,7 @@ class NotificationSettingCubit extends Cubit<NotificationSettingState> {
 
   Future<void> pageStarted() async {
     try {
+      emit(const GetSettingInProgress());
       final statusNoti = await _notificationUseCase.getNotificationSetting();
       emit(GetSettingInSuccess(settingNotification: statusNoti));
     } catch (e) {
@@ -27,6 +28,10 @@ class NotificationSettingCubit extends Cubit<NotificationSettingState> {
     try {
       final isSuccess =
           await _notificationUseCase.updateNotificationSetting(value);
+      if (isSuccess) {
+        final statusNoti = await _notificationUseCase.getNotificationSetting();
+        emit(GetSettingInSuccess(settingNotification: statusNoti));
+      }
     } catch (e) {
       emit(const GetSettingInFail());
       throw Exception(e.toString());

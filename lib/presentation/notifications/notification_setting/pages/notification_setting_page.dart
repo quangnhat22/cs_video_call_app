@@ -17,10 +17,14 @@ class NotificationSettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        NotificationSwitch(),
-      ],
+    return Scaffold(
+      appBar: MPageAppBar(
+          title: AppLocalizations.of(context)!.turn_on_off_notification),
+      body: Column(
+        children: const [
+          NotificationSwitch(),
+        ],
+      ),
     );
   }
 }
