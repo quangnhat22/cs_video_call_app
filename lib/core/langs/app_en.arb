@@ -215,7 +215,7 @@
   "is_calling": " is calling to you",
   "accepted_requets": " accepted request",
   "reject_call_message": " rejected call",
-  "abandon_call_message": "abandon call before @{user_name} join",
+  "abandon_call_message": " abandon call before {user_name} join",
   "@abandon_call_message": {
     "placeholders": {
       "user_name": {

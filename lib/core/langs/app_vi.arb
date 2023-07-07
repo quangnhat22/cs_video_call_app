@@ -215,7 +215,7 @@
   "is_calling": " đang gọi cho bạn",
   "accepted_requets": " đã chấp nhận lời mời",
   "reject_call_message": " từ chối cuộc gọi",
-  "abandon_call_message": "đã kết thúc cuộc gọi trước khi @{user_name} tham gia",
+  "abandon_call_message": " đã kết thúc cuộc gọi trước khi {user_name} tham gia",
   "@abandon_call_message": {
     "placeholders": {
       "user_name": {

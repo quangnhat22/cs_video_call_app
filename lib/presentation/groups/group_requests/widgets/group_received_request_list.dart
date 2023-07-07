@@ -134,7 +134,11 @@ class GroupReceivedRequestList extends StatelessWidget {
                       )
                     ],
                   ),
-                  leading: const CircleAvatar(child: Text('A')),
+                  leading: CustomAvatarImage(
+                    urlImage: receivedRequestList[index].sender?.avatar,
+                    widthImage: 46,
+                    heightImage: 46,
+                  ),
                 );
               },
               itemCount: receivedRequestList.length,

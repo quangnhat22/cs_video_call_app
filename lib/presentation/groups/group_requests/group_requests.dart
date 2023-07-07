@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:videocall/common/widgets/stateless/builder_dialog/app_dialog_base_builder.dart';
+import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/routes/app_navigation.dart';

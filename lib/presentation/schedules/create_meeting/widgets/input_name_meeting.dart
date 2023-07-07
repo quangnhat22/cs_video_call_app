@@ -48,7 +48,8 @@ class _InputNameMeetingState extends State<InputNameMeeting> {
       validator: (value) => validateTitle(value, context),
       decoration: InputDecoration(
         hintText: AppLocalizations.of(context)!.title_hint_text_text_form_field,
-        label: Text(AppLocalizations.of(context)!.title_label_text_form_field),
+        label: Text(
+            '${AppLocalizations.of(context)!.title_label_text_form_field} (*)'),
         border: const OutlineInputBorder(
           borderSide: BorderSide(width: 1),
         ),
