@@ -77,22 +77,26 @@ class AppNotificationItem extends StatelessWidget {
     }
     if (id.isNotEmpty) {
       ctx.read<NotificationBloc>().add(NotifcationTapped(
-          type: type, actionType: type, isAccept: true, id: noti.prep!.id));
+          type: type, actionType: type, isAccept: true, id: id));
     }
   }
 
   void _handleOnTapReject(BuildContext ctx, String type) {
     String content = '';
+    String id = '';
     if (noti.action == 'receive-friend-request') {
       content = AppLocalizations.of(ctx)!.do_you_want_reject_friend;
+      id = noti.prep?.id ?? '';
     }
     if (noti.action == 'receive-group-request') {
       content = AppLocalizations.of(ctx)!.do_you_want_reject_group;
+      id = noti.indirect?.id ?? '';
     }
     if (noti.action == 'incoming-call') {
       content = AppLocalizations.of(ctx)!.do_you_want_reject_call;
+      id = noti.prep?.id ?? '';
     }
-    if (content.isNotEmpty) {
+    if (content.isNotEmpty && id.isNotEmpty) {
       AppDefaultDialogWidget()
           .setAppDialogType(AppDialogType.confirm)
           .setTitle(AppLocalizations.of(ctx)!.confirm)
@@ -101,10 +105,7 @@ class AppNotificationItem extends StatelessWidget {
           .setPositiveText(AppLocalizations.of(ctx)!.confirm)
           .setOnPositive(() {
             ctx.read<NotificationBloc>().add(NotifcationTapped(
-                type: type,
-                actionType: type,
-                isAccept: false,
-                id: noti.prep!.id));
+                type: type, actionType: type, isAccept: false, id: id));
             Navigator.of(ctx).pop();
           })
           .buildDialog(ctx)

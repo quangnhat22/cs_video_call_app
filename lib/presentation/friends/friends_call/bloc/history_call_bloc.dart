@@ -15,6 +15,7 @@ class HistoryCallBloc extends Bloc<HistoryCallEvent, HistoryCallState> {
     on<HistoryCallEvent>((event, emit) async {
       await event.map(
           started: (event) => _started(event, emit),
+          refresh: (event) => _refreshed(event, emit),
           filterStatusCall: (event) => _filterStatusCallChange(event, emit));
     });
   }
@@ -24,6 +25,17 @@ class HistoryCallBloc extends Bloc<HistoryCallEvent, HistoryCallState> {
   Future<void> _started(_Started event, Emitter<HistoryCallState> emit) async {
     try {
       emit(const HistoryCallLoading());
+      final calls = await _friendCallUseCase.getCallList(
+          event.callStatus?.value, event.callee);
+      emit(HistoryCallSuccess(calls: calls));
+    } catch (e) {
+      emit(HistoryCallFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> _refreshed(
+      HistoryCallRefresh event, Emitter<HistoryCallState> emit) async {
+    try {
       final calls = await _friendCallUseCase.getCallList(
           event.callStatus?.value, event.callee);
       emit(HistoryCallSuccess(calls: calls));

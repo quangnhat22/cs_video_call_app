@@ -4,6 +4,8 @@ part of 'history_call_bloc.dart';
 class HistoryCallEvent with _$HistoryCallEvent {
   const factory HistoryCallEvent.started(
       {AppCallStatus? callStatus, String? callee}) = _Started;
+  const factory HistoryCallEvent.refresh(
+      {AppCallStatus? callStatus, String? callee}) = HistoryCallRefresh;
   const factory HistoryCallEvent.filterStatusCall(
       {required AppCallStatus status}) = HistoryCallStatusChange;
 }

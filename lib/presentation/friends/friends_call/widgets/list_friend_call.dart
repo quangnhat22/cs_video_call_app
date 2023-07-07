@@ -26,41 +26,47 @@ class ListFriendCall extends StatelessWidget {
                   child: Text(AppLocalizations.of(context)!.no_calls_found));
             }
 
-            return CustomScrollView(
-              slivers: <Widget>[
-                SliverStickyHeader(
-                  header: Container(
-                    color: Theme.of(context).colorScheme.background,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          DropdownFilterButton(handleDropdownChange),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                padding: const MaterialStatePropertyAll(
-                                    EdgeInsets.symmetric(horizontal: 26)),
-                                backgroundColor:
-                                    const MaterialStatePropertyAll(Colors.red),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8)))),
-                            child: Text(AppLocalizations.of(context)!
-                                .friends_clear_text_button),
-                          )
-                        ],
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<HistoryCallBloc>().add(const HistoryCallRefresh());
+              },
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverStickyHeader(
+                    header: Container(
+                      color: Theme.of(context).colorScheme.background,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, right: 20, top: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            DropdownFilterButton(handleDropdownChange),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                  padding: const MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(horizontal: 26)),
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          Colors.red),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)))),
+                              child: Text(AppLocalizations.of(context)!
+                                  .friends_clear_text_button),
+                            )
+                          ],
+                        ),
                       ),
                     ),
+                    sliver: FriendCallSliverList(
+                      calls: calls,
+                    ),
                   ),
-                  sliver: FriendCallSliverList(
-                    calls: calls,
-                  ),
-                ),
-              ],
+                ],
+              ),
             );
           },
           failure: (message) {

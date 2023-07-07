@@ -229,5 +229,6 @@
   "do_you_want_reject_group": "Do you want to reject a group request?",
   "do_you_want_reject_call": "Do you want to reject a friend call?",
   "oops": "Ooops",
-  "no_internet": "No Internet Connection found. Check your connecttion"
+  "no_internet": "No Internet Connection found. Check your connecttion",
+  "cannot_call_now": "Cannot make a call right now. Please try again later!"
 }
