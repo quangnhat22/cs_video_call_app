@@ -10,7 +10,9 @@ abstract class NotificationUseCase {
 
   Future<bool> deleteAllNotification();
 
-  Future<bool> changeTurnOnAndOffNotification(bool isTurnOn);
+  Future<bool> getNotificationSetting();
+
+  Future<bool> updateNotificationSetting(bool value);
 }
 
 @Injectable(as: NotificationUseCase)
@@ -18,11 +20,6 @@ class NotificationUseCaseImpl extends NotificationUseCase {
   final NotificationRepository _repo;
 
   NotificationUseCaseImpl(this._repo);
-
-  @override
-  Future<bool> changeTurnOnAndOffNotification(bool isTurnOn) async {
-    return await _repo.changeTurnOnAndOffNotification(isTurnOn);
-  }
 
   @override
   Future<bool> deleteAllNotification() async {
@@ -37,5 +34,15 @@ class NotificationUseCaseImpl extends NotificationUseCase {
   @override
   Future<List<NotificationEntity>> getListNotification() async {
     return await _repo.getListNotification();
+  }
+
+  @override
+  Future<bool> getNotificationSetting() async {
+    return await _repo.getNotificationSetting();
+  }
+
+  @override
+  Future<bool> updateNotificationSetting(bool value) async {
+    return await _repo.updateNotificationSetting(value);
   }
 }

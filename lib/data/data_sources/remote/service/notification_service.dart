@@ -37,4 +37,28 @@ class NotificationsService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> getNotificationSetting() async {
+    try {
+      return await _service.dio
+          .get("${BaseService.notificationPath}/notification-setting");
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Response> updateNotificationSetting(bool value) async {
+    try {
+      return await _service.dio.put(
+        "${BaseService.notificationPath}/notification-setting",
+        data: {"notification": value},
+      );
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

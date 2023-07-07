@@ -53,7 +53,7 @@ class DeviceSettings extends StatelessWidget {
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {
                       NavigationUtil.pushNamed(
-                          routeName: RouteName.notifications);
+                          routeName: RouteName.notificationSetting);
                     },
                     hasTopBorderRadius: false,
                     hasBottomBorderRadius: false,

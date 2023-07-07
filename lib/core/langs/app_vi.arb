@@ -234,5 +234,6 @@
   "no_notifications_found": "Không có thông báo nào",
   "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",
   "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
-  "leave_group_success": "Rời nhóm thành công"
+  "leave_group_success": "Rời nhóm thành công",
+  "turn_on_off_notification": "Bật/ Tắt thông báo"
 }

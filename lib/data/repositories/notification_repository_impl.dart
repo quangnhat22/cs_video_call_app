@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:videocall/core/utils/detect_device_info.dart';
 import 'package:videocall/data/data_sources/remote/service/device_service.dart';
 import 'package:videocall/data/data_sources/remote/service/notification_service.dart';
 import 'package:videocall/data/models/notification_model.dart';
@@ -15,25 +14,6 @@ class NotificationRepositoryImpl extends NotificationRepository {
 
   NotificationRepositoryImpl(
       this._service, this._awesomeService, this._deviceService);
-
-  @override
-  Future<bool> changeTurnOnAndOffNotification(bool isTurnOn) async {
-    try {
-      // get device name
-      final deviceName = await DetectDeviceInfo.getDeviceName();
-      final fcmToken =
-          isTurnOn ? await _awesomeService.getFirebaseMessagingToken() : '';
-      // final res = await _deviceService.updateDevice(deviceName, fcmToken);
-      // if (res.statusCode == 200) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      return false;
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
 
   @override
   Future<bool> deleteAllNotification() async {
@@ -85,6 +65,34 @@ class NotificationRepositoryImpl extends NotificationRepository {
       return List<NotificationEntity>.empty();
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<bool> getNotificationSetting() async {
+    try {
+      final res = await _service.getNotificationSetting();
+      if (res.statusCode == 200) {
+        final isTurnOn = res.data["data"] as bool;
+        return isTurnOn;
+      }
+
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> updateNotificationSetting(bool value) async {
+    try {
+      final res = await _service.updateNotificationSetting(value);
+      if (res.statusCode == 200) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception(e..toString());
     }
   }
 }
