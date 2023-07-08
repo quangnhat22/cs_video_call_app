@@ -231,7 +231,7 @@
   "do_you_want_delete_device": "Do you want to delete device?",
   "oops": "Ooops",
   "no_internet": "No Internet Connection found. Check your connecttion",
-  "cannot_call_now": "Cannot make a call right now. Please try again later!",
+  "cannot_call_now": "Room is ended!",
   "leave_group": "Leave group",
   "no_notifications_found": "No notifications found",
   "you_did_sent_any_request": "You didn't send any request",

@@ -231,7 +231,7 @@
   "do_you_want_delete_device": "Bạn có muốn xóa thiết bị?",
   "oops": "Ooops",
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
-  "cannot_call_now": "Không thể thực hiện cuộc gọi ngay lúc này. Vui lòng thử lại sau!",
+  "cannot_call_now": "Phòng video call đã kết thúc.",
   "leave_group": "Rời nhóm",
   "no_notifications_found": "Không có thông báo nào",
   "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",

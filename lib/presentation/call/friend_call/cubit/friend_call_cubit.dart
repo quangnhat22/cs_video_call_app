@@ -2,9 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
-import 'package:videocall/domain/entities/token_livekit_entity.dart';
 import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
-import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 
 import '../../../../core/config/app_config.dart';
 
@@ -24,7 +22,7 @@ class FriendCallCubit extends Cubit<FriendCallState> {
   //for room
   bool _isOpenCamera = true;
   bool _isSwitchCameraFront = true;
-  bool _isOpenMic = false;
+  bool _isOpenMic = true;
 
   void pageSenderInited({required String friendId}) async {
     try {
