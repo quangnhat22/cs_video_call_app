@@ -32,8 +32,9 @@ giúp việc gặp gỡ, trao đổi online trở nên đơn giản, hiệu qu�
 ## Hướng dẫn cài đặt
 
 - Bước 1: Clone sourcecode.
-- Bước 2: Khởi tạo một project trong Firebase
-- Bước 3: Sử dụng Firebase CLI để tích hợp vào Project, sau khi tích hợp thành công sẽ sinh ra file 'firebase_options.dart' ,đặt file này vào đúng folder 'lib/core/config'
-- Bước 4: Chạy câu lệnh `flutter pub get` (trong trường hợp sử dụng fvm: `fvm flutter pub get`).
+- Bước 2: Khởi tạo một project trong Firebase.
+- Bước 3: Sử dụng Firebase CLI để tích hợp vào Project, sau khi tích hợp thành công sẽ sinh ra file 'firebase_options.dart' ,đặt file này vào đúng folder 'lib/core/config'.
+- Bước 4: Trong trường hợp sử dụng FVM, vui lòng gõ câu lệnh `fvm use`, chọn phiên bản Flutter 3.7.12 (nếu không sử dụng fvm có thể bỏ qua bước này).
+- Bước 4: Chạy lệnh `flutter pub get` (trong trường hợp sử dụng fvm: `fvm flutter pub get`).
 - Bước 5: Chạy tiếp câu lệnh `flutter packages pub run build_runner build --delete-conflicting-outputs` (trong trường hợp sử dụng fvm: `fvm flutter pub run build_runner build --delete-conflicting-outputs`).
 - Bước 6: Trong file 'app_config.dart' (lib/core/config/app_config.dart) có thể tuỳ chỉnh biến httpUrl phù hợp với máy ảo hoặc máy thật sử dụng để chạy chương trình.
