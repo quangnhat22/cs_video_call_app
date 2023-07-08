@@ -12,6 +12,8 @@ class GroupMeetingModel with _$GroupMeetingModel {
     String? description,
     // ignore: invalid_annotation_target
     @JsonKey(name: "time_start") DateTime? timeStart,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: "time_end") DateTime? timeEnd,
     String? groupId,
     String? status,
     List<UserModel?>? participants,

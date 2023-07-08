@@ -17,7 +17,8 @@ class FriendCallPage extends StatelessWidget {
           ? (getIt<FriendCallCubit>()..pageSenderInited(friendId: friendId))
           : (getIt<FriendCallCubit>()
             ..pageReceiverInited(chatRoomId: chatRoomId!)),
-      child: const FriendCallView(),
+      child: WillPopScope(
+          onWillPop: () async => false, child: const FriendCallView()),
     );
   }
 }
@@ -34,7 +35,7 @@ class FriendCallView extends StatelessWidget {
         state.whenOrNull(
           connectedFail: (_) {
             SnackBarApp.showSnackBar(
-                context,
+                null,
                 AppLocalizations.of(context)!.cannot_call_now,
                 TypesSnackBar.error);
             Navigator.of(context).pop();

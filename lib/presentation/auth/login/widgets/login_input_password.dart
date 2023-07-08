@@ -36,7 +36,7 @@ class _LoginInputPasswordState extends State<LoginInputPassword> {
           type: InputType.text,
           obscureText: isVisible ? false : true,
           errorText: state.password.displayError != null
-              ? AppLocalizations.of(context)!.password_is_invalid
+              ? state.password.error?.message
               : null,
         );
       },

@@ -114,11 +114,11 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
           FloatActionButtonVideo(
             icon: Icons.call_end,
             backgroundColor: Colors.redAccent,
+            iconColor: Colors.white,
             onPress: () => _handleOnCallEndBtn(),
           ),
           FloatActionButtonVideo(
-            icon:
-                isMicOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,
+            icon: isMicOn ? Icons.mic_none_outlined : Icons.mic_off_outlined,
             onPress: () => _handleOnVolumeBtn(context),
           )
         ],

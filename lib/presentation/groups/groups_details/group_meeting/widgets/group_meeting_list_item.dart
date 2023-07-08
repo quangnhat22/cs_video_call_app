@@ -7,7 +7,7 @@ import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
-import 'package:videocall/presentation/groups/groups_details/cubit_group_meeting/group_meeting_cubit.dart';
+import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit_group_meeting/group_meeting_cubit.dart';
 
 class GroupMeetingListItem extends StatelessWidget {
   const GroupMeetingListItem({
@@ -41,17 +41,20 @@ class GroupMeetingListItem extends StatelessWidget {
                 leading: const CircleAvatar(
                   child: Icon(Icons.videocam_outlined),
                 ),
-                trailing:
-                    (meetingEntity.meetingStatus == AppMeetingStatus.onGoing)
-                        ? TextButton(
-                            onPressed: () =>
-                                _handleOnTapJoin(context, meetingEntity.id),
-                            child: Text(
-                              AppLocalizations.of(context)!.join,
-                            ),
-                          )
-                        //TODO: show duration when meeting ending
-                        : const Text("00:14:50"),
+                trailing: (meetingEntity.meetingStatus ==
+                        AppMeetingStatus.onGoing)
+                    ? TextButton(
+                        onPressed: () =>
+                            _handleOnTapJoin(context, meetingEntity.id),
+                        child: Text(
+                          AppLocalizations.of(context)!.join,
+                        ),
+                      )
+                    : (meetingEntity.timeStart != null &&
+                            meetingEntity.timeEnd != null)
+                        ? Text(AppDateTimeFormat.differentTime(
+                            meetingEntity.timeStart!, meetingEntity.timeEnd!))
+                        : Container(),
               ),
               if (true)
                 Padding(

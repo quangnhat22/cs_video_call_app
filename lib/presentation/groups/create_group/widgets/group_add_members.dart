@@ -84,15 +84,16 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
                               title: Text(friends[index].name!.isEmpty
                                   ? AppLocalizations.of(context)!.unknown_name
                                   : friends[index].name!),
-                              subtitle: Text(
-                                AppLocalizations.of(context)!
-                                    .user_status_online,
-                                style: const TextStyle(color: Colors.green),
+                              // subtitle: Text(
+                              //   AppLocalizations.of(context)!
+                              //       .user_status_online,
+                              //   style: const TextStyle(color: Colors.green),
+                              // ),
+                              secondary: CustomAvatarImage(
+                                urlImage: friends[index].avatar,
+                                widthImage: 46,
+                                heightImage: 46,
                               ),
-                              secondary: CircleAvatar(
-                                  child: Text(friends[index].name!.isEmpty
-                                      ? 'U'
-                                      : 'A')),
                               value: selectedFriends.firstWhere(
                                     (element) =>
                                         element?.id == friends[index].id,

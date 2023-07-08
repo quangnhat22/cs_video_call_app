@@ -23,6 +23,7 @@ class FriendsContactBloc
     on<FriendsContactEvent>((event, emit) async {
       await event.map(
         started: (event) => _started(event, emit),
+        refreshed: (event) => _refreshed(event, emit),
         tappedFriendCard: (event) => _tappedFriendCard(event, emit),
       );
     });
@@ -35,6 +36,16 @@ class FriendsContactBloc
       _Started event, Emitter<FriendsContactState> emit) async {
     try {
       emit(const FriendsContactLoading());
+      final friends = await _useCase.getListFriend();
+      emit(FriendsContactSuccess(friends: friends));
+    } catch (e) {
+      emit(FriendsContactFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> _refreshed(
+      FriendsContactRefreshed event, Emitter<FriendsContactState> emit) async {
+    try {
       final friends = await _useCase.getListFriend();
       emit(FriendsContactSuccess(friends: friends));
     } catch (e) {

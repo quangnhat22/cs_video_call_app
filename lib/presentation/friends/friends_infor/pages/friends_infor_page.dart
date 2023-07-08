@@ -46,11 +46,11 @@ class FriendsInfoView extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              const FriendMutualInfo(),
-              const FriendDetailsInfo(),
-              const FriendActions(),
-              FriendCallsHistory(),
+            children: const <Widget>[
+              FriendMutualInfo(),
+              FriendDetailsInfo(),
+              FriendActions(),
+              // FriendCallsHistory(),
             ],
           ),
         ),

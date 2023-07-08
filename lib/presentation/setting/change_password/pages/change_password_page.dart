@@ -18,6 +18,8 @@ class ChangePasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ChangePasswordCubit, ChangePasswordState>(
+      listenWhen: (previous, current) =>
+          previous.statusSubmit != current.statusSubmit,
       listener: (context, state) {
         if (state.statusSubmit == FormzSubmissionStatus.success) {
           SnackBarApp.showSnackBar(
@@ -26,6 +28,13 @@ class ChangePasswordView extends StatelessWidget {
                   .change_password_successfully_message,
               TypesSnackBar.success);
           NavigationUtil.pop();
+        }
+
+        if (state.statusSubmit == FormzSubmissionStatus.failure) {
+          SnackBarApp.showSnackBar(
+              context,
+              AppLocalizations.of(context)!.old_password_is_incorrect,
+              TypesSnackBar.error);
         }
       },
       child: Scaffold(

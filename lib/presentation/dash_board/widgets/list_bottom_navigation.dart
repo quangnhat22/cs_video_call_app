@@ -25,11 +25,6 @@ class ListBottomNavigation extends StatelessWidget {
           label: AppLocalizations.of(context)!.groups,
         ),
         NavigationDestination(
-          icon: const Icon(Icons.event_outlined),
-          selectedIcon: const Icon(Icons.event),
-          label: AppLocalizations.of(context)!.schedules,
-        ),
-        NavigationDestination(
           icon: const Icon(Icons.notifications_outlined),
           selectedIcon: const Icon(Icons.notifications),
           label: AppLocalizations.of(context)!.notifications,

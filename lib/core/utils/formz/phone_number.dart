@@ -1,7 +1,8 @@
 import 'package:formz/formz.dart';
 
 enum PhoneNumberValidationError {
-  invalid("Phone is not valid");
+  invalid(
+      "Phone number is not valid. Phone numbers need to have exactly 10 numbers.");
 
   const PhoneNumberValidationError(this.message);
 
@@ -19,8 +20,8 @@ class PhoneNumber extends FormzInput<String, PhoneNumberValidationError> {
   @override
   PhoneNumberValidationError? validator(String? value) {
     return value == null || value == "" || value.length != 10
-        ? null
-        : PhoneNumberValidationError.invalid;
+        ? PhoneNumberValidationError.invalid
+        : null;
     // return value == null || value.length < 6
     //     ? PasswordValidationError.invalid
     //     : null;

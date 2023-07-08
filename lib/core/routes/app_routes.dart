@@ -18,6 +18,7 @@ import 'package:videocall/presentation/groups/group_list/widgets/group_list_item
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
+import 'package:videocall/presentation/notifications/notification_setting/notification_setting.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/create_meeting/pages/create_meeting_page.dart';
 import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
@@ -65,18 +66,18 @@ class AppRoutes {
     log(settings.name.toString());
     switch (settings.name) {
       case RouteName.dashboard:
-        return _buildRoute(settings, const DashboardPage());
+        return _buildAnimationRoute(settings, const DashboardPage());
       case RouteName.friends:
-        return _buildRoute(settings, const FriendsDashBoardPage());
+        return _buildAnimationRoute(settings, const FriendsDashBoardPage());
       case RouteName.findFriend:
-        return _buildRoute(settings, const FindNewFriendPage());
+        return _buildAnimationRoute(settings, const FindNewFriendPage());
       case RouteName.friendInfo:
-        return _buildRoute(settings,
+        return _buildAnimationRoute(settings,
             FriendsInfoPage(userInfo: settings.arguments as UserEntity));
       case RouteName.groups:
-        return _buildRoute(settings, const GroupsDashBoardPage());
+        return _buildAnimationRoute(settings, const GroupsDashBoardPage());
       case RouteName.teamDetails:
-        return _buildRoute(
+        return _buildAnimationRoute(
             settings,
             GroupDetailPage(
               groupArgs: settings.arguments as GroupArguments,
@@ -131,6 +132,8 @@ class AppRoutes {
         return _buildAnimationRoute(settings, const ChangePasswordPage());
       case RouteName.aboutUs:
         return _buildAnimationRoute(settings, const AboutUsPage());
+      case RouteName.notificationSetting:
+        return _buildAnimationRoute(settings, const NotificationSettingPage());
       default:
         return _errorRoute();
     }

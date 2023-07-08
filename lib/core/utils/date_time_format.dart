@@ -31,4 +31,8 @@ class AppDateTimeFormat {
         .difference(DateTime(now.year, now.month, now.day))
         .inDays;
   }
+
+  static String differentTime(DateTime startTime, DateTime endTime) {
+    return '${endTime.difference(startTime).inMinutes}m';
+  }
 }

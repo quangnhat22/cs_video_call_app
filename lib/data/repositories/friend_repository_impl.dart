@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:videocall/data/data_sources/remote/service/call_friend_service.dart';
+
 import 'package:videocall/domain/entities/friend_request_entity.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 import 'package:videocall/domain/modules/friend/friend_repository.dart';
@@ -11,13 +11,9 @@ import '../models/user_model.dart';
 
 @Injectable(as: FriendRepository)
 class FriendRepositoryImpl extends FriendRepository {
-  FriendRepositoryImpl(
-    this._callFriendService,
-    this._service,
-  );
+  FriendRepositoryImpl(this._service);
 
   final FriendService _service;
-  final CallFriendService _callFriendService;
 
   @override
   Future<bool> acceptReceiveRequest(String userId) async {

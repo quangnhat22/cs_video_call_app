@@ -7,5 +7,7 @@ abstract class NotificationRepository {
 
   Future<bool> deleteAllNotification();
 
-  Future<bool> changeTurnOnAndOffNotification(bool isTurnOn);
+  Future<bool> getNotificationSetting();
+
+  Future<bool> updateNotificationSetting(bool value);
 }

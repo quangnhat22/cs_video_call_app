@@ -11,8 +11,14 @@ class NotificationList extends StatelessWidget {
           getListInSuccess: (listNotification) {
             if (listNotification.isEmpty) {
               return Center(
-                child:
-                    Text(AppLocalizations.of(context)!.no_notifications_found),
+                child: RefreshView(
+                  label: AppLocalizations.of(context)!.no_notifications_found,
+                  onRefresh: () {
+                    context
+                        .read<NotificationBloc>()
+                        .add(const NotificationRefreshed());
+                  },
+                ),
               );
             }
 

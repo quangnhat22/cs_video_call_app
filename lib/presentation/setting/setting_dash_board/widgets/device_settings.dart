@@ -46,18 +46,19 @@ class DeviceSettings extends StatelessWidget {
                     hasTopBorderRadius: false,
                     hasBottomBorderRadius: false,
                   ),
-                  const DividerSpaceLeft(),
-                  InkWellDynamicBorder(
-                    title: AppLocalizations.of(context)!.notifications,
-                    leading: const Icon(Icons.notifications_outlined),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      NavigationUtil.pushNamed(
-                          routeName: RouteName.notifications);
-                    },
-                    hasTopBorderRadius: false,
-                    hasBottomBorderRadius: false,
-                  ),
+                  // const DividerSpaceLeft(),
+                  // InkWellDynamicBorder(
+                  //   title:
+                  //       AppLocalizations.of(context)!.turn_on_off_notification,
+                  //   leading: const Icon(Icons.notifications_outlined),
+                  //   trailing: const Icon(Icons.chevron_right),
+                  //   onTap: () {
+                  //     NavigationUtil.pushNamed(
+                  //         routeName: RouteName.notificationSetting);
+                  //   },
+                  //   hasTopBorderRadius: false,
+                  //   hasBottomBorderRadius: false,
+                  // ),
                   const DividerSpaceLeft(),
                   InkWellDynamicBorder(
                     title: AppLocalizations.of(context)!.devices,

@@ -1,23 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/data/data_sources/remote/service/call_friend_service.dart';
+
 import 'package:videocall/data/models/call_model.dart';
+import 'package:videocall/data/models/token_livekit_model.dart';
 import 'package:videocall/domain/entities/call_entity.dart';
+import 'package:videocall/domain/entities/token_livekit_entity.dart';
 import 'package:videocall/domain/modules/call/friend_call_repository.dart';
+import 'package:videocall/domain/modules/user/user_repository.dart';
 
 @Injectable(as: FriendCallRepository)
 class FriendCallRepositoryImpl extends FriendCallRepository {
   final CallFriendService _service;
+  final UserRepository _userRepo;
 
-  FriendCallRepositoryImpl(this._service);
+  FriendCallRepositoryImpl(this._service, this._userRepo);
 
   @override
-  Future<String?> createFriendCall(String friendId) async {
+  Future<TokenLiveKitEntity?> createFriendCall(String friendId) async {
     try {
       final res = await _service.createNewFriendCall(friendId);
       if (res.statusCode == 200) {
-        final token = res.data["data"] as String;
-        return token;
+        final tokenJson = TokenLiveKitModel.fromJson(res.data["data"]);
+        return TokenLiveKitEntity.convertToTokenLiveKitEntity(model: tokenJson);
       }
       return null;
     } on DioError catch (e) {
@@ -46,6 +51,7 @@ class FriendCallRepositoryImpl extends FriendCallRepository {
   @override
   Future<List<CallEntity>> getCallList(String? status, String? callee) async {
     try {
+      final userInfo = await _userRepo.getSelf();
       final res = await _service.getCallList(status, callee);
       if (res.statusCode == 200) {
         final listCallJson = res.data["data"] as List<dynamic>?;
@@ -56,8 +62,8 @@ class FriendCallRepositoryImpl extends FriendCallRepository {
               .toList();
 
           final callEntities = callModels
-              .map((callModel) =>
-                  CallEntity.convertToCallEntity(model: callModel))
+              .map((callModel) => CallEntity.convertToCallEntity(
+                  model: callModel, id: userInfo.id))
               .toList();
 
           return callEntities;

@@ -40,13 +40,13 @@ class ParticipantInfoWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (title != null)
-              Flexible(
-                child: Text(
-                  title!,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
+            // if (title != null)
+            //   Flexible(
+            //     child: Text(
+            //       title!,
+            //       overflow: TextOverflow.ellipsis,
+            //     ),
+            //   ),
             isScreenShare
                 ? const Padding(
                     padding: EdgeInsets.only(left: 5),

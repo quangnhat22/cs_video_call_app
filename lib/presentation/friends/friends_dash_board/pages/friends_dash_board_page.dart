@@ -114,9 +114,10 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
               FriendsRequestPage(),
             ],
           ),
-          floatingActionButton: (_tabController.index == 2)
-              ? const FloatingButtonFindFriend()
-              : null,
+          floatingActionButton:
+              (_tabController.index == 1 || _tabController.index == 2)
+                  ? const FloatingButtonFindFriend()
+                  : null,
         ),
       ),
     );

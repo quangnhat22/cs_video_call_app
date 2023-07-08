@@ -14,32 +14,49 @@ class ListFriend extends StatelessWidget {
           success: (friends) {
             return friends.isEmpty
                 ? Center(
-                    child: Text(AppLocalizations.of(context)!.no_friends_found),
+                    child: RefreshView(
+                      label: AppLocalizations.of(context)!.no_friends_found,
+                      onRefresh: () {
+                        context
+                            .read<FriendsContactBloc>()
+                            .add(const FriendsContactRefreshed());
+                      },
+                    ),
                   )
-                : ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) =>
-                        const DividerSpaceLeft(),
-                    itemBuilder: (context, index) {
-                      return ListFriendItem(
-                        id: friends[index].id,
-                        name: friends[index].name,
-                        avatar: friends[index].avatar,
-                        email: friends[index].email,
-                      );
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      context
+                          .read<FriendsContactBloc>()
+                          .add(const FriendsContactRefreshed());
                     },
-                    itemCount: friends.length,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) =>
+                          const DividerSpaceLeft(),
+                      itemBuilder: (context, index) {
+                        return ListFriendItem(
+                          id: friends[index].id,
+                          name: friends[index].name,
+                          avatar: friends[index].avatar,
+                          email: friends[index].email,
+                        );
+                      },
+                      itemCount: friends.length,
+                    ),
                   );
           },
           failure: (message) {
-            return Center(
-              child: Text(AppLocalizations.of(context)!.error_message),
+            return RefreshView(
+              label: AppLocalizations.of(context)!.something_wrong_try_again,
+              onRefresh: () {
+                context
+                    .read<FriendsContactBloc>()
+                    .add(const FriendsContactRefreshed());
+              },
             );
           },
           orElse: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const ListSkeleton();
           },
         );
       },

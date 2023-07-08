@@ -51,7 +51,7 @@ class _GroupRequestsViewState extends State<GroupRequestsView> {
           success: () {
             context
                 .read<ListGroupRequestBloc>()
-                .add(const ListSentGroupRequestRefreshed());
+                .add(const ListGroupRequestRefreshed());
             SnackBarApp.showSnackBar(
                 context,
                 AppLocalizations.of(context)!.recall_message_alert,
@@ -64,12 +64,6 @@ class _GroupRequestsViewState extends State<GroupRequestsView> {
           return state.maybeWhen(
             getDataSuccess: (groupRequestSent, groupRequestReceived) {
               return SingleChildScrollView(
-                  child: RefreshIndicator(
-                onRefresh: () async {
-                  context
-                      .read<ListGroupRequestBloc>()
-                      .add(const ListSentGroupRequestRefreshed());
-                },
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -91,15 +85,20 @@ class _GroupRequestsViewState extends State<GroupRequestsView> {
                           )
                   ],
                 ),
-              ));
+              );
             },
             getDataFail: (message) {
-              return const Text('Something went wrong!!');
+              return RefreshView(
+                  label:
+                      AppLocalizations.of(context)!.something_wrong_try_again,
+                  onRefresh: () {
+                    context
+                        .read<ListGroupRequestBloc>()
+                        .add(const ListReceiveGroupRequestRefreshed());
+                  });
             },
             orElse: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const ListSkeleton();
             },
           );
         },

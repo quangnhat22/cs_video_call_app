@@ -14,10 +14,11 @@ class GroupTextFieldName extends StatelessWidget {
               context.read<CreateGroupCubit>().groupNameChanged(groupName);
             },
             decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                label: Text(AppLocalizations.of(context)!.group_name)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+              label: Text('${AppLocalizations.of(context)!.group_name} (*)'),
+            ),
           ),
         );
       },

@@ -16,20 +16,33 @@ class GroupList extends StatelessWidget {
           success: (groups) {
             if (groups.isEmpty) {
               return Center(
-                  child: Text(AppLocalizations.of(context)!.no_groups_found));
+                child: RefreshView(
+                  label: AppLocalizations.of(context)!.no_groups_found,
+                  onRefresh: () {
+                    context
+                        .read<GroupListBloc>()
+                        .add(const GroupListRefreshed());
+                  },
+                ),
+              );
             }
-            return ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => const DividerSpaceLeft(),
-              itemBuilder: ((context, index) {
-                return GroupListItem(
-                  groupId: groups[index].id,
-                  groupName: groups[index].name ?? "",
-                  groupAvatar: groups[index].imageUrl,
-                );
-              }),
-              itemCount: groups.length,
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<GroupListBloc>().add(const GroupListRefreshed());
+              },
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (context, index) => const DividerSpaceLeft(),
+                itemBuilder: ((context, index) {
+                  return GroupListItem(
+                    groupId: groups[index].id,
+                    groupName: groups[index].name ?? "",
+                    groupAvatar: groups[index].imageUrl,
+                  );
+                }),
+                itemCount: groups.length,
+              ),
             );
           },
           orElse: () {

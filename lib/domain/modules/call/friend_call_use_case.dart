@@ -1,10 +1,11 @@
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/entities/call_entity.dart';
+import 'package:videocall/domain/entities/token_livekit_entity.dart';
 
 import 'friend_call_repository.dart';
 
 abstract class FriendCallUseCase {
-  Future<String?> createFriendCall(String friendId);
+  Future<TokenLiveKitEntity?> createFriendCall(String friendId);
 
   Future<String?> joinFriendCall(String callRoomId);
 
@@ -22,7 +23,7 @@ class FriendCallUseCaseImpl extends FriendCallUseCase {
   FriendCallUseCaseImpl(this._repo);
 
   @override
-  Future<String?> createFriendCall(String friendId) async {
+  Future<TokenLiveKitEntity?> createFriendCall(String friendId) async {
     return await _repo.createFriendCall(friendId);
   }
 

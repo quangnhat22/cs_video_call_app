@@ -25,38 +25,50 @@ class FriendCallSliverList extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          //final int itemIndex = index ~/ 2;
-
           if (index.isEven) {
-            debugPrint(index.toString());
             return ListTile(
-                title: Text(calls[index ~/ 2].callee?.name ?? ''),
-                subtitle: Wrap(
-                  spacing: 6,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: <Widget>[
-                    _buildStatus(calls[index ~/ 2].status!),
-                    Text(DateFormat("dd-MM-yyyy hh:mm aaa")
-                        .format(calls[index ~/ 2].calledAt!))
-                  ],
+              title: Text(calls[index ~/ 2].subjectCall?.name ?? ''),
+              subtitle: Wrap(
+                spacing: 6,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: <Widget>[
+                  _buildStatus(calls[index ~/ 2].status!),
+                  Text(DateFormat("dd-MM-yyyy hh:mm aaa")
+                      .format(calls[index ~/ 2].calledAt!.toLocal()))
+                ],
+              ),
+              leading: SizedBox(
+                width: 48,
+                child: CustomAvatarImage(
+                  urlImage: calls[index ~/ 2].subjectCall!.avatar,
                 ),
-                leading: CustomAvatarImage(
-                  urlImage: calls[index ~/ 2].callee!.avatar,
+              ),
+              trailing: IconButton(
+                icon: Icon(
+                  Icons.call,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                  onPressed: () {
+                onPressed: () {
+                  if (calls[index ~/ 2].status?.toLowerCase() ==
+                      AppCallStatus.onGoing.value.toLowerCase()) {
                     NavigationUtil.pushNamed(
                       routeName: RouteName.personalCall,
                       args: {
-                        "friend-id": calls[index ~/ 2].callee?.id,
+                        "chatRoomId": calls[index ~/ 2].id,
+                        "friendId": calls[index ~/ 2].subjectCall?.id,
                       },
                     );
-                  },
-                ));
+                  } else {
+                    NavigationUtil.pushNamed(
+                      routeName: RouteName.personalCall,
+                      args: {
+                        "friendId": calls[index ~/ 2].subjectCall?.id,
+                      },
+                    );
+                  }
+                },
+              ),
+            );
           }
           return const DividerSpaceLeft();
         },

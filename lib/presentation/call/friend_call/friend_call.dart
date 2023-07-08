@@ -23,6 +23,7 @@ import 'package:videocall/core/utils/live_kit_until.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/call/friend_call/cubit/friend_call_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/presentation/call/group_call/widgets/icon_wrapper.dart';
 
 part 'pages/friend_call_page.dart';
 part 'views/connected_call_view.dart';

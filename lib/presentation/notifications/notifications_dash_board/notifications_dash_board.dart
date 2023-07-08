@@ -14,7 +14,8 @@ import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/notification_entity.dart';
 import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/bloc/notification_bloc.dart';
+import 'package:videocall/presentation/others/refresh_view.dart';
 
 part 'pages/notifications_dash_board_page.dart';
-part 'widgets/notification_list.dart';
 part 'widgets/notification_item.dart';
+part 'widgets/notification_list.dart';

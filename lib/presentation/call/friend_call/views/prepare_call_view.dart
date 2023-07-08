@@ -81,10 +81,13 @@ class _FriendPrepareCallViewState extends State<FriendPrepareCallView> {
     setState(() {
       isMicOn = !isMicOn;
     });
-    ctx.read<FriendCallCubit>().changedAudioPreviewStatus(isMicOn);
+    if (context.mounted) {
+      ctx.read<FriendCallCubit>().changedAudioPreviewStatus(isMicOn);
+    }
   }
 
-  void _handleOnCallEndBtn() async {
+  void _handleOnCallEndBtn(BuildContext ctx) async {
+    await ctx.read<FriendCallCubit>().abandonCall();
     await _removeMediaStream();
     NavigationUtil.pop();
   }
@@ -101,10 +104,12 @@ class _FriendPrepareCallViewState extends State<FriendPrepareCallView> {
         ),
         FloatActionButtonVideo(
           icon: Icons.call_end,
-          onPress: () => _handleOnCallEndBtn(),
+          backgroundColor: Colors.redAccent,
+          iconColor: Colors.white,
+          onPress: () => _handleOnCallEndBtn(context),
         ),
         FloatActionButtonVideo(
-          icon: isMicOn ? Icons.volume_up_outlined : Icons.volume_off_outlined,
+          icon: isMicOn ? Icons.mic_none_outlined : Icons.mic_off_outlined,
           onPress: () => _handleOnVolumeBtn(context),
         )
       ],

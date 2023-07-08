@@ -17,18 +17,22 @@ class FriendCallCubit extends Cubit<FriendCallState> {
       : super(const FriendCallState.initial());
 
   late final Room _room;
+  late final String _callRoomId;
 
   //for room
   bool _isOpenCamera = true;
   bool _isSwitchCameraFront = true;
-  bool _isOpenMic = false;
+  bool _isOpenMic = true;
 
   void pageSenderInited({required String friendId}) async {
     try {
       emit(const FriendCallConnecting());
       final tokenLiveKit = await _friendCallUseCase.createFriendCall(friendId);
-      if (tokenLiveKit != null) {
-        await _setUpRoom(tokenLiveKit);
+      if (tokenLiveKit != null &&
+          tokenLiveKit.token != null &&
+          tokenLiveKit.roomId != null) {
+        _callRoomId = tokenLiveKit.roomId!;
+        await _setUpRoom(tokenLiveKit.token!);
       } else {
         emit(const FriendCallConnectedFail());
       }
@@ -39,7 +43,6 @@ class FriendCallCubit extends Cubit<FriendCallState> {
 
   void pageReceiverInited({required String chatRoomId}) async {
     try {
-      emit(const FriendCallConnecting());
       final tokenLiveKit = await _friendCallUseCase.joinFriendCall(chatRoomId);
       if (tokenLiveKit != null) {
         await _setUpRoom(tokenLiveKit);
@@ -127,6 +130,21 @@ class FriendCallCubit extends Cubit<FriendCallState> {
   void changedAudioPreviewStatus(bool value) async {
     _isOpenMic = value;
     _room.localParticipant?.setMicrophoneEnabled(value);
+  }
+
+  Future<void> abandonCall() async {
+    try {
+      if (state is FriendCallPreparing) {
+        final res = await _friendCallUseCase.abandonCall(_callRoomId);
+        if (res) {
+          emit(const FriendCallEnded());
+        } else {
+          emit(const FriendCallConnectedFail());
+        }
+      }
+    } catch (e) {
+      emit(const FriendCallConnectedFail());
+    }
   }
 
   @override

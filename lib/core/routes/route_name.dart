@@ -31,6 +31,7 @@ class RouteName {
   static const String devices = "/devices";
   static const String changePassword = "/change-password";
   static const String aboutUs = "/about-us";
+  static const String notificationSetting = "/notification-setting";
 
   //error
   static const String notFoundPage = '/not-found';

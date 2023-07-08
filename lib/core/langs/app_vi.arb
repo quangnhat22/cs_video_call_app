@@ -49,7 +49,7 @@
   "friends_tab_requests_title": "Yêu cầu",
   "friends_clear_text_button": "Xoá",
   "requests_recall_text_button": "Gọi lại",
-  "requests_sent_text_button_segment": "Đã gọi",
+  "requests_sent_text_button_segment": "Đã gửi",
   "requests_received_text_button_segment": "Đã nhận",
   "user_status_online": "Đang hoạt động",
   "reject_request": "Từ chối",
@@ -147,8 +147,8 @@
   "unknown_group": "Nhóm không xác định",
   "create_group_failed": "Tạo nhóm thất bại!!",
   "create_group_successfully": "Tạo nhóm thành công!!",
-  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào!",
-  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào!",
+  "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào",
+  "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào",
   "sent_by": "Gửi bởi",
   "sent_to": "Gửi đến",
   "at": "ngày",
@@ -212,10 +212,10 @@
   "no_calls_found": "Chưa có cuộc gọi nào",
   "delete_noti": "Xoá notification",
   "invited_you_to_join_group": " mời bạn tham gia vào nhóm ",
-  "is_calling": "đang gọi cho bạn",
-  "accepted_requets": "đã chấp nhận lời mời",
-  "reject_call_message": "từ chối cuộc gọi",
-  "abandon_call_message": "đã kết thúc cuộc gọi trước khi @{user_name} tham gia",
+  "is_calling": " đang gọi cho bạn",
+  "accepted_requets": " đã chấp nhận lời mời",
+  "reject_call_message": " từ chối cuộc gọi",
+  "abandon_call_message": " đã kết thúc cuộc gọi trước khi {user_name} tham gia",
   "@abandon_call_message": {
     "placeholders": {
       "user_name": {
@@ -228,8 +228,15 @@
   "do_you_want_revoke_group": "Bạn có muốn thu hồi lời mời tham gia nhóm?",
   "do_you_want_reject_group": "Bạn có muốn từ chối lời mời tham gia nhóm?",
   "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?",
+  "do_you_want_delete_device": "Bạn có muốn xóa thiết bị?",
+  "oops": "Ooops",
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
-  "cannot_call_now": "Không thể thực hiện cuộc gọi ngay lúc này. Vui lòng thử lại sau!",
+  "cannot_call_now": "Phòng video call đã kết thúc.",
   "leave_group": "Rời nhóm",
-  "no_notifications_found": "Không có thông báo nào"
+  "no_notifications_found": "Không có thông báo nào",
+  "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",
+  "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
+  "leave_group_success": "Rời nhóm thành công",
+  "turn_on_off_notification": "Bật/ Tắt thông báo",
+  "old_password_is_incorrect": "Mật khẩu cũ không đúng"
 }

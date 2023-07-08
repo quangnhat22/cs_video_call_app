@@ -5,13 +5,11 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/core/utils/live_kit_until.dart';
-import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 import 'icon_wrapper.dart';
 
 class Controls extends StatefulWidget {
@@ -221,10 +219,6 @@ class _ControlsState extends State<Controls> {
         await context.showErrorDialog(error);
       }
     }
-  }
-
-  void _onTapSendData(BuildContext ctx) async {
-    await context.read<CallGroupStatusCubit>().sendMessageData('hello');
   }
 
   Widget _buildIconWhenMicrophoneIsEnabled() {
@@ -440,16 +434,16 @@ class _ControlsState extends State<Controls> {
         const SizedBox(
           width: 10,
         ),
-        IconWrapper(
-          iconButton: IconButton(
-            onPressed: _unPublishAll,
-            icon: const Icon(
-              Icons.block,
-              color: Colors.black,
-            ),
-            tooltip: 'UnPublish all',
-          ),
-        ),
+        // IconWrapper(
+        //   iconButton: IconButton(
+        //     onPressed: _unPublishAll,
+        //     icon: const Icon(
+        //       Icons.block,
+        //       color: Colors.black,
+        //     ),
+        //     tooltip: 'UnPublish all',
+        //   ),
+        // ),
       ],
     );
   }
@@ -460,15 +454,16 @@ class _ControlsState extends State<Controls> {
       alignment: WrapAlignment.center,
       spacing: 20,
       children: [
-        IconWrapper(
-            iconButton: IconButton(
-          onPressed: _onTapUpdateSubscribePermission,
-          icon: const Icon(
-            Icons.security,
-            color: Colors.black,
-          ),
-          tooltip: 'Subscribe permission',
-        )),
+        // IconWrapper(
+        //     iconButton: IconButton(
+        //   onPressed: _onTapUpdateSubscribePermission,
+        //   icon: const Icon(
+        //     Icons.security,
+        //     color: Colors.black,
+        //   ),
+        //   tooltip: 'Subscribe permission',
+        // )),
+        //_buildIconWhenMicrophoneIsEnabled(),
         IconWrapper(
           iconButton: IconButton(
             onPressed: _onTapDisconnect,
@@ -480,15 +475,16 @@ class _ControlsState extends State<Controls> {
           ),
           backgroundColor: Colors.red,
         ),
-        IconWrapper(
-            iconButton: IconButton(
-          onPressed: () => _onTapSendData(context),
-          icon: const Icon(
-            Icons.send,
-            color: Colors.black,
-          ),
-          tooltip: 'send demo data',
-        )),
+        // IconWrapper(
+        //   iconButton: IconButton(
+        //     icon: const Icon(
+        //       Icons.switch_camera_outlined,
+        //       color: Colors.black,
+        //     ),
+        //     onPressed: _toggleCamera,
+        //     tooltip: 'toggle camera',
+        //   ),
+        // ),
       ],
     );
   }
