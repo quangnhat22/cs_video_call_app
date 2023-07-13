@@ -16,8 +16,7 @@ class ProfileInfo extends StatelessWidget {
             children: <Widget>[
               CustomAvatarImage(
                 maxRadiusEmptyImg: 64,
-                widthImage: 120,
-                heightImage: 120,
+                size: CustomAvatarSize.large,
                 urlImage: avatar,
               ),
               const SizedBox(
@@ -44,7 +43,7 @@ class ProfileInfo extends StatelessWidget {
               email != null
                   ? Text(
                       email,
-                      style: AppTextStyles.captionTextStyle,
+                      style: AppTextStyles.titleMedium,
                     )
                   : Container(),
             ],

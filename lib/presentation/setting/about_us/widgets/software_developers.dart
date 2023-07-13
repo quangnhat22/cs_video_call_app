@@ -9,7 +9,7 @@ class SoftwareDevelopers extends StatelessWidget {
       children: <Widget>[
         Text(
           AppLocalizations.of(context)!.developers,
-          style: AppTextStyles.headlineTextStyle,
+          style: AppTextStyles.headLineLarge,
         ),
         const SizedBox(height: 12),
         const DeveloperList()

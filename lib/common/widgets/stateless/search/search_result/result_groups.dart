@@ -40,8 +40,7 @@ class ResultGroups extends StatelessWidget {
             ),
             leading: const CustomAvatarImage(
               urlImage: 'https://i.pravatar.cc/',
-              widthImage: 50,
-              heightImage: 50,
+              size: CustomAvatarSize.small,
             ),
           ),
           itemCount: 30,

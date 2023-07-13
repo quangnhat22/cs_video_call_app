@@ -8,6 +8,7 @@ class CustomOutlineIconButton extends StatelessWidget {
       required this.icon,
       this.handleOnClickButton,
       this.color,
+      this.bgColor,
       this.widthBtn})
       : super(key: key);
 
@@ -15,6 +16,7 @@ class CustomOutlineIconButton extends StatelessWidget {
   final Widget icon;
   final double? widthBtn;
   final Color? color;
+  final Color? bgColor;
   final VoidCallback? handleOnClickButton;
 
   @override
@@ -31,6 +33,7 @@ class CustomOutlineIconButton extends StatelessWidget {
             labelText,
           ),
           style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(bgColor),
             foregroundColor: MaterialStateProperty.all(
                 color ?? Theme.of(context).colorScheme.scrim),
             side: MaterialStateProperty.resolveWith<BorderSide>(

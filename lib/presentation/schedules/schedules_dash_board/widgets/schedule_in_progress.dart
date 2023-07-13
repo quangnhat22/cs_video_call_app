@@ -14,7 +14,7 @@ class ScheduleInProgress extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: Text(
             AppLocalizations.of(context)!.in_progress,
-            style: AppTextStyles.mediumTitleTextStyle,
+            style: AppTextStyles.titleMedium,
           ),
         ),
         const SizedBox(

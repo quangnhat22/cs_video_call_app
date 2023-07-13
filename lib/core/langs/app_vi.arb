@@ -238,5 +238,6 @@
   "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
   "leave_group_success": "Rời nhóm thành công",
   "turn_on_off_notification": "Bật/ Tắt thông báo",
-  "old_password_is_incorrect": "Mật khẩu cũ không đúng"
+  "old_password_is_incorrect": "Mật khẩu cũ không đúng",
+  "choose_a_photo": "Chọn ảnh"
 }

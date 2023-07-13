@@ -12,37 +12,32 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     useMaterial3: true,
-    textTheme: ThemeData.light().textTheme.apply(
-        //fontFamily: "Roboto",
-        ),
     colorScheme: AppColors.lightColorScheme,
+    scaffoldBackgroundColor: AppColors.lightColorScheme.background,
     appBarTheme: AppBarTheme(
       elevation: 0,
       foregroundColor: Colors.black,
       backgroundColor: AppColors.darkColorScheme.background,
     ),
-    filledButtonTheme: const FilledButtonThemeData(
-      style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(Colors.white),
-      ),
-    ),
-    elevatedButtonTheme: const ElevatedButtonThemeData(
-        style: ButtonStyle(
-      foregroundColor: MaterialStatePropertyAll(Colors.white),
-    )),
+    // filledButtonTheme: const FilledButtonThemeData(
+    //   style: ButtonStyle(
+    //     foregroundColor: MaterialStatePropertyAll(Colors.white),
+    //   ),
+    // ),
+    // elevatedButtonTheme: const ElevatedButtonThemeData(
+    //     style: ButtonStyle(
+    //   foregroundColor: MaterialStatePropertyAll(Colors.white),
+    // )),
     cardTheme: CardTheme(
-      elevation: 1,
+      elevation: 0,
       surfaceTintColor: AppColors.lightColorScheme.surface,
     ),
   );
 
   static final ThemeData darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: const Color(0xff1a1d1f),
     useMaterial3: true,
-    textTheme: ThemeData.dark().textTheme.apply(
-        //fontFamily: "Roboto",
-        ),
     colorScheme: AppColors.darkColorScheme,
+    scaffoldBackgroundColor: AppColors.darkColorScheme.background,
     appBarTheme: AppBarTheme(
       elevation: 0,
       foregroundColor: Colors.white,

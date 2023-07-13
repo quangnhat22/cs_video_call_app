@@ -136,8 +136,7 @@ class GroupReceivedRequestList extends StatelessWidget {
                   ),
                   leading: CustomAvatarImage(
                     urlImage: receivedRequestList[index].sender?.avatar,
-                    widthImage: 46,
-                    heightImage: 46,
+                    size: CustomAvatarSize.small,
                   ),
                 );
               },

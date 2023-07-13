@@ -15,10 +15,7 @@ class TextNoticeSentEmail extends StatelessWidget {
           child: Text(
             AppLocalizations.of(context)!.text_send_email(state.email ?? ""),
             textAlign: TextAlign.center,
-            style: AppTextStyles.captionTextStyle.copyWith(
-              height: 1.8,
-              fontSize: AppScreenUtils.isLandscape() ? 16.sp : 14.sp,
-            ),
+            style: AppTextStyles.titleLarge,
           ),
         );
       },
