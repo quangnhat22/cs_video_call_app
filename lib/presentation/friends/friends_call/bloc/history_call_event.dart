@@ -8,4 +8,5 @@ class HistoryCallEvent with _$HistoryCallEvent {
       {AppCallStatus? callStatus, String? callee}) = HistoryCallRefresh;
   const factory HistoryCallEvent.filterStatusCall(
       {required AppCallStatus status}) = HistoryCallStatusChange;
+  const factory HistoryCallEvent.clearHistoryCall() = HistoryCallClear;
 }

@@ -14,6 +14,8 @@ abstract class FriendCallUseCase {
   Future<bool> rejectCall(String callRoomId);
 
   Future<List<CallEntity>> getCallList(String? status, String? callee);
+
+  Future<bool> clearHistoryCall();
 }
 
 @Injectable(as: FriendCallUseCase)
@@ -45,5 +47,10 @@ class FriendCallUseCaseImpl extends FriendCallUseCase {
   @override
   Future<List<CallEntity>> getCallList(String? status, String? callee) async {
     return await _repo.getCallList(status, callee);
+  }
+
+  @override
+  Future<bool> clearHistoryCall() async {
+    return await _repo.clearHistoryCall();
   }
 }

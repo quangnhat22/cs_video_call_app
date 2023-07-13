@@ -70,4 +70,15 @@ class CallFriendService {
       throw Exception(e.toString());
     }
   }
+
+  Future<Response> clearHistoryCall() async {
+    try {
+      // TODO: Update API endpoint
+      return await _service.dio.delete(BaseService.callPath);
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
