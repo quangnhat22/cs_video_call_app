@@ -14,9 +14,11 @@ class HistoryCallBloc extends Bloc<HistoryCallEvent, HistoryCallState> {
   HistoryCallBloc(this._friendCallUseCase) : super(const _Initial()) {
     on<HistoryCallEvent>((event, emit) async {
       await event.map(
-          started: (event) => _started(event, emit),
-          refresh: (event) => _refreshed(event, emit),
-          filterStatusCall: (event) => _filterStatusCallChange(event, emit));
+        started: (event) => _started(event, emit),
+        refresh: (event) => _refreshed(event, emit),
+        filterStatusCall: (event) => _filterStatusCallChange(event, emit),
+        clearHistoryCall: (event) => _clearHistoryCall(event, emit),
+      );
     });
   }
 
@@ -51,6 +53,19 @@ class HistoryCallBloc extends Bloc<HistoryCallEvent, HistoryCallState> {
       final calls = await _friendCallUseCase.getCallList(
           event.status.value.toLowerCase(), null);
       emit(HistoryCallSuccess(calls: calls));
+    } catch (e) {
+      emit(HistoryCallFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> _clearHistoryCall(
+      HistoryCallClear event, Emitter<HistoryCallState> emit) async {
+    try {
+      emit(const HistoryCallLoading());
+      final isClearedSuccess = await _friendCallUseCase.clearHistoryCall();
+      if (isClearedSuccess) {
+        emit(const HistoryCallSuccess(calls: []));
+      }
     } catch (e) {
       emit(HistoryCallFailure(message: e.toString()));
     }

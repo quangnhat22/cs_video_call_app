@@ -101,4 +101,18 @@ class FriendCallRepositoryImpl extends FriendCallRepository {
       throw Exception(e..toString());
     }
   }
+
+  @override
+  Future<bool> clearHistoryCall() async {
+    try {
+      final res = await _service.clearHistoryCall();
+      if (res.statusCode == 200) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e..toString());
+    }
+  }
 }

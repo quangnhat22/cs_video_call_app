@@ -11,4 +11,6 @@ abstract class FriendCallRepository {
   Future<bool> rejectCall(String callRoomId);
 
   Future<List<CallEntity>> getCallList(String? status, String? callee);
+
+  Future<bool> clearHistoryCall();
 }

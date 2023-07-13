@@ -1,22 +1,25 @@
 part of friends_call;
 
-// calls[index ~/ 2].callee!.avatar
-
 class FriendCallSliverList extends StatelessWidget {
   const FriendCallSliverList({super.key, required this.calls});
 
   final List<CallEntity> calls;
 
-  Widget _buildStatus(String status) {
-    Color textColor = Colors.red;
+  Widget _buildCallIcon(bool? isMyCall, String? status) {
+    Color iconColor = Colors.red;
+    IconData icon = Icons.call_received;
 
-    if (status.toLowerCase() == AppCallStatus.onGoing.value.toLowerCase()) {
-      textColor = Colors.green;
+    if (isMyCall != null && isMyCall) {
+      icon = Icons.call_made;
     }
 
-    return Text(
-      status,
-      style: TextStyle(color: textColor),
+    if (status?.toLowerCase() == AppCallStatus.onGoing.value.toLowerCase()) {
+      iconColor = Colors.green;
+    }
+
+    return Icon(
+      icon,
+      color: iconColor,
     );
   }
 
@@ -32,7 +35,9 @@ class FriendCallSliverList extends StatelessWidget {
                 spacing: 6,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: <Widget>[
-                  _buildStatus(calls[index ~/ 2].status!),
+                  // _buildStatus(calls[index ~/ 2].status!),
+                  _buildCallIcon(
+                      calls[index ~/ 2].isMyCall, calls[index ~/ 2].status!),
                   Text(DateFormat("dd-MM-yyyy hh:mm aaa")
                       .format(calls[index ~/ 2].calledAt!.toLocal()))
                 ],

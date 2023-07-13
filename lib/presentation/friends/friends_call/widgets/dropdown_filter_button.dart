@@ -7,17 +7,14 @@ const List<AppCallStatus> listItem = <AppCallStatus>[
   AppCallStatus.reject
 ];
 
-class DropdownFilterButton extends StatefulWidget {
-  final Function onChange;
+class DropdownFilterButton extends StatelessWidget {
+  const DropdownFilterButton({super.key});
 
-  const DropdownFilterButton(this.onChange, {super.key});
-
-  @override
-  State<DropdownFilterButton> createState() => _DropdownFilterButtonState();
-}
-
-class _DropdownFilterButtonState extends State<DropdownFilterButton> {
-  AppCallStatus dropdownValue = AppCallStatus.onGoing;
+  void handleDropdownChange(BuildContext ctx, AppCallStatus status) {
+    ctx
+        .read<HistoryCallBloc>()
+        .add(HistoryCallEvent.filterStatusCall(status: status));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +34,8 @@ class _DropdownFilterButtonState extends State<DropdownFilterButton> {
           style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
           borderRadius: BorderRadius.circular(8),
           onChanged: (AppCallStatus? value) {
-            setState(() {
-              dropdownValue = value!;
-            });
-
-            widget.onChange(context, value);
+            dropdownValue = value!;
+            handleDropdownChange(context, value);
           },
           items: listItem
               .map<DropdownMenuItem<AppCallStatus>>((AppCallStatus status) {
@@ -55,3 +49,5 @@ class _DropdownFilterButtonState extends State<DropdownFilterButton> {
     );
   }
 }
+
+AppCallStatus dropdownValue = AppCallStatus.onGoing;
