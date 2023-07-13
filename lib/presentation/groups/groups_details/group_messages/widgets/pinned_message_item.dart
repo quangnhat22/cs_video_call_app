@@ -39,8 +39,7 @@ class PinnedMessageItem extends StatelessWidget {
             CustomAvatarImage(
               urlImage: message.sender!.avatar,
               maxRadiusEmptyImg: 20,
-              widthImage: 48,
-              heightImage: 48,
+              size: CustomAvatarSize.small,
             ),
             const SizedBox(
               width: 8,

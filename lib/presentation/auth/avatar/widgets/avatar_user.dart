@@ -11,8 +11,7 @@ class AvatarUser extends StatelessWidget {
         return CustomAvatarImage(
           urlImage: state.urlImage,
           maxRadiusEmptyImg: 120,
-          widthImage: 240.w,
-          heightImage: 240.h,
+          size: CustomAvatarSize.extraLarge,
         );
       },
     );

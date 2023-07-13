@@ -22,8 +22,7 @@ class GroupMemberItem extends StatelessWidget {
       ),
       leading: CustomAvatarImage(
         urlImage: avatar,
-        widthImage: 46,
-        heightImage: 46,
+        size: CustomAvatarSize.small,
       ),
       // trailing:
       //     index == 0 ? Text(AppLocalizations.of(context)!.owner_text) : null,

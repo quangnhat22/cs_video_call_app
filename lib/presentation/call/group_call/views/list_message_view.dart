@@ -9,6 +9,7 @@ import 'package:videocall/core/utils/screen_utils.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
 import 'package:videocall/presentation/call/group_call/views/group_call_message_item.dart';
+
 import '../bloc/group_call_pin_message_bloc.dart';
 
 class ListMessageView extends StatelessWidget {
@@ -44,7 +45,11 @@ class ListMessageView extends StatelessWidget {
 
                         return Padding(
                           padding: EdgeInsets.only(
-                              left: 8, right: 8, top: 12, bottom: 60.h),
+                            left: 8,
+                            right: 8,
+                            top: 12,
+                            bottom: 60.h,
+                          ),
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>
                                 const SizedBox(
@@ -65,8 +70,7 @@ class ListMessageView extends StatelessWidget {
                                       Text(listMessage[index].message ?? ''),
                                   leading: CustomAvatarImage(
                                     urlImage: listMessage[index].avatar,
-                                    widthImage: 48,
-                                    heightImage: 48,
+                                    size: CustomAvatarSize.small,
                                   ),
                                   // isThreeLine: true,
                                   trailing: Text(

@@ -53,7 +53,7 @@ class GroupCallDetailsTab extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30, bottom: 10),
               child: Text(
                 '${AppLocalizations.of(context)!.group_call_participants_title} (20)',
-                style: AppTextStyles.mediumTitleTextStyle,
+                style: AppTextStyles.titleMedium,
               ),
             ),
             const GorupCallParticipantList(),

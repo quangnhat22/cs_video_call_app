@@ -11,6 +11,7 @@ class LoginWithGoogleButton extends StatelessWidget {
   }
 
   final double? widthBtn;
+
   @override
   Widget build(BuildContext context) {
     return CustomOutlineIconButton(

@@ -11,12 +11,15 @@ class SignUpForm extends StatelessWidget {
       bottom: 0,
       height: AppScreenUtils.isLandscape() ? 1.sh : 0.7.sh,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.symmetric(
+          vertical: 28.w,
+          horizontal: 20.h,
+        ),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
           ),
         ),
         child: SingleChildScrollView(

@@ -64,8 +64,7 @@ class FriendSearchResult extends StatelessWidget {
                             leading: CustomAvatarImage(
                               urlImage: friends[index].avatar,
                               maxRadiusEmptyImg: 20,
-                              widthImage: 48,
-                              heightImage: 48,
+                              size: CustomAvatarSize.small,
                             ),
                           ),
                         ),

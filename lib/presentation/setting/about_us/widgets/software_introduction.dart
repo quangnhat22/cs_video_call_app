@@ -9,7 +9,7 @@ class SoftwareIntroduction extends StatelessWidget {
       children: <Widget>[
         Text(
           AppLocalizations.of(context)!.our_app,
-          style: AppTextStyles.headlineTextStyle,
+          style: AppTextStyles.headLineLarge,
         ),
         const SizedBox(height: 12),
         Text(
