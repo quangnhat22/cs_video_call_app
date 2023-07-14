@@ -31,7 +31,7 @@ class GroupDetailBloc extends Bloc<GroupDetailEvent, GroupDetailState> {
       } else {
         emit(
           const GroupDetailState.getDetailFail(
-              message: "Something wrong! Try again"),
+              message: "Something went wrong! Please try again"),
         );
       }
     } catch (e) {
@@ -47,7 +47,7 @@ class GroupDetailBloc extends Bloc<GroupDetailEvent, GroupDetailState> {
         emit(const GroupDetailLeaveSuccess());
       } else {
         emit(const GroupDetailLeaveFailure(
-            message: "Something wrong! Try again"));
+            message: "Something went wrong! Please try again"));
       }
     } catch (e) {
       emit(GroupDetailLeaveFailure(message: e.toString()));

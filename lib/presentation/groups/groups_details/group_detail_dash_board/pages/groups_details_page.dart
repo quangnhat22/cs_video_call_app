@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/di/injector.dart';
+import 'package:videocall/core/routes/app_navigation.dart';
+import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
@@ -13,7 +15,7 @@ import '../../cubit_inivite_new_member/new_member_cubit.dart';
 import '../../group_member/widget/fab_invite_new_member.dart';
 import '../widgets/fab_create_new_meeting.dart';
 
-enum GroupOptions { leaveGroup }
+enum GroupOptions { leaveGroup, editGroup }
 
 class GroupDetailPage extends StatelessWidget {
   const GroupDetailPage({
@@ -38,6 +40,7 @@ class GroupDetailPage extends StatelessWidget {
       child: GroupDetailView(
         groupId: groupArgs.groupId,
         groupName: groupArgs.groupName,
+        groupAvatar: groupArgs.groupAvatar ?? '',
       ),
     );
   }
@@ -45,10 +48,14 @@ class GroupDetailPage extends StatelessWidget {
 
 class GroupDetailView extends StatefulWidget {
   const GroupDetailView(
-      {super.key, required this.groupId, required this.groupName});
+      {super.key,
+      required this.groupId,
+      required this.groupName,
+      this.groupAvatar});
 
   final String groupId;
   final String groupName;
+  final String? groupAvatar;
 
   @override
   State<GroupDetailView> createState() => _GroupDetailViewState();
@@ -94,6 +101,14 @@ class _GroupDetailViewState extends State<GroupDetailView>
       context
           .read<GroupDetailBloc>()
           .add(GroupDetailLeave(groupId: widget.groupId));
+    }
+
+    if (selectedOption == GroupOptions.editGroup) {
+      NavigationUtil.pushNamed(routeName: RouteName.editGroup, args: {
+        "groupId": widget.groupId,
+        "groupName": widget.groupName,
+        "groupImage": widget.groupAvatar
+      });
     }
   }
 
@@ -143,6 +158,10 @@ class _GroupDetailViewState extends State<GroupDetailView>
                     PopupMenuItem<GroupOptions>(
                       value: GroupOptions.leaveGroup,
                       child: Text(AppLocalizations.of(context)!.leave_group),
+                    ),
+                    PopupMenuItem<GroupOptions>(
+                      value: GroupOptions.editGroup,
+                      child: Text(AppLocalizations.of(context)!.edit_group),
                     ),
                   ],
                 )

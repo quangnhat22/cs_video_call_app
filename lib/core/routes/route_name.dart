@@ -23,6 +23,7 @@ class RouteName {
   static const String teamDetails = '/team-details';
   static const String teamCallDetails = '/team-call-details';
   static const String createGroup = '/create-group';
+  static const String editGroup = '/edit-group';
   static const String createSchedule = '/create-schedule';
   static const String personalCall = '/personal-call';
   static const String createGroupCall = "/create-group-call";

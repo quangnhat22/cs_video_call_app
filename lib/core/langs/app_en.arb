@@ -84,6 +84,7 @@
   "camera_source_option": "Take photo",
   "gallery_source_option": "Choose from gallery",
   "create_group_app_bar_title": "Create Group",
+  "edit_group_app_bar_title": "Edit Group",
   "set_new_photo": "Set New Photo",
   "group_name": "Group name",
   "add_members": "Add Members",
@@ -147,6 +148,7 @@
   "unknown_group": "Unknown group",
   "create_group_failed": "Create group failed!!",
   "create_group_successfully": "Create group successfully!!",
+  "edit_group_successfully": "Edit group successfully!!",
   "no_received_requests_found": "No received requests found",
   "no_sent_requests_found": "No sent requests found",
   "sent_by": "Sent by",
@@ -238,5 +240,6 @@
   "something_wrong_try_again": "Something wrong! Try again.",
   "leave_group_success": "Leave group success",
   "turn_on_off_notification": "Turn on/turn off notification",
-  "old_password_is_incorrect": "Old password is incorrect"
+  "old_password_is_incorrect": "Old password is incorrect",
+  "edit_group": "Edit group"
 }

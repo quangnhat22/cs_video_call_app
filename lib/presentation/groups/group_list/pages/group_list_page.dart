@@ -20,10 +20,6 @@ class GroupListPage extends StatelessWidget {
 class GroupListView extends StatelessWidget {
   const GroupListView({super.key});
 
-  void handleDropdownChange(String selectedValue) {
-    debugPrint(selectedValue);
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<GroupDetailBloc, GroupDetailState>(

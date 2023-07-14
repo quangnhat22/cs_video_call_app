@@ -24,6 +24,20 @@ class GroupService {
     }
   }
 
+  Future<Response> editGroup(
+      String? groupName, String? groupImage, String groupId) async {
+    try {
+      return await _service.dio.put("${BaseService.groupPath}/$groupId", data: {
+        "name": groupName,
+        "image_url": groupImage,
+      });
+    } on DioError catch (e) {
+      throw Exception(e.message.toString());
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<Response> getGroupList() async {
     try {
       return await _service.dio.get(BaseService.groupPath);

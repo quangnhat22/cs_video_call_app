@@ -84,6 +84,7 @@
   "camera_source_option": "Chụp ảnh mới",
   "gallery_source_option": "Chọn ảnh từ thư viện",
   "create_group_app_bar_title": "Tạo Nhóm",
+  "edit_group_app_bar_title": "Chỉnh Sửa Nhóm",
   "set_new_photo": "Đổi Ảnh Mới",
   "group_name": "Tên nhóm",
   "add_members": "Thêm Thành Viên",
@@ -147,6 +148,7 @@
   "unknown_group": "Nhóm không xác định",
   "create_group_failed": "Tạo nhóm thất bại!!",
   "create_group_successfully": "Tạo nhóm thành công!!",
+  "edit_group_successfully": "Chỉnh sửa nhóm thành công!!",
   "no_received_requests_found": "Bạn chưa nhận được yêu cầu nào",
   "no_sent_requests_found": "Bạn chưa gửi yêu cầu nào",
   "sent_by": "Gửi bởi",
@@ -238,5 +240,6 @@
   "something_wrong_try_again": "Đã có lỗi xảy ra. Vui lòng thử lại",
   "leave_group_success": "Rời nhóm thành công",
   "turn_on_off_notification": "Bật/ Tắt thông báo",
-  "old_password_is_incorrect": "Mật khẩu cũ không đúng"
+  "old_password_is_incorrect": "Mật khẩu cũ không đúng",
+  "edit_group": "Chỉnh sửa nhóm"
 }

@@ -7,6 +7,8 @@ abstract class GroupRepository {
   Future<void> createGroup(
       String? groupName, String? groupImage, List<UserEntity?>? members);
 
+  Future<void> editGroup(String? groupName, String? groupImage, String groupId);
+
   Future<List<GroupEntity>> getGroupList();
 
   Future<GroupDetailEntity?> getGroupDetail(String id);
