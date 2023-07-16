@@ -102,15 +102,39 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _enableScreenShare() async {
-    bool hasPermissions = false;
+    if (WebRTC.platformIsDesktop) {
+      try {
+        final source = await showDialog<DesktopCapturerSource>(
+          context: context,
+          builder: (context) => ScreenSelectDialog(),
+        );
+        if (source == null) {
+          log('cancelled screenshare');
+          return;
+        }
+        log('DesktopCapturerSource: ${source.id}');
+        var track = await LocalVideoTrack.createScreenShareTrack(
+          ScreenShareCaptureOptions(
+            sourceId: source.id,
+            maxFrameRate: 15.0,
+          ),
+        );
+        await participant.publishVideoTrack(track);
+      } catch (e) {
+        log('could not publish video: $e');
+      }
+      return;
+    }
     if (WebRTC.platformIsAndroid) {
+      // Android specific
       requestBackgroundPermission([bool isRetry = false]) async {
+        // Required for android screenshare.
         try {
-          hasPermissions = await FlutterBackground.hasPermissions;
+          bool hasPermissions = await FlutterBackground.hasPermissions;
           if (!isRetry) {
             const androidConfig = FlutterBackgroundAndroidConfig(
               notificationTitle: 'Screen Sharing',
-              notificationText: 'CS Video Call App is sharing the screen.',
+              notificationText: 'LiveKit Example is sharing the screen.',
               notificationImportance: AndroidNotificationImportance.Default,
               notificationIcon: AndroidResource(
                 name: 'ic_launcher',
@@ -125,15 +149,27 @@ class _FriendCallControlState extends State<FriendCallControl> {
             await FlutterBackground.enableBackgroundExecution();
           }
         } catch (e) {
-          return;
+          if (!isRetry) {
+            return await Future<void>.delayed(const Duration(seconds: 1),
+                () => requestBackgroundPermission(true));
+          }
+          log('could not publish video: $e');
         }
       }
 
       await requestBackgroundPermission();
     }
-
-    await participant.setScreenShareEnabled(hasPermissions,
-        captureScreenAudio: hasPermissions);
+    if (WebRTC.platformIsIOS) {
+      var track = await LocalVideoTrack.createScreenShareTrack(
+        const ScreenShareCaptureOptions(
+          useiOSBroadcastExtension: true,
+          maxFrameRate: 15.0,
+        ),
+      );
+      await participant.publishVideoTrack(track);
+      return;
+    }
+    await participant.setScreenShareEnabled(true, captureScreenAudio: true);
   }
 
   void _disableScreenShare() async {

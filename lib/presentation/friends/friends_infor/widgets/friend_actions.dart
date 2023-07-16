@@ -52,32 +52,35 @@ class FriendActions extends StatelessWidget {
               ),
             ),
           )
-        : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                children: [
-                  CommonListTile(
-                    isBorderTop: true,
-                    title: Text(
-                      AppLocalizations.of(context)!.friend_add_friend,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
+        : (friendInfo.relation != AppFriendRelation.self.value)
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                child: Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Column(
+                    children: [
+                      CommonListTile(
+                        isBorderTop: true,
+                        title: Text(
+                          AppLocalizations.of(context)!.friend_add_friend,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.person_add,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        onTap: () => _handleAddFriend(context),
                       ),
-                    ),
-                    icon: Icon(
-                      Icons.person_add,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    onTap: () => _handleAddFriend(context),
+                      //const ButtonFriendBlock(),
+                    ],
                   ),
-                  //const ButtonFriendBlock(),
-                ],
-              ),
-            ),
-          );
+                ),
+              )
+            : Container();
   }
 }
