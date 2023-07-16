@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:uuid/uuid.dart';
 import 'package:videocall/core/config/app_config.dart';
 import 'package:videocall/data/models/message_call_model.dart';
 import 'package:videocall/domain/entities/message_call_entity.dart';
@@ -128,7 +129,9 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
           (state as CallGroupConnectedSuccess).listMessage ?? [];
 
       if (_room.localParticipant != null) {
+        final id = '${const Uuid().v4()}-${DateTime.now().toString()}';
         final newMessageModel = MessageCallModel(
+          id: id,
           groupId: _groupId,
           senderId: userInfo?.id,
           name: userInfo?.name,
@@ -142,9 +145,23 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
         final newMessageEntity =
             MessageCallEntity.convertToMessageEntity(model: newMessageModel);
 
-        await _room.localParticipant!.publishData(dataUtf8, topic: 'hello');
+        await _room.localParticipant!.publishData(dataUtf8, topic: 'message');
         emit((state as CallGroupConnectedSuccess)
             .copyWith(listMessage: [...listMessage, newMessageEntity]));
+      }
+    }
+  }
+
+  Future<void> sendMessagePin(String idMessage) async {
+    if (state is CallGroupConnectedSuccess) {
+      if (_room.localParticipant != null) {
+        final dataUtf8 = utf8.encode(idMessage);
+        final listMessagePinned =
+            (state as CallGroupConnectedSuccess).messagePin ?? [];
+
+        await _room.localParticipant!.publishData(dataUtf8, topic: 'pinned');
+        emit((state as CallGroupConnectedSuccess)
+            .copyWith(messagePin: [...listMessagePinned, idMessage]));
       }
     }
   }
@@ -152,18 +169,28 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   Future<void> receiveNewMessage(DataReceivedEvent event) async {
     try {
       if (state is CallGroupConnectedSuccess) {
-        final listMessage =
-            (state as CallGroupConnectedSuccess).listMessage ?? [];
+        if (event.topic == 'message') {
+          final listMessage =
+              (state as CallGroupConnectedSuccess).listMessage ?? [];
 
-        final dataDecoded = utf8.decode(event.data);
-        final messageJson = jsonDecode(dataDecoded);
-        final newMessage = MessageCallModel.fromJson(messageJson);
-        final newMessageEntity =
-            MessageCallEntity.convertToMessageEntity(model: newMessage);
+          final dataDecoded = utf8.decode(event.data);
+          final messageJson = jsonDecode(dataDecoded);
+          final newMessage = MessageCallModel.fromJson(messageJson);
+          final newMessageEntity =
+              MessageCallEntity.convertToMessageEntity(model: newMessage);
 
-        final listMessageUpdated = [...listMessage, newMessageEntity];
-        emit((state as CallGroupConnectedSuccess)
-            .copyWith(listMessage: listMessageUpdated));
+          final listMessageUpdated = [...listMessage, newMessageEntity];
+          emit((state as CallGroupConnectedSuccess)
+              .copyWith(listMessage: listMessageUpdated));
+        }
+        if (event.topic == 'pinned') {
+          final listMessagePinned =
+              (state as CallGroupConnectedSuccess).messagePin ?? [];
+          final dataDecoded = utf8.decode(event.data);
+          final idMessagePin = dataDecoded.toString();
+          emit((state as CallGroupConnectedSuccess)
+              .copyWith(messagePin: [...listMessagePinned, idMessagePin]));
+        }
       }
     } catch (e) {
       throw Exception(e.toString());

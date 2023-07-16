@@ -182,9 +182,15 @@ class _FriendCallControlState extends State<FriendCallControl> {
     }
   }
 
-  void _onTapDisconnect() async {
-    final result = await context.showDisconnectDialog();
-    if (result == true) await widget.room.disconnect();
+  void _onTapDisconnect(BuildContext ctx) async {
+    final result = await ctx.showDisconnectDialog();
+    if (result == true) {
+      if (ctx.mounted) {
+        await ctx.read<FriendCallCubit>().abandonCall();
+      }
+      await widget.room.disconnect();
+    }
+    ;
   }
 
   Widget _buildIconWhenMicrophoneIsEnabled() {
@@ -408,7 +414,7 @@ class _FriendCallControlState extends State<FriendCallControl> {
             padding: const EdgeInsets.all(8.0),
             child: IconWrapper(
               iconButton: IconButton(
-                onPressed: _onTapDisconnect,
+                onPressed: () => _onTapDisconnect(context),
                 icon: const Icon(
                   Icons.call_end,
                   color: Colors.white,

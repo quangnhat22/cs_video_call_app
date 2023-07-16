@@ -8,7 +8,7 @@ import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
 import 'package:videocall/core/utils/screen_utils.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
-import 'package:videocall/presentation/call/group_call/views/group_call_message_item.dart';
+import 'package:videocall/presentation/call/group_call/widgets/group_call_message_item.dart';
 
 import '../bloc/group_call_pin_message_bloc.dart';
 
@@ -41,7 +41,7 @@ class ListMessageView extends StatelessWidget {
                 BlocBuilder<CallGroupStatusCubit, CallGroupStatusState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      connectedSuccess: (user, listMessage, room) {
+                      connectedSuccess: (user, listMessage, pinMessage, room) {
                         if (listMessage == null || listMessage.isEmpty) {
                           return Center(
                             child: Text(AppLocalizations.of(context)!
@@ -64,6 +64,9 @@ class ListMessageView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return GroupCallMessageItem(
                                 messageCallEntity: listMessage[index],
+                                isPinned: pinMessage != null
+                                    ? pinMessage.contains(listMessage[index].id)
+                                    : false,
                                 messageChild: ListTile(
                                   title: Text(
                                     listMessage[index].name ??

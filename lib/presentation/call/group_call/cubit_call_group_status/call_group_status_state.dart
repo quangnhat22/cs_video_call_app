@@ -13,6 +13,7 @@ class CallGroupStatusState with _$CallGroupStatusState {
   const factory CallGroupStatusState.connectedSuccess({
     UserEntity? user,
     List<MessageCallEntity>? listMessage,
+    List<String>? messagePin,
     required Room room,
   }) = CallGroupConnectedSuccess;
 

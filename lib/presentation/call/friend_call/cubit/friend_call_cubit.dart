@@ -7,7 +7,6 @@ import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
 import '../../../../core/config/app_config.dart';
 
 part 'friend_call_cubit.freezed.dart';
-
 part 'friend_call_state.dart';
 
 @Injectable()
@@ -119,7 +118,9 @@ class FriendCallCubit extends Cubit<FriendCallState> {
 
   Future<void> abandonCall() async {
     try {
-      if (state is FriendCallPreparing) {
+      if (state is FriendCallConnectedSuccess) {
+        final isFullRoom = (state as FriendCallConnectedSuccess).isFullRoom;
+        if (isFullRoom) return;
         final res = await _friendCallUseCase.abandonCall(_callRoomId);
         if (res) {
           emit(const FriendCallEnded());
@@ -152,7 +153,7 @@ class FriendCallCubit extends Cubit<FriendCallState> {
                 ))),
         defaultCameraCaptureOptions: CameraCaptureOptions(
           cameraPosition:
-          _isSwitchCameraFront ? CameraPosition.front : CameraPosition.back,
+              _isSwitchCameraFront ? CameraPosition.front : CameraPosition.back,
           maxFrameRate: 30,
           params: const VideoParameters(
             dimensions: VideoDimensionsPresets.h720_169,

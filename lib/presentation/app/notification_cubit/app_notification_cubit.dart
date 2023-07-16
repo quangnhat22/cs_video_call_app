@@ -8,6 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/data/models/notification_model.dart';
 import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
 import 'package:videocall/domain/modules/friend/friend_usecase.dart';
@@ -40,6 +41,16 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
   Future<void> _onNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
     log(receivedNotification.toString(), name: "onNotificationDisplay");
+    SnackBarApp.showTopSnackBar(
+        receivedNotification.body.toString(), TypesSnackBar.warning);
+    if (receivedNotification.channelKey == 'call_channel') {
+      if (receivedNotification.title == 'Abandon call') {
+        await Future.delayed(const Duration(milliseconds: 300), () {
+          AwesomeNotifications()
+              .dismissNotificationsByChannelKey('call_channel');
+        });
+      }
+    }
   }
 
   Future<void> onDismissActionReceivedMethod(
@@ -78,30 +89,7 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
               break;
 
             case 'accept':
-              String? currentPath;
-              NavigationUtil.navigatorKey?.popUntil((route) {
-                currentPath = route.settings.name;
-                return true;
-              });
-
-              if (currentPath == '/') {
-                // NavigationUtil.pushNamed(
-                //     routeName: RouteName.personalCall,
-                //     args: {
-                //       'friendId': event.body["extra"]["friendId"],
-                //       'chatRoomId': event.body["extra"]["chatRoomId"]
-                //     });
-              } else {
-                // NavigationUtil.pop();
-                // NavigationUtil.pushNamed(
-                //     routeName: RouteName.personalCall,
-                //     args: {
-                //       'friendId': event.body["extra"]["friendId"],
-                //       'chatRoomId': event.body["extra"]["chatRoomId"]
-                //     });
-              }
-
-              break;
+              await _groupUC.acceptReceivedGroup(payload.indirect!.id);
               break;
 
             default:

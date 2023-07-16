@@ -6,6 +6,7 @@ part 'message_call_model.g.dart';
 @freezed
 class MessageCallModel with _$MessageCallModel {
   const factory MessageCallModel({
+    required String id,
     String? groupId,
     String? senderId,
     String? name,

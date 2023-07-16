@@ -33,6 +33,11 @@ class FriendCallView extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       listener: (context, state) {
         state.whenOrNull(
+          ended: () {
+            SnackBarApp.showSnackBar(null, AppLocalizations.of(context)!.ended,
+                TypesSnackBar.success);
+            Navigator.of(context).pop();
+          },
           connectedFail: (_) {
             SnackBarApp.showSnackBar(
                 null,
