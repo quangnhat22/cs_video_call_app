@@ -44,7 +44,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _onChange() {
-    //trigger refresh
     setState(() {});
   }
 
@@ -53,11 +52,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
     _audioOutputs = devices.where((d) => d.kind == "audioutput").toList();
     _videoInputs = devices.where((d) => d.kind == "videoinput").toList();
     _onChange();
-  }
-
-  void _unPublishAll() async {
-    final result = await context.showUnPublishDialog();
-    if (result == true) await participant.unpublishAllTracks();
   }
 
   void _selectAudioInput(MediaDevice device) async {
@@ -76,7 +70,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _toggleCamera() async {
-    //
     final track = participant.videoTracks.firstOrNull?.track;
     if (track == null) return;
 
@@ -109,39 +102,15 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _enableScreenShare() async {
-    if (WebRTC.platformIsDesktop) {
-      try {
-        final source = await showDialog<DesktopCapturerSource>(
-          context: context,
-          builder: (context) => ScreenSelectDialog(),
-        );
-        if (source == null) {
-          log('cancelled screenshare');
-          return;
-        }
-        log('DesktopCapturerSource: ${source.id}');
-        var track = await LocalVideoTrack.createScreenShareTrack(
-          ScreenShareCaptureOptions(
-            sourceId: source.id,
-            maxFrameRate: 15.0,
-          ),
-        );
-        await participant.publishVideoTrack(track);
-      } catch (e) {
-        log('could not publish video: $e');
-      }
-      return;
-    }
+    bool hasPermissions = false;
     if (WebRTC.platformIsAndroid) {
-      // Android specific
       requestBackgroundPermission([bool isRetry = false]) async {
-        // Required for android screenshare.
         try {
-          bool hasPermissions = await FlutterBackground.hasPermissions;
+          hasPermissions = await FlutterBackground.hasPermissions;
           if (!isRetry) {
             const androidConfig = FlutterBackgroundAndroidConfig(
               notificationTitle: 'Screen Sharing',
-              notificationText: 'LiveKit Example is sharing the screen.',
+              notificationText: 'CS Video Call App is sharing the screen.',
               notificationImportance: AndroidNotificationImportance.Default,
               notificationIcon: AndroidResource(
                 name: 'ic_launcher',
@@ -156,35 +125,21 @@ class _FriendCallControlState extends State<FriendCallControl> {
             await FlutterBackground.enableBackgroundExecution();
           }
         } catch (e) {
-          if (!isRetry) {
-            return await Future<void>.delayed(const Duration(seconds: 1),
-                () => requestBackgroundPermission(true));
-          }
-          log('could not publish video: $e');
+          return;
         }
       }
 
       await requestBackgroundPermission();
     }
-    if (WebRTC.platformIsIOS) {
-      var track = await LocalVideoTrack.createScreenShareTrack(
-        const ScreenShareCaptureOptions(
-          useiOSBroadcastExtension: true,
-          maxFrameRate: 15.0,
-        ),
-      );
-      await participant.publishVideoTrack(track);
-      return;
-    }
-    await participant.setScreenShareEnabled(true, captureScreenAudio: true);
+
+    await participant.setScreenShareEnabled(hasPermissions,
+        captureScreenAudio: hasPermissions);
   }
 
   void _disableScreenShare() async {
-    await participant.setScreenShareEnabled(false);
     if (Platform.isAndroid) {
-      // Android specific
       try {
-        //   await FlutterBackground.disableBackgroundExecution();
+        await participant.setScreenShareEnabled(false);
       } catch (error) {
         log('error disabling screen share: $error');
       }
@@ -194,19 +149,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
   void _onTapDisconnect() async {
     final result = await context.showDisconnectDialog();
     if (result == true) await widget.room.disconnect();
-  }
-
-  void _onTapUpdateSubscribePermission() async {
-    final result = await context.showSubscribePermissionDialog();
-    if (result != null) {
-      try {
-        widget.room.localParticipant?.setTrackSubscriptionPermissions(
-          allParticipantsAllowed: result,
-        );
-      } catch (error) {
-        await context.showErrorDialog(error);
-      }
-    }
   }
 
   Widget _buildIconWhenMicrophoneIsEnabled() {
@@ -395,95 +337,53 @@ class _FriendCallControlState extends State<FriendCallControl> {
     );
   }
 
-  Widget _buildPanelSliding() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildIconWhenMicrophoneIsEnabled(),
-        _buildVolumnIcon(),
-        _buildIconWhenCameraIsEnabled(),
-        const SizedBox(
-          width: 10,
-        ),
-        IconWrapper(
-          iconButton: IconButton(
-            icon: const Icon(
-              Icons.switch_camera_outlined,
-              color: Colors.black,
-            ),
-            onPressed: _toggleCamera,
-            tooltip: 'toggle camera',
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        _buildShareScreenIcon(),
-        const SizedBox(
-          width: 10,
-        ),
-        // IconWrapper(
-        //   iconButton: IconButton(
-        //     onPressed: _unPublishAll,
-        //     icon: const Icon(
-        //       Icons.block,
-        //       color: Colors.black,
-        //     ),
-        //     tooltip: 'UnPublish all',
-        //   ),
-        // ),
-      ],
-    );
-  }
-
-  Widget _buildCollapsedSliding() {
-    return Wrap(
-      runAlignment: WrapAlignment.center,
-      alignment: WrapAlignment.center,
-      spacing: 20,
-      children: [
-        // IconWrapper(
-        //     iconButton: IconButton(
-        //   onPressed: _onTapUpdateSubscribePermission,
-        //   icon: const Icon(
-        //     Icons.security,
-        //     color: Colors.black,
-        //   ),
-        //   tooltip: 'Subscribe permission',
-        // )),
-        //_buildIconWhenMicrophoneIsEnabled(),
-        IconWrapper(
-          iconButton: IconButton(
-            onPressed: _onTapDisconnect,
-            icon: const Icon(
-              Icons.call_end,
-              color: Colors.white,
-            ),
-            tooltip: 'disconnect',
-          ),
-          backgroundColor: Colors.red,
-        ),
-        // IconWrapper(
-        //   iconButton: IconButton(
-        //     icon: const Icon(
-        //       Icons.switch_camera_outlined,
-        //       color: Colors.black,
-        //     ),
-        //     onPressed: _toggleCamera,
-        //     tooltip: 'toggle camera',
-        //   ),
-        // ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SlidingUpPanel(
-      minHeight: 80.h,
-      maxHeight: 200.h,
-      panel: _buildPanelSliding(),
-      collapsed: _buildCollapsedSliding(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Wrap(
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.center,
+        spacing: 0,
+        runSpacing: 0,
+        children: [
+          _buildIconWhenMicrophoneIsEnabled(),
+          _buildVolumnIcon(),
+          _buildIconWhenCameraIsEnabled(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconWrapper(
+              iconButton: IconButton(
+                icon: const Icon(
+                  Icons.switch_camera_outlined,
+                  color: Colors.black,
+                ),
+                onPressed: _toggleCamera,
+                tooltip: 'toggle camera',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _buildShareScreenIcon(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconWrapper(
+              iconButton: IconButton(
+                onPressed: _onTapDisconnect,
+                icon: const Icon(
+                  Icons.call_end,
+                  color: Colors.white,
+                ),
+                tooltip: 'disconnect',
+              ),
+              backgroundColor: Colors.red,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
