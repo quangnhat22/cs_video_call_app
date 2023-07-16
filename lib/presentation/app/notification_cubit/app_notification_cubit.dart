@@ -45,6 +45,8 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
               return true;
             });
 
+            await FlutterCallkitIncoming.endCall(event.body["id"]);
+
             if (currentPath == '/') {
               NavigationUtil.pushNamed(
                   routeName: RouteName.personalCall,
@@ -162,36 +164,9 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
   }
 
   @pragma("vm:entry-point")
-  Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    if (receivedAction.channelKey == "basic_channel") {
-    } else if (receivedAction.channelKey == "call_channel") {
-      await _receiveCallNotificationAction(receivedAction);
-    }
-  }
-
-  @pragma("vm:entry-point")
-  static Future<void> _receiveCallNotificationAction(
+  static Future<void> onActionReceivedMethod(
       ReceivedAction receivedAction) async {
-    switch (receivedAction.buttonKeyPressed) {
-      case 'REJECT':
-        // Is not necessary to do anything, because the reject button is
-        // already auto dismissible
-        break;
-
-      case 'ACCEPT':
-        // NavigationUtil.loadSingletonPage(
-        //   targetPage: RouteName.personalCall,
-        //   receivedAction: receivedAction,
-        // );
-        break;
-
-      default:
-        // loadSingletonPage(App.navigatorKey.currentState,
-        //     targetPage: PAGE_PHONE_CALL, receivedAction: receivedAction);
-        break;
-    }
+    WidgetsFlutterBinding.ensureInitialized();
   }
 
   Future<void> _onNotificationCreatedMethod(
@@ -210,7 +185,7 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
     try {
       CallKitParams callKitParams = CallKitParams(
         id: notificationModel.id,
-        nameCaller: notificationModel.subject?.name ?? 'Unknow name',
+        nameCaller: notificationModel.subject?.name ?? 'Unknown name',
         appName: 'CS VideoCall App',
         avatar: notificationModel.subject?.image,
         type: 0,
@@ -229,7 +204,6 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
         },
         android: AndroidParams(
             isCustomNotification: true,
-            isCustomSmallExNotification: true,
             isShowLogo: false,
             ringtonePath: 'system_ringtone_default',
             backgroundColor: '#0955fa',

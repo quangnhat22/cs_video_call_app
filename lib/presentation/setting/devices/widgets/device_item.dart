@@ -30,14 +30,14 @@ class DeviceItem extends StatelessWidget {
         subtitle: Text(
             '${AppLocalizations.of(context)!.last_accessed_at} ${DateFormat('dd-MM-yyyy').format(DateTime.parse(deviceEntity.createdAt!))}'),
         leading: const Icon(Icons.smartphone),
-        // trailing: IconButton(
-        //     onPressed: () {
-        //       _handleDeleteDevice(context, deviceEntity.id, deviceEntity.name!);
-        //     },
-        //     icon: const Icon(
-        //       Icons.delete,
-        //       color: Colors.redAccent,
-        //     )),
+        trailing: IconButton(
+            onPressed: () {
+              _handleDeleteDevice(context, deviceEntity.id, deviceEntity.name!);
+            },
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.redAccent,
+            )),
       ),
     );
   }

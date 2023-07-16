@@ -239,5 +239,6 @@
   "leave_group_success": "Rời nhóm thành công",
   "turn_on_off_notification": "Bật/ Tắt thông báo",
   "old_password_is_incorrect": "Mật khẩu cũ không đúng",
-  "choose_a_photo": "Chọn ảnh"
+  "choose_a_photo": "Chọn ảnh",
+  "do_you_want_delete_history_call": "Bạn có muốn xoá toàn bộ lịch sử cuộc gọi?"
 }

@@ -2,11 +2,21 @@ part of friends_request;
 
 enum Request { sent, received }
 
-class FriendsRequestPage extends StatelessWidget {
+class FriendsRequestPage extends StatefulWidget {
   const FriendsRequestPage({super.key});
 
   @override
+  State<FriendsRequestPage> createState() => _FriendsRequestPageState();
+}
+
+class _FriendsRequestPageState extends State<FriendsRequestPage>
+    with AutomaticKeepAliveClientMixin<FriendsRequestPage> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -97,8 +107,8 @@ class _FriendsRequestViewState extends State<FriendsRequestView> {
                   });
             },
             orElse: () {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return const SingleChildScrollView(
+                child: ListSkeleton(),
               );
             },
           );

@@ -1,15 +1,15 @@
 part of friends_infor;
 
 class FriendActions extends StatelessWidget {
-  const FriendActions({super.key});
+  const FriendActions({super.key, required this.friendInfo});
+
+  final UserEntity friendInfo;
 
   void _handleAddFriend(BuildContext ctx) {
-    final userId = ctx.read<FriendInfoCubit>().state.user.id;
-    ctx.read<FriendsActionCubit>().sentAddFriendRequest(userId);
+    ctx.read<FriendsActionCubit>().sentAddFriendRequest(friendInfo.id);
   }
 
   void _handleRemoveFriend(BuildContext ctx) {
-    final userId = ctx.read<FriendInfoCubit>().state.user.id;
     AppDefaultDialogWidget()
         .setAppDialogType(AppDialogType.confirm)
         .setTitle(AppLocalizations.of(ctx)!.confirm)
@@ -17,7 +17,7 @@ class FriendActions extends StatelessWidget {
         .setNegativeText(AppLocalizations.of(ctx)!.cancel)
         .setPositiveText(AppLocalizations.of(ctx)!.confirm)
         .setOnPositive(() {
-          ctx.read<FriendsActionCubit>().deleteFriend(userId);
+          ctx.read<FriendsActionCubit>().deleteFriend(friendInfo.id);
         })
         .buildDialog(ctx)
         .show(ctx);
@@ -25,11 +25,8 @@ class FriendActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FriendInfoCubit, FriendInfoState>(
-      buildWhen: (prev, current) => prev.user != current.user,
-      builder: (context, state) {
-        if (state.user.relation == AppFriendRelation.friend.value) {
-          return Padding(
+    return (friendInfo.relation == AppFriendRelation.friend.value)
+        ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
             child: Card(
               elevation: 4,
@@ -54,9 +51,8 @@ class FriendActions extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        } else {
-          return Padding(
+          )
+        : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
             child: Card(
               elevation: 4,
@@ -83,8 +79,5 @@ class FriendActions extends StatelessWidget {
               ),
             ),
           );
-        }
-      },
-    );
   }
 }

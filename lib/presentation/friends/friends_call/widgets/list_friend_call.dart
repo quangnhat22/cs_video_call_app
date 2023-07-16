@@ -3,8 +3,18 @@ part of friends_call;
 class ListFriendCall extends StatelessWidget {
   const ListFriendCall({Key? key}) : super(key: key);
 
-  void handleClearHistoryCall(BuildContext ctx) {
-    ctx.read<HistoryCallBloc>().add(const HistoryCallClear());
+  void _handleClearHistoryCall(BuildContext ctx) {
+    AppDefaultDialogWidget()
+        .setAppDialogType(AppDialogType.confirm)
+        .setTitle(AppLocalizations.of(ctx)!.confirm)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_delete_history_call)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .setOnPositive(() {
+      ctx.read<HistoryCallBloc>().add(const HistoryCallClear());
+    })
+        .buildDialog(ctx)
+        .show(ctx);
   }
 
   @override
@@ -38,10 +48,13 @@ class ListFriendCall extends StatelessWidget {
                 slivers: <Widget>[
                   SliverStickyHeader(
                     header: Container(
-                      color: Theme.of(context).colorScheme.background,
+                      color: Theme
+                          .of(context)
+                          .colorScheme
+                          .background,
                       child: Padding(
                         padding:
-                            const EdgeInsets.only(left: 20, right: 20, top: 16),
+                        const EdgeInsets.only(left: 20, right: 20, top: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,20 +62,25 @@ class ListFriendCall extends StatelessWidget {
                             const DropdownFilterButton(),
                             ElevatedButton(
                               onPressed: () {
-                                handleClearHistoryCall(context);
+                                _handleClearHistoryCall(context);
                               },
                               style: ButtonStyle(
-                                  padding: const MaterialStatePropertyAll(
-                                      EdgeInsets.symmetric(horizontal: 26)),
-                                  backgroundColor:
-                                      const MaterialStatePropertyAll(
-                                          Colors.red),
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8)))),
-                              child: Text(AppLocalizations.of(context)!
-                                  .friends_clear_text_button),
+                                padding: const MaterialStatePropertyAll(
+                                    EdgeInsets.symmetric(horizontal: 26)),
+                                backgroundColor: const MaterialStatePropertyAll(
+                                    Colors.redAccent),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .friends_clear_text_button,
+                                style: AppTextStyles.labelLarge
+                                    .copyWith(color: Colors.white),
+                              ),
                             )
                           ],
                         ),

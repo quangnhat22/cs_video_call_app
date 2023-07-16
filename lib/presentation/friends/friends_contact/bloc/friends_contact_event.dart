@@ -5,7 +5,4 @@ class FriendsContactEvent with _$FriendsContactEvent {
   const factory FriendsContactEvent.started() = _Started;
 
   const factory FriendsContactEvent.refreshed() = FriendsContactRefreshed;
-
-  const factory FriendsContactEvent.tappedFriendCard({required String id}) =
-      TapFriendContactCard;
 }

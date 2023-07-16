@@ -30,7 +30,10 @@ class FriendCallSliverList extends StatelessWidget {
         (BuildContext context, int index) {
           if (index.isEven) {
             return ListTile(
-              title: Text(calls[index ~/ 2].subjectCall?.name ?? ''),
+              title: Text(
+                calls[index ~/ 2].subjectCall?.name ?? '',
+                style: AppTextStyles.bodyLarge,
+              ),
               subtitle: Wrap(
                 spacing: 6,
                 crossAxisAlignment: WrapCrossAlignment.center,
@@ -38,19 +41,21 @@ class FriendCallSliverList extends StatelessWidget {
                   // _buildStatus(calls[index ~/ 2].status!),
                   _buildCallIcon(
                       calls[index ~/ 2].isMyCall, calls[index ~/ 2].status!),
-                  Text(DateFormat("dd-MM-yyyy hh:mm aaa")
-                      .format(calls[index ~/ 2].calledAt!.toLocal()))
+                  Text(
+                    DateFormat("dd-MM-yyyy hh:mm aaa")
+                        .format(calls[index ~/ 2].calledAt!.toLocal()),
+                    style: AppTextStyles.bodySmall,
+                  ),
                 ],
               ),
-              leading: SizedBox(
-                width: 48,
-                child: CustomAvatarImage(
-                  urlImage: calls[index ~/ 2].subjectCall!.avatar,
-                ),
+              leading: CustomAvatarImage(
+                urlImage: calls[index ~/ 2].subjectCall!.avatar,
+                size: CustomAvatarSize.small,
+                maxRadiusEmptyImg: 20,
               ),
               trailing: IconButton(
                 icon: Icon(
-                  Icons.call,
+                  Icons.call_outlined,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 onPressed: () {

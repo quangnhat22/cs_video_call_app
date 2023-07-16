@@ -239,5 +239,6 @@
   "leave_group_success": "Leave group success",
   "turn_on_off_notification": "Turn on/turn off notification",
   "old_password_is_incorrect": "Old password is incorrect",
-  "choose_a_photo": "Choose a photo"
+  "choose_a_photo": "Choose a photo",
+  "do_you_want_delete_history_call": "Do you want to delete the entire call history?"
 }

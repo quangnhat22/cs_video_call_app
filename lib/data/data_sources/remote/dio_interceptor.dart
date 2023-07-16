@@ -24,6 +24,11 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
   }
 
   @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    handler.next(response);
+  }
+
+  @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
     try {
 // Go Next when call api login || refreshToken
@@ -37,15 +42,12 @@ class DioInterceptor extends QueuedInterceptorsWrapper {
       if (err.response?.statusCode == 401) {
         final isHasToken = await _refreshToken();
         if (!isHasToken) {
+          await _localDataSource.deleteAllLocal();
           return handler.next(err);
         }
 
-        // err.requestOptions.headers.remove('Authorization');
-        // err.requestOptions.headers.addAll(await _accessToken());
-
-        final accessToken = await _authLocalDataSrc.getAccessToken();
-
-        err.requestOptions.headers["Authorization"] = "Bearer $accessToken";
+        err.requestOptions.headers.remove('Authorization');
+        err.requestOptions.headers.addAll(await _accessToken());
 
         final opts = Options(
           headers: err.requestOptions.headers,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart';
 
 import '../../../../core/routes/app_navigation.dart';
@@ -43,7 +44,7 @@ class GroupListItem extends StatelessWidget {
       child: ListTile(
         title: Text(
           groupName,
-          style: const TextStyle(fontWeight: FontWeight.w500),
+          style: AppTextStyles.bodyLarge,
         ),
         // subtitle: Text(
         //   AppLocalizations.of(context)!.group_on_going,
@@ -51,6 +52,7 @@ class GroupListItem extends StatelessWidget {
         // ),
         leading: CustomAvatarImage(
           urlImage: groupAvatar,
+          maxRadiusEmptyImg: 20,
           size: CustomAvatarSize.small,
         ),
       ),

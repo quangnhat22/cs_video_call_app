@@ -23,10 +23,13 @@ class ListFriendItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.read<FriendsContactBloc>().add(TapFriendContactCard(id: id));
+        NavigationUtil.pushNamed(routeName: RouteName.friendInfo, args: id);
       },
       child: ListTile(
-        title: Text(name ?? ""),
+        title: Text(
+          name ?? "",
+          style: AppTextStyles.bodyLarge,
+        ),
         subtitle: Text(email ?? ""),
         leading: CustomAvatarImage(
           urlImage: avatar,
