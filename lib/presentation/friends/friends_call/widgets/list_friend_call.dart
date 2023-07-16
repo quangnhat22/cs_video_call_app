@@ -11,8 +11,9 @@ class ListFriendCall extends StatelessWidget {
         .setNegativeText(AppLocalizations.of(ctx)!.cancel)
         .setPositiveText(AppLocalizations.of(ctx)!.confirm)
         .setOnPositive(() {
-      ctx.read<HistoryCallBloc>().add(const HistoryCallClear());
-    })
+          ctx.read<HistoryCallBloc>().add(const HistoryCallClear());
+          NavigationUtil.pop();
+        })
         .buildDialog(ctx)
         .show(ctx);
   }
@@ -48,13 +49,10 @@ class ListFriendCall extends StatelessWidget {
                 slivers: <Widget>[
                   SliverStickyHeader(
                     header: Container(
-                      color: Theme
-                          .of(context)
-                          .colorScheme
-                          .background,
+                      color: Theme.of(context).colorScheme.background,
                       child: Padding(
                         padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 16),
+                            const EdgeInsets.only(left: 20, right: 20, top: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,

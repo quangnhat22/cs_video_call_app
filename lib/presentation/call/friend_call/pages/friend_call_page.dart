@@ -46,7 +46,8 @@ class FriendCallView extends StatelessWidget {
         return state.maybeWhen(
           connecting: () => const ConnectingCallView(),
           preparing: (room, _) => FriendPrepareCallView(room: room),
-          connectedSuccess: (room) => FriendCallConnectView(room: room),
+          connectedSuccess: (room, isFullRoom) =>
+              FriendCallConnectView(room: room, isFullRoom: isFullRoom),
           orElse: () => Container(),
         );
       },

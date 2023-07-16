@@ -13,6 +13,7 @@ class FriendCallState with _$FriendCallState {
 
   const factory FriendCallState.connectedSuccess({
     required Room room,
+    @Default(false) bool isFullRoom,
   }) = FriendCallConnectedSuccess;
 
   const factory FriendCallState.connectedFail({String? message}) =

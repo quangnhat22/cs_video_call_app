@@ -7,6 +7,7 @@ import 'package:videocall/domain/modules/call/friend_call_use_case.dart';
 import '../../../../core/config/app_config.dart';
 
 part 'friend_call_cubit.freezed.dart';
+
 part 'friend_call_state.dart';
 
 @Injectable()
@@ -32,7 +33,11 @@ class FriendCallCubit extends Cubit<FriendCallState> {
           tokenLiveKit.token != null &&
           tokenLiveKit.roomId != null) {
         _callRoomId = tokenLiveKit.roomId!;
-        await _setUpRoom(tokenLiveKit.token!);
+        _room = Room();
+        await _roomConnect(tokenLiveKit.token!);
+        await _room.localParticipant?.setCameraEnabled(true);
+        await _room.localParticipant?.setMicrophoneEnabled(true);
+        emit(FriendCallConnectedSuccess(room: _room));
       } else {
         emit(const FriendCallConnectedFail());
       }
@@ -77,44 +82,24 @@ class FriendCallCubit extends Cubit<FriendCallState> {
     try {
       if (state is FriendCallPreparing) {
         final token = (state as FriendCallPreparing).token;
-        await _room.connect(
-          "ws://${AppConfig.httpUrl}:7880",
-          token,
-          roomOptions: RoomOptions(
-            adaptiveStream: true,
-            dynacast: true,
-            defaultVideoPublishOptions: const VideoPublishOptions(
-              simulcast: true,
-            ),
-            defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(
-                useiOSBroadcastExtension: true,
-                params: VideoParameters(
-                    dimensions: VideoDimensionsPresets.h1080_169,
-                    encoding: VideoEncoding(
-                      maxBitrate: 3 * 1000 * 1000,
-                      maxFramerate: 15,
-                    ))),
-            defaultCameraCaptureOptions: CameraCaptureOptions(
-              cameraPosition: _isSwitchCameraFront
-                  ? CameraPosition.front
-                  : CameraPosition.back,
-              maxFrameRate: 30,
-              params: const VideoParameters(
-                dimensions: VideoDimensionsPresets.h720_169,
-                encoding: VideoEncoding(
-                  maxBitrate: 2 * 1000 * 1000,
-                  maxFramerate: 30,
-                ),
-              ),
-            ),
-          ),
-        );
+        await _roomConnect(token);
+
         await _room.localParticipant?.setCameraEnabled(_isOpenCamera);
         await _room.localParticipant?.setMicrophoneEnabled(_isOpenMic);
         emit(FriendCallConnectedSuccess(room: _room));
       }
     } catch (e) {
       emit(const FriendCallConnectedFail());
+    }
+  }
+
+  void memberCallChanged(int number) {
+    if (state is FriendCallConnectedSuccess) {
+      final isFullRoom = (state as FriendCallConnectedSuccess).isFullRoom;
+      if (!isFullRoom) {
+        emit((state as FriendCallConnectedSuccess)
+            .copyWith(isFullRoom: number == 2));
+      }
     }
   }
 
@@ -145,6 +130,40 @@ class FriendCallCubit extends Cubit<FriendCallState> {
     } catch (e) {
       emit(const FriendCallConnectedFail());
     }
+  }
+
+  Future<void> _roomConnect(String token) async {
+    await _room.connect(
+      "ws://${AppConfig.httpUrl}:7880",
+      token,
+      roomOptions: RoomOptions(
+        adaptiveStream: true,
+        dynacast: true,
+        defaultVideoPublishOptions: const VideoPublishOptions(
+          simulcast: true,
+        ),
+        defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(
+            useiOSBroadcastExtension: true,
+            params: VideoParameters(
+                dimensions: VideoDimensionsPresets.h1080_169,
+                encoding: VideoEncoding(
+                  maxBitrate: 3 * 1000 * 1000,
+                  maxFramerate: 15,
+                ))),
+        defaultCameraCaptureOptions: CameraCaptureOptions(
+          cameraPosition:
+          _isSwitchCameraFront ? CameraPosition.front : CameraPosition.back,
+          maxFrameRate: 30,
+          params: const VideoParameters(
+            dimensions: VideoDimensionsPresets.h720_169,
+            encoding: VideoEncoding(
+              maxBitrate: 2 * 1000 * 1000,
+              maxFramerate: 30,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
