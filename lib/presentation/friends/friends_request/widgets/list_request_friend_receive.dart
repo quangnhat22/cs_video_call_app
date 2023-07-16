@@ -16,7 +16,7 @@ class ListRequestFriendReceive extends StatelessWidget {
         .setPositiveText(AppLocalizations.of(ctx)!.confirm)
         .setOnPositive(() {
           ctx.read<FriendRequestActionCubit>().rejectRequest(receiverId);
-          NavigationUtil.pop();
+          Navigator.of(ctx).pop();
         })
         .buildDialog(ctx)
         .show(ctx);
