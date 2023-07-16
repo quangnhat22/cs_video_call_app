@@ -13,7 +13,12 @@ import 'package:videocall/presentation/call/group_call/views/group_call_message_
 import '../bloc/group_call_pin_message_bloc.dart';
 
 class ListMessageView extends StatelessWidget {
-  ListMessageView({super.key});
+  ListMessageView({
+    super.key,
+    required this.pageController,
+  });
+
+  final PageController pageController;
 
   final TextEditingController _controller = TextEditingController();
 
@@ -28,10 +33,11 @@ class ListMessageView extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          body: GestureDetector(
-            onTap: () => AppScreenUtils.hideInputKeyboard(),
-            child: Stack(
-              children: [
+          resizeToAvoidBottomInset: true,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => AppScreenUtils.hideInputKeyboard(),
+              child: Stack(children: [
                 BlocBuilder<CallGroupStatusCubit, CallGroupStatusState>(
                   builder: (context, state) {
                     return state.maybeWhen(
@@ -47,7 +53,7 @@ class ListMessageView extends StatelessWidget {
                           padding: EdgeInsets.only(
                             left: 8,
                             right: 8,
-                            top: 12,
+                            top: 48.h,
                             bottom: 60.h,
                           ),
                           child: ListView.separated(
@@ -135,7 +141,27 @@ class ListMessageView extends StatelessWidget {
                         ],
                       ),
                     )),
-              ],
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pageController.animateToPage(0,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.linear);
+                    },
+                    style: ButtonStyle(
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(10)),
+                        //   backgroundColor: MaterialStateProperty.all(backgroundColor),
+                        shape: MaterialStateProperty.all(const CircleBorder())),
+                    child: const Icon(
+                      Icons.chevron_left,
+                      //color: iconColor,
+                    ),
+                  ),
+                ),
+              ]),
             ),
           ),
         );
