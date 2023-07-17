@@ -23,9 +23,9 @@ import '../../../core/routes/app_navigation.dart';
 import '../../../core/utils/snack_bar.dart';
 
 part 'pages/create_group_page.dart';
-part 'widgets/btn_add_new_group.dart';
-part 'widgets/group_add_members.dart';
-part 'widgets/group_set_photo.dart';
-part 'widgets/btn_add_new_group.dart';
-part 'widgets/group_text_field_name.dart';
 
+part 'widgets/btn_add_new_group.dart';
+
+part 'widgets/group_add_members.dart';
+
+part 'widgets/group_set_photo.dart';
