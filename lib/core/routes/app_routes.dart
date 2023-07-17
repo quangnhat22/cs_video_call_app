@@ -14,7 +14,7 @@ import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.d
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
 import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart';
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
-import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
+import 'package:videocall/presentation/groups/group_list/group_list.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_edit/group_edit.dart';

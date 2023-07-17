@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:videocall/common/widgets/stateless/divider/divider_space_left.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
 import 'package:videocall/presentation/groups/groups_details/bloc/group_detail_bloc.dart';
 
@@ -23,18 +24,24 @@ class GroupMemberList extends StatelessWidget {
               );
             }
             return Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return GroupMemberItem(
-                    friendId: members[index].id,
-                    friendName: members[index].name,
-                    avatar: members[index].avatar,
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: GroupMemberItem(
+                      friendId: members[index].id,
+                      friendName: members[index].name,
+                      avatar: members[index].avatar,
+                    ),
                   );
                 },
                 itemCount: members.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const DividerSpaceLeft();
+                },
               ),
             );
           },

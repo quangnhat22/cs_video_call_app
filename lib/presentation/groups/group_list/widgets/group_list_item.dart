@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
-import 'package:videocall/core/config/app_text_styles.dart';
-import 'package:videocall/presentation/groups/group_list/bloc/group_list_bloc.dart';
-
-import '../../../../core/routes/app_navigation.dart';
-import '../../../../core/routes/route_name.dart';
+part of group_list;
 
 class GroupArguments {
   final String groupName;
@@ -21,11 +14,15 @@ class GroupListItem extends StatelessWidget {
     required this.groupId,
     required this.groupName,
     this.groupAvatar,
+    this.isHasOnGoingMeeting = false,
+    this.member = 0,
   }) : super(key: key);
 
   final String groupId;
   final String groupName;
   final String? groupAvatar;
+  final int member;
+  final bool isHasOnGoingMeeting;
 
   void _onTapItem(BuildContext ctx) {
     NavigationUtil.pushNamed(
@@ -42,19 +39,29 @@ class GroupListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => _onTapItem(context),
-      child: ListTile(
-        title: Text(
-          groupName,
-          style: AppTextStyles.bodyLarge,
-        ),
-        // subtitle: Text(
-        //   AppLocalizations.of(context)!.group_on_going,
-        //   style: const TextStyle(color: Colors.green),
-        // ),
-        leading: CustomAvatarImage(
-          urlImage: groupAvatar,
-          maxRadiusEmptyImg: 20,
-          size: CustomAvatarSize.small,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 1.0),
+        child: ListTile(
+          title: Text(
+            groupName,
+            style: AppTextStyles.bodyLarge,
+          ),
+          subtitle: Text(
+            AppLocalizations.of(context)!.number_member(member),
+            style: AppTextStyles.bodyMedium,
+          ),
+          leading: CustomAvatarImage(
+            urlImage: groupAvatar,
+            maxRadiusEmptyImg: 20,
+            size: CustomAvatarSize.small,
+          ),
+          trailing: isHasOnGoingMeeting
+              ? Text(
+                  AppLocalizations.of(context)!.group_on_going,
+                  style: AppTextStyles.bodyMedium
+                      .copyWith(color: Theme.of(context).colorScheme.tertiary),
+                )
+              : null,
         ),
       ),
     );

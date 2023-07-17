@@ -24,14 +24,20 @@ class DeviceList extends StatelessWidget {
                   child: Text(AppLocalizations.of(context)!.no_devices_found));
             }
 
-            return ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return DeviceItem(
-                  deviceEntity: devices[index],
-                );
-              },
-              itemCount: devices.length,
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 4.0,
+              ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return DeviceItem(
+                    deviceEntity: devices[index],
+                  );
+                },
+                itemCount: devices.length,
+              ),
             );
           },
           orElse: () {

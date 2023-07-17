@@ -33,19 +33,24 @@ class GroupMeetingList extends StatelessWidget {
                     onRefresh: () {
                       context.read<GroupMeetingCubit>().refreshGroupMeeting();
                     })
-                : CustomScrollView(
-                    slivers: [
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                            return GroupMeetingListItem(
-                              meetingEntity: listMeeting[index],
-                            );
-                          },
-                          childCount: listMeeting.length,
-                        ),
-                      )
-                    ],
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<GroupMeetingCubit>().refreshGroupMeeting();
+                    },
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return GroupMeetingListItem(
+                                meetingEntity: listMeeting[index],
+                              );
+                            },
+                            childCount: listMeeting.length,
+                          ),
+                        )
+                      ],
+                    ),
                   );
           },
         );

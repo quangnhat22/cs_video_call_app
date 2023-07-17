@@ -48,7 +48,7 @@
   "friends_tab_contacts_title": "Liên hệ",
   "friends_tab_requests_title": "Yêu cầu",
   "friends_clear_text_button": "Xoá",
-  "requests_recall_text_button": "Gọi lại",
+  "requests_recall_text_button": "Thu hồi",
   "requests_sent_text_button_segment": "Đã gửi",
   "requests_received_text_button_segment": "Đã nhận",
   "user_status_online": "Đang hoạt động",
@@ -227,6 +227,7 @@
   },
   "do_you_want_revoke_friend": "Bạn có muốn thu hồi lời mời kết bạn?",
   "do_you_want_reject_friend": "Bạn có muốn từ chối lời mời kết bạn?",
+  "do_you_want_delete_friend": "Bạn có muốn huỷ kết bạn?",
   "do_you_want_revoke_group": "Bạn có muốn thu hồi lời mời tham gia nhóm?",
   "do_you_want_reject_group": "Bạn có muốn từ chối lời mời tham gia nhóm?",
   "do_you_want_reject_call": "Bạn có muốn từ chối cuộc gọi từ bạn bè?",
@@ -249,5 +250,24 @@
   "create_account_success": "Tạo tài khoản mới thành công",
   "create_account_fail": "Tạo tài khoản mới thất bại",
   "delete_all_noti_title": "Xoá tất cả thông báo",
-  "delete_all_noti_content": "Bạn có muốn xoá tất cả thông báo hay không?"
+  "delete_all_noti_content": "Bạn có muốn xoá tất cả thông báo hay không?",
+  "number_member": "{number_member} thành viên",
+  "@number_member": {
+    "placeholders": {
+      "number_member": {
+        "type": "int"
+      }
+    }
+  },
+  "invite_member_successfully": "Mời thành viên mới thành công",
+  "invite_member_failed": "Mời thành viên mới thất bại",
+  "currently_logged": "Đang đăng nhập",
+  "started_at": "Bắt đầu lúc {time}",
+  "@started_at": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

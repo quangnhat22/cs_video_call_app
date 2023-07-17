@@ -1,16 +1,18 @@
 import '../../data/models/group_model.dart';
 
 class GroupEntity {
-  String id;
-  String? name;
-  String? imageUrl;
-  List<String?>? members;
+  final String id;
+  final String? name;
+  final String? imageUrl;
+  final List<String?>? members;
+  final bool isHasOnGoingMeeting;
 
   GroupEntity({
     required this.id,
     this.name,
     this.imageUrl,
     this.members,
+    this.isHasOnGoingMeeting = false,
   });
 
   static final groupEntityEmpty = GroupEntity(id: "-1");
@@ -20,10 +22,13 @@ class GroupEntity {
   }) {
     if (model == null) return groupEntityEmpty;
     return GroupEntity(
-      id: model.id,
-      name: model.name,
-      imageUrl: model.imageUrl,
-      members: model.members,
-    );
+        id: model.id,
+        name: model.name,
+        imageUrl: model.imageUrl,
+        members: model.members,
+        isHasOnGoingMeeting:
+            model.latestMeeting != null && model.latestMeeting!.isNotEmpty
+                ? true
+                : false);
   }
 }

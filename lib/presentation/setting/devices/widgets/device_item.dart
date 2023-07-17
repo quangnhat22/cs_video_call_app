@@ -24,20 +24,39 @@ class DeviceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: ListTile(
-        title: Text(deviceEntity.name ?? ''),
-        subtitle: Text(
-            '${AppLocalizations.of(context)!.last_accessed_at} ${DateFormat('dd-MM-yyyy').format(DateTime.parse(deviceEntity.createdAt!))}'),
-        leading: const Icon(Icons.smartphone),
-        trailing: IconButton(
-            onPressed: () {
-              _handleDeleteDevice(context, deviceEntity.id, deviceEntity.name!);
-            },
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.redAccent,
-            )),
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          title: Text(
+            deviceEntity.name ?? '',
+            style: AppTextStyles.bodyLarge,
+          ),
+          subtitle: deviceEntity.isCurrentDevice
+              ? Text(
+                  AppLocalizations.of(context)!.currently_logged,
+                  style: AppTextStyles.bodySmall
+                      .copyWith(color: Theme.of(context).colorScheme.tertiary),
+                )
+              : Text(
+                  '${AppLocalizations.of(context)!.last_accessed_at} ${DateFormat('dd-MM-yyyy HH:mm').format(deviceEntity.createdAt!)}',
+                  style: AppTextStyles.bodySmall,
+                ),
+          leading: const CircleAvatar(child: Icon(Icons.smartphone)),
+          trailing: !deviceEntity.isCurrentDevice
+              ? IconButton(
+                  onPressed: () {
+                    _handleDeleteDevice(
+                        context, deviceEntity.id, deviceEntity.name!);
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.redAccent,
+                  ))
+              : null,
+        ),
       ),
     );
   }

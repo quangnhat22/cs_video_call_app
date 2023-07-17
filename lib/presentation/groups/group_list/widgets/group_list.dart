@@ -32,13 +32,14 @@ class GroupList extends StatelessWidget {
               },
               child: ListView.separated(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 separatorBuilder: (context, index) => const DividerSpaceLeft(),
                 itemBuilder: ((context, index) {
                   return GroupListItem(
                     groupId: groups[index].id,
                     groupName: groups[index].name ?? "",
                     groupAvatar: groups[index].imageUrl,
+                    isHasOnGoingMeeting: groups[index].isHasOnGoingMeeting,
+                    member: groups[index].members?.length ?? 0,
                   );
                 }),
                 itemCount: groups.length,

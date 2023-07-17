@@ -76,7 +76,7 @@ class AvatarView extends StatelessWidget {
                           ),
                           const AvatarUser(),
                           SizedBox(
-                            height: 16.h,
+                            height: 32.h,
                           ),
                           const ButtonChooseAvatar(),
                           //const ActionsAvatar(),

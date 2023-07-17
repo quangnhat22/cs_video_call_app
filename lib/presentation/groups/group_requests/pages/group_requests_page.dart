@@ -46,15 +46,15 @@ class _GroupRequestsViewState extends State<GroupRequestsView> {
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         state.whenOrNull(
-          failure: (message) =>
-              SnackBarApp.showSnackBar(context, message, TypesSnackBar.error),
+          failure: (message) => SnackBarApp.showSnackBar(context,
+              AppLocalizations.of(context)!.action_fail, TypesSnackBar.error),
           success: () {
             context
                 .read<ListGroupRequestBloc>()
                 .add(const ListGroupRequestRefreshed());
             SnackBarApp.showSnackBar(
                 context,
-                AppLocalizations.of(context)!.recall_message_alert,
+                AppLocalizations.of(context)!.action_success,
                 TypesSnackBar.success);
           },
         );

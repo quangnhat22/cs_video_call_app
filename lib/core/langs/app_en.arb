@@ -48,7 +48,7 @@
   "friends_tab_contacts_title": "Contacts",
   "friends_tab_requests_title": "Requests",
   "friends_clear_text_button": "Clear",
-  "requests_recall_text_button": "Recall",
+  "requests_recall_text_button": "Undo",
   "requests_sent_text_button_segment": "Sent",
   "requests_received_text_button_segment": "Received",
   "user_status_online": "Online",
@@ -154,7 +154,7 @@
   "sent_by": "Sent by",
   "sent_to": "Sent to",
   "at": "at",
-  "recall_message_alert": "Recall successfully",
+  "recall_message_alert": "Undo successfully",
   "join": "Join",
   "meeting_started_time": "Started {time}",
   "@meeting_started_time": {
@@ -227,6 +227,7 @@
   },
   "do_you_want_revoke_friend": "Do you want to undo a friend request?",
   "do_you_want_reject_friend": "Do you want to reject a friend request?",
+  "do_you_want_delete_friend": "Do you want to delete friend?",
   "do_you_want_revoke_group": "Do you want to undo a group request?",
   "do_you_want_reject_group": "Do you want to reject a group request?",
   "do_you_want_reject_call": "Do you want to reject a friend call?",
@@ -249,5 +250,24 @@
   "create_account_success": "Create new account successfully",
   "create_account_fail": "Failed to create new account",
   "delete_all_noti_title": "Delete all notifications",
-  "delete_all_noti_content": "Do you want delete all notifications?"
+  "delete_all_noti_content": "Do you want delete all notifications?",
+  "number_member": "{number_member} members",
+  "@number_member": {
+    "placeholders": {
+      "number_member": {
+        "type": "int"
+      }
+    }
+  },
+  "invite_member_successfully": "Invite member successfully",
+  "invite_member_failed": "Invite new member failed",
+  "currently_logged": "Currently logged",
+  "started_at": "Started at {time}",
+  "@started_at": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,9 +1,13 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/search/add_members_search.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
+import 'package:videocall/domain/entities/user_entity.dart';
+import 'package:videocall/presentation/groups/groups_details/bloc/group_detail_bloc.dart';
 
 import '../../cubit_inivite_new_member/new_member_cubit.dart';
 
@@ -12,6 +16,12 @@ class FabInviteNewFriend extends StatelessWidget {
 
   final String groupId;
 
+  bool _isMemberExist(List<UserEntity> members, UserEntity friend) {
+    final isExist =
+        members.firstWhereOrNull((member) => member.id == friend.id);
+    return isExist != null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewMemberCubit, NewMemberState>(
@@ -19,33 +29,47 @@ class FabInviteNewFriend extends StatelessWidget {
       listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         state.whenOrNull(
-          getListFriendFail: (message) {
-            SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+          getListFriendFail: (_) {
+            SnackBarApp.showSnackBar(
+                context,
+                AppLocalizations.of(context)!.invite_member_failed,
+                TypesSnackBar.error);
           },
           inviteInSuccess: () {
             SnackBarApp.showSnackBar(
-                context, 'Invite successfully', TypesSnackBar.success);
+                context,
+                AppLocalizations.of(context)!.invite_member_successfully,
+                TypesSnackBar.success);
           },
         );
       },
       builder: (context, state) {
         return FloatingActionButton(
           onPressed: () async {
-            await context.read<NewMemberCubit>().getListFriend();
-            if (state is NewMemberGetSuccess && context.mounted) {
-              final newMembers = await showSearch(
-                  context: context,
-                  delegate: AddMembersSearch(state.listFriend));
-
-              if (newMembers != null) {
-                final arrayNewMembers = jsonDecode(newMembers);
-                final memList = (arrayNewMembers as List)
-                    .map((mem) => mem as String)
+            final currentDetailGroupState =
+                context.read<GroupDetailBloc>().state;
+            if (currentDetailGroupState is GroupGetDetailSuccess) {
+              final List<UserEntity> currentMember =
+                  currentDetailGroupState.groupDetail.members ?? [];
+              await context.read<NewMemberCubit>().getListFriend();
+              if (state is NewMemberGetSuccess && context.mounted) {
+                final displayFriend = state.listFriend
+                    .where((friend) => !_isMemberExist(currentMember, friend))
                     .toList();
-                if (memList.isNotEmpty && context.mounted) {
-                  context
-                      .read<NewMemberCubit>()
-                      .inviteNewMember(groupId, memList);
+                final newMembers = await showSearch(
+                    context: context,
+                    delegate: AddMembersSearch(displayFriend));
+
+                if (newMembers != null) {
+                  final arrayNewMembers = jsonDecode(newMembers);
+                  final memList = (arrayNewMembers as List)
+                      .map((mem) => mem as String)
+                      .toList();
+                  if (memList.isNotEmpty && context.mounted) {
+                    context
+                        .read<NewMemberCubit>()
+                        .inviteNewMember(groupId, memList);
+                  }
                 }
               }
             }

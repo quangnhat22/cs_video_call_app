@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_enum.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit_group_meeting/group_meeting_cubit.dart';
@@ -35,9 +36,14 @@ class GroupMeetingListItem extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                title: Text(meetingEntity.title ?? ""),
+                title: Text(
+                  meetingEntity.title ?? "",
+                  style: AppTextStyles.bodyLarge,
+                ),
                 subtitle: Text(
-                    'Started at ${AppDateTimeFormat.convertToHourMinuteFollowDay(meetingEntity.timeStart ?? DateTime.now())}'),
+                  'Started at ${AppDateTimeFormat.convertToHourMinuteFollowDay(meetingEntity.timeStart ?? DateTime.now())}',
+                  style: AppTextStyles.bodyMedium,
+                ),
                 leading: const CircleAvatar(
                   child: Icon(Icons.videocam_outlined),
                 ),

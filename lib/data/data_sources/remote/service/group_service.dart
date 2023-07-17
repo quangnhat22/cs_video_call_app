@@ -112,11 +112,10 @@ class GroupService {
     }
   }
 
-  Future<Response> inviteNewMember(
-      String groupId, List<String> friendIds) async {
+  Future<Response> inviteNewMember(String groupId, String friendId) async {
     try {
       return await _service.dio
-          .post('${BaseService.groupPath}/request/$groupId/${friendIds[0]}');
+          .post('${BaseService.groupPath}/request/$groupId/$friendId');
     } on DioError catch (e) {
       throw Exception(e.message.toString());
     } catch (e) {

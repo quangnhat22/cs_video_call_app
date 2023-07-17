@@ -3,8 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/group/group_usecase.dart';
 
-part 'edit_group_state.dart';
 part 'edit_group_cubit.freezed.dart';
+part 'edit_group_state.dart';
 
 @Injectable()
 class EditGroupCubit extends Cubit<EditGroupState> {
@@ -39,10 +39,10 @@ class EditGroupCubit extends Cubit<EditGroupState> {
     try {
       final editGroupState = state as SentEditRequestGroupInitValue;
       if (!editGroupState.isValid) return;
-
+      if (editGroupState.groupName.trim().isEmpty) return;
       emit(const SentEditRequestGroupInProgress());
       await _groupUseCase.editGroup(
-          editGroupState.groupName, editGroupState.groupImage, groupId);
+          editGroupState.groupName.trim(), editGroupState.groupImage, groupId);
       emit(SentEditRequestGroupSuccess(groupName: editGroupState.groupName));
     } catch (e) {
       emit(SentEditRequestGroupFailure(message: e.toString()));

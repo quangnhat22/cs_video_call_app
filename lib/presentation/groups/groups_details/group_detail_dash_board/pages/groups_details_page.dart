@@ -5,7 +5,7 @@ import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
-import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
+import 'package:videocall/presentation/groups/group_list/group_list.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
 import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
 import 'package:videocall/presentation/groups/groups_details/group_messages/group_messages.dart';
@@ -119,7 +119,6 @@ class _GroupDetailViewState extends State<GroupDetailView>
         child: BlocListener<GroupDetailBloc, GroupDetailState>(
           listener: (context, state) {
             if (state is GroupDetailLeaveSuccess) {
-              // TODO: Quang fixes refreshing group list after leaved group
               Navigator.of(context).pop(true);
               SnackBarApp.showSnackBar(
                   null,

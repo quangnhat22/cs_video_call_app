@@ -13,7 +13,7 @@ class FriendActions extends StatelessWidget {
     AppDefaultDialogWidget()
         .setAppDialogType(AppDialogType.confirm)
         .setTitle(AppLocalizations.of(ctx)!.confirm)
-        .setContent(AppLocalizations.of(ctx)!.do_you_want_reject_friend)
+        .setContent(AppLocalizations.of(ctx)!.do_you_want_delete_friend)
         .setNegativeText(AppLocalizations.of(ctx)!.cancel)
         .setPositiveText(AppLocalizations.of(ctx)!.confirm)
         .setOnPositive(() {

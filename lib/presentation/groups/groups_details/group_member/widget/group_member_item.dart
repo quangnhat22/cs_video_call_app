@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
 
 class GroupMemberItem extends StatelessWidget {
   const GroupMemberItem({
@@ -18,7 +19,7 @@ class GroupMemberItem extends StatelessWidget {
     return ListTile(
       title: Text(
         friendName ?? "",
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: AppTextStyles.bodyMedium,
       ),
       leading: CustomAvatarImage(
         urlImage: avatar,

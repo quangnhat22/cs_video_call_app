@@ -1,12 +1,19 @@
 import 'package:videocall/data/models/device_model.dart';
 
 class DeviceEntity {
-  String id;
-  String? name;
-  String? createdAt;
-  String? updatedAt;
+  final String id;
+  final String? name;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final bool isCurrentDevice;
 
-  DeviceEntity({required this.id, this.name, this.createdAt, this.updatedAt});
+  DeviceEntity({
+    required this.id,
+    this.name,
+    this.createdAt,
+    this.updatedAt,
+    this.isCurrentDevice = false,
+  });
 
   static final deviceEntityEmpty = DeviceEntity(id: "-1");
 
@@ -15,8 +22,9 @@ class DeviceEntity {
     return DeviceEntity(
       id: model.id,
       name: model.name,
-      createdAt: model.created_at,
-      updatedAt: model.updated_at,
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt,
+      isCurrentDevice: model.isCurrentDevice ?? false,
     );
   }
 }

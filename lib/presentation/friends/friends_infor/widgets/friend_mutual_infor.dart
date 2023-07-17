@@ -12,7 +12,7 @@ class FriendMutualInfo extends StatelessWidget {
       clipBehavior: Clip.none,
       children: <Widget>[
         Container(
-          height: 180.h,
+          height: 250.h,
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 240, 187, 205),
@@ -30,7 +30,7 @@ class FriendMutualInfo extends StatelessWidget {
                 size: CustomAvatarSize.large,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16),
+                padding: EdgeInsets.only(top: 16.h),
                 child: Text(
                   friendInfo.name ?? AppLocalizations.of(context)!.unknown_name,
                   style: AppTextStyles.titleLarge,
@@ -40,7 +40,7 @@ class FriendMutualInfo extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 160.h,
+          top: 220.h,
           child: Card(
             elevation: 6,
             child: SizedBox(

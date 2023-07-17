@@ -37,12 +37,12 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: BlocProvider(
-        create: (context) => getIt<GlobalSearchBloc>(),
-        child: Scaffold(
-          appBar: MHomeAppBar(
-            title: AppLocalizations.of(context)!.friends,
-            bottomWidget: TabBar(controller: _tabController, tabs: [
+      child: Scaffold(
+        appBar: MHomeAppBar(
+          title: AppLocalizations.of(context)!.friends,
+          bottomWidget: TabBar(
+            controller: _tabController,
+            tabs: [
               Tab(
                 child:
                     Text(AppLocalizations.of(context)!.friends_tab_calls_title),
@@ -55,21 +55,21 @@ class _FriendsDashBoardPageState extends State<FriendsDashBoardPage>
                 child: Text(
                     AppLocalizations.of(context)!.friends_tab_requests_title),
               )
-            ]),
-          ),
-          body: TabBarView(
-            controller: _tabController,
-            children: const <Widget>[
-              FriendsCallPage(),
-              FriendsContactPage(),
-              FriendsRequestPage(),
             ],
           ),
-          floatingActionButton:
-              (_tabController.index == 1 || _tabController.index == 2)
-                  ? const FloatingButtonFindFriend()
-                  : null,
         ),
+        body: TabBarView(
+          controller: _tabController,
+          children: const <Widget>[
+            FriendsCallPage(),
+            FriendsContactPage(),
+            FriendsRequestPage(),
+          ],
+        ),
+        floatingActionButton:
+            (_tabController.index == 1 || _tabController.index == 2)
+                ? const FloatingButtonFindFriend()
+                : null,
       ),
     );
   }

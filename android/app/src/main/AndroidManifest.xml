@@ -27,7 +27,7 @@
 
     <application
         android:usesCleartextTraffic="true"
-        android:label="videocall"
+        android:label="CS Video Call"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <service

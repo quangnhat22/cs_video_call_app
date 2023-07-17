@@ -7,8 +7,8 @@ import 'package:videocall/core/utils/formz/phone_number.dart';
 import 'package:videocall/core/utils/formz/text_formz.dart';
 import 'package:videocall/domain/modules/user/user_usecase.dart';
 
-part 'edit_profile_state.dart';
 part 'edit_profile_cubit.freezed.dart';
+part 'edit_profile_state.dart';
 
 @Injectable()
 class EditProfileCubit extends Cubit<EditProfileState> {
@@ -81,14 +81,17 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   Future<void> updateUserInfo() async {
     try {
       emit(state.copyWith(submitStatus: FormzSubmissionStatus.inProgress));
-      if (!state.isValid || state.dob == null) return;
+      if (!state.isValid ||
+          state.dob == null ||
+          state.fullName.value.trim().isEmpty ||
+          state.phoneNumber.value.trim().isEmpty) return;
 
       final isUpdateSuccess = await _userUseCase.updateSelf(
-        name: state.fullName.value,
-        phone: state.phoneNumber.value,
+        name: state.fullName.value.trim(),
+        phone: state.phoneNumber.value.trim(),
         birthday: state.dob?.toUtc(),
         gender: state.gender.value,
-        bio: state.bio.value,
+        bio: state.bio.value.trim(),
       );
 
       if (isUpdateSuccess) {
