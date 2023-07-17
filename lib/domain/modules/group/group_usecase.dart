@@ -9,6 +9,8 @@ abstract class GroupUseCase {
   Future<void> createGroup(
       String? groupName, String? groupImage, List<UserEntity?>? members);
 
+  Future<void> editGroup(String? groupName, String? groupImage, String groupId);
+
   Future<List<GroupEntity>> getGroupList();
 
   Future<GroupDetailEntity?> getGroupDetail(String id);
@@ -83,5 +85,11 @@ class GroupUseCaseImpl extends GroupUseCase {
   @override
   Future<bool> leaveGroup(String groupId) async {
     return await _repo.leaveGroup(groupId);
+  }
+
+  @override
+  Future<void> editGroup(
+      String? groupName, String? groupImage, String groupId) async {
+    return await _repo.editGroup(groupName, groupImage, groupId);
   }
 }

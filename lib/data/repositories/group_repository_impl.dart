@@ -222,4 +222,19 @@ class GroupRepositoryImpl extends GroupRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<void> editGroup(
+      String? groupName, String? groupImage, String groupId) async {
+    try {
+      String? imageUrl = groupImage ?? "";
+      if (groupImage != null) {
+        imageUrl = await _assetFirebase.uploadFile(groupImage);
+      }
+
+      await _service.editGroup(groupName, imageUrl, groupId);
+    } catch (error) {
+      throw Exception(error.toString());
+    }
+  }
 }

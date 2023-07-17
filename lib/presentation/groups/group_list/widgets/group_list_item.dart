@@ -8,9 +8,10 @@ import '../../../../core/routes/route_name.dart';
 
 class GroupArguments {
   final String groupName;
+  final String? groupAvatar;
   final String groupId;
 
-  GroupArguments(this.groupName, this.groupId);
+  GroupArguments(this.groupName, this.groupAvatar, this.groupId);
 }
 
 class GroupListItem extends StatelessWidget {
@@ -28,7 +29,7 @@ class GroupListItem extends StatelessWidget {
   void _onTapItem(BuildContext ctx) {
     NavigationUtil.pushNamed(
             routeName: RouteName.teamDetails,
-            args: GroupArguments(groupName, groupId))
+            args: GroupArguments(groupName, groupAvatar, groupId))
         .then((result) {
       if (result != null && result == true) {
         ctx.read<GroupListBloc>().add(const GroupListRefreshed());

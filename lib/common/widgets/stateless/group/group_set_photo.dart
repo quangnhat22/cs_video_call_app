@@ -1,15 +1,27 @@
-part of create_group;
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:videocall/common/widgets/stateless/ink_well/inkwell_dynamic_border.dart';
+import 'package:videocall/core/config/app_enum.dart';
+import 'package:videocall/presentation/groups/create_group/cubit/create_group_cubit.dart';
+import 'package:videocall/presentation/groups/groups_details/group_edit/cubit/edit_group_cubit.dart';
 
-class GroupSetPhoto extends StatefulWidget {
-  const GroupSetPhoto({this.mode = AppGroupFormMode.create, super.key});
+class GroupChangePhoto extends StatefulWidget {
+  const GroupChangePhoto(
+      {this.mode = AppGroupFormMode.create, this.groupImage, super.key});
 
   final AppGroupFormMode mode;
+  final String? groupImage;
 
   @override
-  State<GroupSetPhoto> createState() => _GroupSetPhotoState();
+  State<GroupChangePhoto> createState() => _GroupChangePhotoState();
 }
 
-class _GroupSetPhotoState extends State<GroupSetPhoto> {
+class _GroupChangePhotoState extends State<GroupChangePhoto> {
   File? imageFile;
 
   void _getFromGallery(BuildContext ctx) async {
@@ -48,6 +60,8 @@ class _GroupSetPhotoState extends State<GroupSetPhoto> {
       if (ctx.mounted) {
         if (widget.mode == AppGroupFormMode.create) {
           ctx.read<CreateGroupCubit>().groupImageChanged(croppedFile.path);
+        } else {
+          ctx.read<EditGroupCubit>().groupImageChanged(croppedFile.path);
         }
       }
     }
@@ -95,53 +109,56 @@ class _GroupSetPhotoState extends State<GroupSetPhoto> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateGroupCubit, CreateGroupState>(
-      builder: (context, state) {
-        return Column(
+    return Column(
+      children: [
+        SizedBox(
+          height: 25.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 25.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundImage:
-                          imageFile != null ? FileImage(imageFile!) : null,
-                      child: imageFile != null
-                          ? null
-                          : IconButton(
-                              onPressed: () {
-                                _showImageDialog(context);
-                              },
-                              icon: const Icon(
-                                Icons.camera_alt_rounded,
-                                size: 35,
-                              ),
-                            ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: GestureDetector(
-                        onTap: () {
-                          _showImageDialog(context);
-                        },
-                        child: Text(
-                          AppLocalizations.of(context)!.set_new_photo,
-                          style: const TextStyle(fontSize: 18),
-                        ),
+                if (widget.groupImage != null && imageFile == null)
+                  CircleAvatar(
+                    radius: 55,
+                    backgroundImage: NetworkImage(widget.groupImage!),
+                  ),
+                if (widget.groupImage == null && imageFile == null)
+                  CircleAvatar(
+                    radius: 55,
+                    child: IconButton(
+                      onPressed: () {
+                        _showImageDialog(context);
+                      },
+                      icon: const Icon(
+                        Icons.camera_alt_rounded,
+                        size: 35,
                       ),
-                    )
-                  ],
+                    ),
+                  ),
+                if (imageFile != null)
+                  CircleAvatar(
+                    radius: 55,
+                    backgroundImage: FileImage(imageFile!),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      _showImageDialog(context);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.set_new_photo,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ),
                 )
               ],
-            ),
+            )
           ],
-        );
-      },
+        ),
+      ],
     );
   }
 }

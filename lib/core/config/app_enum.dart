@@ -86,3 +86,5 @@ enum AppCallStatus {
 
   final String value;
 }
+
+enum AppGroupFormMode { create, edit }
