@@ -13,7 +13,7 @@ class DividerWithText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 0),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
       child: SizedBox(
         width: withDivider,
         child: Row(

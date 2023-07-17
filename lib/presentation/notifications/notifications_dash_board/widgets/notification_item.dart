@@ -151,8 +151,7 @@ class AppNotificationItem extends StatelessWidget {
         ),
         leading: CustomAvatarImage(
           urlImage: _returnImageNotification(),
-          widthImage: 48,
-          heightImage: 48,
+          size: CustomAvatarSize.small,
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

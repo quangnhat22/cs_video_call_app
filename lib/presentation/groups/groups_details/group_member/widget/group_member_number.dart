@@ -20,12 +20,12 @@ class GroupMemberNumber extends StatelessWidget {
           child: state.maybeWhen(getDetailSuccess: (groupDetail) {
             return Text(
               '${groupDetail.members?.length ?? 0} ${AppLocalizations.of(context)!.members_text_title}',
-              style: AppTextStyles.mediumTitleTextStyle,
+              style: AppTextStyles.titleMedium,
             );
           }, orElse: () {
             return const Text(
               '0',
-              style: AppTextStyles.mediumTitleTextStyle,
+              style: AppTextStyles.titleMedium,
             );
           }),
         );

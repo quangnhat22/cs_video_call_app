@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:videocall/common/widgets/stateless/buttons/float_back_button.dart';
+import 'package:videocall/core/config/app_color.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 
 class AuthHeader extends StatelessWidget {
@@ -12,7 +13,11 @@ class AuthHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 30, left: 12, right: 12),
+      padding: const EdgeInsets.only(
+        top: 30,
+        left: 12,
+        right: 12,
+      ),
       decoration: BoxDecoration(color: mainColor),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         FloatBackButton(Theme.of(context).colorScheme.onPrimary, mainColor),
@@ -20,13 +25,18 @@ class AuthHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 12),
             child: Text(
               title,
-              style: AppTextStyles.authHeadTitleTextStyle,
+              style: AppTextStyles.displaySmall.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.lightColorScheme.background,
+              ),
             )),
         Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Text(
             subTitle,
-            style: AppTextStyles.authHeadSubtitleTextStyle,
+            style: AppTextStyles.titleSmall.copyWith(
+              color: AppColors.lightColorScheme.background,
+            ),
           ),
         )
       ]),

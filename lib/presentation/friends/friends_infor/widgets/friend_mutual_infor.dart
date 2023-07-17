@@ -27,9 +27,8 @@ class FriendMutualInfo extends StatelessWidget {
                 children: <Widget>[
                   CustomAvatarImage(
                     maxRadiusEmptyImg: 64,
-                    heightImage: 120,
-                    widthImage: 120,
                     urlImage: state.user.avatar,
+                    size: CustomAvatarSize.large,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16),

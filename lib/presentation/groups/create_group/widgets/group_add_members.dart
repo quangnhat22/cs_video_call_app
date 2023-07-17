@@ -39,7 +39,7 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
             child: Text(
               AppLocalizations.of(context)!.add_members,
               textAlign: TextAlign.center,
-              style: AppTextStyles.mediumTitleTextStyle,
+              style: AppTextStyles.titleLarge,
             ),
           ),
           Padding(
@@ -63,7 +63,7 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
             child: Text(
               '${selectedFriends.length} ${AppLocalizations.of(context)!.selected_text}',
               textAlign: TextAlign.start,
-              style: AppTextStyles.mediumTitleTextStyle,
+              style: AppTextStyles.titleMedium,
             ),
           ),
           BlocBuilder<FriendsContactBloc, FriendsContactState>(
@@ -91,8 +91,7 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
                               // ),
                               secondary: CustomAvatarImage(
                                 urlImage: friends[index].avatar,
-                                widthImage: 46,
-                                heightImage: 46,
+                                size: CustomAvatarSize.small,
                               ),
                               value: selectedFriends.firstWhere(
                                     (element) =>

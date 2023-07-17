@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 
 class AddMembersSearch extends SearchDelegate<String> {
@@ -40,7 +40,7 @@ class AddMembersSearch extends SearchDelegate<String> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Text(
         '${selectedMembers.length.toString()} ${AppLocalizations.of(context)!.selected_text}',
-        style: AppTextStyles.mediumTitleTextStyle,
+        style: AppTextStyles.titleSmall,
       ),
     );
   }
@@ -69,8 +69,7 @@ class AddMembersSearch extends SearchDelegate<String> {
                   title: Text(memberResults[index].name ?? ""),
                   secondary: CustomAvatarImage(
                     urlImage: memberResults[index].avatar,
-                    widthImage: 50,
-                    heightImage: 50,
+                    size: CustomAvatarSize.small,
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   value: selectedMembers.contains(memberResults[index]),

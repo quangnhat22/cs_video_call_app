@@ -14,7 +14,7 @@ class ScheduleUpcoming extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: Text(
             AppLocalizations.of(context)!.upcoming,
-            style: AppTextStyles.mediumTitleTextStyle,
+            style: AppTextStyles.titleMedium,
           ),
         ),
         const SizedBox(

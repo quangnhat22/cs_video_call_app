@@ -14,7 +14,7 @@ class ScheduleToday extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: Text(
             AppLocalizations.of(context)!.today,
-            style: AppTextStyles.mediumTitleTextStyle,
+            style: AppTextStyles.titleMedium,
           ),
         ),
         const SizedBox(

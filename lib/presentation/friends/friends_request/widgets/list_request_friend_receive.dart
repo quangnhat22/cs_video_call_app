@@ -52,8 +52,7 @@ class ListRequestFriendReceive extends StatelessWidget {
                   leading: CustomAvatarImage(
                     urlImage: listReceiveRequest[index].receiver?.avatar,
                     maxRadiusEmptyImg: 20,
-                    widthImage: 48,
-                    heightImage: 48,
+                    size: CustomAvatarSize.small,
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -241,5 +241,6 @@
   "leave_group_success": "Rời nhóm thành công",
   "turn_on_off_notification": "Bật/ Tắt thông báo",
   "old_password_is_incorrect": "Mật khẩu cũ không đúng",
-  "edit_group": "Chỉnh sửa nhóm"
+  "edit_group": "Chỉnh sửa nhóm",
+  "choose_a_photo": "Chọn ảnh"
 }

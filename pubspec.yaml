@@ -79,6 +79,7 @@ dependencies:
   flutter_callkit_incoming: ^2.0.0+1
   flutter_slidable: ^3.0.0
   connectivity_plus: ^4.0.1
+  firebase_app_installations: ^0.2.3+3
 
 dev_dependencies:
   flutter_test:

@@ -3,19 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/skeleton.dart';
 import 'package:videocall/core/config/app_assets.dart';
 
+enum CustomAvatarSize {
+  small(46, 46),
+  medium(64, 64),
+  large(120, 120),
+  extraLarge(240, 240);
+
+  const CustomAvatarSize(this.width, this.height);
+
+  final double width;
+  final double height;
+}
+
 class CustomAvatarImage extends StatelessWidget {
   const CustomAvatarImage({
     Key? key,
     this.urlImage,
     this.maxRadiusEmptyImg = 24,
-    this.widthImage,
-    this.heightImage,
+    this.size = CustomAvatarSize.small,
   }) : super(key: key);
 
   final String? urlImage;
   final double? maxRadiusEmptyImg;
-  final double? widthImage;
-  final double? heightImage;
+  final CustomAvatarSize? size;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +38,8 @@ class CustomAvatarImage extends StatelessWidget {
     }
 
     return CachedNetworkImage(
-      width: widthImage,
-      height: heightImage,
+      width: size!.width,
+      height: size!.height,
       fit: BoxFit.cover,
       imageUrl: urlImage!,
       imageBuilder: (_, imageProvider) => Container(

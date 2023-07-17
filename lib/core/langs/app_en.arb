@@ -241,5 +241,6 @@
   "leave_group_success": "Leave group success",
   "turn_on_off_notification": "Turn on/turn off notification",
   "old_password_is_incorrect": "Old password is incorrect",
-  "edit_group": "Edit group"
+  "edit_group": "Edit group",
+  "choose_a_photo": "Choose a photo"
 }

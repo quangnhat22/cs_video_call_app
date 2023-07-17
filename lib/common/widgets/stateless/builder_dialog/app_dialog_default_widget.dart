@@ -83,13 +83,13 @@ class AppDefaultDialogWidget extends AppDialogBaseBuilder {
                   ),
                   child: Text(
                     _title ?? "",
-                    style: AppTextStyles.headlineTextStyle,
+                    style: AppTextStyles.headLineSmall,
                   )),
             if (_content != null)
               Text(
                 _content ?? "",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.subTitleGreyText,
+                //    style: AppTextStyles.bodyMedium,
               ),
             const SizedBox(height: 32),
             Row(

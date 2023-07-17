@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:videocall/common/widgets/stateless/buttons/custom_elevated_button.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 
 class AppDialog {
@@ -21,7 +21,6 @@ class AppDialog {
           elevation: 48,
           actionsAlignment: MainAxisAlignment.spaceAround,
           //actionsOverflowButtonSpacing: 16.sw,
-          actionsOverflowAlignment: OverflowBarAlignment.center,
           actionsPadding: const EdgeInsets.all(4),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -37,7 +36,7 @@ class AppDialog {
                   Flexible(
                     child: Text(
                       title,
-                      style: AppTextStyles.headlineTextStyle,
+                      style: AppTextStyles.headLineSmall,
                     ),
                   ),
                 ],
@@ -57,11 +56,12 @@ class AppDialog {
               Flexible(
                 child: Text(
                   content,
-                  style: const TextStyle(fontSize: 16),
+                  style: AppTextStyles.bodyMedium,
                 ),
               ),
             ],
           ),
+          actionsOverflowAlignment: OverflowBarAlignment.end,
           actions: [
             ActionDialogButton(
               title: AppLocalizations.of(context)!.cancel,
@@ -93,18 +93,17 @@ class ActionDialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onTab,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          title,
-          style: AppTextStyles.titleAppBarTextStyle.copyWith(
-            fontSize: 16.sp,
-            fontWeight: isConfirm == true ? FontWeight.bold : FontWeight.w400,
-          ),
-        ),
-      ),
-    );
+    return isConfirm == true
+        ? CustomElevatedButton(
+            buttonText: title,
+            onPressed: onTab,
+          )
+        : TextButton(
+            onPressed: onTab,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(title, style: AppTextStyles.labelLarge),
+            ),
+          );
   }
 }

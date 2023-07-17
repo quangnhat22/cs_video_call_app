@@ -52,8 +52,7 @@ class GroupListItem extends StatelessWidget {
         // ),
         leading: CustomAvatarImage(
           urlImage: groupAvatar,
-          widthImage: 50,
-          heightImage: 50,
+          size: CustomAvatarSize.small,
         ),
       ),
     );

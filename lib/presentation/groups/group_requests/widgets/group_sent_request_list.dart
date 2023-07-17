@@ -75,8 +75,7 @@ class GroupSentRequestList extends StatelessWidget {
                       ])),
                   leading: CustomAvatarImage(
                     urlImage: sentRequestList[index].receiver!.avatar,
-                    widthImage: 46,
-                    heightImage: 46,
+                    size: CustomAvatarSize.small,
                   ),
                   trailing: SizedBox(
                     child: ElevatedButton(

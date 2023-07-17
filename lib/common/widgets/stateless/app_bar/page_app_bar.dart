@@ -24,7 +24,7 @@ class MPageAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         overflow: TextOverflow.ellipsis,
-        style: AppTextStyles.titleAppBarTextStyle,
+        style: AppTextStyles.titleLarge,
       ),
       bottom: bottomWidget,
       actions: actionWidgets,
