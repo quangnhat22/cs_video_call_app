@@ -17,6 +17,7 @@ import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/group_list/widgets/group_list_item.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
+import 'package:videocall/presentation/groups/groups_details/group_edit/group_edit.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notification_setting/notification_setting.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
@@ -95,6 +96,20 @@ class AppRoutes {
         return _buildAnimationRoute(settings, const EditProfilePage());
       case RouteName.createGroup:
         return _buildAnimationRoute(settings, const CreateGroupPage());
+      case RouteName.editGroup:
+        {
+          final argument = settings.arguments as Map<String, dynamic>;
+          final groupId = argument["groupId"] as String;
+          final groupName = argument["groupName"] as String;
+          final groupImage = argument["groupImage"] as String;
+          return _buildAnimationRoute(
+              settings,
+              EditGroupPage(
+                groupId: groupId,
+                groupName: groupName,
+                groupImage: groupImage,
+              ));
+        }
       case RouteName.createSchedule:
         return _buildAnimationRoute(
             settings,
