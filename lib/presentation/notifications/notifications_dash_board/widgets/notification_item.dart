@@ -140,11 +140,12 @@ class AppNotificationItem extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text: _returnOwnerNotification(),
-                style: const TextStyle(fontWeight: FontWeight.w600),
+                style: AppTextStyles.titleSmall
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
                 text: _returnActionNotification(context),
-                style: const TextStyle(fontWeight: FontWeight.w300),
+                style: AppTextStyles.titleSmall,
               ),
             ],
           ),
@@ -159,8 +160,12 @@ class AppNotificationItem extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            Text(AppDateTimeFormat.convertToHourMinuteFollowDay(
-                noti.createdAt ?? DateTime.now())),
+            Text(
+              AppDateTimeFormat.convertToHourMinuteFollowDay(
+                noti.createdAt ?? DateTime.now(),
+              ),
+              style: AppTextStyles.bodySmall,
+            ),
             if (noti.action != null &&
                 noti.action != 'accept-request' &&
                 noti.action != 'abandon-call' &&

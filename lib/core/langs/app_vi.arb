@@ -247,5 +247,7 @@
   "continueLabel": "Tiếp tục",
   "call_ended": "Kết thúc cuộc gọi",
   "create_account_success": "Tạo tài khoản mới thành công",
-  "create_account_fail": "Tạo tài khoản mới thất bại"
+  "create_account_fail": "Tạo tài khoản mới thất bại",
+  "delete_all_noti_title": "Xoá tất cả thông báo",
+  "delete_all_noti_content": "Bạn có muốn xoá tất cả thông báo hay không?"
 }

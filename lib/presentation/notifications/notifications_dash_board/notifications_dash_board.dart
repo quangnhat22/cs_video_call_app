@@ -9,6 +9,7 @@ import 'package:videocall/common/widgets/stateless/builder_dialog/app_dialog_bas
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/common/widgets/stateless/divider/divider_space_left.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
+import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/notification_entity.dart';

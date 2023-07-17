@@ -23,6 +23,21 @@ class NotificationsDashBoardPage extends StatelessWidget {
 class NotificationsDashboardView extends StatelessWidget {
   const NotificationsDashboardView({super.key});
 
+  void _deleteAllNotification(BuildContext ctx) {
+    AppDefaultDialogWidget()
+        .setTitle(AppLocalizations.of(ctx)!.delete_all_noti_title)
+        .setContent(AppLocalizations.of(ctx)!.delete_all_noti_content)
+        .setAppDialogType(AppDialogType.confirm)
+        .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+        .setOnPositive(() {
+          ctx.read<NotificationBloc>().add(const ListNotificationDeleted());
+          Navigator.of(ctx).pop();
+        })
+        .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+        .buildDialog(ctx)
+        .show(ctx);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +58,7 @@ class NotificationsDashboardView extends StatelessWidget {
                   Icons.delete_outline,
                   color: Theme.of(context).colorScheme.error,
                 ),
-                onPressed: () {
-                  context
-                      .read<NotificationBloc>()
-                      .add(const ListNotificationDeleted());
-                },
+                onPressed: () => _deleteAllNotification(context),
               ),
             ],
           )),

@@ -5,23 +5,25 @@ enum TypesSnackBar { success, warning, error }
 
 class SnackBarApp {
   static void showSnackBar(
-      BuildContext? context, String? message, TypesSnackBar type) {
-    if (context != null) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(
-          content: Text(message ?? ""),
-          backgroundColor: _showBackgroundSnackBar(context, type),
-        ));
-    } else {
-      Fluttertoast.showToast(
-          msg: message ?? '',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: _showBackgroundSnackBarWithoutContext(type),
-          fontSize: 16.0);
-    }
+      BuildContext? context, String? message, TypesSnackBar type) async {
+    await Fluttertoast.cancel();
+    await Fluttertoast.showToast(
+        msg: message ?? '',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: _showBackgroundSnackBarWithoutContext(type),
+        fontSize: 16.0);
+    // if (context != null) {
+    //   ScaffoldMessenger.of(context)
+    //     ..hideCurrentSnackBar()
+    //     ..showSnackBar(SnackBar(
+    //       content: Text(message ?? ""),
+    //       backgroundColor: _showBackgroundSnackBar(context, type),
+    //     ));
+    // } else {
+    //
+    // }
   }
 
   static void showTopSnackBar(String? message, TypesSnackBar type) {

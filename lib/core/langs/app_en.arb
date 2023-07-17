@@ -247,5 +247,7 @@
   "continueLabel": "Continue",
   "call_ended": "Call ended",
   "create_account_success": "Create new account successfully",
-  "create_account_fail": "Failed to create new account"
+  "create_account_fail": "Failed to create new account",
+  "delete_all_noti_title": "Delete all notifications",
+  "delete_all_noti_content": "Do you want delete all notifications?"
 }
