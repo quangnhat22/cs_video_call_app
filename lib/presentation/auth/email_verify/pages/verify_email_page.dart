@@ -7,10 +7,15 @@ class VerifyEmailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<SendEmailCubit>()
-        ..pageInited(email)
-        ..sendEmail(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<SendEmailCubit>()..pageInited(email),
+        ),
+        BlocProvider(
+          create: (_) => getIt<IsSentEmailCubit>(),
+        ),
+      ],
       child: const VerifiedView(),
     );
   }
@@ -26,17 +31,17 @@ class VerifiedView extends StatelessWidget {
         state.whenOrNull(
           success: (_) {
             SnackBarApp.showSnackBar(
-              context,
+              null,
               AppLocalizations.of(context)!.send_email_success,
               TypesSnackBar.success,
             );
           },
           failure: (_, message) {
-            SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+            SnackBarApp.showSnackBar(null, message, TypesSnackBar.error);
           },
           notVerified: (_) {
             SnackBarApp.showSnackBar(
-              context,
+              null,
               AppLocalizations.of(context)!.you_didnt_verify,
               TypesSnackBar.warning,
             );
@@ -65,18 +70,17 @@ class VerifiedView extends StatelessWidget {
                           height: AppScreenUtils.isLandscape() ? 320.h : 250.h,
                           child: AppAssets.iconApp,
                         ),
-                        const TextNoticeSentEmail(),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextNoticeSentEmail(),
+                        ),
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: const [
-                              ButttonVerifyReceiveEmail(),
+                              ColumnButtonAction(),
                               SizedBox(
-                                height: 20,
-                              ),
-                              ButtonResendEmail(),
-                              SizedBox(
-                                height: 20,
+                                height: 4,
                               ),
                               VerifyEmailLogoutButton(),
                               SizedBox(

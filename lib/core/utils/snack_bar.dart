@@ -24,6 +24,16 @@ class SnackBarApp {
     }
   }
 
+  static void showTopSnackBar(String? message, TypesSnackBar type) {
+    Fluttertoast.showToast(
+        msg: message ?? '',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        backgroundColor: _showBackgroundSnackBarWithoutContext(type),
+        fontSize: 16.0);
+  }
+
   static Color? _showBackgroundSnackBar(
       BuildContext context, TypesSnackBar type) {
     switch (type) {

@@ -28,7 +28,10 @@ class WelcomeView extends StatelessWidget {
           //   context.read<AppBloc>().add(AppUserChanged());
           // },
           signInFail: (message) {
-            SnackBarApp.showSnackBar(context, message, TypesSnackBar.error);
+            SnackBarApp.showSnackBar(
+                null,
+                AppLocalizations.of(context)!.login_failed_message,
+                TypesSnackBar.error);
           },
         );
       },

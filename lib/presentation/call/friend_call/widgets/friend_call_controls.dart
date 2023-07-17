@@ -44,7 +44,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _onChange() {
-    //trigger refresh
     setState(() {});
   }
 
@@ -53,11 +52,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
     _audioOutputs = devices.where((d) => d.kind == "audioutput").toList();
     _videoInputs = devices.where((d) => d.kind == "videoinput").toList();
     _onChange();
-  }
-
-  void _unPublishAll() async {
-    final result = await context.showUnPublishDialog();
-    if (result == true) await participant.unpublishAllTracks();
   }
 
   void _selectAudioInput(MediaDevice device) async {
@@ -76,7 +70,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _toggleCamera() async {
-    //
     final track = participant.videoTracks.firstOrNull?.track;
     if (track == null) return;
 
@@ -180,33 +173,24 @@ class _FriendCallControlState extends State<FriendCallControl> {
   }
 
   void _disableScreenShare() async {
-    await participant.setScreenShareEnabled(false);
     if (Platform.isAndroid) {
-      // Android specific
       try {
-        //   await FlutterBackground.disableBackgroundExecution();
+        await participant.setScreenShareEnabled(false);
       } catch (error) {
         log('error disabling screen share: $error');
       }
     }
   }
 
-  void _onTapDisconnect() async {
-    final result = await context.showDisconnectDialog();
-    if (result == true) await widget.room.disconnect();
-  }
-
-  void _onTapUpdateSubscribePermission() async {
-    final result = await context.showSubscribePermissionDialog();
-    if (result != null) {
-      try {
-        widget.room.localParticipant?.setTrackSubscriptionPermissions(
-          allParticipantsAllowed: result,
-        );
-      } catch (error) {
-        await context.showErrorDialog(error);
+  void _onTapDisconnect(BuildContext ctx) async {
+    final result = await ctx.showDisconnectDialog();
+    if (result == true) {
+      if (ctx.mounted) {
+        await ctx.read<FriendCallCubit>().abandonCall();
       }
+      await widget.room.disconnect();
     }
+    ;
   }
 
   Widget _buildIconWhenMicrophoneIsEnabled() {
@@ -395,95 +379,53 @@ class _FriendCallControlState extends State<FriendCallControl> {
     );
   }
 
-  Widget _buildPanelSliding() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildIconWhenMicrophoneIsEnabled(),
-        _buildVolumnIcon(),
-        _buildIconWhenCameraIsEnabled(),
-        const SizedBox(
-          width: 10,
-        ),
-        IconWrapper(
-          iconButton: IconButton(
-            icon: const Icon(
-              Icons.switch_camera_outlined,
-              color: Colors.black,
-            ),
-            onPressed: _toggleCamera,
-            tooltip: 'toggle camera',
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        _buildShareScreenIcon(),
-        const SizedBox(
-          width: 10,
-        ),
-        // IconWrapper(
-        //   iconButton: IconButton(
-        //     onPressed: _unPublishAll,
-        //     icon: const Icon(
-        //       Icons.block,
-        //       color: Colors.black,
-        //     ),
-        //     tooltip: 'UnPublish all',
-        //   ),
-        // ),
-      ],
-    );
-  }
-
-  Widget _buildCollapsedSliding() {
-    return Wrap(
-      runAlignment: WrapAlignment.center,
-      alignment: WrapAlignment.center,
-      spacing: 20,
-      children: [
-        // IconWrapper(
-        //     iconButton: IconButton(
-        //   onPressed: _onTapUpdateSubscribePermission,
-        //   icon: const Icon(
-        //     Icons.security,
-        //     color: Colors.black,
-        //   ),
-        //   tooltip: 'Subscribe permission',
-        // )),
-        //_buildIconWhenMicrophoneIsEnabled(),
-        IconWrapper(
-          iconButton: IconButton(
-            onPressed: _onTapDisconnect,
-            icon: const Icon(
-              Icons.call_end,
-              color: Colors.white,
-            ),
-            tooltip: 'disconnect',
-          ),
-          backgroundColor: Colors.red,
-        ),
-        // IconWrapper(
-        //   iconButton: IconButton(
-        //     icon: const Icon(
-        //       Icons.switch_camera_outlined,
-        //       color: Colors.black,
-        //     ),
-        //     onPressed: _toggleCamera,
-        //     tooltip: 'toggle camera',
-        //   ),
-        // ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SlidingUpPanel(
-      minHeight: 80.h,
-      maxHeight: 200.h,
-      panel: _buildPanelSliding(),
-      collapsed: _buildCollapsedSliding(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Wrap(
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.center,
+        spacing: 0,
+        runSpacing: 0,
+        children: [
+          _buildIconWhenMicrophoneIsEnabled(),
+          _buildVolumnIcon(),
+          _buildIconWhenCameraIsEnabled(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconWrapper(
+              iconButton: IconButton(
+                icon: const Icon(
+                  Icons.switch_camera_outlined,
+                  color: Colors.black,
+                ),
+                onPressed: _toggleCamera,
+                tooltip: 'toggle camera',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _buildShareScreenIcon(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconWrapper(
+              iconButton: IconButton(
+                onPressed: () => _onTapDisconnect(context),
+                icon: const Icon(
+                  Icons.call_end,
+                  color: Colors.white,
+                ),
+                tooltip: 'disconnect',
+              ),
+              backgroundColor: Colors.red,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

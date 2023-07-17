@@ -35,12 +35,21 @@ class _GroupCallingPageState extends State<GroupCallingPage> {
   @override
   Widget build(BuildContext context) {
     return PageView(
-      controller: controller,
       children: [
-        GroupCalling(room: widget.room),
         BlocProvider(
           create: (_) => getIt<GroupCallPinMessageBloc>(),
-          child: ListMessageView(),
+          child: PageView(
+            controller: controller,
+            children: [
+              GroupCalling(
+                room: widget.room,
+                pageController: controller,
+              ),
+              ListMessageView(
+                pageController: controller,
+              ),
+            ],
+          ),
         ),
       ],
     );

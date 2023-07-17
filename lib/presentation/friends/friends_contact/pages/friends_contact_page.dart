@@ -1,13 +1,24 @@
 part of friends_contact;
 
-class FriendsContactPage extends StatelessWidget {
+class FriendsContactPage extends StatefulWidget {
   const FriendsContactPage({super.key});
 
   @override
+  State<FriendsContactPage> createState() => _FriendsContactPageState();
+}
+
+class _FriendsContactPageState extends State<FriendsContactPage>
+    with AutomaticKeepAliveClientMixin<FriendsContactPage> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider(
       create: (_) =>
-          getIt<FriendsContactBloc>()..add(const FriendsContactEvent.started()),
+      getIt<FriendsContactBloc>()
+        ..add(const FriendsContactEvent.started()),
       child: const FriendsContactView(),
     );
   }

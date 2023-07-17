@@ -8,12 +8,17 @@ import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
 import 'package:videocall/core/utils/screen_utils.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
-import 'package:videocall/presentation/call/group_call/views/group_call_message_item.dart';
+import 'package:videocall/presentation/call/group_call/widgets/group_call_message_item.dart';
 
 import '../bloc/group_call_pin_message_bloc.dart';
 
 class ListMessageView extends StatelessWidget {
-  ListMessageView({super.key});
+  ListMessageView({
+    super.key,
+    required this.pageController,
+  });
+
+  final PageController pageController;
 
   final TextEditingController _controller = TextEditingController();
 
@@ -28,14 +33,15 @@ class ListMessageView extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          body: GestureDetector(
-            onTap: () => AppScreenUtils.hideInputKeyboard(),
-            child: Stack(
-              children: [
+          resizeToAvoidBottomInset: true,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => AppScreenUtils.hideInputKeyboard(),
+              child: Stack(children: [
                 BlocBuilder<CallGroupStatusCubit, CallGroupStatusState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      connectedSuccess: (user, listMessage, room) {
+                      connectedSuccess: (user, listMessage, pinMessage, room) {
                         if (listMessage == null || listMessage.isEmpty) {
                           return Center(
                             child: Text(AppLocalizations.of(context)!
@@ -47,7 +53,7 @@ class ListMessageView extends StatelessWidget {
                           padding: EdgeInsets.only(
                             left: 8,
                             right: 8,
-                            top: 12,
+                            top: 48.h,
                             bottom: 60.h,
                           ),
                           child: ListView.separated(
@@ -58,6 +64,9 @@ class ListMessageView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return GroupCallMessageItem(
                                 messageCallEntity: listMessage[index],
+                                isPinned: pinMessage != null
+                                    ? pinMessage.contains(listMessage[index].id)
+                                    : false,
                                 messageChild: ListTile(
                                   title: Text(
                                     listMessage[index].name ??
@@ -135,7 +144,27 @@ class ListMessageView extends StatelessWidget {
                         ],
                       ),
                     )),
-              ],
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pageController.animateToPage(0,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.linear);
+                    },
+                    style: ButtonStyle(
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(10)),
+                        //   backgroundColor: MaterialStateProperty.all(backgroundColor),
+                        shape: MaterialStateProperty.all(const CircleBorder())),
+                    child: const Icon(
+                      Icons.chevron_left,
+                      //color: iconColor,
+                    ),
+                  ),
+                ),
+              ]),
             ),
           ),
         );

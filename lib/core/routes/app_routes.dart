@@ -22,14 +22,12 @@ import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notification_setting/notification_setting.dart';
 import 'package:videocall/presentation/notifications/notifications_dash_board/notifications_dash_board.dart';
 import 'package:videocall/presentation/schedules/create_meeting/pages/create_meeting_page.dart';
-import 'package:videocall/presentation/schedules/schedules_dash_board/schedule_dash_board.dart';
 import 'package:videocall/presentation/setting/about_us/about_us.dart';
 import 'package:videocall/presentation/setting/change_password/change_password.dart';
 import 'package:videocall/presentation/setting/devices/devices.dart';
 import 'package:videocall/presentation/setting/edit_profile/edit_profile.dart';
 import 'package:videocall/presentation/welcome/welcome.dart';
 
-import '../../domain/entities/user_entity.dart';
 import '../../presentation/auth/login/login.dart';
 import '../../presentation/setting/setting_dash_board/setting_dash_board.dart';
 
@@ -73,8 +71,8 @@ class AppRoutes {
       case RouteName.findFriend:
         return _buildAnimationRoute(settings, const FindNewFriendPage());
       case RouteName.friendInfo:
-        return _buildAnimationRoute(settings,
-            FriendsInfoPage(userInfo: settings.arguments as UserEntity));
+        return _buildAnimationRoute(
+            settings, FriendsInfoPage(friendId: settings.arguments as String));
       case RouteName.groups:
         return _buildAnimationRoute(settings, const GroupsDashBoardPage());
       case RouteName.teamDetails:
@@ -83,8 +81,8 @@ class AppRoutes {
             GroupDetailPage(
               groupArgs: settings.arguments as GroupArguments,
             ));
-      case RouteName.schedules:
-        return _buildRoute(settings, ScheduleDashBoardPage());
+      // case RouteName.schedules:
+      //   return _buildRoute(settings, ScheduleDashBoardPage());
       case RouteName.notifications:
         return _buildRoute(settings, const NotificationsDashBoardPage());
       case RouteName.settings:
@@ -97,7 +95,7 @@ class AppRoutes {
       case RouteName.editProfile:
         return _buildAnimationRoute(settings, const EditProfilePage());
       case RouteName.createGroup:
-        return _buildRoute(settings, const CreateGroupPage());
+        return _buildAnimationRoute(settings, const CreateGroupPage());
       case RouteName.editGroup:
         {
           final argument = settings.arguments as Map<String, dynamic>;

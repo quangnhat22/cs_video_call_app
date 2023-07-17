@@ -34,7 +34,7 @@ class FindNewFriendView extends StatelessWidget {
               SnackBarApp.showSnackBar(context, message, TypesSnackBar.error),
           success: (userResult) {
             NavigationUtil.pushNamed(
-                routeName: RouteName.friendInfo, args: userResult);
+                routeName: RouteName.friendInfo, args: userResult.id);
           },
         );
       },

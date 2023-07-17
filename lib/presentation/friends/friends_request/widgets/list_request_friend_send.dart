@@ -29,46 +29,54 @@ class ListRequestFriendSend extends StatelessWidget {
             onRefresh: () {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListFriendRequestEvent.started());
+                  .add(const ListSentFriendRequestRefreshed());
             })
         : RefreshIndicator(
             onRefresh: () async {
               context
                   .read<ListFriendRequestBloc>()
-                  .add(const ListFriendRequestEvent.started());
+                  .add(const ListSentFriendRequestRefreshed());
             },
             child: ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(listSentRequest[index].receiver?.name ?? ""),
-                  subtitle: Text(
-                    listSentRequest[index].createdAt != null
-                        ? AppDateTimeFormat.formatDDMMYYYY(
-                            listSentRequest[index].createdAt)
-                        : "",
-                  ),
-                  leading: CustomAvatarImage(
-                    urlImage: listSentRequest[index].receiver?.avatar,
-                    maxRadiusEmptyImg: 20,
-                    size: CustomAvatarSize.small,
-                  ),
-                  trailing: SizedBox(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onSecondary,
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                      ),
-                      onPressed: () => _onTapRecallButton(
-                        context,
-                        listSentRequest[index].receiver?.id,
-                      ),
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .requests_recall_text_button,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(
+                      listSentRequest[index].receiver?.name ?? "",
+                      style: AppTextStyles.bodyLarge,
+                    ),
+                    subtitle: Text(
+                      listSentRequest[index].createdAt != null
+                          ? AppDateTimeFormat.formatDDMMYYYY(
+                              listSentRequest[index].createdAt)
+                          : "",
+                      style: AppTextStyles.bodySmall,
+                    ),
+                    leading: CustomAvatarImage(
+                      urlImage: listSentRequest[index].receiver?.avatar,
+                      maxRadiusEmptyImg: 20,
+                      size: CustomAvatarSize.small,
+                    ),
+                    trailing: SizedBox(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onSecondary,
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                        ),
+                        onPressed: () => _onTapRecallButton(
+                          context,
+                          listSentRequest[index].receiver?.id,
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .requests_recall_text_button,
+                        ),
                       ),
                     ),
                   ),

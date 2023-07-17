@@ -10,6 +10,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:videocall/core/utils/live_kit_until.dart';
+
 import 'icon_wrapper.dart';
 
 class Controls extends StatefulWidget {
@@ -17,9 +18,11 @@ class Controls extends StatefulWidget {
     Key? key,
     required this.room,
     required this.participant,
+    required this.pageController,
   }) : super(key: key);
   final Room room;
   final LocalParticipant participant;
+  final PageController pageController;
 
   @override
   State<Controls> createState() => _ControlsState();
@@ -454,16 +457,6 @@ class _ControlsState extends State<Controls> {
       alignment: WrapAlignment.center,
       spacing: 20,
       children: [
-        // IconWrapper(
-        //     iconButton: IconButton(
-        //   onPressed: _onTapUpdateSubscribePermission,
-        //   icon: const Icon(
-        //     Icons.security,
-        //     color: Colors.black,
-        //   ),
-        //   tooltip: 'Subscribe permission',
-        // )),
-        //_buildIconWhenMicrophoneIsEnabled(),
         IconWrapper(
           iconButton: IconButton(
             onPressed: _onTapDisconnect,
@@ -475,16 +468,19 @@ class _ControlsState extends State<Controls> {
           ),
           backgroundColor: Colors.red,
         ),
-        // IconWrapper(
-        //   iconButton: IconButton(
-        //     icon: const Icon(
-        //       Icons.switch_camera_outlined,
-        //       color: Colors.black,
-        //     ),
-        //     onPressed: _toggleCamera,
-        //     tooltip: 'toggle camera',
-        //   ),
-        // ),
+        IconWrapper(
+          iconButton: IconButton(
+            onPressed: () {
+              widget.pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.linear);
+            },
+            icon: const Icon(
+              Icons.message_outlined,
+            ),
+            tooltip: 'message',
+          ),
+        ),
       ],
     );
   }
@@ -494,6 +490,7 @@ class _ControlsState extends State<Controls> {
     return SlidingUpPanel(
       minHeight: 80.h,
       maxHeight: 200.h,
+      renderPanelSheet: false,
       panel: _buildPanelSliding(),
       collapsed: _buildCollapsedSliding(),
     );

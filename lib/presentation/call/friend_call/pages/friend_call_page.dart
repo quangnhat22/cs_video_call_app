@@ -33,6 +33,13 @@ class FriendCallView extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       listener: (context, state) {
         state.whenOrNull(
+          ended: () {
+            SnackBarApp.showSnackBar(
+                null,
+                AppLocalizations.of(context)!.call_ended,
+                TypesSnackBar.success);
+            Navigator.of(context).pop();
+          },
           connectedFail: (_) {
             SnackBarApp.showSnackBar(
                 null,
@@ -46,7 +53,8 @@ class FriendCallView extends StatelessWidget {
         return state.maybeWhen(
           connecting: () => const ConnectingCallView(),
           preparing: (room, _) => FriendPrepareCallView(room: room),
-          connectedSuccess: (room) => FriendCallConnectView(room: room),
+          connectedSuccess: (room, isFullRoom) =>
+              FriendCallConnectView(room: room, isFullRoom: isFullRoom),
           orElse: () => Container(),
         );
       },

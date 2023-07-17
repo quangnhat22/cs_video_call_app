@@ -29,19 +29,22 @@ class ListFriend extends StatelessWidget {
                           .read<FriendsContactBloc>()
                           .add(const FriendsContactRefreshed());
                     },
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) =>
-                          const DividerSpaceLeft(),
-                      itemBuilder: (context, index) {
-                        return ListFriendItem(
-                          id: friends[index].id,
-                          name: friends[index].name,
-                          avatar: friends[index].avatar,
-                          email: friends[index].email,
-                        );
-                      },
-                      itemCount: friends.length,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) =>
+                            const DividerSpaceLeft(),
+                        itemBuilder: (context, index) {
+                          return ListFriendItem(
+                            id: friends[index].id,
+                            name: friends[index].name,
+                            avatar: friends[index].avatar,
+                            email: friends[index].email,
+                          );
+                        },
+                        itemCount: friends.length,
+                      ),
                     ),
                   );
           },

@@ -26,33 +26,23 @@ class GlobalSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final List<UserEntity> filteredFriends = [];
-
     if (query.isNotEmpty) {
       context
           .read<GlobalSearchBloc>()
           .add(GlobalSearchChanging(query: query.trim()));
     }
 
-    return SearchResult(
-      filteredFriends: filteredFriends,
-      query: query.trim(),
-    );
+    return const SearchResult();
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<UserEntity> filteredFriends = [];
-
     if (query.isNotEmpty) {
       context
           .read<GlobalSearchBloc>()
           .add(GlobalSearchChanging(query: query.trim()));
     }
 
-    return SearchResult(
-      filteredFriends: filteredFriends,
-      query: query.trim(),
-    );
+    return const SearchResult();
   }
 }

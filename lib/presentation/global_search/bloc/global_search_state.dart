@@ -7,8 +7,10 @@ class GlobalSearchState with _$GlobalSearchState {
   const factory GlobalSearchState.getResultInProgress() =
       GetSearchResultInProgress;
 
-  const factory GlobalSearchState.getResultSuccess(
-      {required List<UserModel>? friends}) = GetSearchResultSuccess;
+  const factory GlobalSearchState.getResultSuccess({
+    List<UserEntity>? friends,
+    List<GroupEntity>? groups,
+  }) = GetSearchResultSuccess;
 
   const factory GlobalSearchState.getResultFailed({required String message}) =
       GetSearchResultFailed;

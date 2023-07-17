@@ -2,22 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOutlineIconButton extends StatelessWidget {
-  const CustomOutlineIconButton(
-      {Key? key,
-      required this.labelText,
-      required this.icon,
-      this.handleOnClickButton,
-      this.color,
-      this.bgColor,
-      this.widthBtn})
-      : super(key: key);
+  const CustomOutlineIconButton({
+    Key? key,
+    required this.labelText,
+    this.icon,
+    this.handleOnClickButton,
+    this.color,
+    this.bgColor,
+    this.widthBtn,
+    this.padding,
+    this.radiusValue = 20,
+  }) : super(key: key);
 
   final String labelText;
-  final Widget icon;
+  final Widget? icon;
   final double? widthBtn;
   final Color? color;
   final Color? bgColor;
   final VoidCallback? handleOnClickButton;
+  final EdgeInsets? padding;
+  final double radiusValue;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +31,8 @@ class CustomOutlineIconButton extends StatelessWidget {
         width: widthBtn ?? 1.sw,
         child: OutlinedButton.icon(
           onPressed: handleOnClickButton,
-          icon: icon,
-          label: Text(
-            //AppLocalizations.of(context)!.sign_in_with_google,
-            labelText,
-          ),
+          icon: icon ?? Container(),
+          label: Text(labelText),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(bgColor),
             foregroundColor: MaterialStateProperty.all(
@@ -41,8 +42,14 @@ class CustomOutlineIconButton extends StatelessWidget {
                 color: color ?? Colors.grey[700]!,
               ),
             ),
+            shape: MaterialStateProperty.resolveWith<OutlinedBorder?>((states) {
+              return RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(radiusValue),
+              );
+            }),
             padding: MaterialStateProperty.all(
-              const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              padding ??
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
             ),
           ),
         ),

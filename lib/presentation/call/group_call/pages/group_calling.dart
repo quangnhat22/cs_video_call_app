@@ -13,9 +13,11 @@ class GroupCalling extends StatefulWidget {
   const GroupCalling({
     super.key,
     required this.room,
+    required this.pageController,
   });
 
   final Room room;
+  final PageController pageController;
 
   @override
   State<GroupCalling> createState() => _GroupCallingState();
@@ -177,6 +179,7 @@ class _GroupCallingState extends State<GroupCalling> {
                   child: Controls(
                     room: widget.room,
                     participant: widget.room.localParticipant!,
+                    pageController: widget.pageController,
                   ),
                 )
             ],

@@ -185,7 +185,7 @@
   "update_avatar_success": "Cập nhật avatar thành công!",
   "update_avatar_fail": "Cập nhật avatar thất bại! Vui lòng thử lại.",
   "resend_email_after": "Gửi lại email sau",
-  "check_email_forgot_password": "Chúng tôi đã gửi một email đến địa chỉ {email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
+  "check_email_forgot_password": "Chúng tôi sẽ gửi một email đến địa chỉ {email_user} có chứa đường Link khôi phục mật khẩu! Vui lòng kiểm tra.",
   "@check_email_forgot_password": {
     "placeholders": {
       "email_user": {
@@ -233,7 +233,7 @@
   "do_you_want_delete_device": "Bạn có muốn xóa thiết bị?",
   "oops": "Ooops",
   "no_internet": "Không thể kết nối Internet. Vui lòng kiểm tra đường truyền của bạn",
-  "cannot_call_now": "Phòng video call đã kết thúc.",
+  "cannot_call_now": "Không thể thực hiện Videocall lúc này! Vui lòng thử lại sau.",
   "leave_group": "Rời nhóm",
   "no_notifications_found": "Không có thông báo nào",
   "you_did_sent_any_request": "Bạn chưa gửi bất kỳ lời mời nào",
@@ -242,5 +242,10 @@
   "turn_on_off_notification": "Bật/ Tắt thông báo",
   "old_password_is_incorrect": "Mật khẩu cũ không đúng",
   "edit_group": "Chỉnh sửa nhóm",
-  "choose_a_photo": "Chọn ảnh"
+  "choose_a_photo": "Chọn ảnh",
+  "do_you_want_delete_history_call": "Bạn có muốn xoá toàn bộ lịch sử cuộc gọi?",
+  "continueLabel": "Tiếp tục",
+  "call_ended": "Kết thúc cuộc gọi",
+  "create_account_success": "Tạo tài khoản mới thành công",
+  "create_account_fail": "Tạo tài khoản mới thất bại"
 }

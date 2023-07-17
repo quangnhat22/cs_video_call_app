@@ -4,9 +4,11 @@ class FriendCallConnectView extends StatefulWidget {
   const FriendCallConnectView({
     super.key,
     required this.room,
+    required this.isFullRoom,
   });
 
   final Room room;
+  final bool isFullRoom;
 
   @override
   State<FriendCallConnectView> createState() => _FriendCallConnectViewState();
@@ -42,6 +44,10 @@ class _FriendCallConnectViewState extends State<FriendCallConnectView> {
     if (mounted) {
       List<ParticipantTrack> userMediaTracks = [];
       List<ParticipantTrack> screenTracks = [];
+
+      context
+          .read<FriendCallCubit>()
+          .memberCallChanged(widget.room.participants.length + 1);
       for (var participant in widget.room.participants.values) {
         for (var t in participant.videoTracks) {
           if (t.isScreenShare) {
@@ -123,6 +129,9 @@ class _FriendCallConnectViewState extends State<FriendCallConnectView> {
       WidgetsBindingCompatible.instance
           ?.addPostFrameCallback((timeStamp) => Navigator.pop(context));
     })
+    ..on<ParticipantConnectedEvent>((event) async {
+      context.read<FriendCallCubit>().memberCallChanged(2);
+    })
     ..on<RoomRecordingStatusChanged>((event) {
       if (mounted) {
         context.showRecordingStatusChangedDialog(event.activeRecording);
@@ -154,43 +163,61 @@ class _FriendCallConnectViewState extends State<FriendCallConnectView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                  child: participantTracks.isNotEmpty
-                      ? ParticipantWidget.widgetFor(participantTracks.first)
-                      : Container()),
-              if (widget.room.localParticipant != null)
-                SafeArea(
-                  top: false,
-                  child: FriendCallControl(
-                    room: widget.room,
-                    participant: widget.room.localParticipant!,
-                  ),
-                )
-            ],
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0,
-            child: SizedBox(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: math.max(0, participantTracks.length - 1),
-                itemBuilder: (BuildContext context, int index) => SizedBox(
-                  width: 180,
-                  height: 120,
-                  child:
-                      ParticipantWidget.widgetFor(participantTracks[index + 1]),
-                ),
-              ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Expanded(
+                    child: participantTracks.isNotEmpty
+                        ? ParticipantWidget.widgetFor(participantTracks.first)
+                        : Container()),
+                if (widget.room.localParticipant != null)
+                  SafeArea(
+                    top: false,
+                    child: FriendCallControl(
+                      room: widget.room,
+                      participant: widget.room.localParticipant!,
+                    ),
+                  )
+              ],
             ),
-          ),
-        ],
+            !widget.isFullRoom
+                ? Positioned(
+                    left: 0,
+                    top: 0,
+                    child: SizedBox(
+                      width: 0.36.sw,
+                      height: 120,
+                      child: Container(
+                        color: Colors.black.withOpacity(0.4),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                  )
+                : Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    child: SizedBox(
+                      height: 120,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: math.max(0, participantTracks.length - 1),
+                        itemBuilder: (BuildContext context, int index) =>
+                            SizedBox(
+                          width: 180,
+                          height: 120,
+                          child: ParticipantWidget.widgetFor(
+                              participantTracks[index + 1]),
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }

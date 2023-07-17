@@ -72,7 +72,7 @@ class AppColors {
     errorContainer: Color(0xFF93000A),
     onErrorContainer: Color(0xFFFFDAD6),
     outline: Color(0xFF8A9297),
-    background: Color(0xFFFFFFFF),
+    background: Color(0xFF000000),
     //0xFF191C1E
     onBackground: Color(0xFFE1E2E5),
     surface: Color(0xFF111416),
