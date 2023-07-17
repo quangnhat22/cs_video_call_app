@@ -1,7 +1,7 @@
 part of email_verify;
 
-class ButttonVerifyReceiveEmail extends StatelessWidget {
-  const ButttonVerifyReceiveEmail({
+class ButtonVerifyReceiveEmail extends StatelessWidget {
+  const ButtonVerifyReceiveEmail({
     super.key,
   });
 
@@ -11,33 +11,32 @@ class ButttonVerifyReceiveEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SendEmailCubit, SendEmailState>(
+    return BlocBuilder<IsSentEmailCubit, IsSentEmailState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        return state.maybeWhen(
-          inProgress: (_) {
-            return const LinearProgressIndicator();
-          },
-          verified: (_) {
-            return CustomElevatedButton(
-              buttonText: AppLocalizations.of(context)!.edit_profile,
-              onPressed: () {
-                NavigationUtil.pushReplacementNamed(
-                    routeName: RouteName.editProfile);
-              },
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              width: 0.8.sw,
-            );
-          },
-          orElse: () {
-            return CustomElevatedButton(
-              buttonText: AppLocalizations.of(context)!.i_verified,
-              onPressed: () => _onVerifiedEmailBtn(context),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              width: 0.8.sw,
-            );
-          },
-        );
+        return state.disableVerify
+            ? CustomOutlineIconButton(
+                labelText:
+                    AppLocalizations.of(context)!.continueLabel.toUpperCase(),
+                color: Theme.of(context).colorScheme.surface,
+                bgColor: Theme.of(context).colorScheme.surfaceVariant,
+                handleOnClickButton: null,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                ),
+                radiusValue: 12,
+              )
+            : CustomOutlineIconButton(
+                labelText:
+                    AppLocalizations.of(context)!.continueLabel.toUpperCase(),
+                color: Theme.of(context).colorScheme.primary,
+                bgColor: Theme.of(context).colorScheme.primaryContainer,
+                handleOnClickButton: () => _onVerifiedEmailBtn(context),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                ),
+                radiusValue: 12,
+              );
       },
     );
   }

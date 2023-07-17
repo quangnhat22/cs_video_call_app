@@ -183,7 +183,7 @@
   "update_avatar_success": "Update avatar success",
   "update_avatar_fail": "Update avatar fail! Try again",
   "resend_email_after": "Resend email after",
-  "check_email_forgot_password": "We sent an email to {email_user} with a password reset Link! Please check.",
+  "check_email_forgot_password": "We will send an email to {email_user} with a password reset Link! Please check.",
   "@check_email_forgot_password": {
     "placeholders": {
       "email_user": {
@@ -231,7 +231,7 @@
   "do_you_want_delete_device": "Do you want to delete device?",
   "oops": "Ooops",
   "no_internet": "No Internet Connection found. Check your connecttion",
-  "cannot_call_now": "Room is ended!",
+  "cannot_call_now": "Calls cannot be made at this time. Please try again after!",
   "leave_group": "Leave group",
   "no_notifications_found": "No notifications found",
   "you_did_sent_any_request": "You didn't send any request",
@@ -240,5 +240,9 @@
   "turn_on_off_notification": "Turn on/turn off notification",
   "old_password_is_incorrect": "Old password is incorrect",
   "choose_a_photo": "Choose a photo",
-  "do_you_want_delete_history_call": "Do you want to delete the entire call history?"
+  "do_you_want_delete_history_call": "Do you want to delete the entire call history?",
+  "continueLabel": "Continue",
+  "call_ended": "Call ended",
+  "create_account_success": "Create new account successfully",
+  "create_account_fail": "Failed to create new account"
 }

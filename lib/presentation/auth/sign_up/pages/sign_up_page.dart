@@ -24,15 +24,15 @@ class SignUpView extends StatelessWidget {
       listener: (context, state) {
         if (state.statusSubmit == FormzSubmissionStatus.failure) {
           SnackBarApp.showSnackBar(
-            context,
-            AppLocalizations.of(context)!.action_fail,
+            null,
+            AppLocalizations.of(context)!.create_account_fail,
             TypesSnackBar.error,
           );
         }
         if (state.statusSubmit == FormzSubmissionStatus.success) {
           SnackBarApp.showSnackBar(
-            context,
-            AppLocalizations.of(context)!.action_success,
+            null,
+            AppLocalizations.of(context)!.create_account_success,
             TypesSnackBar.success,
           );
         }

@@ -13,8 +13,6 @@ import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 
 import '../../core/config/app_text_styles.dart';
 import '../../core/routes/route_name.dart';
-import '../../core/utils/screen_utils.dart';
-
 import 'cubit/welcome_cubit.dart';
 
 part 'pages/welcome_page.dart';
