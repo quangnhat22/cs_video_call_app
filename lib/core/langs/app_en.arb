@@ -277,5 +277,23 @@
   "member_left": "Member left",
   "pinned": "Pinned",
   "pin": "Pin",
-  "pin_message_success": "Pin message successfully"
+  "pin_message_success": "Pin message successfully",
+  "app_version": "App version: {version}",
+  "@app_version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "app_name": "App name: {version}",
+  "@app_name": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "contact_message": "If you have a need to contact or report an error in the application, please contact this Email: ",
+  "open_email_fail": "Can't open Email app. Try again!"
 }

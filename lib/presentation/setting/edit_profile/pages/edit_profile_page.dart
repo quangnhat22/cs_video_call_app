@@ -32,6 +32,7 @@ class EditProfileView extends StatelessWidget {
               context,
               AppLocalizations.of(context)!.update_profile_success,
               TypesSnackBar.success);
+          NavigationUtil.pop();
         }
       },
       child: Scaffold(

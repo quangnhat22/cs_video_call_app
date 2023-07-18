@@ -54,7 +54,7 @@ class ListFriendCall extends StatelessWidget {
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 16),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             // const DropdownFilterButton(),
