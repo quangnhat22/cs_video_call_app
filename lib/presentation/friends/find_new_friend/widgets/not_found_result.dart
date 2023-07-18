@@ -8,10 +8,7 @@ class NotFoundResult extends StatelessWidget {
     return Column(
       children: <Widget>[
         const SizedBox(
-          height: 64,
-        ),
-        const SizedBox(
-          height: 32,
+          height: 96,
         ),
         AppAssets.notFoundSvg,
       ],

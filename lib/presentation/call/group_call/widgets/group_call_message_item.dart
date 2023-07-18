@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:videocall/domain/entities/message_call_entity.dart';
-import 'package:videocall/presentation/call/group_call/bloc/group_call_pin_message_bloc.dart';
-import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
+part of group_call;
 
 class GroupCallMessageItem extends StatefulWidget {
   const GroupCallMessageItem(
@@ -50,7 +45,9 @@ class _GroupCallMessageItemState extends State<GroupCallMessageItem> {
                 widget.isPinned ? Colors.grey[400]! : const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             icon: Icons.push_pin,
-            label: widget.isPinned ? 'Pinned' : 'Pin',
+            label: widget.isPinned
+                ? AppLocalizations.of(context)!.pinned
+                : AppLocalizations.of(context)!.pin,
           ),
         ],
       ),

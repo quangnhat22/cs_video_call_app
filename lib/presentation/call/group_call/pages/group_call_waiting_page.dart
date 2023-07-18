@@ -1,14 +1,4 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:livekit_client/livekit_client.dart';
-import 'package:videocall/core/routes/app_navigation.dart';
-
-import '../../../../common/widgets/stateless/buttons/custom_elevated_button.dart';
-import '../../../../common/widgets/stateless/buttons/float_action_button_video.dart';
-import '../cubit_call_group_status/call_group_status_cubit.dart';
+part of group_call;
 
 class GroupCallPreparingPage extends StatefulWidget {
   const GroupCallPreparingPage({
@@ -161,7 +151,7 @@ class _GroupCallPreparingPageState extends State<GroupCallPreparingPage> {
                   height: 48,
                 ),
                 CustomElevatedButton(
-                  buttonText: "Start call",
+                  buttonText: AppLocalizations.of(context)!.start_call,
                   onPressed: () {
                     context.read<CallGroupStatusCubit>().connectRoom();
                   },

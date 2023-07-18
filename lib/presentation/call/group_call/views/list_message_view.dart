@@ -1,18 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
-import 'package:videocall/common/widgets/stateless/skeleton/list_skeleton.dart';
-import 'package:videocall/core/utils/screen_utils.dart';
-import 'package:videocall/core/utils/snack_bar.dart';
-import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
-import 'package:videocall/presentation/call/group_call/widgets/group_call_message_item.dart';
+part of group_call;
 
-import '../bloc/group_call_pin_message_bloc.dart';
-
-class ListMessageView extends StatelessWidget {
+class ListMessageView extends StatefulWidget {
   ListMessageView({
     super.key,
     required this.pageController,
@@ -20,7 +8,18 @@ class ListMessageView extends StatelessWidget {
 
   final PageController pageController;
 
+  @override
+  State<ListMessageView> createState() => _ListMessageViewState();
+}
+
+class _ListMessageViewState extends State<ListMessageView> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,9 @@ class ListMessageView extends StatelessWidget {
       listener: (context, state) {
         if (state is GroupCallPinMessageSuccess) {
           SnackBarApp.showSnackBar(
-              context, 'Pin message successfully', TypesSnackBar.success);
+              context,
+              AppLocalizations.of(context)!.pin_message_success,
+              TypesSnackBar.success);
         }
       },
       builder: (context, state) {
@@ -41,7 +42,8 @@ class ListMessageView extends StatelessWidget {
                 BlocBuilder<CallGroupStatusCubit, CallGroupStatusState>(
                   builder: (context, state) {
                     return state.maybeWhen(
-                      connectedSuccess: (user, listMessage, pinMessage, room) {
+                      connectedSuccess:
+                          (user, listMessage, _, pinMessage, room) {
                         if (listMessage == null || listMessage.isEmpty) {
                           return Center(
                             child: Text(AppLocalizations.of(context)!
@@ -57,6 +59,7 @@ class ListMessageView extends StatelessWidget {
                             bottom: 60.h,
                           ),
                           child: ListView.separated(
+                            reverse: true,
                             separatorBuilder: (context, index) =>
                                 const SizedBox(
                               height: 20,
@@ -102,9 +105,12 @@ class ListMessageView extends StatelessWidget {
                     child: Container(
                       height: 60.h,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 12),
+                          horizontal: 8, vertical: 8),
                       decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryContainer,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primaryContainer
+                              .withOpacity(0.6),
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8))),
@@ -118,13 +124,24 @@ class ListMessageView extends StatelessWidget {
                           Expanded(
                             child: TextField(
                               controller: _controller,
+                              minLines: 1,
+                              maxLines: null,
                               decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(24),
-                                  )),
+                                filled: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 4,
+                                ),
+                                fillColor:
+                                    Theme.of(context).colorScheme.onPrimary,
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.0,
+                                    style: BorderStyle.none,
+                                  ),
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -135,9 +152,10 @@ class ListMessageView extends StatelessWidget {
                               context
                                   .read<CallGroupStatusCubit>()
                                   .sendMessageData(_controller.text);
+                              _controller.text = '';
                             },
                             icon: const Icon(
-                              Icons.send,
+                              Icons.send_outlined,
                               size: 26,
                             ),
                           )
@@ -149,7 +167,7 @@ class ListMessageView extends StatelessWidget {
                   left: 0,
                   child: ElevatedButton(
                     onPressed: () {
-                      pageController.animateToPage(0,
+                      widget.pageController.animateToPage(0,
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.linear);
                     },

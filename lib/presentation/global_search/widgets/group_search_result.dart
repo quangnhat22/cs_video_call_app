@@ -22,15 +22,7 @@ class GroupSearchResult extends StatelessWidget {
         return state.maybeWhen(
           getResultSuccess: (_, groups) {
             return groups == null
-                ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 60),
-                      child: Text(
-                        AppLocalizations.of(context)!.no_result_found,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  )
+                ? Container()
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[

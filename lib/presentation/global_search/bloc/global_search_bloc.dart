@@ -18,7 +18,7 @@ class GlobalSearchBloc extends Bloc<GlobalSearchEvent, GlobalSearchState> {
     on<GlobalSearchEvent>((event, emit) async {
       await event.map(
           searchInputChanging: (event) => _searchInputChanging(event, emit));
-    }, transformer: _debounce(const Duration(seconds: 3)));
+    }, transformer: _debounce(const Duration(milliseconds: 500)));
   }
 
   final SearchUseCase _searchUseCase;

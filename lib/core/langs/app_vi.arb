@@ -269,5 +269,31 @@
         "type": "String"
       }
     }
-  }
+  },
+  "do_you_want_leave_group": "Bạn có muốn rời khỏi nhóm?",
+  "disable_camera": "Tắt Camera",
+  "start_call": "Bắt đầu cuộc gọi",
+  "new_member_joined": "Có thành viên mới tham gia cuộc gọi",
+  "member_left": "Có thành viên rời khỏi cuộc gọi",
+  "pinned": "Đã ghim",
+  "pin": "Ghim",
+  "pin_message_success": "Đã ghim tin nhắn thành công",
+  "app_version": "Phiên bản ứng dụng: {version}",
+  "@app_version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "app_name": "Tên ứng dụng: {version}",
+  "@app_name": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "contact_message": "Nếu bạn có nhu cầu liên hệ hoặc báo các vấn đề, lỗi phát sinh khi dùng ứng dụng, vui lòng liên hệ đến địa chỉ Email sau: ",
+  "open_email_fail": "Không thể mở ứng dụng Mail. Vui lòng thử lại!"
 }

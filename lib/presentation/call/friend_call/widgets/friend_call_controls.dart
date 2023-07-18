@@ -59,11 +59,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
     _onChange();
   }
 
-  void _selectAudioOutput(MediaDevice device) async {
-    await widget.room.setAudioOutputDevice(device);
-    _onChange();
-  }
-
   void _selectVideoInput(MediaDevice device) async {
     await widget.room.setVideoInputDevice(device);
     _onChange();
@@ -134,7 +129,7 @@ class _FriendCallControlState extends State<FriendCallControl> {
           if (!isRetry) {
             const androidConfig = FlutterBackgroundAndroidConfig(
               notificationTitle: 'Screen Sharing',
-              notificationText: 'LiveKit Example is sharing the screen.',
+              notificationText: 'CS Video Call is sharing the screen.',
               notificationImportance: AndroidNotificationImportance.Default,
               notificationIcon: AndroidResource(
                 name: 'ic_launcher',
@@ -249,51 +244,6 @@ class _FriendCallControlState extends State<FriendCallControl> {
     );
   }
 
-  Widget _buildVolumnIcon() {
-    return PopupMenuButton<MediaDevice>(
-      icon: const IconWrapper(
-        iconButton: Icon(
-          Icons.volume_up,
-          color: Colors.black,
-        ),
-      ),
-      itemBuilder: (BuildContext context) {
-        return [
-          const PopupMenuItem<MediaDevice>(
-            value: null,
-            child: ListTile(
-              leading: Icon(
-                Icons.speaker,
-                color: Colors.white,
-              ),
-              title: Text('Select Audio Output'),
-            ),
-          ),
-          if (_audioOutputs != null)
-            ..._audioOutputs!.map((device) {
-              return PopupMenuItem<MediaDevice>(
-                value: device,
-                child: ListTile(
-                  leading: (device.deviceId ==
-                          widget.room.selectedAudioOutputDeviceId)
-                      ? const Icon(
-                          Icons.check_box_outlined,
-                          color: Colors.white,
-                        )
-                      : const Icon(
-                          Icons.square_outlined,
-                          color: Colors.white,
-                        ),
-                  title: Text(device.label),
-                ),
-                onTap: () => _selectAudioOutput(device),
-              );
-            }).toList()
-        ];
-      },
-    );
-  }
-
   Widget _buildIconWhenCameraIsEnabled() {
     if (participant.isCameraEnabled()) {
       return PopupMenuButton<MediaDevice>(
@@ -308,12 +258,12 @@ class _FriendCallControlState extends State<FriendCallControl> {
             PopupMenuItem<MediaDevice>(
               value: null,
               onTap: _disableVideo,
-              child: const ListTile(
-                leading: Icon(
+              child: ListTile(
+                leading: const Icon(
                   Icons.videocam_off,
                   color: Colors.white,
                 ),
-                title: Text('Disable Camera'),
+                title: Text(AppLocalizations.of(context)!.disable_camera),
               ),
             ),
             if (_videoInputs != null)
@@ -391,7 +341,7 @@ class _FriendCallControlState extends State<FriendCallControl> {
         runSpacing: 0,
         children: [
           _buildIconWhenMicrophoneIsEnabled(),
-          _buildVolumnIcon(),
+          // _buildVolumnIcon(),
           _buildIconWhenCameraIsEnabled(),
           Padding(
             padding: const EdgeInsets.all(8.0),

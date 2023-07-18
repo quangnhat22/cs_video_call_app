@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/common/widgets/stateless/divider/divider_space_left.dart';
+import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
 import 'package:videocall/domain/entities/user_entity.dart';
 import 'package:videocall/presentation/friends/friends_contact/friends_contact.dart';

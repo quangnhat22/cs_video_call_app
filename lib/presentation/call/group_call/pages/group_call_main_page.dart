@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/presentation/call/group_call/cubit_call_group_status/call_group_status_cubit.dart';
-import 'package:videocall/presentation/call/group_call/pages/group_call_waiting_page.dart';
-
-import 'group_calling_page.dart';
+part of group_call;
 
 class GroupCallPage extends StatelessWidget {
   const GroupCallPage({
@@ -38,7 +32,7 @@ class GroupCallView extends StatelessWidget {
           preparing: (room) {
             return GroupCallPreparingPage(room: room);
           },
-          connectedSuccess: (_, __, ___, room) {
+          connectedSuccess: (_, __, ___, ____, room) {
             return GroupCallingPage(
               room: room,
             );

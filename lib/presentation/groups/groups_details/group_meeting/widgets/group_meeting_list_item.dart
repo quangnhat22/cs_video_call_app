@@ -41,7 +41,8 @@ class GroupMeetingListItem extends StatelessWidget {
                   style: AppTextStyles.bodyLarge,
                 ),
                 subtitle: Text(
-                  'Started at ${AppDateTimeFormat.convertToHourMinuteFollowDay(meetingEntity.timeStart ?? DateTime.now())}',
+                  AppLocalizations.of(context)!.started_at(
+                      AppDateTimeFormat.formatDMYHHmm(meetingEntity.timeStart)),
                   style: AppTextStyles.bodyMedium,
                 ),
                 leading: const CircleAvatar(

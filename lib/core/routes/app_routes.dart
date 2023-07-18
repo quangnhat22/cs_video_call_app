@@ -8,7 +8,7 @@ import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
 import 'package:videocall/presentation/auth/sign_up/sign_up.dart';
 import 'package:videocall/presentation/call/friend_call/friend_call.dart';
-import 'package:videocall/presentation/call/group_call/pages/group_call_main_page.dart';
+import 'package:videocall/presentation/call/group_call/group_call.dart';
 import 'package:videocall/presentation/dash_board/dash_board.dart';
 import 'package:videocall/presentation/friends/find_new_friend/find_new_friend.dart';
 import 'package:videocall/presentation/friends/friends_dash_board/friends_dash_board.dart';
@@ -16,7 +16,7 @@ import 'package:videocall/presentation/friends/friends_infor/friends_infor.dart'
 import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/group_list/group_list.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
-import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/pages/groups_details_page.dart';
+import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/group_details.dart';
 import 'package:videocall/presentation/groups/groups_details/group_edit/group_edit.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notification_setting/notification_setting.dart';
@@ -101,7 +101,7 @@ class AppRoutes {
           final argument = settings.arguments as Map<String, dynamic>;
           final groupId = argument["groupId"] as String;
           final groupName = argument["groupName"] as String;
-          final groupImage = argument["groupImage"] as String;
+          final groupImage = argument["groupImage"] as String?;
           return _buildAnimationRoute(
               settings,
               EditGroupPage(

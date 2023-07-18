@@ -48,11 +48,14 @@ class ChangePasswordView extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: SingleChildScrollView(
                 child: Column(
-                  children: const <Widget>[
-                    OldPasswordInput(),
-                    NewPasswordInput(),
-                    ConfirmNewPasswordInput(),
-                    ChangePasswordButton(),
+                  children: <Widget>[
+                    const OldPasswordInput(),
+                    const NewPasswordInput(),
+                    const ConfirmNewPasswordInput(),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    const ChangePasswordButton(),
                   ],
                 ),
               ),
