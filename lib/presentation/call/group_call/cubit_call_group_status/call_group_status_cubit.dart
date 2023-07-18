@@ -123,6 +123,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   }
 
   Future<void> sendMessageData(String message) async {
+    if (message.trim().isEmpty) return;
     if (state is CallGroupConnectedSuccess) {
       final userInfo = (state as CallGroupConnectedSuccess).user;
       final listMessage =
@@ -147,7 +148,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
         await _room.localParticipant!.publishData(dataUtf8, topic: 'message');
         emit((state as CallGroupConnectedSuccess)
-            .copyWith(listMessage: [...listMessage, newMessageEntity]));
+            .copyWith(listMessage: [newMessageEntity, ...listMessage]));
       }
     }
   }
@@ -179,21 +180,28 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
           final newMessageEntity =
               MessageCallEntity.convertToMessageEntity(model: newMessage);
 
-          final listMessageUpdated = [...listMessage, newMessageEntity];
+          final listMessageUpdated = [newMessageEntity, ...listMessage];
           emit((state as CallGroupConnectedSuccess)
-              .copyWith(listMessage: listMessageUpdated));
+              .copyWith(listMessage: listMessageUpdated, isNewMessage: true));
         }
         if (event.topic == 'pinned') {
           final listMessagePinned =
               (state as CallGroupConnectedSuccess).messagePin ?? [];
           final dataDecoded = utf8.decode(event.data);
           final idMessagePin = dataDecoded.toString();
-          emit((state as CallGroupConnectedSuccess)
-              .copyWith(messagePin: [...listMessagePinned, idMessagePin]));
+          emit((state as CallGroupConnectedSuccess).copyWith(
+            messagePin: [...listMessagePinned, idMessagePin],
+          ));
         }
       }
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  void readNewMessage() {
+    if (state is CallGroupConnectedSuccess) {
+      emit((state as CallGroupConnectedSuccess).copyWith(isNewMessage: false));
     }
   }
 

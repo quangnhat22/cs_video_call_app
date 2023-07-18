@@ -1,13 +1,4 @@
-import 'dart:developer';
-import 'dart:math' as math;
-
-import 'package:flutter/material.dart';
-import 'package:livekit_client/livekit_client.dart';
-import 'package:videocall/common/widgets/stateless/call/video_render/participant_info.dart';
-import 'package:videocall/core/utils/live_kit_until.dart';
-import 'package:videocall/presentation/call/group_call/widgets/controls.dart';
-
-import '../../../../common/widgets/stateless/call/video_render/participant.dart';
+part of group_call;
 
 class GroupCalling extends StatefulWidget {
   const GroupCalling({
@@ -129,38 +120,47 @@ class _GroupCallingState extends State<GroupCalling> {
     }
   }
 
-  void _setUpListeners() => _listener
-    ..on<RoomDisconnectedEvent>((event) async {
-      WidgetsBindingCompatible.instance
-          ?.addPostFrameCallback((timeStamp) => Navigator.pop(context));
-    })
-    ..on<RoomRecordingStatusChanged>((event) {
-      if (mounted) {
-        context.showRecordingStatusChangedDialog(event.activeRecording);
-      }
-    })
-    ..on<LocalTrackPublishedEvent>((_) {
-      if (mounted) {
-        return _sortParticipants();
-      }
-    })
-    ..on<LocalTrackUnpublishedEvent>((_) {
-      if (mounted) {
-        return _sortParticipants();
-      }
-    })
-    ..on<ParticipantNameUpdatedEvent>((event) {
-      log('Participant name updated: ${event.participant.identity}, name => ${event.name}');
-    })
-    ..on<AudioPlaybackStatusChanged>((event) async {
-      if (mounted && !widget.room.canPlaybackAudio) {
-        log('Audio playback failed for iOS Safari ..........');
-        bool? yesno = await context.showPlayAudioManuallyDialog();
-        if (yesno == true) {
-          await widget.room.startAudio();
+  void _setUpListeners() =>
+      _listener..on<RoomDisconnectedEvent>((event) async {
+        WidgetsBindingCompatible.instance
+            ?.addPostFrameCallback((timeStamp) => Navigator.pop(context));
+      })..on<RoomRecordingStatusChanged>((event) {
+        if (mounted) {
+          context.showRecordingStatusChangedDialog(event.activeRecording);
         }
-      }
-    });
+      })..on<LocalTrackPublishedEvent>((_) {
+        if (mounted) {
+          return _sortParticipants();
+        }
+      })..on<LocalTrackUnpublishedEvent>((_) {
+        if (mounted) {
+          return _sortParticipants();
+        }
+      })..on<ParticipantNameUpdatedEvent>((event) {
+        log('Participant name updated: ${event.participant
+            .identity}, name => ${event.name}');
+      })..on<AudioPlaybackStatusChanged>((event) async {
+        if (mounted && !widget.room.canPlaybackAudio) {
+          log('Audio playback failed for iOS Safari ..........');
+          bool? yesno = await context.showPlayAudioManuallyDialog();
+          if (yesno == true) {
+            await widget.room.startAudio();
+          }
+        }
+      })..on<ParticipantConnectedEvent>((_) {
+        if (context.mounted) {
+          SnackBarApp.showSnackBar(
+              null,
+              AppLocalizations.of(context)!.new_member_joined,
+              TypesSnackBar.success);
+        }
+      })..on<ParticipantDisconnectedEvent>((_) {
+        if (context.mounted) {
+          SnackBarApp.showSnackBar(
+              null, AppLocalizations.of(context)!.member_left,
+              TypesSnackBar.success);
+        }
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -193,12 +193,13 @@ class _GroupCallingState extends State<GroupCalling> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: math.max(0, participantTracks.length - 1),
-                itemBuilder: (BuildContext context, int index) => SizedBox(
-                  width: 180,
-                  height: 120,
-                  child:
+                itemBuilder: (BuildContext context, int index) =>
+                    SizedBox(
+                      width: 180,
+                      height: 120,
+                      child:
                       ParticipantWidget.widgetFor(participantTracks[index + 1]),
-                ),
+                    ),
               ),
             ),
           ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of group_call;
 
 class IconWrapper extends StatelessWidget {
   const IconWrapper(

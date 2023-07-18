@@ -158,6 +158,20 @@ class _FriendCallConnectViewState extends State<FriendCallConnectView> {
           await widget.room.startAudio();
         }
       }
+    })
+    ..on<ParticipantConnectedEvent>((_) {
+      if (context.mounted) {
+        SnackBarApp.showSnackBar(
+            null,
+            AppLocalizations.of(context)!.new_member_joined,
+            TypesSnackBar.success);
+      }
+    })
+    ..on<ParticipantDisconnectedEvent>((_) {
+      if (context.mounted) {
+        SnackBarApp.showSnackBar(null,
+            AppLocalizations.of(context)!.member_left, TypesSnackBar.success);
+      }
     });
 
   @override

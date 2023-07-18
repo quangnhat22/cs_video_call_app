@@ -57,7 +57,7 @@ class ListFriendCall extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const DropdownFilterButton(),
+                            // const DropdownFilterButton(),
                             ElevatedButton(
                               onPressed: () {
                                 _handleClearHistoryCall(context);

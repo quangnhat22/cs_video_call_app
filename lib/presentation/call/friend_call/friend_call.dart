@@ -9,6 +9,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -22,8 +23,7 @@ import 'package:videocall/core/routes/app_navigation.dart';
 import 'package:videocall/core/utils/live_kit_until.dart';
 import 'package:videocall/core/utils/snack_bar.dart';
 import 'package:videocall/presentation/call/friend_call/cubit/friend_call_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:videocall/presentation/call/group_call/widgets/icon_wrapper.dart';
+import 'package:videocall/presentation/call/group_call/group_call.dart';
 
 part 'pages/friend_call_page.dart';
 part 'views/connected_call_view.dart';

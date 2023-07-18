@@ -270,5 +270,12 @@
       }
     }
   },
-  "do_you_want_leave_group": "Do you want to leave a group?"
+  "do_you_want_leave_group": "Do you want to leave a group?",
+  "disable_camera": "Disable Camera",
+  "start_call": "Start call",
+  "new_member_joined": "New member joined",
+  "member_left": "Member left",
+  "pinned": "Pinned",
+  "pin": "Pin",
+  "pin_message_success": "Pin message successfully"
 }

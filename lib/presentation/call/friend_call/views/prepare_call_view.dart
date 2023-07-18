@@ -151,7 +151,7 @@ class _FriendPrepareCallViewState extends State<FriendPrepareCallView> {
                   height: 48,
                 ),
                 CustomElevatedButton(
-                  buttonText: "Start call",
+                  buttonText: AppLocalizations.of(context)!.start_call,
                   onPressed: () {
                     context.read<FriendCallCubit>().connectRoom();
                   },

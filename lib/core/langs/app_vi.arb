@@ -270,5 +270,12 @@
       }
     }
   },
-  "do_you_want_leave_group": "Bạn có muốn rời khỏi nhóm?"
+  "do_you_want_leave_group": "Bạn có muốn rời khỏi nhóm?",
+  "disable_camera": "Tắt Camera",
+  "start_call": "Bắt đầu cuộc gọi",
+  "new_member_joined": "Có thành viên mới tham gia cuộc gọi",
+  "member_left": "Có thành viên rời khỏi cuộc gọi",
+  "pinned": "Đã ghim",
+  "pin": "Ghim",
+  "pin_message_success": "Đã ghim tin nhắn thành công"
 }
