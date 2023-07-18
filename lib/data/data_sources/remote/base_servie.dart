@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/core/config/app_config.dart';
@@ -36,7 +38,7 @@ class BaseService {
   static Dio initDio() {
     final dio = Dio(
       BaseOptions(
-          baseUrl: AppConfig.baseUrl,
+          baseUrl: AppConfig.apiUrl,
           connectTimeout: const Duration(milliseconds: 10000),
           receiveTimeout: const Duration(milliseconds: 10000),
           responseType: ResponseType.json,
@@ -46,5 +48,14 @@ class BaseService {
           }),
     );
     return dio;
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

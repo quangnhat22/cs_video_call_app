@@ -77,7 +77,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
 
   Future<void> connectRoom() async {
     await _room.connect(
-      "ws://${AppConfig.httpUrl}:7880",
+      "wss://${AppConfig.callServerUrl}",
       _token,
       roomOptions: RoomOptions(
         adaptiveStream: true,

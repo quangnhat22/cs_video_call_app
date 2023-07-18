@@ -12,15 +12,15 @@ class AppCheckPermission {
       log('Notification Permission disabled');
     }
 
-    status = await Permission.bluetooth.request();
-    if (status.isPermanentlyDenied) {
-      log('Bluetooth Permission disabled');
-    }
+    // status = await Permission.bluetooth.request();
+    // if (status.isPermanentlyDenied) {
+    //   log('Bluetooth Permission disabled');
+    // }
 
-    status = await Permission.bluetoothConnect.request();
-    if (status.isPermanentlyDenied) {
-      log('Bluetooth Connect Permission disabled');
-    }
+    // status = await Permission.bluetoothConnect.request();
+    // if (status.isPermanentlyDenied) {
+    //   log('Bluetooth Connect Permission disabled');
+    // }
 
     status = await Permission.camera.request();
     if (status.isPermanentlyDenied) {

@@ -131,7 +131,7 @@ class FriendCallCubit extends Cubit<FriendCallState> {
 
   Future<void> _roomConnect(String token) async {
     await _room.connect(
-      "ws://${AppConfig.httpUrl}:7880",
+      "wss://${AppConfig.callServerUrl}",
       token,
       roomOptions: RoomOptions(
         adaptiveStream: true,
