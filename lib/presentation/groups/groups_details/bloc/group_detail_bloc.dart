@@ -4,9 +4,9 @@ import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/entities/group_detail_entity.dart';
 import 'package:videocall/domain/modules/group/group_usecase.dart';
 
+part 'group_detail_bloc.freezed.dart';
 part 'group_detail_event.dart';
 part 'group_detail_state.dart';
-part 'group_detail_bloc.freezed.dart';
 
 @Injectable()
 class GroupDetailBloc extends Bloc<GroupDetailEvent, GroupDetailState> {
@@ -17,6 +17,7 @@ class GroupDetailBloc extends Bloc<GroupDetailEvent, GroupDetailState> {
       await event.map(
         started: (event) async => await _started(event, emit),
         leaveGroup: (event) async => await _leaveGroup(event, emit),
+        refreshed: (event) async => await _refreshed(event, emit),
       );
     });
   }
@@ -34,6 +35,29 @@ class GroupDetailBloc extends Bloc<GroupDetailEvent, GroupDetailState> {
               message: "Something went wrong! Please try again"),
         );
       }
+    } catch (e) {
+      emit(GroupGetDetailFail(message: e.toString()));
+    }
+  }
+
+  Future<void> _refreshed(
+      GroupDetailRefresh event, Emitter<GroupDetailState> emit) async {
+    try {
+      if (state is GroupGetDetailSuccess) {
+        final groupId =
+            (state as GroupGetDetailSuccess).groupDetail.groupDetails?.id;
+        if (groupId == null) return;
+        final groupDetailInfor = await _groupUC.getGroupDetail(groupId);
+        if (groupDetailInfor != null) {
+          emit(GroupGetDetailSuccess(groupDetail: groupDetailInfor));
+        } else {
+          emit(
+            const GroupDetailState.getDetailFail(
+                message: "Something went wrong! Please try again"),
+          );
+        }
+      }
+      return;
     } catch (e) {
       emit(GroupGetDetailFail(message: e.toString()));
     }

@@ -269,5 +269,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "do_you_want_leave_group": "Do you want to leave a group?"
 }

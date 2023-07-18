@@ -1,19 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:videocall/core/di/injector.dart';
-import 'package:videocall/core/routes/app_navigation.dart';
-import 'package:videocall/core/routes/route_name.dart';
-import 'package:videocall/core/utils/snack_bar.dart';
-import 'package:videocall/presentation/groups/group_list/group_list.dart';
-import 'package:videocall/presentation/groups/groups_details/group_meeting/pages/group_meeting_page.dart';
-import 'package:videocall/presentation/groups/groups_details/group_member/pages/group_members_tab.dart';
-import 'package:videocall/presentation/groups/groups_details/group_messages/group_messages.dart';
-
-import '../../bloc/group_detail_bloc.dart';
-import '../../cubit_inivite_new_member/new_member_cubit.dart';
-import '../../group_member/widget/fab_invite_new_member.dart';
-import '../widgets/fab_create_new_meeting.dart';
+part of group_details;
 
 enum GroupOptions { leaveGroup, editGroup }
 
@@ -98,17 +83,37 @@ class _GroupDetailViewState extends State<GroupDetailView>
   void handleGroupOptionsSelected(
       BuildContext ctx, GroupOptions selectedOption) {
     if (selectedOption == GroupOptions.leaveGroup) {
-      context
-          .read<GroupDetailBloc>()
-          .add(GroupDetailLeave(groupId: widget.groupId));
+      AppDefaultDialogWidget()
+          .setTitle(AppLocalizations.of(ctx)!.confirm)
+          .setContent(AppLocalizations.of(ctx)!.do_you_want_leave_group)
+          .setAppDialogType(AppDialogType.confirm)
+          .setNegativeText(AppLocalizations.of(ctx)!.cancel)
+          .setOnPositive(() {
+            context
+                .read<GroupDetailBloc>()
+                .add(GroupDetailLeave(groupId: widget.groupId));
+            Navigator.of(context).pop();
+          })
+          .setPositiveText(AppLocalizations.of(ctx)!.confirm)
+          .buildDialog(ctx)
+          .show(ctx);
     }
 
     if (selectedOption == GroupOptions.editGroup) {
-      NavigationUtil.pushNamed(routeName: RouteName.editGroup, args: {
-        "groupId": widget.groupId,
-        "groupName": widget.groupName,
-        "groupImage": widget.groupAvatar
-      });
+      final currentState = context.read<GroupDetailBloc>().state;
+      if (currentState is GroupGetDetailSuccess) {
+        final groupInfo = currentState.groupDetail;
+
+        NavigationUtil.pushNamed(routeName: RouteName.editGroup, args: {
+          "groupId": groupInfo.groupDetails?.id ?? widget.groupId,
+          "groupName": groupInfo.groupDetails?.name ?? '',
+          "groupImage": groupInfo.groupDetails?.imageUrl,
+        }).then((result) {
+          if (result == true) {
+            context.read<GroupDetailBloc>().add(const GroupDetailRefresh());
+          }
+        });
+      }
     }
   }
 
@@ -128,7 +133,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
           },
           child: Scaffold(
             appBar: AppBar(
-              title: Text(widget.groupName),
+              title: const GroupName(),
               backgroundColor: Theme.of(context).colorScheme.background,
               bottom: TabBar(controller: _tabController, tabs: <Widget>[
                 Tab(

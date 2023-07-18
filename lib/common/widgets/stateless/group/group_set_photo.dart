@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,6 +25,7 @@ class GroupChangePhoto extends StatefulWidget {
 class _GroupChangePhotoState extends State<GroupChangePhoto> {
   File? imageFile;
 
+  //TODO: dư thừa
   void _getFromGallery(BuildContext ctx) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,

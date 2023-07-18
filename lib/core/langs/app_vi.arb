@@ -269,5 +269,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "do_you_want_leave_group": "Bạn có muốn rời khỏi nhóm?"
 }
