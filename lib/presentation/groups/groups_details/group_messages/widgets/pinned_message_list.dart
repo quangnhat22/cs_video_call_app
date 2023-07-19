@@ -10,12 +10,14 @@ class PinnedMessagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<MessagesBloc>().add(const MessageRefreshed());
+      },
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: ListView.separated(
           shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (context, index) => const SizedBox(
             height: 30,
           ),

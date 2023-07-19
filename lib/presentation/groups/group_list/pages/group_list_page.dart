@@ -1,10 +1,20 @@
 part of group_list;
 
-class GroupListPage extends StatelessWidget {
+class GroupListPage extends StatefulWidget {
   const GroupListPage({super.key});
 
   @override
+  State<GroupListPage> createState() => _GroupListPageState();
+}
+
+class _GroupListPageState extends State<GroupListPage>
+    with AutomaticKeepAliveClientMixin<GroupListPage> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (_) =>

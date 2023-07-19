@@ -31,7 +31,13 @@ class MeetingPinnedMessageList extends StatelessWidget {
           success: (messages) {
             if (messages.isEmpty) {
               return Center(
-                  child: Text(AppLocalizations.of(context)!.no_messages_found));
+                child: RefreshView(
+                  label: AppLocalizations.of(context)!.no_messages_found,
+                  onRefresh: () {
+                    context.read<MessagesBloc>().add(const MessageRefreshed());
+                  },
+                ),
+              );
             }
 
             return PinnedMessagesList(messages: messages);

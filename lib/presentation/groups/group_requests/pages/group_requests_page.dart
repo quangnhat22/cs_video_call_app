@@ -9,9 +9,14 @@ class GroupRequestsPage extends StatefulWidget {
   State<GroupRequestsPage> createState() => _GroupRequestsPageState();
 }
 
-class _GroupRequestsPageState extends State<GroupRequestsPage> {
+class _GroupRequestsPageState extends State<GroupRequestsPage>
+    with AutomaticKeepAliveClientMixin<GroupRequestsPage> {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (_) => getIt<ListGroupRequestBloc>()
