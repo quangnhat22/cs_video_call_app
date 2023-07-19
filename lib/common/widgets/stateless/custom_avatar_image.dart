@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:videocall/common/widgets/stateless/skeleton/skeleton.dart';
 import 'package:videocall/core/config/app_assets.dart';
 
+import 'full_screen_image.dart';
+
 enum CustomAvatarSize {
   small(46, 46),
   medium(64, 64),
@@ -42,21 +44,32 @@ class CustomAvatarImage extends StatelessWidget {
       height: size!.height,
       fit: BoxFit.cover,
       imageUrl: urlImage!,
-      imageBuilder: (_, imageProvider) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(0, 1), // changes position of shadow
+      imageBuilder: (_, imageProvider) => GestureDetector(
+        onTap: () {
+          if (urlImage != null) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        FullScreenImage(imageUrl: urlImage!)));
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
             ),
-          ],
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(0, 1), // changes position of shadow
+              ),
+            ],
+          ),
         ),
       ),
       //placeholder: (context, url) => const Skeleton.circle(),

@@ -6,8 +6,8 @@ class AppAssetsPicker {
   static Future<String?> getImageFromGallery() async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-      maxWidth: 480,
-      maxHeight: 640,
+      maxWidth: 1080,
+      maxHeight: 1080,
       imageQuality: 50,
     );
 
@@ -15,23 +15,25 @@ class AppAssetsPicker {
   }
 
   static Future<String?> getImageFromCamera() async {
-    final status = await Permission.camera.status;
-    if (status.isDenied) {
-      final resPermission = await Permission.camera.request();
-      if (resPermission.isDenied || resPermission.isPermanentlyDenied) {
-        openAppSettings();
+    try {
+      final status = await Permission.camera.status;
+      if (status.isDenied || status.isPermanentlyDenied) {
+        final resPermission = await Permission.camera.request();
+        if (resPermission.isDenied || resPermission.isPermanentlyDenied) {
+          openAppSettings();
+        }
+      } else if (status.isGranted) {
+        XFile? pickedFile = await ImagePicker().pickImage(
+          source: ImageSource.camera,
+          maxWidth: 1080,
+          maxHeight: 1080,
+          imageQuality: 50,
+        );
+        return await _cropImage(pickedFile!.path);
       }
-
       return null;
-    } else {
-      XFile? pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.camera,
-        maxWidth: 480,
-        maxHeight: 640,
-        imageQuality: 50,
-      );
-
-      return await _cropImage(pickedFile!.path);
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 

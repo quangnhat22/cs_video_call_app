@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:videocall/core/config/app_constant.dart';
 import 'package:videocall/domain/modules/auth/auth_usecase.dart';
 
 part 'app_event.dart';
@@ -37,15 +38,15 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
-  void _onAppStarted(AppStarted event, Emitter<AppState> emit) {
-    ///TODO: HANDLE NOTIFICATION AGAIN
-    // getIt<NotificationController>().initializeNotificationsEventListeners();
-  }
+  void _onAppStarted(AppStarted event, Emitter<AppState> emit) {}
 
   Future<void> _onAppUserChanged(
       AppUserChanged event, Emitter<AppState> emit) async {
     final isLoggedIn = await _useCase.checkIsLoggedIn();
-    emit(isLoggedIn ? AppAuthorized() : AppUnAuthorized());
+    await Future.delayed(Duration(seconds: AppConstant.delayTimeShowLoading),
+        () async {
+      emit(isLoggedIn ? AppAuthorized() : AppUnAuthorized());
+    });
   }
 
   @override

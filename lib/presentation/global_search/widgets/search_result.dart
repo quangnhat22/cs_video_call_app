@@ -9,9 +9,7 @@ class SearchResult extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           getResultSuccess: (friends, groups) {
-            if (friends == null ||
-                groups == null ||
-                friends.isEmpty && groups.isEmpty) {
+            if (friends == null && groups == null) {
               return Center(child: AppAssets.notFoundSvg);
             }
             return SingleChildScrollView(

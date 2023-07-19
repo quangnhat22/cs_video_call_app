@@ -41,7 +41,7 @@ class AvatarView extends StatelessWidget {
               AuthHeader(
                 AppLocalizations.of(context)!.add_photo,
                 AppLocalizations.of(context)!.add_photo_so_your_friend_know,
-                Theme.of(context).colorScheme.secondary,
+                AppColors.lightColorScheme.secondary,
               ),
               Positioned(
                 left: 0,
@@ -59,9 +59,9 @@ class AvatarView extends StatelessWidget {
                               Orientation.landscape
                           ? 1
                           : 0.7),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))),
                   child: Container(

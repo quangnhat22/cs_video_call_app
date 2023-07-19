@@ -8,7 +8,7 @@ class DeviceList extends StatelessWidget {
     return BlocConsumer<DevicesBloc, DevicesState>(
       listener: (context, state) {
         if (state is DevicesDeleteSuccess) {
-          context.read<DevicesBloc>().add(const DevicesEvent.started());
+          context.read<DevicesBloc>().add(const DevicesEvent.refreshed());
         }
       },
       builder: (context, state) {
