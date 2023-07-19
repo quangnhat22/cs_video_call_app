@@ -78,14 +78,13 @@ dependencies:
   external_app_launcher: ^3.1.0
   flutter_slidable: ^3.0.0
   connectivity_plus: ^4.0.1
-  firebase_app_installations: ^0.2.3+3
   package_info_plus: any
   url_launcher: any
+  flutter_native_splash: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: any
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -149,8 +148,3 @@ flutter:
 #
 # For details regarding fonts from package dependencies,
 # see https://flutter.dev/custom-fonts/#from-packages
-flutter_launcher_icons:
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  image_path: "assets/logos/logo_light.png"

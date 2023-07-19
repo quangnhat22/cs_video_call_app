@@ -6,8 +6,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:videocall/domain/modules/app_settings/app_settings_usecase.dart';
 
-part 'app_setting_state.dart';
 part 'app_setting_cubit.freezed.dart';
+part 'app_setting_state.dart';
 
 @Injectable()
 class AppSettingCubit extends Cubit<AppSettingState> {
@@ -21,13 +21,11 @@ class AppSettingCubit extends Cubit<AppSettingState> {
 
     // listen theme change from local storage
     _themeSub = useCase.getAppThemeStream().listen((value) {
-      print(value);
       final theme = _convertToThemeMode(value);
       appThemeChanged(theme);
     });
     //listen lang change from local storage
     _langSub = useCase.getAppLangStream().listen((value) {
-      print(value);
       final locale = _convertToLocale(value);
       appLangChanged(locale);
     });
