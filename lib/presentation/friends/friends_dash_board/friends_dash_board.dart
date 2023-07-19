@@ -1,14 +1,11 @@
 library friends_dash_board;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/common/widgets/stateless/app_bar/m_app_bar.dart';
-import 'package:videocall/core/di/injector.dart';
 import 'package:videocall/presentation/friends/friends_call/friends_call.dart';
 import 'package:videocall/presentation/friends/friends_contact/friends_contact.dart';
 import 'package:videocall/presentation/friends/friends_request/friends_request.dart';
-import 'package:videocall/presentation/global_search/bloc/global_search_bloc.dart';
 
 import '../../../core/routes/app_navigation.dart';
 import '../../../core/routes/route_name.dart';
