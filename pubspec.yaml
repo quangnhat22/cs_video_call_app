@@ -81,6 +81,7 @@ dependencies:
   package_info_plus: any
   url_launcher: any
   flutter_native_splash: any
+  stream_transform: any
 
 dev_dependencies:
   flutter_test:
