@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:videocall/core/routes/app_transition_animation.dart';
 import 'package:videocall/core/routes/route_name.dart';
+import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/presentation/auth/avatar/avatar.dart';
 import 'package:videocall/presentation/auth/email_verify/email_verify.dart';
 import 'package:videocall/presentation/auth/forgot_password/forgot_password.dart';
@@ -17,6 +18,7 @@ import 'package:videocall/presentation/groups/create_group/create_group.dart';
 import 'package:videocall/presentation/groups/group_list/group_list.dart';
 import 'package:videocall/presentation/groups/groups_dash_board/groups_dash_board.dart';
 import 'package:videocall/presentation/groups/groups_details/group_detail_dash_board/group_details.dart';
+import 'package:videocall/presentation/groups/groups_details/group_details_call/group_details_call.dart';
 import 'package:videocall/presentation/groups/groups_details/group_edit/group_edit.dart';
 import 'package:videocall/presentation/notifications/loading/loading_page.dart';
 import 'package:videocall/presentation/notifications/notification_setting/notification_setting.dart';
@@ -138,6 +140,17 @@ class AppRoutes {
             GroupCallPage(
               token: token,
               groupId: groupId,
+            ));
+      case RouteName.groupDetailsCall:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final meetingEntity = arguments['meetingEntity'] as GroupMeetingEntity;
+        final groupName = arguments['groupName'] as String;
+
+        return _buildAnimationRoute(
+            settings,
+            GroupDetailsCall(
+              meeting: meetingEntity,
+              groupName: groupName,
             ));
       case RouteName.devices:
         return _buildAnimationRoute(settings, const DevicesPage());

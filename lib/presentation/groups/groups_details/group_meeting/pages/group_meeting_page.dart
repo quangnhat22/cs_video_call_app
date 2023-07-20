@@ -6,9 +6,11 @@ import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit
 import '../widgets/group_meeting_list.dart';
 
 class GroupMeetingPage extends StatefulWidget {
-  const GroupMeetingPage({super.key, required this.groupId});
+  const GroupMeetingPage(
+      {super.key, required this.groupId, required this.groupName});
 
   final String groupId;
+  final String groupName;
 
   @override
   State<GroupMeetingPage> createState() => _GroupMeetingPageState();
@@ -26,22 +28,24 @@ class _GroupMeetingPageState extends State<GroupMeetingPage>
       create: (_) => getIt<GroupMeetingCubit>()
         ..getListGroupMeeting(groupId: widget.groupId),
       child: GroupsCallView(
-        groupId: widget.groupId,
+        groupName: widget.groupName,
       ),
     );
   }
 }
 
 class GroupsCallView extends StatelessWidget {
-  const GroupsCallView({super.key, required this.groupId});
+  const GroupsCallView({super.key, required this.groupName});
 
-  final String groupId;
+  final String groupName;
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: GroupMeetingList(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GroupMeetingList(
+        groupName: groupName,
+      ),
     );
   }
 }

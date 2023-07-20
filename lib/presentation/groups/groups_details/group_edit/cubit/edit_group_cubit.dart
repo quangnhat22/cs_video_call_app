@@ -36,12 +36,10 @@ class EditGroupCubit extends Cubit<EditGroupState> {
   }
 
   Future<void> sendEditGroupRequest(String groupId) async {
-    try {
+     try {
       final editGroupState = state as SentEditRequestGroupInitValue;
-      if (!editGroupState.isValid || editGroupState.groupName.trim().isEmpty) {
-        return;
-      }
-
+      if (!editGroupState.isValid) return;
+      if (editGroupState.groupName.trim().isEmpty) return;
       emit(const SentEditRequestGroupInProgress());
       await _groupUseCase.editGroup(
           editGroupState.groupName.trim(), editGroupState.groupImage, groupId);
