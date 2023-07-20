@@ -1,7 +1,7 @@
 part of group_call;
 
 class ListMessageView extends StatefulWidget {
-  ListMessageView({
+  const ListMessageView({
     super.key,
     required this.pageController,
   });

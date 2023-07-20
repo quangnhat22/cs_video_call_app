@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../domain/entities/user_entity.dart';
 import '../../../../domain/modules/friend/friend_usecase.dart';
-import '../../../../domain/modules/user/user_usecase.dart';
 
 part 'friends_contact_bloc.freezed.dart';
 part 'friends_contact_event.dart';
@@ -13,10 +12,8 @@ part 'friends_contact_state.dart';
 @Injectable()
 class FriendsContactBloc
     extends Bloc<FriendsContactEvent, FriendsContactState> {
-  FriendsContactBloc(
-      {required FriendUseCase useCase, required UserUseCase userUseCase})
+  FriendsContactBloc({required FriendUseCase useCase})
       : _useCase = useCase,
-        _userUseCase = userUseCase,
         super(const _Initial()) {
     on<FriendsContactEvent>((event, emit) async {
       await event.map(
@@ -27,7 +24,6 @@ class FriendsContactBloc
   }
 
   final FriendUseCase _useCase;
-  final UserUseCase _userUseCase;
 
   Future<void> _started(
       _Started event, Emitter<FriendsContactState> emit) async {

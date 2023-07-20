@@ -25,7 +25,6 @@ class GroupChangePhoto extends StatefulWidget {
 class _GroupChangePhotoState extends State<GroupChangePhoto> {
   File? imageFile;
 
-  //TODO: dư thừa
   void _getFromGallery(BuildContext ctx) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,

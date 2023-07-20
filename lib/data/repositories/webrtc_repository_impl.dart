@@ -161,7 +161,6 @@ class WebRTCRepositoryImpl extends CallRepository {
 
       // Code for creating SDP answer below
       var data = roomSnapshot.data() as Map<String, dynamic>;
-      print('Got offer $data');
       var offer = data['offer'];
       await _peerConnection?.setRemoteDescription(
         RTCSessionDescription(offer['sdp'], offer['type']),

@@ -39,7 +39,7 @@ class _CreateSchedulePageState extends State<CreateSchedulePage> {
     "Salary"
   ];
 
-  String? _currentSelectedValue;
+  //String? _currentSelectedValue;
   final durations = [
     '5',
     '30',
