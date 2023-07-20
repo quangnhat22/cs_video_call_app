@@ -26,14 +26,22 @@ class GroupCallInfor extends StatelessWidget {
             height: 12,
           ),
           Text(
-              style: AppTextStyles.bodyLarge,
-              AppLocalizations.of(context)!.started_at(
-                AppDateTimeFormat.formatDMYHHmm(startAt),
-              )),
+            style: AppTextStyles.bodyLarge,
+            AppLocalizations.of(context)!.started_at(
+              AppDateTimeFormat.formatDMYHHmm(startAt),
+            ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
           if (description != null)
-            Text(
-              style: AppTextStyles.bodyLarge,
-              description ?? '',
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    style: AppTextStyles.bodyLarge,
+                    AppLocalizations.of(context)!.description(description!)),
+              ),
             ),
         ],
       ),

@@ -296,5 +296,13 @@
   },
   "contact_message": "If you have a need to contact or report an error in the application, please contact this Email: ",
   "open_email_fail": "Can't open Email app. Try again!",
-  "image": "Image"
+  "image": "Image",
+  "description": "Description: {des}",
+  "@description": {
+    "placeholders": {
+      "des": {
+        "type": "String"
+      }
+    }
+  }
 }

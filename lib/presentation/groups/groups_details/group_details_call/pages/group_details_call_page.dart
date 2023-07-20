@@ -13,16 +13,7 @@ class GroupDetailsCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(groupName),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        leading: IconButton(
-          onPressed: () {
-            NavigationUtil.pop();
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
+      appBar: MPageAppBar(title: groupName ?? ''),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +24,7 @@ class GroupDetailsCall extends StatelessWidget {
               description: meeting.description,
             ),
             const SizedBox(
-              height: 22,
+              height: 16,
             ),
             GroupDetailsCallParticipants(
                 participants: meeting.participants ?? [])

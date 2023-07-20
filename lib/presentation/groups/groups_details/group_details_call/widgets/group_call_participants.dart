@@ -13,7 +13,8 @@ class GroupDetailsCallParticipants extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(12),
           child: Text(
-              style: AppTextStyles.titleLarge,
+              style: AppTextStyles.titleMedium
+                  .copyWith(fontWeight: FontWeight.bold),
               '${AppLocalizations.of(context)!.group_call_participants_title} (${participants.length})'),
         ),
         ListView.separated(

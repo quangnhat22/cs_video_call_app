@@ -296,5 +296,13 @@
   },
   "contact_message": "Nếu bạn có nhu cầu liên hệ hoặc báo các vấn đề, lỗi phát sinh khi dùng ứng dụng, vui lòng liên hệ đến địa chỉ Email sau: ",
   "open_email_fail": "Không thể mở ứng dụng Mail. Vui lòng thử lại!",
-  "image": "Hình ảnh"
+  "image": "Hình ảnh",
+  "description": "Mô tả: {des}",
+  "@description": {
+    "placeholders": {
+      "des": {
+        "type": "String"
+      }
+    }
+  }
 }
