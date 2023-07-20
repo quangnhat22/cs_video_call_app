@@ -16,11 +16,9 @@ class GroupMeetingCubit extends Cubit<GroupMeetingState> {
       {required LiveKitCallUseCase liveKitCallUC,
       required GroupUseCase groupUseCase})
       : _liveKitUC = liveKitCallUC,
-        _groupUseCase = groupUseCase,
         super(const GroupMeetingState.initial());
 
   final LiveKitCallUseCase _liveKitUC;
-  final GroupUseCase _groupUseCase;
   String _groupId = "";
 
   Future<void> getListGroupMeeting({String? groupId}) async {
@@ -57,15 +55,6 @@ class GroupMeetingCubit extends Cubit<GroupMeetingState> {
           "groupId": _groupId,
         });
       }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
-  Future<String> getGroupTitle({required String groupId}) async {
-    try {
-      final group = await _groupUseCase.getGroupDetail(groupId);
-      return group!.groupDetails!.name ?? '';
     } catch (e) {
       throw Exception(e.toString());
     }
