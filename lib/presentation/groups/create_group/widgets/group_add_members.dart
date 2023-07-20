@@ -9,8 +9,9 @@ class GroupAddMembers extends StatefulWidget {
 
 class _GroupAddMembersState extends State<GroupAddMembers> {
   final List<UserEntity?> selectedFriends = [];
+  String? query;
 
-  void handleSelectMembers(BuildContext ctx, UserEntity member) {
+  void _handleSelectMembers(BuildContext ctx, UserEntity member) {
     ctx.read<CreateGroupCubit>().groupMembersChanged(member);
 
     final existingMember = selectedFriends.firstWhere(
@@ -24,6 +25,17 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
         selectedFriends.removeWhere((element) => element?.id == member.id);
       }
     });
+  }
+
+  List<UserEntity> _hanleFilterListFriendByQuery(
+      String? query, List<UserEntity> friends) {
+    if (query == null || friends.isEmpty) return friends;
+
+    final filteredFriends = friends
+        .where((friend) =>
+            friend.name!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return filteredFriends;
   }
 
   @override
@@ -45,6 +57,11 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
             child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  query = value;
+                });
+              },
               decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.search),
                   filled: true,
@@ -71,6 +88,8 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
             builder: (context, state) {
               return state.maybeWhen(
                 success: (friends) {
+                  final filteredFriends =
+                      _hanleFilterListFriendByQuery(query, friends);
                   return friends.isEmpty
                       ? Center(
                           child: Text(
@@ -81,30 +100,32 @@ class _GroupAddMembersState extends State<GroupAddMembers> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             return CheckboxListTile(
-                              title: Text(friends[index].name!.isEmpty
+                              title: Text(filteredFriends[index].name!.isEmpty
                                   ? AppLocalizations.of(context)!.unknown_name
-                                  : friends[index].name!),
+                                  : filteredFriends[index].name!),
                               // subtitle: Text(
                               //   AppLocalizations.of(context)!
                               //       .user_status_online,
                               //   style: const TextStyle(color: Colors.green),
                               // ),
                               secondary: CustomAvatarImage(
-                                urlImage: friends[index].avatar,
+                                urlImage: filteredFriends[index].avatar,
                                 size: CustomAvatarSize.small,
                               ),
                               value: selectedFriends.firstWhere(
                                     (element) =>
-                                        element?.id == friends[index].id,
+                                        element?.id ==
+                                        filteredFriends[index].id,
                                     orElse: () => null,
                                   ) !=
                                   null,
                               onChanged: (bool? value) => {
-                                handleSelectMembers(context, friends[index])
+                                _handleSelectMembers(
+                                    context, filteredFriends[index])
                               },
                             );
                           },
-                          itemCount: friends.length,
+                          itemCount: filteredFriends.length,
                         );
                 },
                 failure: (message) {
