@@ -36,17 +36,17 @@ class SnackBarApp {
         fontSize: 16.0);
   }
 
-  static Color? _showBackgroundSnackBar(
-      BuildContext context, TypesSnackBar type) {
-    switch (type) {
-      case TypesSnackBar.success:
-        return Theme.of(context).colorScheme.tertiary;
-      case TypesSnackBar.warning:
-        return Colors.amber;
-      case TypesSnackBar.error:
-        return Theme.of(context).colorScheme.error;
-    }
-  }
+  // static Color? _showBackgroundSnackBar(
+  //     BuildContext context, TypesSnackBar type) {
+  //   switch (type) {
+  //     case TypesSnackBar.success:
+  //       return Theme.of(context).colorScheme.tertiary;
+  //     case TypesSnackBar.warning:
+  //       return Colors.amber;
+  //     case TypesSnackBar.error:
+  //       return Theme.of(context).colorScheme.error;
+  //   }
+  // }
 
   static Color? _showBackgroundSnackBarWithoutContext(TypesSnackBar type) {
     switch (type) {

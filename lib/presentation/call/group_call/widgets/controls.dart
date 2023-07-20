@@ -19,7 +19,7 @@ class _ControlsState extends State<Controls> {
   CameraPosition position = CameraPosition.front;
 
   List<MediaDevice>? _audioInputs;
-  List<MediaDevice>? _audioOutputs;
+  //List<MediaDevice>? _audioOutputs;
   List<MediaDevice>? _videoInputs;
 
   StreamSubscription? _subscription;
@@ -52,7 +52,7 @@ class _ControlsState extends State<Controls> {
 
   void _loadDevices(List<MediaDevice> devices) {
     _audioInputs = devices.where((d) => d.kind == "audioinput").toList();
-    _audioOutputs = devices.where((d) => d.kind == "audioutput").toList();
+    //_audioOutputs = devices.where((d) => d.kind == "audioutput").toList();
     _videoInputs = devices.where((d) => d.kind == "videoinput").toList();
     _onChange();
   }

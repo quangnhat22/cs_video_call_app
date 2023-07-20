@@ -121,7 +121,7 @@ class FriendCallCubit extends Cubit<FriendCallState> {
       if (state is FriendCallConnectedSuccess) {
         final isFullRoom = (state as FriendCallConnectedSuccess).isFullRoom;
         if (isFullRoom) return;
-        final res = await _friendCallUseCase.abandonCall(_callRoomId);
+        await _friendCallUseCase.abandonCall(_callRoomId);
         emit(const FriendCallEnded());
       }
     } catch (e) {
