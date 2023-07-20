@@ -38,9 +38,6 @@ class GroupMessageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MeetingPinnedMessageList(
-      groupId: groupId,
-      handleRefresh: handleRefreshList,
-    );
+    return MeetingPinnedMessageList(groupId: groupId);
   }
 }

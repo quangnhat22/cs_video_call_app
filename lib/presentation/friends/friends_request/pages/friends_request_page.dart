@@ -2,21 +2,11 @@ part of friends_request;
 
 enum Request { sent, received }
 
-class FriendsRequestPage extends StatefulWidget {
+class FriendsRequestPage extends StatelessWidget {
   const FriendsRequestPage({super.key});
 
   @override
-  State<FriendsRequestPage> createState() => _FriendsRequestPageState();
-}
-
-class _FriendsRequestPageState extends State<FriendsRequestPage>
-    with AutomaticKeepAliveClientMixin<FriendsRequestPage> {
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider(

@@ -33,7 +33,7 @@ class CallGroupStatusCubit extends Cubit<CallGroupStatusState> {
   //for room
   bool _isOpenCamera = true;
   bool _isSwitchCameraFront = true;
-  bool _isOpenMic = false;
+  bool _isOpenMic = true;
 
   void pageInited(String token, String groupId) {
     _token = token;

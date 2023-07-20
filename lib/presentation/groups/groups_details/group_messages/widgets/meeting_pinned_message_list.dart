@@ -1,20 +1,16 @@
 part of group_messages;
 
 class MeetingPinnedMessageList extends StatelessWidget {
-  const MeetingPinnedMessageList(
-      {super.key, required this.groupId, this.handleRefresh});
+  const MeetingPinnedMessageList({super.key, required this.groupId});
 
   final String groupId;
-  final Function? handleRefresh;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MessagesBloc, MessagesState>(
       listener: (context, state) {
         if (state is MessagesUnpinSuccess) {
-          context
-              .read<MessagesBloc>()
-              .add(MessagesEvent.started(groupId: groupId));
+          context.read<MessagesBloc>().add(const MessagesEvent.refreshed());
         }
       },
       buildWhen: (previous, current) => previous != current,
@@ -24,7 +20,9 @@ class MeetingPinnedMessageList extends StatelessWidget {
             return EmptyMessage(
               title: (AppLocalizations.of(context)!.error_message),
               handleRefresh: () {
-                handleRefresh!(context);
+                context
+                    .read<MessagesBloc>()
+                    .add(const MessagesEvent.refreshed());
               },
             );
           },
