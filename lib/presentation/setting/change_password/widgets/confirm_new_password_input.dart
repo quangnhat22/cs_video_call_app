@@ -42,7 +42,7 @@ class _ConfirmNewPasswordInputState extends State<ConfirmNewPasswordInput> {
           type: InputType.text,
           obscureText: isVisible ? false : true,
           errorText: state.confirmPassword.displayError != null
-              ? AppLocalizations.of(context)!.password_is_invalid
+              ? state.confirmPassword.error?.message
               : null,
         );
       },

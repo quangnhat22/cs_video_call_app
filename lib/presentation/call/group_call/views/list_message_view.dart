@@ -168,7 +168,7 @@ class _ListMessageViewState extends State<ListMessageView> {
                   child: ElevatedButton(
                     onPressed: () {
                       widget.pageController.animateToPage(0,
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 400),
                           curve: Curves.linear);
                     },
                     style: ButtonStyle(

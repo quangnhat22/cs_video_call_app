@@ -37,7 +37,7 @@ class _OldPasswordInputState extends State<OldPasswordInput> {
           type: InputType.text,
           obscureText: isVisible ? false : true,
           errorText: state.oldPassword.displayError != null
-              ? AppLocalizations.of(context)!.password_is_invalid
+              ? state.oldPassword.error?.message
               : null,
         );
       },
