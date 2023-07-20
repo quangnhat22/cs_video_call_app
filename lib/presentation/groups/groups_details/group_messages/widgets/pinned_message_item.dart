@@ -21,7 +21,7 @@ class PinnedMessageItem extends StatelessWidget {
               ),
               TextSpan(
                 text: AppLocalizations.of(context)!.was_pinned_by(
-                    intl.DateFormat('dd-MM-yyyy')
+                    intl.DateFormat('dd-MM-yyyy HH:mm')
                         .format(DateTime.parse(message.sentAt!))),
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground),
@@ -45,6 +45,7 @@ class PinnedMessageItem extends StatelessWidget {
               width: 8,
             ),
             Container(
+              constraints: BoxConstraints(maxWidth: 0.6.sw),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -63,6 +64,9 @@ class PinnedMessageItem extends StatelessWidget {
                   ),
                   Text(
                     message.content ?? '',
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
                   ),
                 ],
               ),

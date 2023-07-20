@@ -3,6 +3,7 @@ library group_messages;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:videocall/common/widgets/stateless/custom_avatar_image.dart';
 import 'package:videocall/common/widgets/stateless/empty_message/empty_message.dart';

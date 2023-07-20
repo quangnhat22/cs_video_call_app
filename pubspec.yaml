@@ -114,7 +114,6 @@ flutter:
   assets:
     - assets/images/
     - assets/logos/
-    - assets/gifs/
     - assets/icons/
 # flutter_intl:
 #   enabled: true

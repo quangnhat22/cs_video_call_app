@@ -41,7 +41,6 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   Future<void> _unpinMessage(
       MessagesUnpin event, Emitter<MessagesState> emit) async {
     try {
-      emit(const MessagesLoading());
       await _messageUseCase.unpinMessage(event.messageId);
       emit(const MessagesUnpinSuccess());
     } catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppAssets {
@@ -12,14 +13,8 @@ class AppAssets {
     fit: BoxFit.cover,
   );
 
-  static final loadingGif = Image.asset(
-    'assets/gifs/loading.gif',
-    height: 256.0,
-    width: 256.0,
-  );
-
-  static final welcomeImage = Image.asset(
-    'assets/images/welcome.png',
+  static final welcomeImage = SvgPicture.asset(
+    'assets/images/welcome_image_light.svg',
     fit: BoxFit.cover,
   );
 
@@ -40,6 +35,8 @@ class AppAssets {
   static final notFoundSvg = SvgPicture.asset(
     'assets/images/not_found.svg',
     semanticsLabel: 'A red up arrow',
+    width: 180.w,
+    height: 180.h,
   );
 
   static final successImage = Image.asset(
