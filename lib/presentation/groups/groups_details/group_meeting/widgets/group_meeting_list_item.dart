@@ -6,6 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:videocall/core/config/app_assets.dart';
 import 'package:videocall/core/config/app_enum.dart';
 import 'package:videocall/core/config/app_text_styles.dart';
+import 'package:videocall/core/routes/app_navigation.dart';
+import 'package:videocall/core/routes/route_name.dart';
 import 'package:videocall/core/utils/date_time_format.dart';
 import 'package:videocall/domain/entities/group_meeting_entity.dart';
 import 'package:videocall/presentation/groups/groups_details/group_meeting/cubit_group_meeting/group_meeting_cubit.dart';
@@ -14,11 +16,18 @@ class GroupMeetingListItem extends StatelessWidget {
   const GroupMeetingListItem({
     super.key,
     required this.meetingEntity,
+    required this.groupName,
   });
 
   final GroupMeetingEntity meetingEntity;
+  final String groupName;
 
-  void _onTapGroupMeetingItem(BuildContext ctx) {}
+  void _onTapGroupMeetingItem() {
+    NavigationUtil.pushNamed(routeName: RouteName.groupDetailsCall, args: {
+      'meetingEntity': meetingEntity,
+      'groupName': groupName,
+    });
+  }
 
   void _handleOnTapJoin(BuildContext ctx, String meetingId) async {
     await ctx.read<GroupMeetingCubit>().joinMeeting(meetingId: meetingId);
@@ -32,7 +41,7 @@ class GroupMeetingListItem extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         elevation: 2,
         child: InkWell(
-          onTap: () => _onTapGroupMeetingItem(context),
+          onTap: _onTapGroupMeetingItem,
           child: Column(
             children: [
               ListTile(

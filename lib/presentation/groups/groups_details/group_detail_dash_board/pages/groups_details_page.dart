@@ -176,6 +176,7 @@ class _GroupDetailViewState extends State<GroupDetailView>
               children: <Widget>[
                 GroupMeetingPage(
                   groupId: widget.groupId,
+                  groupName: widget.groupName,
                 ),
                 GroupMessagesPage(groupId: widget.groupId),
                 const GroupMemberPage()

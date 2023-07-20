@@ -38,13 +38,12 @@ class EditGroupCubit extends Cubit<EditGroupState> {
   Future<void> sendEditGroupRequest(String groupId) async {
     try {
       final editGroupState = state as SentEditRequestGroupInitValue;
-      if (!editGroupState.isValid || editGroupState.groupName == null) return;
-      if (editGroupState.groupName!.trim().isEmpty) return;
+      if (!editGroupState.isValid) return;
+      if (editGroupState.groupName.trim().isEmpty) return;
       emit(const SentEditRequestGroupInProgress());
       await _groupUseCase.editGroup(
-          editGroupState.groupName!.trim(), editGroupState.groupImage, groupId);
-      emit(SentEditRequestGroupSuccess(
-          groupName: editGroupState.groupName ?? ''));
+          editGroupState.groupName.trim(), editGroupState.groupImage, groupId);
+      emit(SentEditRequestGroupSuccess(groupName: editGroupState.groupName));
     } catch (e) {
       emit(SentEditRequestGroupFailure(message: e.toString()));
     }

@@ -8,7 +8,9 @@ import 'package:videocall/presentation/others/refresh_view.dart';
 import 'group_meeting_list_item.dart';
 
 class GroupMeetingList extends StatelessWidget {
-  const GroupMeetingList({super.key});
+  const GroupMeetingList({super.key, required this.groupName});
+
+  final String groupName;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class GroupMeetingList extends StatelessWidget {
                             (BuildContext context, int index) {
                               return GroupMeetingListItem(
                                 meetingEntity: listMeeting[index],
+                                groupName: groupName,
                               );
                             },
                             childCount: listMeeting.length,

@@ -27,6 +27,7 @@ class RouteName {
   static const String createSchedule = '/create-schedule';
   static const String personalCall = '/personal-call';
   static const String createGroupCall = "/create-group-call";
+  static const String groupDetailsCall = "/group-details-call";
   static const String groupCall = "/group-call";
   static const String globalSearch = "/global-search";
   static const String devices = "/devices";
