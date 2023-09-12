@@ -13,7 +13,7 @@ class GroupDetailsCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MPageAppBar(title: groupName ?? ''),
+      appBar: MPageAppBar(title: groupName),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

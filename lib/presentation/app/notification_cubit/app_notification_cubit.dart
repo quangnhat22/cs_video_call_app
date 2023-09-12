@@ -45,8 +45,8 @@ class AppNotificationCubit extends Cubit<AppNotificationState> {
         receivedNotification.body.toString(), TypesSnackBar.warning);
     if (receivedNotification.channelKey == 'call_channel') {
       if (receivedNotification.title == 'Abandon call') {
-        await Future.delayed(const Duration(milliseconds: 300), () {
-          AwesomeNotifications()
+        await Future.delayed(const Duration(milliseconds: 300), () async {
+          await AwesomeNotifications()
               .dismissNotificationsByChannelKey('call_channel');
         });
       }

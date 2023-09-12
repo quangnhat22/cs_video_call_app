@@ -126,7 +126,7 @@
   "minutes": "minutes",
   "action_success": "Your action is success",
   "action_fail": "Your action is fail! Try again",
-  "text_send_email": "We have sent a verified email to {user_email}. Please check your email and click the link to verify your account",
+  "text_send_email": "We will send a verified email to {user_email}. Please check your email and click the link to verify your account",
   "@text_send_email": {
     "placeholders": {
       "user_email": {

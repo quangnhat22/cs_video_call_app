@@ -18,6 +18,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
+      listenWhen: (prev, current) => prev != current,
       listener: (context, state) {
         if (state.statusSubmit == FormzSubmissionStatus.failure) {
           SnackBarApp.showSnackBar(

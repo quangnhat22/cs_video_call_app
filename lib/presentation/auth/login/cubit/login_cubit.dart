@@ -6,8 +6,8 @@ import 'package:videocall/core/utils/formz/email.dart';
 import 'package:videocall/core/utils/formz/password.dart';
 import 'package:videocall/domain/modules/auth/auth_usecase.dart';
 
-part 'login_state.dart';
 part 'login_cubit.freezed.dart';
+part 'login_state.dart';
 
 @Injectable()
 class LoginCubit extends Cubit<LoginState> {
@@ -44,6 +44,11 @@ class LoginCubit extends Cubit<LoginState> {
       emit(
         state.copyWith(
           statusSubmit: FormzSubmissionStatus.failure,
+        ),
+      );
+      emit(
+        state.copyWith(
+          statusSubmit: FormzSubmissionStatus.initial,
         ),
       );
     }

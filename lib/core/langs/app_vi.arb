@@ -126,7 +126,7 @@
   "minutes": "phút",
   "action_success": "Yêu cầu của bạn đã gửi thành công!",
   "action_fail": "Yêu cầu của bạn đã thất bại! Vui lòng thử lại.",
-  "text_send_email": "Chúng tôi đã gửi email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
+  "text_send_email": "Chúng tôi sẽ gửi một email xác nhận đến @{user_email}. Vui lòng check mail và nhấn vào link đính kèm để xác nhận tài khoản",
   "@text_send_email": {
     "placeholders": {
       "user_email": {
